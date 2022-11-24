@@ -56,4 +56,24 @@ public class AirplaneController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+    @PutMapping("/update/{airplaneName}")
+    public ResponseEntity<MessageModel> updateAirplane(@PathVariable String airplaneName, @RequestBody AirplanesRequest airplanesRequest)
+    {
+        MessageModel messageModel = new MessageModel();
+        AirplanesResponse airplanesResponse = airplanesService.updateAirplane(airplanesRequest, airplaneName);
+
+        if(airplanesResponse == null)
+        {
+            messageModel.setStatus(HttpStatus.CONFLICT.value());
+            messageModel.setMessage("Failed to update airplane");
+            return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Update role with id : " + airplanesResponse.getAirplaneName());
+            messageModel.setData(airplanesResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }
+    }
 }
