@@ -76,4 +76,22 @@ public class AirplaneController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
+    @DeleteMapping("/delete/{airplaneName}")
+    public ResponseEntity<MessageModel> deleteAirplane(@PathVariable String airplaneName)
+    {
+        MessageModel messageModel = new MessageModel();
+        Boolean deleteAirplane = airplanesService.deleteAirplane(airplaneName);
+        if(deleteAirplane)
+        {
+            messageModel.setMessage("Success delete airplane by name: " + airplaneName);
+            messageModel.setStatus(HttpStatus.OK.value());
+            return ResponseEntity.ok().body(messageModel);
+        }
+        else
+        {
+            messageModel.setMessage("Failed delete airplane by name: " + airplaneName + ", not found");
+            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
+            return ResponseEntity.badRequest().body(messageModel);
+        }
+    }
 }
