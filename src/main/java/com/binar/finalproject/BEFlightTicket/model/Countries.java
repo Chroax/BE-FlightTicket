@@ -46,4 +46,7 @@ public class Countries
 
     @OneToMany(mappedBy = "countriesTravelerList", cascade = CascadeType.ALL)
     private Set<TravelerList> travelerList;
+
+    @OneToMany(mappedBy = "countriesPassport", cascade = CascadeType.ALL)
+    private Set<Passport> passports;
 }

@@ -10,36 +10,21 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "traveler_list")
-public class TravelerList {
+@Table(name = "passport")
+public class Passport {
     @Id
-    @GeneratedValue
-    @Column(name = "traveler_id")
-    private UUID travelerId;
-
-    @Column(name = "type", length = 20 ,nullable = false)
-    private String type;
-
-    @Column(name = "title", columnDefinition = "CHAR(4)")
-    private String title;
-
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
-
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
+    @Column(name = "passport_number", columnDefinition = "CHAR(50)")
+    private String passportNumber;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "birth_date", nullable = false, columnDefinition="DATE")
-    private LocalDate birthDate;
+    @Column(name = "passport_expiry", nullable = false, columnDefinition="DATE")
+    private LocalDate passportExpiry;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
@@ -51,13 +36,10 @@ public class TravelerList {
     private LocalDateTime modifiedAt;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_id", nullable = false)
-    private Users usersTravelerList;
+    @JoinColumn(name="traveler_id", nullable = false)
+    private TravelerList travelerListPassport;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="nationality", nullable = false)
-    private Countries countriesTravelerList;
-
-    @OneToMany(mappedBy = "travelerListPassport", cascade = CascadeType.ALL)
-    private Set<Passport> passports;
+    @JoinColumn(name="passport_country", nullable = false)
+    private Countries countriesPassport;
 }
