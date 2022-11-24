@@ -49,4 +49,7 @@ public class Countries
 
     @OneToMany(mappedBy = "countriesPassport", cascade = CascadeType.ALL)
     private Set<Passport> passports;
+
+    @OneToMany(mappedBy = "countriesIDCard", cascade = CascadeType.ALL)
+    private Set<IDCard> idCards;
 }
