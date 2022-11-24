@@ -9,28 +9,21 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "countries",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "telephone_code", columnNames = "telephone_code")
-        })
-public class Countries
-{
+@Table(name = "cities")
+public class Cities {
+
     @Id
-    @Column(name = "country_code", columnDefinition = "CHAR(4)")
-    private String countryCode;
+    @Column(name = "city_code", columnDefinition = "CHAR(5)")
+    private String cityCode;
 
-    @Column(name = "country_name", nullable = false)
-    private String countryName;
-
-    @Column(name = "telephone_code", columnDefinition = "CHAR(4)", nullable = false)
-    private String telephoneCode;
+    @Column(name = "city_name", nullable = false)
+    private String cityName;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
@@ -41,6 +34,7 @@ public class Countries
     @UpdateTimestamp
     private LocalDateTime modifiedAt;
 
-    @OneToMany(mappedBy = "countriesCities", cascade = CascadeType.ALL)
-    private Set<Cities> cities;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="country_code", nullable = false)
+    private Countries countriesCities;
 }
