@@ -40,4 +40,21 @@ public class RoleController {
         }
     }
 
+    @GetMapping("/get-all")
+    public ResponseEntity<MessageModel> getAllRole()
+    {
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<RoleResponse> rolesGet = roleService.searchAllRole();
+            messageModel.setMessage("Success get all role");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(rolesGet);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get all role");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
 }
