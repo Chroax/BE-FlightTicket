@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
@@ -51,6 +52,23 @@ public class UserController {
         }catch (Exception exception)
         {
             messageModel.setMessage("Failed get all user");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+
+    @GetMapping("/name/{fullName}")
+    public ResponseEntity<MessageModel> getUserById(@PathVariable String fullName){
+        MessageModel messageModel = new MessageModel();
+        try {
+            UserResponse userGet = userService.searchUserByName(fullName);
+            messageModel.setMessage("Success get user");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(userGet);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get user");
             messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
