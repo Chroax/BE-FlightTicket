@@ -10,7 +10,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -18,38 +17,28 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "email", columnNames = "email"),
-                @UniqueConstraint(name = "telephone", columnNames = "telephone")
-        })
-public class Users {
+@Table(name = "traveler_list")
+public class TravelerList {
     @Id
     @GeneratedValue
-    @Column(name = "user_id")
-    private UUID userId;
+    @Column(name = "traveler_id")
+    private UUID travelerId;
 
-    @Column(name = "full_name", nullable = false)
-    private String fullName;
+    @Column(name = "type", length = 20 ,nullable = false)
+    private String type;
 
-    @Column(name = "email", nullable = false)
-    private String email;
+    @Column(name = "title", columnDefinition = "CHAR(4)")
+    private String title;
 
-    @Column(name = "password", nullable = false)
-    private String password;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
 
-    @Column(name = "telephone", columnDefinition = "CHAR(16)", nullable = false)
-    private String telephone;
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "birth_date", nullable = false, columnDefinition="DATE")
     private LocalDate birthDate;
-
-    @Column(name = "gender")
-    private Boolean gender;
-
-    @Column(name = "status_active", nullable = false)
-    private Boolean statusActive;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
@@ -61,9 +50,10 @@ public class Users {
     private LocalDateTime modifiedAt;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="role_id", nullable = false)
-    private Roles rolesUsers;
+    @JoinColumn(name="user_id", nullable = false)
+    private Users usersTravelerList;
 
-    @OneToMany(mappedBy = "usersTravelerList", cascade = CascadeType.ALL)
-    private Set<TravelerList> travelerList;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="nationality", nullable = false)
+    private Countries countriesTravelerList;
 }
