@@ -9,19 +9,18 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "terminals")
-public class Terminals {
+@Table(name = "gates")
+public class Gates {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "terminal_id")
-    private Integer terminalId;
+    @Column(name = "gate_id")
+    private Integer gateId;
 
     @Column(name = "terminal_name", columnDefinition = "CHAR(3)", nullable = false)
     private String terminalName;
@@ -36,9 +35,6 @@ public class Terminals {
     private LocalDateTime modifiedAt;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="iata_code", nullable = false)
-    private Airports airportsTerminals;
-
-    @OneToMany(mappedBy = "terminalsGates", cascade = CascadeType.ALL)
-    private Set<Gates> gates;
+    @JoinColumn(name="terminal_id", nullable = false)
+    private Terminals terminalsGates;
 }
