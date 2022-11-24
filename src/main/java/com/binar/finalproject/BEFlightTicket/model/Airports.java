@@ -9,22 +9,20 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "cities")
-public class Cities {
-
+@Table(name = "airports")
+public class Airports {
     @Id
-    @Column(name = "city_code", columnDefinition = "CHAR(5)")
-    private String cityCode;
+    @Column(name = "iata_code", columnDefinition = "CHAR(3)")
+    private String iataCode;
 
-    @Column(name = "city_name", nullable = false)
-    private String cityName;
+    @Column(name = "airport_name", nullable = false)
+    private String airportName;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
@@ -36,9 +34,6 @@ public class Cities {
     private LocalDateTime modifiedAt;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="country_code", nullable = false)
-    private Countries countriesCities;
-
-    @OneToMany(mappedBy = "citiesAirport", cascade = CascadeType.ALL)
-    private Set<Airports> airports;
+    @JoinColumn(name="city_code", nullable = false)
+    private Cities citiesAirport;
 }
