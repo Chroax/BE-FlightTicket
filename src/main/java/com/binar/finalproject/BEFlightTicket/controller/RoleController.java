@@ -78,4 +78,23 @@ public class RoleController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
+
+    @DeleteMapping("/delete/{roleName}")
+    public ResponseEntity<MessageModel> deleteRole(@PathVariable String roleName)
+    {
+        MessageModel messageModel = new MessageModel();
+        Boolean deleteRole = roleService.deleteRole(roleName);
+        if(deleteRole)
+        {
+            messageModel.setMessage("Success delete role by name : " + roleName);
+            messageModel.setStatus(HttpStatus.OK.value());
+            return ResponseEntity.ok().body(messageModel);
+        }
+        else
+        {
+            messageModel.setMessage("Failed delete role by name : " + roleName + ", not found");
+            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
+            return ResponseEntity.badRequest().body(messageModel);
+        }
+    }
 }
