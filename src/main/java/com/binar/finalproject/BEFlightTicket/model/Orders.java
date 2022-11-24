@@ -55,4 +55,7 @@ public class Orders {
 
     @OneToMany(mappedBy = "ordersTicket", cascade = CascadeType.ALL)
     private Set<Tickets> tickets;
+
+    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
+    private Set<ScheduleOrders> scheduleOrders;
 }

@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -63,4 +64,7 @@ public class Schedules {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="route_id", nullable = false)
     private Routes routesSchedules;
+
+    @OneToMany(mappedBy = "schedules", cascade = CascadeType.ALL)
+    private Set<ScheduleOrders> scheduleOrders;
 }
