@@ -6,10 +6,11 @@ import com.binar.finalproject.BEFlightTicket.model.Airplanes;
 import com.binar.finalproject.BEFlightTicket.repository.AirplanesRepository;
 import com.binar.finalproject.BEFlightTicket.service.AirplanesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
 public class AirplaneServiceImpl implements AirplanesService {
 
     @Autowired
