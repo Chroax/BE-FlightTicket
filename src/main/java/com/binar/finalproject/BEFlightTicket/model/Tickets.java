@@ -9,7 +9,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -17,24 +16,12 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "orders")
-public class Orders {
+@Table(name = "tickets")
+public class Tickets {
     @Id
     @GeneratedValue
-    @Column(name = "order_id")
-    private UUID orderId;
-
-    @Column(name = "total_ticket", nullable = false)
-    private Integer totalTicket;
-
-    @Column(name = "total_price", nullable = false, precision = 2)
-    private Float totalPrice;
-
-    @Column(name = "pnr_code", columnDefinition = "CHAR(6)")
-    private String pnrCode;
-
-    @Column(name = "status", length = 20, nullable = false)
-    private String status;
+    @Column(name = "ticket_id")
+    private UUID ticketId;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
@@ -46,13 +33,14 @@ public class Orders {
     private LocalDateTime modifiedAt;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_id", nullable = false)
-    private Users usersOrder;
+    @JoinColumn(name="traveler_id", nullable = false)
+    private TravelerList travelerListTicket;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="payment_id", nullable = false)
-    private PaymentMethods paymentMethodsOrder;
+    @JoinColumn(name="order_id", nullable = false)
+    private Orders ordersTicket;
 
-    @OneToMany(mappedBy = "ordersTicket", cascade = CascadeType.ALL)
-    private Set<Tickets> tickets;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="seat_id", nullable = false)
+    private Seats seatsTicket;
 }

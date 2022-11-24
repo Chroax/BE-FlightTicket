@@ -9,6 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Data
@@ -40,4 +41,7 @@ public class Seats {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="airplane_name", nullable = false)
     private Airplanes airplanesSeats;
+
+    @OneToMany(mappedBy = "seatsTicket", cascade = CascadeType.ALL)
+    private Set<Tickets> tickets;
 }

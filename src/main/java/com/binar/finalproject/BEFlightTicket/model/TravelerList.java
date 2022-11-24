@@ -63,4 +63,7 @@ public class TravelerList {
 
     @OneToMany(mappedBy = "travelerListIDCard", cascade = CascadeType.ALL)
     private Set<IDCard> idCards;
+
+    @OneToMany(mappedBy = "travelerListTicket", cascade = CascadeType.ALL)
+    private Set<Tickets> tickets;
 }
