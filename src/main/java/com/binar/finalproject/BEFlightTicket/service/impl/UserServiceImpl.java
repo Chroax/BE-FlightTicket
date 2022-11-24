@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService {
                                 .gender(userRequest.getGender())
                                 .telephone(userRequest.getTelephone())
                                 .rolesUsers(roles.get())
+                                .statusActive(true)
                                 .build();
 
                         users.setPassword(EncoderConfiguration.encrypt(users.getPassword()));
