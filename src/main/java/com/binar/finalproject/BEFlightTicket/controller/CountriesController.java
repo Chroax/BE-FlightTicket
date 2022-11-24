@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/countries")
 public class CountriesController {
@@ -35,4 +37,23 @@ public class CountriesController {
 
         }
     }
+
+    @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<MessageModel> getAllCountries() {
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<CountriesResponse> getAllCountries = countriesService.searchAllCountries();
+            messageModel.setMessage("Success get all Countries");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(getAllCountries);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get all countries");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+
 }

@@ -11,6 +11,8 @@ public class CountriesRequest {
     private String countryCode;
     @NotEmpty(message = "Countries name is required.")
     private String countryName;
+
+    @NotEmpty(message = "Countries telephone Code is required.")
     private String telephoneCode;
 
     public Countries toCountries() {
