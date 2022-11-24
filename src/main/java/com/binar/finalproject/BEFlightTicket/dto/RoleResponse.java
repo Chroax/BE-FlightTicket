@@ -11,8 +11,8 @@ public class RoleResponse {
     private Integer roleId;
     private String roleName;
 
-    public Roles toRoles(Roles roles) {
-        return Roles.builder()
+    public static RoleResponse build(Roles roles) {
+        return RoleResponse.builder()
                 .roleId(roles.getRoleId())
                 .roleName(roles.getRoleName())
                 .build();
