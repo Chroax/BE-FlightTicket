@@ -66,4 +66,7 @@ public class Users {
 
     @OneToMany(mappedBy = "usersTravelerList", cascade = CascadeType.ALL)
     private Set<TravelerList> travelerList;
+
+    @OneToMany(mappedBy = "usersOrder", cascade = CascadeType.ALL)
+    private Set<Orders> orders;
 }

@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Data
@@ -36,4 +37,7 @@ public class PaymentMethods {
     @Column(name = "modified_at", insertable = false)
     @UpdateTimestamp
     private LocalDateTime modifiedAt;
+
+    @OneToMany(mappedBy = "paymentMethodsOrder", cascade = CascadeType.ALL)
+    private Set<Orders> orders;
 }
