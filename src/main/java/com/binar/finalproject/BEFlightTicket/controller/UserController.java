@@ -3,6 +3,7 @@ package com.binar.finalproject.BEFlightTicket.controller;
 import com.binar.finalproject.BEFlightTicket.dto.MessageModel;
 import com.binar.finalproject.BEFlightTicket.dto.UserRequest;
 import com.binar.finalproject.BEFlightTicket.dto.UserResponse;
+import com.binar.finalproject.BEFlightTicket.dto.UserUpdateRequest;
 import com.binar.finalproject.BEFlightTicket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
@@ -88,6 +90,26 @@ public class UserController {
             messageModel.setMessage("Failed non-active user by name : " + fullName + ", not found");
             messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
             return ResponseEntity.badRequest().body(messageModel);
+        }
+    }
+
+    @PutMapping("/update/{fullName}")
+    public ResponseEntity<MessageModel> updateUser(@PathVariable String fullName, @RequestBody UserUpdateRequest userUpdateRequest) {
+        MessageModel messageModel = new MessageModel();
+        UserResponse userResponse = userService.updateUser(userUpdateRequest, fullName);
+
+        if(userResponse == null)
+        {
+            messageModel.setStatus(HttpStatus.CONFLICT.value());
+            messageModel.setMessage("Failed update user with name : " + fullName);
+            return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Update user with name : " + fullName);
+            messageModel.setData(userResponse);
+            return ResponseEntity.ok().body(messageModel);
         }
     }
 }
