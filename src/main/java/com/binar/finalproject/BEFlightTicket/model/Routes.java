@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -48,4 +49,7 @@ public class Routes {
     @Column(name = "modified_at", insertable = false)
     @UpdateTimestamp
     private LocalDateTime modifiedAt;
+
+    @OneToMany(mappedBy = "routesSchedules", cascade = CascadeType.ALL)
+    private Set<Schedules> schedules;
 }

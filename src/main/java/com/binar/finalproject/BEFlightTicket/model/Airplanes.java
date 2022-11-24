@@ -34,4 +34,7 @@ public class Airplanes {
 
     @OneToMany(mappedBy = "airplanesSeats", cascade = CascadeType.ALL)
     private Set<Seats> seats;
+
+    @OneToMany(mappedBy = "airplanesSchedules", cascade = CascadeType.ALL)
+    private Set<Schedules> schedules;
 }
