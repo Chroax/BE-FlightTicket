@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/airplane")
 public class AirplaneController {
@@ -35,6 +37,23 @@ public class AirplaneController {
             messageModel.setData(airplanesResponse);
             return ResponseEntity.ok().body(messageModel);
 
+        }
+    }
+    @GetMapping("/get-all")
+    public ResponseEntity<MessageModel> getAllAirplane()
+    {
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<AirplanesResponse> airplaneGet = airplanesService.getAllAirplane();
+            messageModel.setMessage("Success get all airplane");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(airplaneGet);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get all airplane");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
 }
