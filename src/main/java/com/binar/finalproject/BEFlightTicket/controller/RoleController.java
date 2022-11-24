@@ -57,4 +57,25 @@ public class RoleController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+
+    @PutMapping("/update/{roleName}")
+    public ResponseEntity<MessageModel> updateRole(@PathVariable String roleName, @RequestBody RoleRequest roleRequest)
+    {
+        MessageModel messageModel = new MessageModel();
+        RoleResponse roleResponse = roleService.updateRole(roleRequest, roleName);
+
+        if(roleResponse == null)
+        {
+            messageModel.setStatus(HttpStatus.CONFLICT.value());
+            messageModel.setMessage("Failed to update roles");
+            return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Update role with id : " + roleResponse.getRoleId());
+            messageModel.setData(roleResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }
+    }
 }
