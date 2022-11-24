@@ -56,4 +56,25 @@ public class CountriesController {
         }
     }
 
+    @PutMapping(value = "/update/{countryName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> updateRole(@PathVariable String countryName, @RequestBody CountriesRequest countriesRequest)
+    {
+        MessageModel messageModel = new MessageModel();
+        CountriesResponse countriesResponse = countriesService.updateCountries(countriesRequest, countryName);
+
+        if(countriesResponse == null)
+        {
+            messageModel.setStatus(HttpStatus.CONFLICT.value());
+            messageModel.setMessage("Failed to update Countries");
+            return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Update Countries with name : " + countriesResponse.getCountryName());
+            messageModel.setData(countriesResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }
+    }
+
 }
