@@ -38,4 +38,21 @@ public class UserController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
+
+    @GetMapping("/get-all")
+    public ResponseEntity<MessageModel> getAllUsers(){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<UserResponse> usersGet = userService.searchAllUser();
+            messageModel.setMessage("Success get all user");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(usersGet);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get all user");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
 }
