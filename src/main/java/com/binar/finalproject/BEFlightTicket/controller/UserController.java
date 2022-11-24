@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
@@ -71,6 +70,24 @@ public class UserController {
             messageModel.setMessage("Failed get user");
             messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+
+    @DeleteMapping("/delete/{fullName}")
+    public ResponseEntity<MessageModel> deleteUser(@PathVariable String fullName){
+        MessageModel messageModel = new MessageModel();
+        Boolean deleteUser = userService.deleteUser(fullName);
+        if(deleteUser)
+        {
+            messageModel.setMessage("Success non-active user by name : " + fullName);
+            messageModel.setStatus(HttpStatus.OK.value());
+            return ResponseEntity.ok().body(messageModel);
+        }
+        else
+        {
+            messageModel.setMessage("Failed non-active user by name : " + fullName + ", not found");
+            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
+            return ResponseEntity.badRequest().body(messageModel);
         }
     }
 }
