@@ -15,17 +15,5 @@ public class UserUpdateRequest {
     private String telephone;
     private LocalDate birthDate;
     private Boolean gender;
-    private Roles rolesUsers;
-
-    public Users toUsers(Users user) {
-        Users users = new Users();
-        users.setFullName(user.getFullName());
-        users.setEmail(user.getEmail());
-        users.setPassword(user.getPassword());
-        users.setTelephone(user.getTelephone());
-        users.setBirthDate(user.getBirthDate());
-        users.setGender(user.getGender());
-        users.setRolesUsers(user.getRolesUsers());
-        return users;
-    }
+    private Integer rolesId;
 }
