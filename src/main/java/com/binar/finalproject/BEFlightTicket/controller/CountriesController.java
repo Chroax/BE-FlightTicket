@@ -57,11 +57,10 @@ public class CountriesController {
     }
 
     @PutMapping(value = "/update/{countryName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageModel> updateRole(@PathVariable String countryName, @RequestBody CountriesRequest countriesRequest)
+    public ResponseEntity<MessageModel> updateCountries(@PathVariable String countryName, @RequestBody CountriesRequest countriesRequest)
     {
         MessageModel messageModel = new MessageModel();
         CountriesResponse countriesResponse = countriesService.updateCountries(countriesRequest, countryName);
-
         if(countriesResponse == null)
         {
             messageModel.setStatus(HttpStatus.CONFLICT.value());
@@ -74,6 +73,25 @@ public class CountriesController {
             messageModel.setMessage("Update Countries with name : " + countriesResponse.getCountryName());
             messageModel.setData(countriesResponse);
             return ResponseEntity.ok().body(messageModel);
+        }
+    }
+
+    @DeleteMapping(value = "/delete/{countryName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> deleteCountriesByName(@PathVariable String countryName)
+    {
+        MessageModel messageModel = new MessageModel();
+        Boolean deleteCountries = countriesService.deleteCountries(countryName);
+        if(deleteCountries)
+        {
+            messageModel.setMessage("Success delete Countries by name : " + countryName);
+            messageModel.setStatus(HttpStatus.OK.value());
+            return ResponseEntity.ok().body(messageModel);
+        }
+        else
+        {
+            messageModel.setMessage("Failed delete Countries by name : " + countryName + ", is not found");
+            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
+            return ResponseEntity.badRequest().body(messageModel);
         }
     }
 
