@@ -4,7 +4,7 @@ import com.binar.finalproject.BEFlightTicket.dto.RoleRequest;
 import com.binar.finalproject.BEFlightTicket.dto.RoleResponse;
 import com.binar.finalproject.BEFlightTicket.model.Roles;
 import com.binar.finalproject.BEFlightTicket.repository.RoleRepository;
-import com.binar.finalproject.BEFlightTicket.service.RolesService;
+import com.binar.finalproject.BEFlightTicket.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class RoleServiceImpl implements RolesService {
+public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private RoleRepository roleRepository;

@@ -5,7 +5,7 @@ import com.binar.finalproject.BEFlightTicket.dto.RoleResponse;
 
 import java.util.List;
 
-public interface RolesService {
+public interface RoleService {
     RoleResponse registerRole(RoleRequest roleRequest);
     List<RoleResponse> searchAllRole();
     RoleResponse updateRole(RoleRequest roleRequest, String roleName);
