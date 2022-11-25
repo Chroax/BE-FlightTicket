@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class AirplaneServiceImpl implements AirplanesService {
 
@@ -41,8 +43,9 @@ public class AirplaneServiceImpl implements AirplanesService {
 
     @Override
     public AirplanesResponse updateAirplane(AirplanesRequest airplanesRequest, String airplaneName) {
-        Airplanes airplanes = airplanesRepository.findByName(airplaneName);
-        if (airplanes != null){
+        Optional<Airplanes> isAirplanes = airplanesRepository.findById(airplaneName);
+        if (isAirplanes.isPresent()){
+            Airplanes airplanes = isAirplanes.get();
             airplanes.setAirplaneName(airplanesRequest.getAirplaneName());
             try {
                 airplanesRepository.save(airplanes);
@@ -53,13 +56,14 @@ public class AirplaneServiceImpl implements AirplanesService {
             }
         }
         else
-            throw new RuntimeException("Roles with name: "+airplaneName+" not found");
+            throw new RuntimeException("Airplane with name: "+airplaneName+" not found");
     }
 
     @Override
     public Boolean deleteAirplane(String airplaneName) {
-        Airplanes airplanes = airplanesRepository.findByName(airplaneName);
-        if (airplanes != null){
+        Optional<Airplanes> isAirplanes = airplanesRepository.findById(airplaneName);
+        if (isAirplanes.isPresent()){
+            Airplanes airplanes = isAirplanes.get();
             airplanesRepository.deleteById(airplanes.getAirplaneName());
             return true;
         }
