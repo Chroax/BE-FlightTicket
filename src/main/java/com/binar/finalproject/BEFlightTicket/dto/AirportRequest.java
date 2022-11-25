@@ -10,7 +10,7 @@ public class AirportRequest {
 
     private String iataCode;
 
-    @NotEmpty(message = "City name is required.")
+    @NotEmpty(message = "Airports name is required.")
     private String airportName;
 
     public Airports toAirports(){
