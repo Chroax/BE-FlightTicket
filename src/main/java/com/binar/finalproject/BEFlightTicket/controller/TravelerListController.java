@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/traveler-list")
 public class TravelerListController {
@@ -32,6 +35,23 @@ public class TravelerListController {
             messageModel.setMessage("Register new traveler list");
             messageModel.setData(travelerListResponse);
             return ResponseEntity.ok().body(messageModel);
+        }
+    }
+
+    @GetMapping("/get-all/{userId}")
+    public ResponseEntity<MessageModel> getAllUsers(@PathVariable UUID userId){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<TravelerListResponse> travelerListGet = travelerListService.searchAllUserTravelerList(userId);
+            messageModel.setMessage("Success get all traveler list by userId : " + userId);
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(travelerListGet);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get all traveler list by userId, " + userId + " not found");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
 }
