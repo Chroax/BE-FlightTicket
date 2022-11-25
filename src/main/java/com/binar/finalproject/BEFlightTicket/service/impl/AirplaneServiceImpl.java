@@ -53,7 +53,7 @@ public class AirplaneServiceImpl implements AirplanesService {
         Optional<Airplanes> isAirplanes = airplanesRepository.findById(airplaneName);
         if (isAirplanes.isPresent()){
             Airplanes airplanes = isAirplanes.get();
-            airplanes.setAirplaneName(airplanesRequest.getAirplaneName());
+            airplanes.setAirplaneType(airplanesRequest.getAirplaneType());
             try {
                 airplanesRepository.save(airplanes);
                 return AirplanesResponse.build(airplanes);
