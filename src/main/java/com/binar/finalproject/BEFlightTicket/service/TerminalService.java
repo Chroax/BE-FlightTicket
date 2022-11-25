@@ -1,7 +1,5 @@
 package com.binar.finalproject.BEFlightTicket.service;
 
-import com.binar.finalproject.BEFlightTicket.dto.CitiesRequest;
-import com.binar.finalproject.BEFlightTicket.dto.CitiesResponse;
 import com.binar.finalproject.BEFlightTicket.dto.TerminalRequest;
 import com.binar.finalproject.BEFlightTicket.dto.TerminalResponse;
 
