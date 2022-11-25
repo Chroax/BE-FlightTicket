@@ -39,7 +39,6 @@ public class PassportController {
         }
     }
 
-
     @GetMapping("/get-all/{travelerId}")
     public ResponseEntity<MessageModel> getTravelerPassport(@PathVariable UUID travelerId){
         MessageModel messageModel = new MessageModel();
@@ -57,7 +56,6 @@ public class PassportController {
         }
     }
 
-
     @GetMapping("/get/{passportNumber}")
     public ResponseEntity<MessageModel> getPassport(@PathVariable String passportNumber){
         MessageModel messageModel = new MessageModel();
@@ -72,6 +70,26 @@ public class PassportController {
             messageModel.setMessage("Failed get passport");
             messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+
+    @PutMapping("/update/{passportNumber}")
+    public ResponseEntity<MessageModel> updatePassport(@PathVariable String passportNumber, @RequestBody PassportRequest passportRequest) {
+        MessageModel messageModel = new MessageModel();
+        PassportResponse passportResponse = passportService.updatePassport(passportRequest, passportNumber);
+
+        if(passportResponse == null)
+        {
+            messageModel.setStatus(HttpStatus.CONFLICT.value());
+            messageModel.setMessage("Failed update passport with number : " + passportNumber);
+            return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Success update passport with number : " + passportNumber);
+            messageModel.setData(passportResponse);
+            return ResponseEntity.ok().body(messageModel);
         }
     }
 }
