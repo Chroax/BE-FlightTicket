@@ -36,7 +36,7 @@ public class Cities {
     private LocalDateTime modifiedAt;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="country_code", nullable = false)
+    @JoinColumn(name="country_code")  // , nullable = false
     private Countries countriesCities;
 
     @OneToMany(mappedBy = "citiesAirport", cascade = CascadeType.ALL)

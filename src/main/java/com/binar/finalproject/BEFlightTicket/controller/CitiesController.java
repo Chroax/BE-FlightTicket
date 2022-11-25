@@ -33,4 +33,24 @@ public class CitiesController {
 
         }
     }
+
+    @PutMapping(value = "/update/{cityName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> updateCity(@PathVariable String cityName, @RequestBody CitiesRequest citiesRequest)
+    {
+        MessageModel messageModel = new MessageModel();
+        CitiesResponse citiesResponse = citiesService.updateCity(citiesRequest, cityName);
+        if(citiesResponse == null)
+        {
+            messageModel.setStatus(HttpStatus.CONFLICT.value());
+            messageModel.setMessage("Failed to update City");
+            return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Update City with name : " + citiesResponse.getCityName());
+            messageModel.setData(citiesResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }
+    }
 }
