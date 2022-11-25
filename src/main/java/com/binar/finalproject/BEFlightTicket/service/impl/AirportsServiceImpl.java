@@ -3,8 +3,10 @@ package com.binar.finalproject.BEFlightTicket.service.impl;
 import com.binar.finalproject.BEFlightTicket.dto.AirportRequest;
 import com.binar.finalproject.BEFlightTicket.dto.AirportResponse;
 import com.binar.finalproject.BEFlightTicket.dto.CitiesResponse;
+import com.binar.finalproject.BEFlightTicket.dto.CountriesResponse;
 import com.binar.finalproject.BEFlightTicket.model.Airports;
 import com.binar.finalproject.BEFlightTicket.model.Cities;
+import com.binar.finalproject.BEFlightTicket.model.Countries;
 import com.binar.finalproject.BEFlightTicket.repository.AirportsRepository;
 import com.binar.finalproject.BEFlightTicket.service.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +36,13 @@ public class AirportsServiceImpl implements AirportService {
 
     @Override
     public List<AirportResponse> searchAllAirports() {
-        List<Airports> getAllAirports = airportsRepository.findAll();
-        List<AirportResponse> allAirportsResponse = new ArrayList<>();
-        for (Airports airports : getAllAirports) {
+        List<Airports> allAirports = airportsRepository.findAll();
+        List<AirportResponse> allAirportResponse = new ArrayList<>();
+        for (Airports airports : allAirports) {
             AirportResponse airportResponse = AirportResponse.build(airports);
-            allAirportsResponse.add(airportResponse);
+            allAirportResponse.add(airportResponse);
         }
-        return allAirportsResponse;
+        return allAirportResponse;
     }
 
     @Override

@@ -37,14 +37,14 @@ public class AirportsController {
     }
 
     @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<MessageModel> getAllAirports() {
+    public ResponseEntity<MessageModel> getAllAirports()
+    {
         MessageModel messageModel = new MessageModel();
         try {
-            List<AirportResponse> getAllAirports = airportService.searchAllAirports();
+            List<AirportResponse> getAirport = airportService.searchAllAirports();
             messageModel.setMessage("Success get all Airports");
             messageModel.setStatus(HttpStatus.OK.value());
-            messageModel.setData(getAllAirports);
+            messageModel.setData(getAirport);
             return ResponseEntity.ok().body(messageModel);
         }catch (Exception exception)
         {
@@ -71,6 +71,25 @@ public class AirportsController {
             messageModel.setMessage("Update Airport with name : " + airportResponse.getAirportName());
             messageModel.setData(airportResponse);
             return ResponseEntity.ok().body(messageModel);
+        }
+    }
+
+    @DeleteMapping(value = "/delete/{airportName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> deleteAirportByName(@PathVariable String airportName)
+    {
+        MessageModel messageModel = new MessageModel();
+        Boolean deleteAirport = airportService.deleteAirportsByName(airportName);
+        if(deleteAirport)
+        {
+            messageModel.setMessage("Success delete Airport by name : " + airportName);
+            messageModel.setStatus(HttpStatus.OK.value());
+            return ResponseEntity.ok().body(messageModel);
+        }
+        else
+        {
+            messageModel.setMessage("Failed delete Airport by name : " + airportName + ", is not found");
+            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
+            return ResponseEntity.badRequest().body(messageModel);
         }
     }
 }
