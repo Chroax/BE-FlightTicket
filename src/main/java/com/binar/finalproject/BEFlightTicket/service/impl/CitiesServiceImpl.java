@@ -45,6 +45,7 @@ public class CitiesServiceImpl implements CitiesService {
     public CitiesResponse updateCity(CitiesRequest citiesRequest, String cityName) {
         Cities cities = citiesRepository.findByCityName(cityName);
         if (cities != null) {
+            cities.setCityCode(citiesRequest.getCityCode());
             cities.setCityName(citiesRequest.getCityName());
             try {
                 return CitiesResponse.build(cities);
