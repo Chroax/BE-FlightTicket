@@ -3,6 +3,7 @@ package com.binar.finalproject.BEFlightTicket.service.impl;
 import com.binar.finalproject.BEFlightTicket.dto.AirplanesRequest;
 import com.binar.finalproject.BEFlightTicket.dto.AirplanesResponse;
 import com.binar.finalproject.BEFlightTicket.model.Airplanes;
+import com.binar.finalproject.BEFlightTicket.model.Users;
 import com.binar.finalproject.BEFlightTicket.repository.AirplanesRepository;
 import com.binar.finalproject.BEFlightTicket.service.AirplanesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,12 @@ public class AirplaneServiceImpl implements AirplanesService {
         catch (Exception exception) {
             return null;
         }
+    }
+
+    @Override
+    public AirplanesResponse searchAirplaneByName(String airplaneName) {
+        Optional<Airplanes> isAirplanes = airplanesRepository.findById(airplaneName);
+        return isAirplanes.map(AirplanesResponse::build).orElse(null);
     }
 
     @Override
