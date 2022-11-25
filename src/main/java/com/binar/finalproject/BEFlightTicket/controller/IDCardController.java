@@ -38,4 +38,21 @@ public class IDCardController {
         }
     }
 
+    @GetMapping("/get-all/{travelerId}")
+    public ResponseEntity<MessageModel> getTravelerIdCard(@PathVariable UUID travelerId){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<IDCardResponse> idCardResponses = idCardService.searchTravelerListIdCard(travelerId);
+            messageModel.setMessage("Success get id-card by traveler id : " + travelerId);
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(idCardResponses);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get id-card by traveler id, " + travelerId + " not found");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+
 }
