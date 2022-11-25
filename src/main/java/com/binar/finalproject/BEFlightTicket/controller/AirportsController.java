@@ -92,4 +92,20 @@ public class AirportsController {
             return ResponseEntity.badRequest().body(messageModel);
         }
     }
+    @GetMapping(value = "/get-byName/{airportName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> getAirportsByName(@PathVariable String airportName){
+        MessageModel messageModel = new MessageModel();
+        try {
+            AirportResponse getAirport = airportService.searchAirportsByName(airportName);
+            messageModel.setMessage("Success get Airport By name");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(getAirport);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get Airport By Name");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
 }
