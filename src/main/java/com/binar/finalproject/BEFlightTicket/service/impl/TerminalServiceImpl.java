@@ -41,4 +41,20 @@ public class TerminalServiceImpl implements TerminalService {
         return allTerminalResponses;
     }
 
+    @Override
+    public TerminalResponse updateTerminal(TerminalRequest terminalRequest, String terminalName) {
+        Terminals terminals = terminalsRepository.findByTerminalName(terminalName);
+        if (terminals != null) {
+            terminals.setTerminalName(terminalRequest.getTerminalName());
+            try {
+                return TerminalResponse.build(terminals);
+            } catch (Exception exception) {
+                return null;
+            }
+        }
+        else {
+            throw new RuntimeException("Terminals with name : " + terminalName + " is not found");
+        }
+    }
+
 }
