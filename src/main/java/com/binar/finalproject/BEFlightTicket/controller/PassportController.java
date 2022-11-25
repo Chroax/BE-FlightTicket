@@ -56,4 +56,22 @@ public class PassportController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+
+
+    @GetMapping("/get/{passportNumber}")
+    public ResponseEntity<MessageModel> getPassport(@PathVariable String passportNumber){
+        MessageModel messageModel = new MessageModel();
+        try {
+            PassportResponse passportResponse = passportService.searchPassport(passportNumber);
+            messageModel.setMessage("Success get passport");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(passportResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get passport");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
 }
