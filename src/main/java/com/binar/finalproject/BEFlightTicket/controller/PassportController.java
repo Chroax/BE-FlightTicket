@@ -38,4 +38,22 @@ public class PassportController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
+
+
+    @GetMapping("/get-all/{travelerId}")
+    public ResponseEntity<MessageModel> getTravelerPassport(@PathVariable UUID travelerId){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<PassportResponse> passportResponse = passportService.searchTravelerListPassport(travelerId);
+            messageModel.setMessage("Success get passport by traveler id : " + travelerId);
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(passportResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get passport by traveler id, " + travelerId + " not found");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
 }
