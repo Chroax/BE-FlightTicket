@@ -29,7 +29,7 @@ public class AirportsController {
         }
         else {
             messageModel.setStatus(HttpStatus.CREATED.value());
-            messageModel.setMessage("Create new City");
+            messageModel.setMessage("Create new Airports");
             messageModel.setData(airportResponse);
             return ResponseEntity.ok().body(messageModel);
 
@@ -51,6 +51,26 @@ public class AirportsController {
             messageModel.setMessage("Failed get all Airports");
             messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+
+    @PutMapping(value = "/update/{airportName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> updateAirports(@PathVariable String airportName, @RequestBody AirportRequest airportRequest)
+    {
+        MessageModel messageModel = new MessageModel();
+        AirportResponse airportResponse = airportService.updateAirports(airportRequest, airportName);
+        if(airportResponse == null)
+        {
+            messageModel.setStatus(HttpStatus.CONFLICT.value());
+            messageModel.setMessage("Failed to update Airports");
+            return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Update Airport with name : " + airportResponse.getAirportName());
+            messageModel.setData(airportResponse);
+            return ResponseEntity.ok().body(messageModel);
         }
     }
 }
