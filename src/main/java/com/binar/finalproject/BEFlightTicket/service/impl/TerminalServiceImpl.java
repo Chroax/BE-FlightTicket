@@ -57,4 +57,15 @@ public class TerminalServiceImpl implements TerminalService {
         }
     }
 
+    @Override
+    public Boolean deleteTerminal(String terminalName) {
+        Terminals terminals = terminalsRepository.findByTerminalName(terminalName);
+        if(terminals != null) {
+            terminalsRepository.deleteById(terminals.getTerminalId());
+            return true;
+        }
+        else
+            return false;
+    }
+
 }
