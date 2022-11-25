@@ -8,6 +8,9 @@ import com.binar.finalproject.BEFlightTicket.service.TerminalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class TerminalServiceImpl implements TerminalService {
 
@@ -25,6 +28,17 @@ public class TerminalServiceImpl implements TerminalService {
         {
             return null;
         }
+    }
+
+    @Override
+    public List<TerminalResponse> searchAllTerminal() {
+        List<Terminals> allTerminal = terminalsRepository.findAll();
+        List<TerminalResponse> allTerminalResponses = new ArrayList<>();
+        for (Terminals terminals : allTerminal) {
+            TerminalResponse terminalResponse = TerminalResponse.build(terminals);
+            allTerminalResponses.add(terminalResponse);
+        }
+        return allTerminalResponses;
     }
 
 }
