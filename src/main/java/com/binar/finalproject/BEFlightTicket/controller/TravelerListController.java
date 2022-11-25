@@ -19,7 +19,7 @@ public class TravelerListController {
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<MessageModel> registerUser(@RequestBody TravelerListRequest travelerListRequest) {
+    public ResponseEntity<MessageModel> registerTravelerList(@RequestBody TravelerListRequest travelerListRequest) {
         MessageModel messageModel = new MessageModel();
 
         TravelerListResponse travelerListResponse = travelerListService.registerTravelerList(travelerListRequest);
@@ -39,7 +39,7 @@ public class TravelerListController {
     }
 
     @GetMapping("/get-all/{userId}")
-    public ResponseEntity<MessageModel> getAllUsers(@PathVariable UUID userId){
+    public ResponseEntity<MessageModel> getAllUserTravelerList(@PathVariable UUID userId){
         MessageModel messageModel = new MessageModel();
         try {
             List<TravelerListResponse> travelerListGet = travelerListService.searchAllUserTravelerList(userId);
@@ -50,6 +50,23 @@ public class TravelerListController {
         }catch (Exception exception)
         {
             messageModel.setMessage("Failed get all traveler list by userId, " + userId + " not found");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+
+    @GetMapping("/get-all")
+    public ResponseEntity<MessageModel> getAllTravelerList(){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<TravelerListResponse> travelerListGet = travelerListService.searchAllTravelerList();
+            messageModel.setMessage("Success get all traveler list");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(travelerListGet);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get all traveler list");
             messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
