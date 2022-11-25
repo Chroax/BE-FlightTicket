@@ -39,6 +39,22 @@ public class AirplaneController {
 
         }
     }
+    @GetMapping("/name/{airplaneName}")
+    public ResponseEntity<MessageModel> getUserById(@PathVariable String airplaneName){
+        MessageModel messageModel = new MessageModel();
+        try {
+            AirplanesResponse airplaneGet = airplanesService.searchAirplaneByName(airplaneName);
+            messageModel.setMessage("Success get airplane");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(airplaneGet);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get airplane");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
     @GetMapping("/get-all")
     public ResponseEntity<MessageModel> getAllAirplane()
     {
