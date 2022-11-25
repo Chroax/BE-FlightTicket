@@ -92,4 +92,21 @@ public class CitiesController {
             return ResponseEntity.badRequest().body(messageModel);
         }
     }
+
+    @GetMapping(value = "/get-byName/{cityName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> getCountriesByName(@PathVariable String cityName){
+        MessageModel messageModel = new MessageModel();
+        try {
+            CitiesResponse getCity = citiesService.searchCityByName(cityName);
+            messageModel.setMessage("Success get City By name");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(getCity);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get City By Name");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
 }
