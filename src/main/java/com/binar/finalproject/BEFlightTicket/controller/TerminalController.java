@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/terminals")
@@ -37,5 +36,20 @@ public class TerminalController {
         }
     }
 
+    @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> getAllRole() {
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<TerminalResponse> getAllTerminal = terminalService.searchAllTerminal();
+            messageModel.setMessage("Success get all Terminal");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(getAllTerminal);
+            return ResponseEntity.ok().body(messageModel);
+        } catch (Exception exception) {
+            messageModel.setMessage("Failed get all Terminal");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
 
 }
