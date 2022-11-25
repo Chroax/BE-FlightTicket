@@ -17,4 +17,25 @@ public class IDCardController {
     @Autowired
     IdCardService idCardService;
 
+    @PostMapping("/add")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<MessageModel> registerIdCard(@RequestBody IDCardRequest idCardRequest) {
+        MessageModel messageModel = new MessageModel();
+
+        IDCardResponse idCardResponse = idCardService.registerIdCard(idCardRequest);
+        if(idCardResponse == null)
+        {
+            messageModel.setMessage("Failed register new id-card");
+            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
+            return ResponseEntity.badRequest().body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Register new id-card");
+            messageModel.setData(idCardResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }
+    }
+
 }
