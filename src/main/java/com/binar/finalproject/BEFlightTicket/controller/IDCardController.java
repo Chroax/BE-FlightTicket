@@ -55,4 +55,21 @@ public class IDCardController {
         }
     }
 
+    @GetMapping("/get/{idCardNumber}")
+    public ResponseEntity<MessageModel> getIdCard(@PathVariable String idCardNumber){
+        MessageModel messageModel = new MessageModel();
+        try {
+            IDCardResponse idCardResponses = idCardService.searchIdCard(idCardNumber);
+            messageModel.setMessage("Success get id-card");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(idCardResponses);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get id-card");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+
 }
