@@ -2,6 +2,7 @@ package com.binar.finalproject.BEFlightTicket.service.impl;
 
 import com.binar.finalproject.BEFlightTicket.dto.SeatRequest;
 import com.binar.finalproject.BEFlightTicket.dto.SeatResponse;
+import com.binar.finalproject.BEFlightTicket.model.Airplanes;
 import com.binar.finalproject.BEFlightTicket.model.Seats;
 import com.binar.finalproject.BEFlightTicket.repository.SeatRepository;
 import com.binar.finalproject.BEFlightTicket.service.SeatService;
@@ -16,10 +17,15 @@ public class SeatServiceImpl implements SeatService {
 
     @Autowired
     private SeatRepository seatRepository;
+    @Autowired
+    private 
 
     @Override
     public SeatResponse addSeat(SeatRequest seatRequest) {
-        Seats seats = seatRequest.toSeats();
+        Seats seats = Seats.builder()
+                .seatNumber(seatRequest.getSeatNumber())
+                .seatType(seatRequest.getSeatType())
+                .airplanesSeats(ai);
         try
         {
             seatRepository.save(seats);

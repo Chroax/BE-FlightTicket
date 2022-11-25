@@ -10,6 +10,7 @@ public class SeatResponse {
     private Integer seatId;
     private String seatNumber;
     private String seatType;
+    private String airplaneName;
 
     public static SeatResponse build(Seats seats)
     {
@@ -17,6 +18,7 @@ public class SeatResponse {
                 .seatId(seats.getSeatId())
                 .seatNumber(seats.getSeatNumber())
                 .seatType(seats.getSeatType())
+                .airplaneName(seats.getAirplanesSeats().getAirplaneName())
                 .build();
     }
 }
