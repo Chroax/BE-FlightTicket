@@ -71,7 +71,7 @@ public class AirplaneController {
         else
         {
             messageModel.setStatus(HttpStatus.OK.value());
-            messageModel.setMessage("Update role with id : " + airplanesResponse.getAirplaneName());
+            messageModel.setMessage("Update airplane with name : " + airplanesResponse.getAirplaneName());
             messageModel.setData(airplanesResponse);
             return ResponseEntity.ok().body(messageModel);
         }
