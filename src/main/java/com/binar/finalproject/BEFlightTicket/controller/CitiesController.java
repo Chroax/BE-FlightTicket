@@ -73,4 +73,23 @@ public class CitiesController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+
+    @DeleteMapping(value = "/delete/{cityName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> deleteCityByName(@PathVariable String cityName)
+    {
+        MessageModel messageModel = new MessageModel();
+        Boolean deleteCity = citiesService.deleteCity(cityName);
+        if(deleteCity)
+        {
+            messageModel.setMessage("Success delete City by name : " + cityName);
+            messageModel.setStatus(HttpStatus.OK.value());
+            return ResponseEntity.ok().body(messageModel);
+        }
+        else
+        {
+            messageModel.setMessage("Failed delete City by name : " + cityName + ", is not found");
+            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
+            return ResponseEntity.badRequest().body(messageModel);
+        }
+    }
 }
