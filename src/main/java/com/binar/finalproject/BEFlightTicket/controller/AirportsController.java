@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/airports")
 public class AirportsController {
@@ -31,6 +33,24 @@ public class AirportsController {
             messageModel.setData(airportResponse);
             return ResponseEntity.ok().body(messageModel);
 
+        }
+    }
+
+    @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<MessageModel> getAllAirports() {
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<AirportResponse> getAllAirports = airportService.searchAllAirports();
+            messageModel.setMessage("Success get all Airports");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(getAllAirports);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get all Airports");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
 }
