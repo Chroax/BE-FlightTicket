@@ -52,4 +52,25 @@ public class TerminalController {
         }
     }
 
+    @PutMapping(value = "/update/{terminalName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> updateRole(@PathVariable String terminalName, @RequestBody TerminalRequest terminalRequest)
+    {
+        MessageModel messageModel = new MessageModel();
+        TerminalResponse terminalResponse = terminalService.updateTerminal(terminalRequest, terminalName);
+
+        if(terminalResponse == null)
+        {
+            messageModel.setStatus(HttpStatus.CONFLICT.value());
+            messageModel.setMessage("Failed to update Terminal");
+            return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Update Terminal with name : " + terminalResponse.getTerminalName());
+            messageModel.setData(terminalResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }
+    }
+
 }
