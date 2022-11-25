@@ -71,4 +71,24 @@ public class TravelerListController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+
+    @PutMapping("/update/{travelerId}")
+    public ResponseEntity<MessageModel> updateUser(@PathVariable UUID travelerId, @RequestBody TravelerListUpdateRequest travelerListUpdateRequest) {
+        MessageModel messageModel = new MessageModel();
+        TravelerListResponse travelerListResponse = travelerListService.updateTravelerList(travelerListUpdateRequest, travelerId);
+
+        if(travelerListResponse == null)
+        {
+            messageModel.setStatus(HttpStatus.CONFLICT.value());
+            messageModel.setMessage("Failed traveler-list with id : " + travelerId);
+            return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Update traveler-list with id : " + travelerId);
+            messageModel.setData(travelerListResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }
+    }
 }

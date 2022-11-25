@@ -11,5 +11,4 @@ public interface TravelerListService {
     List<TravelerListResponse> searchAllTravelerList();
     List<TravelerListResponse> searchAllUserTravelerList(UUID userId);
     TravelerListResponse updateTravelerList(TravelerListUpdateRequest userUpdateRequest, UUID travelerId);
-    Boolean deleteTravelerList(UUID travelerId);
 }

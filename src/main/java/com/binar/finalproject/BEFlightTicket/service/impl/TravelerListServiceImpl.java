@@ -3,7 +3,9 @@ package com.binar.finalproject.BEFlightTicket.service.impl;
 import com.binar.finalproject.BEFlightTicket.dto.TravelerListRequest;
 import com.binar.finalproject.BEFlightTicket.dto.TravelerListResponse;
 import com.binar.finalproject.BEFlightTicket.dto.TravelerListUpdateRequest;
+import com.binar.finalproject.BEFlightTicket.dto.UserResponse;
 import com.binar.finalproject.BEFlightTicket.model.Countries;
+import com.binar.finalproject.BEFlightTicket.model.Roles;
 import com.binar.finalproject.BEFlightTicket.model.TravelerList;
 import com.binar.finalproject.BEFlightTicket.model.Users;
 import com.binar.finalproject.BEFlightTicket.repository.TravelerListRepository;
@@ -83,17 +85,32 @@ public class TravelerListServiceImpl implements TravelerListService {
     }
 
     @Override
-    public TravelerListResponse updateTravelerList(TravelerListUpdateRequest userUpdateRequest, UUID travelerId) {
-        return null;
-    }
-
-    @Override
-    public Boolean deleteTravelerList(UUID travelerId) {
-        if(travelerListRepository.existsById(travelerId)) {
-            travelerListRepository.deleteById(travelerId);
-            return true;
-        }
-        else
-            return false;
+    public TravelerListResponse updateTravelerList(TravelerListUpdateRequest travelerListUpdateRequest, UUID travelerId) {
+        Optional<TravelerList> isTravelerList = travelerListRepository.findById(travelerId);
+        String message = null;
+        if (isTravelerList.isPresent()) {
+            TravelerList travelerList = isTravelerList.get();
+            travelerList.setType(travelerListUpdateRequest.getType());
+            travelerList.setTitle(travelerListUpdateRequest.getTitle());
+            travelerList.setFirstName(travelerListUpdateRequest.getFirstName());
+            travelerList.setLastName(travelerListUpdateRequest.getLastName());
+            travelerList.setBirthDate(travelerListUpdateRequest.getBirthDate());
+            if (travelerListUpdateRequest.getCountryCode() != null)
+            {
+                Optional<Countries> countries = countriesRepository.findById(travelerListUpdateRequest.getCountryCode());
+                if(countries.isPresent())
+                    travelerList.setCountriesTravelerList(countries.get());
+                else
+                    message = "Countries with this code doesnt exist";
+            }
+            if(message != null)
+                return null;
+            else
+            {
+                travelerListRepository.saveAndFlush(travelerList);
+                return TravelerListResponse.build(travelerList);
+            }
+        } else
+            return null;
     }
 }
