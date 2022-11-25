@@ -2,7 +2,6 @@ package com.binar.finalproject.BEFlightTicket.controller;
 
 import com.binar.finalproject.BEFlightTicket.dto.*;
 import com.binar.finalproject.BEFlightTicket.service.CountriesService;
-import com.binar.finalproject.BEFlightTicket.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -92,6 +91,23 @@ public class CountriesController {
             messageModel.setMessage("Failed delete Countries by name : " + countryName + ", is not found");
             messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
             return ResponseEntity.badRequest().body(messageModel);
+        }
+    }
+
+    @GetMapping(value = "/get-byName/{countryName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> getCountriesByName(@PathVariable String countryName){
+        MessageModel messageModel = new MessageModel();
+        try {
+            CountriesResponse getCountries = countriesService.searchCountriesByName(countryName);
+            messageModel.setMessage("Success get Countries By name");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(getCountries);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get Countries By Name");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
 

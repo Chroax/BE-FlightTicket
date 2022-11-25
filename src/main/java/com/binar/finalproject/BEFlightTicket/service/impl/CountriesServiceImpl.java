@@ -2,9 +2,7 @@ package com.binar.finalproject.BEFlightTicket.service.impl;
 
 import com.binar.finalproject.BEFlightTicket.dto.CountriesRequest;
 import com.binar.finalproject.BEFlightTicket.dto.CountriesResponse;
-import com.binar.finalproject.BEFlightTicket.dto.RoleResponse;
 import com.binar.finalproject.BEFlightTicket.model.Countries;
-import com.binar.finalproject.BEFlightTicket.model.Roles;
 import com.binar.finalproject.BEFlightTicket.repository.CountriesRepository;
 import com.binar.finalproject.BEFlightTicket.service.CountriesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,5 +69,15 @@ public class CountriesServiceImpl implements CountriesService {
         }
         else
             return false;
+    }
+
+    @Override
+    public CountriesResponse searchCountriesByName(String countryName) {
+        Countries countries = countriesRepository.findByCountriesName(countryName);
+        if (countries != null){
+            return CountriesResponse.build(countries);
+        }else {
+            return null;
+        }
     }
 }
