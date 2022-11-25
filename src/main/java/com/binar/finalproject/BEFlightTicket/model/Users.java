@@ -49,7 +49,7 @@ public class Users {
     private Boolean gender;
 
     @Column(name = "status_active", nullable = false)
-    private Boolean statusActive;
+    private Boolean statusActive = true;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
