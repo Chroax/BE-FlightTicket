@@ -71,5 +71,24 @@ public class IDCardController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+    
+    @PutMapping("/update/{idCardNumber}")
+    public ResponseEntity<MessageModel> updateIdCard(@PathVariable String idCardNumber, @RequestBody IDCardRequest idCardRequest) {
+        MessageModel messageModel = new MessageModel();
+        IDCardResponse idCardResponse = idCardService.updateIdCard(idCardRequest, idCardNumber);
 
+        if(idCardResponse == null)
+        {
+            messageModel.setStatus(HttpStatus.CONFLICT.value());
+            messageModel.setMessage("Failed update id-card with number : " + idCardNumber);
+            return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Success update id-card with number : " + idCardNumber);
+            messageModel.setData(idCardResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }
+    }
 }
