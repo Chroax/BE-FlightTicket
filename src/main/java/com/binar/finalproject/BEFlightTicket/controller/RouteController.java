@@ -91,4 +91,22 @@ public class RouteController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
+    @DeleteMapping("/delete/{routeId}")
+    public ResponseEntity<MessageModel> deleteRoute(@PathVariable UUID routeId)
+    {
+        MessageModel messageModel = new MessageModel();
+        Boolean deleteRoute = routeService.deleteRoute(routeId);
+        if(deleteRoute)
+        {
+            messageModel.setMessage("Success delete route by id: " + routeId);
+            messageModel.setStatus(HttpStatus.OK.value());
+            return ResponseEntity.ok().body(messageModel);
+        }
+        else
+        {
+            messageModel.setMessage("Failed delete route by id: " + routeId + ", not found");
+            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
+            return ResponseEntity.badRequest().body(messageModel);
+        }
+    }
 }
