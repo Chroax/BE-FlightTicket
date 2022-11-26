@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/payment")
 public class PaymentMethodController {
@@ -45,6 +47,23 @@ public class PaymentMethodController {
         }catch (Exception exception)
         {
             messageModel.setMessage("Failed get payment");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+    @GetMapping("/get-all")
+    public ResponseEntity<MessageModel> getAllPayment()
+    {
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<PaymentMethodResponse> paymentGet = paymentMethodService.gettAllPaymentMethod();
+            messageModel.setMessage("Success get all payment");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(paymentGet);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get all payment");
             messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
