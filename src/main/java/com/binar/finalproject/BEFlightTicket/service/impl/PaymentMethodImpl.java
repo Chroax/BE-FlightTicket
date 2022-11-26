@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PaymentMethodImpl implements PaymentMethodService {
+
     @Autowired
     private PaymentMethodRepository paymentMethodRepository;
 
@@ -58,21 +58,21 @@ public class PaymentMethodImpl implements PaymentMethodService {
         String message = null;
         if (paymentMethods != null)
         {
-           if (paymentMethodRequest.getPaymentName() != null)
-               paymentMethods.setPaymentName(paymentMethodRequest.getPaymentName());
-           else
-               message = "Payment with name: "+paymentName+" not found";
-           if (paymentMethodRequest.getPaymentType() != null)
+            if (paymentMethodRequest.getPaymentName() != null)
+                paymentMethods.setPaymentName(paymentMethodRequest.getPaymentName());
+            else
+                message = "Payment with name: "+paymentName+" not found";
+            if (paymentMethodRequest.getPaymentType() != null)
                 paymentMethods.setPaymentType(paymentMethodRequest.getPaymentType());
-           if (paymentMethodRequest.getImagePath() != null)
+            if (paymentMethodRequest.getImagePath() != null)
                 paymentMethods.setImagePath(paymentMethodRequest.getImagePath());
-           if (message == null)
-               return null;
-           else
-           {
-               paymentMethodRepository.saveAndFlush(paymentMethods);
-               return PaymentMethodResponse.build(paymentMethods);
-           }
+            if (message == null)
+                return null;
+            else
+            {
+                paymentMethodRepository.saveAndFlush(paymentMethods);
+                return PaymentMethodResponse.build(paymentMethods);
+            }
         }
         else
             return null;
