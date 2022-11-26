@@ -98,13 +98,16 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public Boolean deleteSeat(String seatNumber) {
-        Seats seats = seatRepository.findByNumber(seatNumber);
-        if (seats != null)
+    public List<SeatResponse> searchAirplaneSeat(String airplaneName) {
+        List<Seats> allSeat = seatRepository.findAllSeatsByAirplaneName(airplaneName);
+        List<SeatResponse> allSeatResponse = new ArrayList<>();
+        for (Seats seats : allSeat)
         {
-            seatRepository.deleteById(seats.getSeatId());
-            return true;
+            SeatResponse seatResponse = SeatResponse.build(seats);
+            allSeatResponse.add(seatResponse);
         }
-        return false;
+        return allSeatResponse;
     }
+
+
 }

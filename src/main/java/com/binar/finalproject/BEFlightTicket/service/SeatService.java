@@ -10,5 +10,5 @@ public interface SeatService {
     SeatResponse searchSeatBySeatNumber(String seatNumber);
     List<SeatResponse> getAllSeat();
     SeatResponse updateSeat(SeatRequest seatRequest, String seatNumber);
-    Boolean deleteSeat(String seatNumber);
+    List<SeatResponse> searchAirplaneSeat(String airplaneName);
 }
