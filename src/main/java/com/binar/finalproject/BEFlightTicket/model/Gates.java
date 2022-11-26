@@ -22,8 +22,8 @@ public class Gates {
     @Column(name = "gate_id")
     private Integer gateId;
 
-    @Column(name = "terminal_name", columnDefinition = "CHAR(3)", nullable = false)
-    private String terminalName;
+    @Column(name = "gate_name", columnDefinition = "CHAR(3)", nullable = false)
+    private String gateName;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
