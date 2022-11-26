@@ -4,6 +4,7 @@ import com.binar.finalproject.BEFlightTicket.dto.SeatRequest;
 import com.binar.finalproject.BEFlightTicket.dto.SeatResponse;
 import com.binar.finalproject.BEFlightTicket.model.Airplanes;
 import com.binar.finalproject.BEFlightTicket.model.Seats;
+import com.binar.finalproject.BEFlightTicket.repository.AirplanesRepository;
 import com.binar.finalproject.BEFlightTicket.repository.SeatRepository;
 import com.binar.finalproject.BEFlightTicket.service.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SeatServiceImpl implements SeatService {
@@ -18,23 +20,31 @@ public class SeatServiceImpl implements SeatService {
     @Autowired
     private SeatRepository seatRepository;
     @Autowired
-    private 
+    private AirplanesRepository airplanesRepository;
 
     @Override
     public SeatResponse addSeat(SeatRequest seatRequest) {
-        Seats seats = Seats.builder()
-                .seatNumber(seatRequest.getSeatNumber())
-                .seatType(seatRequest.getSeatType())
-                .airplanesSeats(ai);
-        try
-        {
-            seatRepository.save(seats);
-            return SeatResponse.build(seats);
-        }
-        catch(Exception exception)
-        {
-            return null;
-        }
+       try {
+           Optional<Airplanes> airplanes = airplanesRepository.findById(seatRequest.getAirplane_name());
+           if (airplanes.isPresent())
+           {
+               Seats seats = seatRequest.toSeats(airplanes.get());
+               try {
+                   seatRepository.save(seats);
+                   return SeatResponse.build(seats);
+               }
+               catch (Exception exception)
+               {
+                   return null;
+               }
+           }
+           else
+               return null;
+       }
+       catch (Exception exception)
+       {
+           return null;
+       }
     }
 
     @Override
