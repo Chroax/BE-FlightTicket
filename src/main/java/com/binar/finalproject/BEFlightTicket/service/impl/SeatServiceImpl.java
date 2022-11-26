@@ -80,11 +80,16 @@ public class SeatServiceImpl implements SeatService {
                 message = "Seat with number: "+seatNumber+" not found";
             if (seatRequest.getSeatType() != null)
                 seats.setSeatType(seatRequest.getSeatType());
-            if (message == null)
+            Optional<Airplanes> airplanes = airplanesRepository.findById(seatRequest.getAirplane_name());
+            if (airplanes.isPresent())
+                seats.setAirplanesSeats(airplanes.get());
+            else
+                message = "Airplane with this name doesnt exist";
+            if (message != null)
                 return null;
             else
             {
-                seatRepository.save(seats);
+                seatRepository.saveAndFlush(seats);
                 return SeatResponse.build(seats);
             }
         }
