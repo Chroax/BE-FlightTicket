@@ -17,10 +17,10 @@ public class SeatRequest {
     private String airplane_name;
     public Seats toSeats(Airplanes airplanes)
     {
-        Seats seats = new Seats();
-        seats.setSeatNumber(this.seatNumber);
-        seats.setSeatType(this.seatType);
-        seats.setAirplanesSeats(airplanes);
-        return seats;
+        return Seats.builder()
+                .seatNumber(this.seatNumber)
+                .seatType(this.seatType)
+                .airplanesSeats(airplanes)
+                .build();
     }
 }
