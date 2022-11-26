@@ -54,4 +54,21 @@ public class RouteController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+    @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> getAllRoute()
+    {
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<RouteResponse> routeGet = routeService.getAllRoute();
+            messageModel.setMessage("Success get all route");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(routeGet);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get all route");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
 }
