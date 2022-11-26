@@ -93,6 +93,11 @@ public class GatesServiceImpl implements GatesService {
 
     @Override
     public GatesResponse searchGatesByName(String gateName) {
-        return null;
+        Gates gates = gatesRepository.findByGatesName(gateName);
+        if (gates != null){
+            return GatesResponse.build(gates);
+        }else {
+            return null;
+        }
     }
 }
