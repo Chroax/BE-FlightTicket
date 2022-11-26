@@ -82,7 +82,13 @@ public class GatesServiceImpl implements GatesService {
 
     @Override
     public Boolean deleteGates(String gateName) {
-        return null;
+        Gates  gates = gatesRepository.findByGatesName(gateName);
+        if(gates != null) {
+            gatesRepository.deleteById(gates.getGateId());
+            return true;
+        }
+        else
+            return false;
     }
 
     @Override
