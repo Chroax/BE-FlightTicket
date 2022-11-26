@@ -34,6 +34,23 @@ public class SeatController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
+    @GetMapping("/number/{seatNumber}")
+    public ResponseEntity<MessageModel> getSeatByNumber(@PathVariable String seatNumber){
+        MessageModel messageModel = new MessageModel();
+        try {
+            SeatResponse seatGet = seatService.searchSeatBySeatNumber(seatNumber);
+            messageModel.setMessage("Success get seat");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(seatGet);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get seat");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+
 
 
 
