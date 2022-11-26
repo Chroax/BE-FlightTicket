@@ -88,4 +88,22 @@ public class PaymentMethodController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
+    @DeleteMapping("/delete/{paymentName}")
+    public ResponseEntity<MessageModel> deletePayment(@PathVariable String paymentName)
+    {
+        MessageModel messageModel = new MessageModel();
+        Boolean deletePayment = paymentMethodService.deletePayment(paymentName);
+        if(deletePayment)
+        {
+            messageModel.setMessage("Success delete payment by name: " + paymentName);
+            messageModel.setStatus(HttpStatus.OK.value());
+            return ResponseEntity.ok().body(messageModel);
+        }
+        else
+        {
+            messageModel.setMessage("Failed delete payment by name: " + paymentName + ", not found");
+            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
+            return ResponseEntity.badRequest().body(messageModel);
+        }
+    }
 }
