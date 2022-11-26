@@ -52,4 +52,22 @@ public class GatesController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+
+    @PutMapping(value = "/update/{gateName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> updateGates(@PathVariable String gateName, @RequestBody GatesRequest gatesRequest) {
+        MessageModel messageModel = new MessageModel();
+        GatesResponse gatesResponse = gatesService.updateGates(gatesRequest, gateName);
+        if(gatesResponse == null) {
+            messageModel.setStatus(HttpStatus.CONFLICT.value());
+            messageModel.setMessage("Failed to update Gates");
+            return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(messageModel);
+        }
+        else {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Update Gates with name : " + gatesResponse.getGateName());
+            messageModel.setData(gatesResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }
+    }
+
 }
