@@ -33,4 +33,20 @@ public class PaymentMethodController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
+    @GetMapping("/name/{paymentName}")
+    public ResponseEntity<MessageModel> getPaymentByName(@PathVariable String paymentName){
+        MessageModel messageModel = new MessageModel();
+        try {
+            PaymentMethodResponse paymentGet = paymentMethodService.searchPaymentByName(paymentName);
+            messageModel.setMessage("Success get payment");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(paymentGet);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get payment");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
 }
