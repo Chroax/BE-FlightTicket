@@ -68,4 +68,24 @@ public class PaymentMethodController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+    @PutMapping("/update/{paymentName}")
+    public ResponseEntity<MessageModel> updatePayment(@PathVariable String paymentName, @RequestBody PaymentMethodRequest paymentMethodRequest)
+    {
+        MessageModel messageModel = new MessageModel();
+        PaymentMethodResponse paymentMethodResponse = paymentMethodService.updatePayment(paymentMethodRequest, paymentName);
+
+        if(paymentMethodResponse == null)
+        {
+            messageModel.setStatus(HttpStatus.CONFLICT.value());
+            messageModel.setMessage("Failed to update payment");
+            return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Update payment with name : " + paymentMethodResponse.getPaymentName());
+            messageModel.setData(paymentMethodResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }
+    }
 }

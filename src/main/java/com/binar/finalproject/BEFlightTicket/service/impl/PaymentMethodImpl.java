@@ -66,11 +66,11 @@ public class PaymentMethodImpl implements PaymentMethodService {
                 paymentMethods.setPaymentType(paymentMethodRequest.getPaymentType());
             if (paymentMethodRequest.getImagePath() != null)
                 paymentMethods.setImagePath(paymentMethodRequest.getImagePath());
-            if (message == null)
+            if (message != null)
                 return null;
             else
             {
-                paymentMethodRepository.saveAndFlush(paymentMethods);
+                paymentMethodRepository.save(paymentMethods);
                 return PaymentMethodResponse.build(paymentMethods);
             }
         }
