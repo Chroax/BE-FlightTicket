@@ -7,6 +7,7 @@ import com.binar.finalproject.BEFlightTicket.service.GatesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +40,13 @@ public class GatesServiceImpl implements GatesService {
 
     @Override
     public List<GatesResponse> searchAllGates() {
-        return null;
+        List<Gates> allGates = gatesRepository.findAll();
+        List<GatesResponse> allGatesResponse = new ArrayList<>();
+        for (Gates  gates : allGates) {
+            GatesResponse gatesResponse = GatesResponse.build(gates);
+            allGatesResponse.add(gatesResponse);
+        }
+        return allGatesResponse;
     }
 
     @Override
