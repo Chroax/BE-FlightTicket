@@ -4,8 +4,11 @@ import com.binar.finalproject.BEFlightTicket.dto.*;
 import com.binar.finalproject.BEFlightTicket.service.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/seat")
@@ -50,9 +53,42 @@ public class SeatController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+    @GetMapping("/get-all")
+    public ResponseEntity<MessageModel> getAllSeats()
+    {
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<SeatResponse> seatGet = seatService.getAllSeat();
+            messageModel.setMessage("Success get all seats");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(seatGet);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get all seats");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+    @PutMapping(value = "/update/{seatNumber}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> updateSeat(@PathVariable String seatNumber, @RequestBody SeatRequest seatRequest)
+    {
+        MessageModel messageModel = new MessageModel();
+        SeatResponse seatResponse = seatService.updateSeat(seatRequest, seatNumber);
 
-
-
-
+        if(seatResponse == null)
+        {
+            messageModel.setStatus(HttpStatus.CONFLICT.value());
+            messageModel.setMessage("Failed to update seat");
+            return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Update seat with number: " + seatResponse.getSeatId());
+            messageModel.setData(seatResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }
+    }
 
 }
