@@ -28,7 +28,7 @@ public class SeatController {
         }
         else
         {
-            messageModel.setStatus(HttpStatus.CREATED.value());
+            messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setMessage("Add new seat");
             messageModel.setData(seatResponse);
             return ResponseEntity.ok().body(messageModel);
