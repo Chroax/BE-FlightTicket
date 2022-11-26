@@ -13,6 +13,9 @@ public class CitiesRequest {
     @NotEmpty(message = "City name is required.")
     private String cityName;
 
+    @NotEmpty(message = "Countries is required.")
+    private String countryCode;
+
     public Cities toCities(){
         return Cities.builder()
                 .cityCode(this.cityCode)
