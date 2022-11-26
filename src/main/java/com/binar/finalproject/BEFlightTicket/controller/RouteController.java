@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/route")
@@ -69,6 +70,25 @@ public class RouteController {
             messageModel.setMessage("Failed get all route");
             messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+    @PutMapping("/update/{routeId}")
+    public ResponseEntity<MessageModel> updateRoute(@PathVariable UUID routeId, @RequestBody RouteRequest routeRequest) {
+        MessageModel messageModel = new MessageModel();
+        RouteResponse routeResponse = routeService.updateRoute(routeRequest, routeId);
+
+        if(routeResponse == null)
+        {
+            messageModel.setStatus(HttpStatus.CONFLICT.value());
+            messageModel.setMessage("Failed update route with id : " + routeId);
+            return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Success update route with id : " + routeId);
+            messageModel.setData(routeResponse);
+            return ResponseEntity.ok().body(messageModel);
         }
     }
 }
