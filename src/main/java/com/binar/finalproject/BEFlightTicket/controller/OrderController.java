@@ -71,4 +71,20 @@ public class OrderController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+    @GetMapping("/get-all/{userId}")
+    public ResponseEntity<MessageModel> getUserOrders(@PathVariable UUID userId){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<OrderResponse> orderResponses = orderService.getAllOrderByUserId(userId);
+            messageModel.setMessage("Success get order by user id : " + userId);
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(orderResponses);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get order by user id, " + userId + " not found");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
 }
