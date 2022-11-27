@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CitiesRepository extends JpaRepository<Cities, String> {
-
     @Query("SELECT u FROM Cities u WHERE LOWER(u.cityName) LIKE LOWER(:cityName)")
     Cities findByCityName(@Param("cityName") String cityName);
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TerminalsRepository extends JpaRepository<Terminals, Integer> {
-
     @Query("SELECT t FROM Terminals t WHERE LOWER(t.terminalName) LIKE LOWER(:terminalName)")
     Terminals findByTerminalName(@Param("terminalName") String terminalName);
 }

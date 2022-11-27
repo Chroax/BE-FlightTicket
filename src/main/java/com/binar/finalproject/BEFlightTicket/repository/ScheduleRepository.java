@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ScheduleRepository extends JpaRepository<Schedules, UUID> {
-    @Query(nativeQuery = true, value = "SELECT * FROM schedule s where s.airplane_name = :airplaneName")
+    @Query(nativeQuery = true, value = "SELECT * FROM schedules s where s.airplane_name = :airplaneName")
     List<Schedules> getAllAirplaneSchedule(@Param("airplaneName") String airplaneName);
-    @Query(nativeQuery = true, value = "SELECT * FROM schedule s where s.route_id = :routeId")
+    @Query(nativeQuery = true, value = "SELECT * FROM schedules s where s.route_id = :routeId")
     List<Schedules> getAllRouteSchedule(@Param("routeId") UUID routeId);
 }

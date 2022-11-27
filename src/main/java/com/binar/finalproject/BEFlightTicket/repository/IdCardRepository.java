@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface IdCardRepository extends JpaRepository<IDCard, String> {
-
     @Query(nativeQuery = true, value = "SELECT * FROM id_card i where i.traveler_id = :travelerId")
     List<IDCard> findAllIdCardByTravelerList(@Param("travelerId") UUID travelerId);
 }

@@ -7,7 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 
 public interface CountriesRepository extends JpaRepository<Countries, String> {
-
     @Query("SELECT r FROM Countries r WHERE LOWER(r.countryName) LIKE LOWER(:countryName)")
     Countries findByCountriesName(@Param("countryName") String countryName);
 }

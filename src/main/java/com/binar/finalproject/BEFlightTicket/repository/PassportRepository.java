@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface PassportRepository extends JpaRepository<Passport, String> {
-
     @Query(nativeQuery = true, value = "SELECT * FROM passport p where p.traveler_id = :travelerId")
     List<Passport> findAllPassportByTravelerList(@Param("travelerId") UUID travelerId);
 }
