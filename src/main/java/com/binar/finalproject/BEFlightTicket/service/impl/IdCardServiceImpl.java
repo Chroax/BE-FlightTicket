@@ -26,7 +26,6 @@ public class IdCardServiceImpl implements IdCardService {
     @Autowired
     CountriesRepository countriesRepository;
 
-
     @Override
     public IdCardResponse registerIdCard(IdCardRequest idCardRequest) {
         try{

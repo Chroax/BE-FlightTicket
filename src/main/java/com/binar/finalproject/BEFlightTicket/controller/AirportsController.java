@@ -74,25 +74,7 @@ public class AirportsController {
         }
     }
 
-    @DeleteMapping(value = "/delete/{airportName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageModel> deleteAirportByName(@PathVariable String airportName)
-    {
-        MessageModel messageModel = new MessageModel();
-        Boolean deleteAirport = airportService.deleteAirportsByName(airportName);
-        if(deleteAirport)
-        {
-            messageModel.setMessage("Success delete Airport by name : " + airportName);
-            messageModel.setStatus(HttpStatus.OK.value());
-            return ResponseEntity.ok().body(messageModel);
-        }
-        else
-        {
-            messageModel.setMessage("Failed delete Airport by name : " + airportName + ", is not found");
-            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
-            return ResponseEntity.badRequest().body(messageModel);
-        }
-    }
-    @GetMapping(value = "/get-byName/{airportName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/name/{airportName}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MessageModel> getAirportsByName(@PathVariable String airportName){
         MessageModel messageModel = new MessageModel();
         try {
