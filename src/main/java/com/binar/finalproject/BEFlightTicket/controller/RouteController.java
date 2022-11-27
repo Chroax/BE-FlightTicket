@@ -55,6 +55,22 @@ public class RouteController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+    @GetMapping("/getAll/{departureAirport}/{arrivalAirport}")
+    public ResponseEntity<MessageModel> getRouteByDepartureAndArrivalAirport(@PathVariable String departureAirport,@PathVariable String arrivalAirport){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<RouteResponse> routeResponse = routeService.findByDepartureAndArrivalAirport(departureAirport, arrivalAirport);
+            messageModel.setMessage("Success get route");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(routeResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get route");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
     @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MessageModel> getAllRoute()
     {
