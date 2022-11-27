@@ -70,25 +70,6 @@ public class GatesController {
         }
     }
 
-    @DeleteMapping(value = "/delete/{gateName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageModel> deleteGatesByName(@PathVariable String gateName)
-    {
-        MessageModel messageModel = new MessageModel();
-        Boolean deleteGates = gatesService.deleteGates(gateName);
-        if(deleteGates)
-        {
-            messageModel.setMessage("Success delete Gates by name : " + gateName);
-            messageModel.setStatus(HttpStatus.OK.value());
-            return ResponseEntity.ok().body(messageModel);
-        }
-        else
-        {
-            messageModel.setMessage("Failed delete Gates by name : " + gateName + ", is not found");
-            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
-            return ResponseEntity.badRequest().body(messageModel);
-        }
-    }
-
     @GetMapping(value = "/get-byName/{gateName}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MessageModel> getGatesByName(@PathVariable String gateName){
         MessageModel messageModel = new MessageModel();
