@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/ticket")
@@ -50,6 +51,25 @@ public class TicketController {
             messageModel.setMessage("Failed get all ticket");
             messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+    @PutMapping("/update/{ticketId}")
+    public ResponseEntity<MessageModel> updateTicket(@PathVariable UUID ticketId, @RequestBody TicketRequest ticketRequest) {
+        MessageModel messageModel = new MessageModel();
+        TicketResponse ticketResponse = ticketService.updateTicket(ticketRequest, ticketId);
+
+        if(ticketResponse == null)
+        {
+            messageModel.setStatus(HttpStatus.CONFLICT.value());
+            messageModel.setMessage("Failed update ticket with id : " + ticketId);
+            return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Success update ticket with id : " + ticketId);
+            messageModel.setData(ticketResponse);
+            return ResponseEntity.ok().body(messageModel);
         }
     }
 }
