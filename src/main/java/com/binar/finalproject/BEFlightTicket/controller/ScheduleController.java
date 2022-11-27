@@ -86,4 +86,21 @@ public class ScheduleController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+    @GetMapping("/get-all")
+    public ResponseEntity<MessageModel> getAllSchedule()
+    {
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<ScheduleResponse> scheduleGet = scheduleService.getAllSchedule();
+            messageModel.setMessage("Success get all schedule");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(scheduleGet);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get all schedule");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
 }
