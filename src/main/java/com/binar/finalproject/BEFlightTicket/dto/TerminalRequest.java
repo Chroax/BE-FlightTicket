@@ -8,8 +8,10 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 public class TerminalRequest {
+
     @NotEmpty(message = "Terminal name is required.")
     private String terminalName;
+
     @NotEmpty(message = "Airports is required.")
     private String iataCode;
 

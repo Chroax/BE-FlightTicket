@@ -1,6 +1,7 @@
 package com.binar.finalproject.BEFlightTicket.config;
 
 public class EncoderConfiguration {
+
     public static String encrypt(String md5) {
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");

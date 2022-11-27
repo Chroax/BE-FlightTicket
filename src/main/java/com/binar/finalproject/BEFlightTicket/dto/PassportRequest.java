@@ -11,6 +11,7 @@ import java.util.UUID;
 
 @Data
 public class PassportRequest {
+
     @NotEmpty(message = "passportNumber is required.")
     private String passportNumber;
     @NotEmpty(message = "passportExpiry is required.")

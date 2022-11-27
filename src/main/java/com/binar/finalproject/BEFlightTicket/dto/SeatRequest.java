@@ -8,13 +8,13 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 public class SeatRequest {
+
     @NotEmpty(message = "Seat number is required.")
     private String seatNumber;
     @NotEmpty(message = "Seat type is required.")
     private String seatType;
     @NotEmpty(message = "Airplane name is required.")
-    private String airplaneName;
-
+    private String airplane_name;
     public Seats toSeats(Airplanes airplanes)
     {
         return Seats.builder()

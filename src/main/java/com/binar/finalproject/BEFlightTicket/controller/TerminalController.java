@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/terminals")
 public class TerminalController {
+
     @Autowired
     private TerminalService terminalService;
 
@@ -72,7 +73,26 @@ public class TerminalController {
         }
     }
 
-    @GetMapping(value = "/name/{terminalName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/delete/{terminalName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> deleteCityByName(@PathVariable String terminalName)
+    {
+        MessageModel messageModel = new MessageModel();
+        Boolean deleteTerminal = terminalService.deleteTerminal(terminalName);
+        if(deleteTerminal)
+        {
+            messageModel.setMessage("Success delete Terminal by name : " + terminalName);
+            messageModel.setStatus(HttpStatus.OK.value());
+            return ResponseEntity.ok().body(messageModel);
+        }
+        else
+        {
+            messageModel.setMessage("Failed delete Terminal by name : " + terminalName + ", is not found");
+            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
+            return ResponseEntity.badRequest().body(messageModel);
+        }
+    }
+
+    @GetMapping(value = "/get-byName/{terminalName}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MessageModel> getAirportsByName(@PathVariable String terminalName){
         MessageModel messageModel = new MessageModel();
         try {

@@ -1,8 +1,12 @@
 package com.binar.finalproject.BEFlightTicket.service.impl;
 
+import com.binar.finalproject.BEFlightTicket.dto.AirportResponse;
+import com.binar.finalproject.BEFlightTicket.dto.CitiesResponse;
 import com.binar.finalproject.BEFlightTicket.dto.TerminalRequest;
 import com.binar.finalproject.BEFlightTicket.dto.TerminalResponse;
 import com.binar.finalproject.BEFlightTicket.model.Airports;
+import com.binar.finalproject.BEFlightTicket.model.Cities;
+import com.binar.finalproject.BEFlightTicket.model.Countries;
 import com.binar.finalproject.BEFlightTicket.model.Terminals;
 import com.binar.finalproject.BEFlightTicket.repository.AirportsRepository;
 import com.binar.finalproject.BEFlightTicket.repository.TerminalsRepository;
@@ -16,8 +20,10 @@ import java.util.Optional;
 
 @Service
 public class TerminalServiceImpl implements TerminalService {
+
     @Autowired
     private TerminalsRepository terminalsRepository;
+
     @Autowired
     private AirportsRepository airportsRepository;
 
@@ -77,6 +83,17 @@ public class TerminalServiceImpl implements TerminalService {
             }
         } else
             return null;
+    }
+
+    @Override
+    public Boolean deleteTerminal(String terminalName) {
+        Terminals terminals = terminalsRepository.findByTerminalName(terminalName);
+        if(terminals != null) {
+            terminalsRepository.deleteById(terminals.getTerminalId());
+            return true;
+        }
+        else
+            return false;
     }
 
     @Override

@@ -8,10 +8,10 @@ import lombok.Data;
 @Data
 @Builder
 public class TerminalResponse {
+
     private Integer terminalId;
     private String terminalName;
     private String iataCode;
-
     public static TerminalResponse build(Terminals terminals) {
         return TerminalResponse.builder()
                 .terminalId(terminals.getTerminalId())

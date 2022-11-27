@@ -9,5 +9,7 @@ public interface AirportService {
     AirportResponse addAirports(AirportRequest airportRequest);
     List<AirportResponse> searchAllAirports();
     AirportResponse updateAirports(AirportRequest airportRequest, String iataCode);
+    Boolean deleteAirportsByName(String airportName);
     AirportResponse searchAirportsByName(String airportName);
+
 }

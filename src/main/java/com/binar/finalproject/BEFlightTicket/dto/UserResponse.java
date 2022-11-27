@@ -13,6 +13,7 @@ import java.util.UUID;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserResponse {
+
     private UUID userId;
     private String fullName;
     private String email;

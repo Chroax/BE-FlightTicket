@@ -13,4 +13,5 @@ public interface RouteRepository extends JpaRepository<Routes, UUID> {
     List<Routes> findRouteByDepartureCityAndArrivalCity(@Param("departureCity") String departureCity, @Param("arrivalCity") String arrivalCity);
     @Query("SELECT r FROM Routes r WHERE LOWER(r.departureAirport) LIKE LOWER(:departureAirport) AND LOWER(r.arrivalAirport) LIKE LOWER(:arrivalAirport) ")
     List<Routes> findRouteByDepartureAndArrivalAirport(@Param("departureAirport") String departureAirport, @Param("arrivalAirport") String arrivalAirport);
+
 }

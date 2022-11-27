@@ -7,6 +7,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 public class PaymentMethodRequest {
+
     @NotEmpty(message = "Payment name is required.")
     private String paymentName;
     @NotEmpty(message = "Payment type is required.")

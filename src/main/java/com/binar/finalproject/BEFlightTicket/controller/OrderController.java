@@ -15,7 +15,6 @@ import java.util.UUID;
 public class OrderController {
     @Autowired
     private OrderService orderService;
-
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> addOrder (@RequestBody OrderRequest orderRequest)
@@ -36,7 +35,6 @@ public class OrderController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
-
     @PutMapping("/update/{orderId}")
     public ResponseEntity<MessageModel> updateOrder(@PathVariable UUID orderId, @RequestBody OrderRequest orderRequest) {
         MessageModel messageModel = new MessageModel();
@@ -56,7 +54,6 @@ public class OrderController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
-
     @GetMapping("/get-all")
     public ResponseEntity<MessageModel> getAllOrders()
     {
@@ -74,8 +71,7 @@ public class OrderController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-
-    @GetMapping("/get-all/user/{userId}")
+    @GetMapping("/get-all/{userId}")
     public ResponseEntity<MessageModel> getUserOrders(@PathVariable UUID userId){
         MessageModel messageModel = new MessageModel();
         try {
@@ -91,8 +87,7 @@ public class OrderController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-
-    @GetMapping("/get-all/payment/{paymentId}")
+    @GetMapping("/get-all/{paymentId}")
     public ResponseEntity<MessageModel> getPaymentOrders(@PathVariable Integer paymentId){
         MessageModel messageModel = new MessageModel();
         try {

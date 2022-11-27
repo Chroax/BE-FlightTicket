@@ -19,8 +19,10 @@ import java.util.Optional;
 
 @Service
 public class AirportsServiceImpl implements AirportService {
+
     @Autowired
     private AirportsRepository airportsRepository;
+
     @Autowired
     private CitiesRepository citiesRepository;
 
@@ -44,6 +46,15 @@ public class AirportsServiceImpl implements AirportService {
         catch (Exception ignore){
             return null;
         }
+//        Airports airports = airportRequest.toAirports();
+//        try {
+//            airportsRepository.save(airports);
+//            return AirportResponse.build(airports);
+//        }
+//        catch(Exception exception)
+//        {
+//            return null;
+//        }
     }
 
     @Override
@@ -82,6 +93,17 @@ public class AirportsServiceImpl implements AirportService {
             }
         } else
             return null;
+    }
+
+    @Override
+    public Boolean deleteAirportsByName(String airportName) {
+        Airports airports = airportsRepository.findByAirportName(airportName);
+        if(airports != null) {
+            airportsRepository.deleteById(airports.getIataCode());
+            return true;
+        }
+        else
+            return false;
     }
 
     @Override

@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/seat")
 public class SeatController {
+
     @Autowired
     private SeatService seatService;
 
@@ -36,7 +37,6 @@ public class SeatController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
-
     @GetMapping("/number/{seatNumber}")
     public ResponseEntity<MessageModel> getSeatByNumber(@PathVariable String seatNumber){
         MessageModel messageModel = new MessageModel();
@@ -53,7 +53,6 @@ public class SeatController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-
     @GetMapping("/get-all")
     public ResponseEntity<MessageModel> getAllSeats()
     {
@@ -71,8 +70,7 @@ public class SeatController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-
-    @GetMapping("/get-all/airplane/{airplaneName}")
+    @GetMapping("/get-all/{airplaneName}")
     public ResponseEntity<MessageModel> getAirplaneSeat(@PathVariable String airplaneName){
         MessageModel messageModel = new MessageModel();
         try {
@@ -88,7 +86,6 @@ public class SeatController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-
     @PutMapping(value = "/update/{seatNumber}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MessageModel> updateSeat(@PathVariable String seatNumber, @RequestBody SeatRequest seatRequest)
     {

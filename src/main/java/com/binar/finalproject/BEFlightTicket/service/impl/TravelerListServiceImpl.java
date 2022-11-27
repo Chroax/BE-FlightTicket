@@ -3,7 +3,9 @@ package com.binar.finalproject.BEFlightTicket.service.impl;
 import com.binar.finalproject.BEFlightTicket.dto.TravelerListRequest;
 import com.binar.finalproject.BEFlightTicket.dto.TravelerListResponse;
 import com.binar.finalproject.BEFlightTicket.dto.TravelerListUpdateRequest;
+import com.binar.finalproject.BEFlightTicket.dto.UserResponse;
 import com.binar.finalproject.BEFlightTicket.model.Countries;
+import com.binar.finalproject.BEFlightTicket.model.Roles;
 import com.binar.finalproject.BEFlightTicket.model.TravelerList;
 import com.binar.finalproject.BEFlightTicket.model.Users;
 import com.binar.finalproject.BEFlightTicket.repository.TravelerListRepository;
@@ -20,6 +22,7 @@ import java.util.UUID;
 
 @Service
 public class TravelerListServiceImpl implements TravelerListService {
+
     @Autowired
     TravelerListRepository travelerListRepository;
     @Autowired

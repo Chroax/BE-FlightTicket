@@ -14,6 +14,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/passport")
 public class PassportController {
+
     @Autowired
     PassportService passportService;
 
@@ -38,7 +39,7 @@ public class PassportController {
         }
     }
 
-    @GetMapping("/get-all/traveler/{travelerId}")
+    @GetMapping("/get-all/{travelerId}")
     public ResponseEntity<MessageModel> getTravelerPassport(@PathVariable UUID travelerId){
         MessageModel messageModel = new MessageModel();
         try {

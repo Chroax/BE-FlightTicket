@@ -13,6 +13,7 @@ import java.util.List;
 
 @Service
 public class PaymentMethodImpl implements PaymentMethodService {
+
     @Autowired
     private PaymentMethodRepository paymentMethodRepository;
 

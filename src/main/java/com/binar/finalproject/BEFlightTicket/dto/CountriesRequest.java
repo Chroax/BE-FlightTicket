@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 public class CountriesRequest {
-    @NotEmpty(message = "Countries code is required.")
+
     private String countryCode;
     @NotEmpty(message = "Countries name is required.")
     private String countryName;

@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/airplane")
 public class AirplaneController {
+
     @Autowired
     private AirplanesService airplanesService;
 
@@ -38,7 +39,6 @@ public class AirplaneController {
 
         }
     }
-
     @GetMapping("/name/{airplaneName}")
     public ResponseEntity<MessageModel> getUserById(@PathVariable String airplaneName){
         MessageModel messageModel = new MessageModel();
@@ -55,7 +55,6 @@ public class AirplaneController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-
     @GetMapping("/get-all")
     public ResponseEntity<MessageModel> getAllAirplane()
     {
@@ -73,7 +72,6 @@ public class AirplaneController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-
     @PutMapping("/update/{airplaneName}")
     public ResponseEntity<MessageModel> updateAirplane(@PathVariable String airplaneName, @RequestBody AirplanesRequest airplanesRequest)
     {
@@ -94,7 +92,6 @@ public class AirplaneController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
-
     @DeleteMapping("/delete/{airplaneName}")
     public ResponseEntity<MessageModel> deleteAirplane(@PathVariable String airplaneName)
     {

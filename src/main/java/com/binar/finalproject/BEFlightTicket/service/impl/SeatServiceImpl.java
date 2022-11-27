@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @Service
 public class SeatServiceImpl implements SeatService {
+
     @Autowired
     private SeatRepository seatRepository;
     @Autowired
@@ -24,7 +25,7 @@ public class SeatServiceImpl implements SeatService {
     @Override
     public SeatResponse addSeat(SeatRequest seatRequest) {
        try {
-           Optional<Airplanes> airplanes = airplanesRepository.findById(seatRequest.getAirplaneName());
+           Optional<Airplanes> airplanes = airplanesRepository.findById(seatRequest.getAirplane_name());
            if (airplanes.isPresent())
            {
                Seats seats = seatRequest.toSeats(airplanes.get());
@@ -73,14 +74,17 @@ public class SeatServiceImpl implements SeatService {
         String message = null;
         if (seats != null)
         {
-            seats.setSeatNumber(seatRequest.getSeatNumber());
-            seats.setSeatType(seatRequest.getSeatType());
-            Optional<Airplanes> airplanes = airplanesRepository.findById(seatRequest.getAirplaneName());
+            if (seatRequest.getSeatNumber() != null)
+                seats.setSeatNumber(seatRequest.getSeatNumber());
+            else
+                message = "Seat with number: "+seatNumber+" not found";
+            if (seatRequest.getSeatType() != null)
+                seats.setSeatType(seatRequest.getSeatType());
+            Optional<Airplanes> airplanes = airplanesRepository.findById(seatRequest.getAirplane_name());
             if (airplanes.isPresent())
                 seats.setAirplanesSeats(airplanes.get());
             else
                 message = "Airplane with this name doesnt exist";
-
             if (message != null)
                 return null;
             else
@@ -104,4 +108,6 @@ public class SeatServiceImpl implements SeatService {
         }
         return allSeatResponse;
     }
+
+
 }

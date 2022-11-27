@@ -15,7 +15,6 @@ import java.util.UUID;
 public class ScheduleController {
     @Autowired
     private ScheduleService scheduleService;
-
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> addSchedule (@RequestBody ScheduleRequest scheduleRequest)
@@ -36,7 +35,6 @@ public class ScheduleController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
-
     @PutMapping("/update/{scheduleId}")
     public ResponseEntity<MessageModel> updateSchedule(@PathVariable UUID scheduleId, @RequestBody ScheduleRequest scheduleRequest) {
         MessageModel messageModel = new MessageModel();
@@ -56,8 +54,7 @@ public class ScheduleController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
-
-    @GetMapping("/get-all/airplane/{airplaneName}")
+    @GetMapping("/get-all/{airplaneName}")
     public ResponseEntity<MessageModel> getAirplaneSchedule(@PathVariable String airplaneName){
         MessageModel messageModel = new MessageModel();
         try {
@@ -73,8 +70,7 @@ public class ScheduleController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-
-    @GetMapping("/get-all/route/{routeId}")
+    @GetMapping("/get-all/{routeId}")
     public ResponseEntity<MessageModel> getRouteSchedule(@PathVariable UUID routeId){
         MessageModel messageModel = new MessageModel();
         try {
@@ -90,7 +86,6 @@ public class ScheduleController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-
     @GetMapping("/get-all")
     public ResponseEntity<MessageModel> getAllSchedule()
     {

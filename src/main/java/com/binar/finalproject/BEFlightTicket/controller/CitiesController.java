@@ -13,10 +13,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/cities")
 public class CitiesController {
+
     @Autowired
     private CitiesService citiesService;
 
-    @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/add-city", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> createCity(@RequestBody CitiesRequest citiesRequest) {
         MessageModel messageModel = new MessageModel();
@@ -73,7 +74,26 @@ public class CitiesController {
         }
     }
 
-    @GetMapping(value = "/name/{cityName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/delete/{cityName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> deleteCityByName(@PathVariable String cityName)
+    {
+        MessageModel messageModel = new MessageModel();
+        Boolean deleteCity = citiesService.deleteCity(cityName);
+        if(deleteCity)
+        {
+            messageModel.setMessage("Success delete City by name : " + cityName);
+            messageModel.setStatus(HttpStatus.OK.value());
+            return ResponseEntity.ok().body(messageModel);
+        }
+        else
+        {
+            messageModel.setMessage("Failed delete City by name : " + cityName + ", is not found");
+            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
+            return ResponseEntity.badRequest().body(messageModel);
+        }
+    }
+
+    @GetMapping(value = "/get-byName/{cityName}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MessageModel> getCountriesByName(@PathVariable String cityName){
         MessageModel messageModel = new MessageModel();
         try {

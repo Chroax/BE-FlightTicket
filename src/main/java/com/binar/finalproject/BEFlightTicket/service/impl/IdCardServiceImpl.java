@@ -1,7 +1,7 @@
 package com.binar.finalproject.BEFlightTicket.service.impl;
 
-import com.binar.finalproject.BEFlightTicket.dto.IdCardRequest;
-import com.binar.finalproject.BEFlightTicket.dto.IdCardResponse;
+import com.binar.finalproject.BEFlightTicket.dto.IDCardRequest;
+import com.binar.finalproject.BEFlightTicket.dto.IDCardResponse;
 import com.binar.finalproject.BEFlightTicket.model.Countries;
 import com.binar.finalproject.BEFlightTicket.model.IDCard;
 import com.binar.finalproject.BEFlightTicket.model.TravelerList;
@@ -26,8 +26,9 @@ public class IdCardServiceImpl implements IdCardService {
     @Autowired
     CountriesRepository countriesRepository;
 
+
     @Override
-    public IdCardResponse registerIdCard(IdCardRequest idCardRequest) {
+    public IDCardResponse registerIdCard(IDCardRequest idCardRequest) {
         try{
             Optional<TravelerList> travelerList = travelerListRepository.findById(idCardRequest.getTravelerId());
             Optional<Countries> countries = countriesRepository.findById(idCardRequest.getCountryCode());
@@ -40,7 +41,7 @@ public class IdCardServiceImpl implements IdCardService {
 
                     try {
                         idCardRepository.save(idCard);
-                        return IdCardResponse.build(idCard);
+                        return IDCardResponse.build(idCard);
                     }
                     catch(Exception exception)
                     {
@@ -59,24 +60,24 @@ public class IdCardServiceImpl implements IdCardService {
     }
 
     @Override
-    public List<IdCardResponse> searchTravelerListIdCard(UUID travelerId) {
+    public List<IDCardResponse> searchTravelerListIdCard(UUID travelerId) {
         List<IDCard> allIdCard = idCardRepository.findAllIdCardByTravelerList(travelerId);
-        List<IdCardResponse> allIdCardResponse = new ArrayList<>();
+        List<IDCardResponse> allIdCardResponse = new ArrayList<>();
         for (IDCard idCard: allIdCard) {
-            IdCardResponse idCardResponse = IdCardResponse.build(idCard);
+            IDCardResponse idCardResponse = IDCardResponse.build(idCard);
             allIdCardResponse.add(idCardResponse);
         }
         return allIdCardResponse;
     }
 
     @Override
-    public IdCardResponse searchIdCard(String idCardNumber) {
+    public IDCardResponse searchIdCard(String idCardNumber) {
         Optional<IDCard> idCard = idCardRepository.findById(idCardNumber);
-        return idCard.map(IdCardResponse::build).orElse(null);
+        return idCard.map(IDCardResponse::build).orElse(null);
     }
 
     @Override
-    public IdCardResponse updateIdCard(IdCardRequest idCardRequest, String idCardNumber) {
+    public IDCardResponse updateIdCard(IDCardRequest idCardRequest, String idCardNumber) {
         Optional<IDCard> isIdCard = idCardRepository.findById(idCardNumber);
         String message = null;
         if (isIdCard.isPresent()) {
@@ -93,7 +94,7 @@ public class IdCardServiceImpl implements IdCardService {
                 return null;
             else {
                 idCardRepository.saveAndFlush(idCard);
-                return IdCardResponse.build(idCard);
+                return IDCardResponse.build(idCard);
             }
         }
         else

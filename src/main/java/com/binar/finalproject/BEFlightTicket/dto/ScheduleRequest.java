@@ -26,7 +26,6 @@ public class ScheduleRequest {
     private String airplaneName;
     @NotEmpty(message = "Route ID is required.")
     private UUID routeId;
-
     public Schedules toSchedule(Airplanes airplanes, Routes routes) {
         Schedules schedules = new Schedules();
         schedules.setDepartureDate(this.departureDate);
