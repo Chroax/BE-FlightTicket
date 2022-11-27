@@ -34,4 +34,23 @@ public class OrderController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
+    @PutMapping("/update/{orderId}")
+    public ResponseEntity<MessageModel> updateOrder(@PathVariable UUID orderId, @RequestBody OrderRequest orderRequest) {
+        MessageModel messageModel = new MessageModel();
+        OrderResponse orderResponse = orderService.updateOrder(orderRequest, orderId);
+
+        if(orderResponse == null)
+        {
+            messageModel.setStatus(HttpStatus.CONFLICT.value());
+            messageModel.setMessage("Failed update order with id : " + orderId);
+            return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Success update order with id : " + orderId);
+            messageModel.setData(orderResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }
+    }
 }
