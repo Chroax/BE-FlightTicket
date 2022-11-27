@@ -16,9 +16,9 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/route")
 public class RouteController {
-
     @Autowired
     private RouteService routeService;
+
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> addRoute(@RequestBody RouteRequest routeRequest)
@@ -39,6 +39,7 @@ public class RouteController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
+
     @GetMapping("/get-all/city/{departureCity}/{arrivalCity}")
     public ResponseEntity<MessageModel> getRouteByDepartureAndArrivalCity(@PathVariable String departureCity,@PathVariable String arrivalCity){
         MessageModel messageModel = new MessageModel();
@@ -55,6 +56,7 @@ public class RouteController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+
     @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}")
     public ResponseEntity<MessageModel> getRouteByDepartureAndArrivalAirport(@PathVariable String departureAirport,@PathVariable String arrivalAirport){
         MessageModel messageModel = new MessageModel();
@@ -71,6 +73,7 @@ public class RouteController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+
     @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MessageModel> getAllRoute()
     {
@@ -88,6 +91,7 @@ public class RouteController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+
     @PutMapping("/update/{routeId}")
     public ResponseEntity<MessageModel> updateRoute(@PathVariable UUID routeId, @RequestBody RouteRequest routeRequest) {
         MessageModel messageModel = new MessageModel();
@@ -107,6 +111,7 @@ public class RouteController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
+
     @DeleteMapping("/delete/{routeId}")
     public ResponseEntity<MessageModel> deleteRoute(@PathVariable UUID routeId)
     {
