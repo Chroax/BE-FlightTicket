@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -51,6 +52,23 @@ public class OrderController {
             messageModel.setMessage("Success update order with id : " + orderId);
             messageModel.setData(orderResponse);
             return ResponseEntity.ok().body(messageModel);
+        }
+    }
+    @GetMapping("/get-all")
+    public ResponseEntity<MessageModel> getAllOrders()
+    {
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<OrderResponse> orderGet = orderService.getAllOrder();
+            messageModel.setMessage("Success get all orders");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(orderGet);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get all orders");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
 }
