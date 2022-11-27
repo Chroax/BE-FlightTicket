@@ -9,15 +9,14 @@ import java.util.UUID;
 
 @Data
 @Builder
-public class IDCardResponse {
-
+public class IdCardResponse {
     private String idCardNumber;
     private LocalDate idCardExpiry;
     private String countryCode;
     private UUID travelerId;
 
-    public static IDCardResponse build(IDCard idCard) {
-        return IDCardResponse.builder()
+    public static IdCardResponse build(IDCard idCard) {
+        return IdCardResponse.builder()
                 .idCardNumber(idCard.getIdCardNumber())
                 .idCardExpiry(idCard.getIdCardExpiry())
                 .countryCode(idCard.getCountriesIDCard().getCountryCode())

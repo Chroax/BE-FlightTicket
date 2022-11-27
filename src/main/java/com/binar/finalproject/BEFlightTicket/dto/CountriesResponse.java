@@ -1,14 +1,12 @@
 package com.binar.finalproject.BEFlightTicket.dto;
 
 import com.binar.finalproject.BEFlightTicket.model.Countries;
-import com.binar.finalproject.BEFlightTicket.model.Roles;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
 public class CountriesResponse {
-
     private String countryCode;
     private String countryName;
     private String telephoneCode;
