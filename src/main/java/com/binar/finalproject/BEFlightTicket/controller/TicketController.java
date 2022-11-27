@@ -72,4 +72,20 @@ public class TicketController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
+    @GetMapping("/get-by/{ticketId}")
+    public ResponseEntity<MessageModel> getTicketById(@PathVariable UUID ticketId){
+        MessageModel messageModel = new MessageModel();
+        try {
+            TicketResponse ticketGet = ticketService.searchTicketById(ticketId);
+            messageModel.setMessage("Success get ticket");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(ticketGet);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get ticket");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
 }
