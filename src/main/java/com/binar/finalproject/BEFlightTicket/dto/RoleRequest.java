@@ -7,7 +7,6 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 public class RoleRequest {
-
     @NotEmpty(message = "Role name is required.")
     private String roleName;
 
