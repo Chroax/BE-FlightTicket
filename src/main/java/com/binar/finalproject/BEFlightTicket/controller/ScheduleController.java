@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/schedule")
@@ -29,6 +30,25 @@ public class ScheduleController {
         {
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setMessage("Add new schedule");
+            messageModel.setData(scheduleResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }
+    }
+    @PutMapping("/update/{scheduleId}")
+    public ResponseEntity<MessageModel> updateSchedule(@PathVariable UUID scheduleId, @RequestBody ScheduleRequest scheduleRequest) {
+        MessageModel messageModel = new MessageModel();
+        ScheduleResponse scheduleResponse = scheduleService.updateSchedule(scheduleRequest, scheduleId);
+
+        if(scheduleResponse == null)
+        {
+            messageModel.setStatus(HttpStatus.CONFLICT.value());
+            messageModel.setMessage("Failed update schedule with id : " + scheduleId);
+            return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Success update schedule with id : " + scheduleId);
             messageModel.setData(scheduleResponse);
             return ResponseEntity.ok().body(messageModel);
         }
