@@ -17,12 +17,14 @@ public class CitiesRequest {
     @NotEmpty(message = "Countries is required.")
     private String countryCode;
 
-    public Cities toCities(Countries countries){
+
+    public Cities toAirports(Countries countries) {
         return Cities.builder()
                 .cityCode(this.cityCode)
                 .cityName(this.cityName)
                 .countriesCities(countries)
                 .build();
+
     }
 
 }

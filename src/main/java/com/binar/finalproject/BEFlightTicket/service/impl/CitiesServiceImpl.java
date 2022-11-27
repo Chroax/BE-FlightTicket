@@ -57,33 +57,32 @@ public class CitiesServiceImpl implements CitiesService {
     }
 
     @Override
-    public CitiesResponse updateCity(CitiesRequest citiesRequest, String cityName) {
-        Cities isCity = citiesRepository.findByCityName(cityName);
+    public CitiesResponse updateCity(CitiesRequest citiesRequest, String cityCode) {
+        Optional<Cities> isCity = citiesRepository.findById(cityCode);
         String message = null;
-        if (isCity != null){
-//            Cities cities = isCity;
-            isCity.setCityCode(citiesRequest.getCityCode());
-            isCity.setCityName(citiesRequest.getCityName());
-            if (citiesRequest.getCountryCode() != null){
-                Optional<Countries> countries = countriesRepository.findById(citiesRequest.getCountryCode());
-                if(countries.isPresent()){
-                    isCity.setCountriesCities(countries.get());
-                }else {
-                    message = "Countries with this code doesnt exist";
-                }
-            }
-            if (message != null) {
+        if (isCity.isPresent()) {
+            Cities cities = isCity.get();
+            cities.setCityCode(citiesRequest.getCityCode());
+            cities.setCityName(citiesRequest.getCityName());
+            Optional<Countries> countries = countriesRepository.findById(citiesRequest.getCountryCode());
+            if (countries.isPresent())
+                cities.setCountriesCities(countries.get());
+            else
+                message = "Countries with this code doesnt exist";
+
+            if (message != null)
                 return null;
-            }
             else {
-                citiesRepository.saveAndFlush(isCity);
-                return CitiesResponse.build(isCity);
+                citiesRepository.saveAndFlush(cities);
+                return CitiesResponse.build(cities);
             }
-        }else {
+        }
+        else {
             return null;
         }
 
     }
+
 
     @Override
     public Boolean deleteCity(String cityName) {
