@@ -54,11 +54,11 @@ public class AirportsController {
         }
     }
 
-    @PutMapping(value = "/update/{airportName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageModel> updateAirports(@PathVariable String airportName, @RequestBody AirportRequest airportRequest)
+    @PutMapping(value = "/update/{iataCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> updateAirports(@PathVariable String iataCode, @RequestBody AirportRequest airportRequest)
     {
         MessageModel messageModel = new MessageModel();
-        AirportResponse airportResponse = airportService.updateAirports(airportRequest, airportName);
+        AirportResponse airportResponse = airportService.updateAirports(airportRequest, iataCode);
         if(airportResponse == null)
         {
             messageModel.setStatus(HttpStatus.CONFLICT.value());
