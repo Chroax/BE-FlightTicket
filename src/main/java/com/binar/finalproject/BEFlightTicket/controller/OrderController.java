@@ -87,4 +87,20 @@ public class OrderController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+    @GetMapping("/get-all/{paymentId}")
+    public ResponseEntity<MessageModel> getPaymentOrders(@PathVariable Integer paymentId){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<OrderResponse> orderResponses = orderService.getAllOrderByPaymentId(paymentId);
+            messageModel.setMessage("Success get order by payment id : " + paymentId);
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(orderResponses);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get order by payment id, " + paymentId + " not found");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
 }
