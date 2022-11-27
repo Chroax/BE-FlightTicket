@@ -20,6 +20,7 @@ public class OrderRequest {
     private UUID userId;
     @NotEmpty(message = "Payment ID is required.")
     private Integer paymentId;
+
     public Orders toOrders (Users users, PaymentMethods paymentMethods)
     {
         return Orders.builder()
