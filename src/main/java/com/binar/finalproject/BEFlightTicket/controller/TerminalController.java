@@ -72,11 +72,11 @@ public class TerminalController {
         }
     }
 
-    @GetMapping(value = "/name/{terminalName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageModel> getAirportsByName(@PathVariable String terminalName){
+    @GetMapping(value = "/id/{terminalId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> getTerminalById(@PathVariable Integer terminalId){
         MessageModel messageModel = new MessageModel();
         try {
-            TerminalResponse getTerminal = terminalService.searchTerminalByName(terminalName);
+            TerminalResponse getTerminal = terminalService.searchTerminalById(terminalId);
             messageModel.setMessage("Success get Terminal By name");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(getTerminal);

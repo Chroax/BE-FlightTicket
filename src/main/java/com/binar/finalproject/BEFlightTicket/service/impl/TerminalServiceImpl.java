@@ -80,12 +80,8 @@ public class TerminalServiceImpl implements TerminalService {
     }
 
     @Override
-    public TerminalResponse searchTerminalByName(String terminalName) {
-        Terminals terminals = terminalsRepository.findByTerminalName(terminalName);
-        if (terminals != null){
-            return TerminalResponse.build(terminals);
-        }else {
-            return null;
-        }
+    public TerminalResponse searchTerminalById(Integer terminalId) {
+        Optional<Terminals> isTerminals = terminalsRepository.findById(terminalId);
+        return isTerminals.map(TerminalResponse::build).orElse(null);
     }
 }

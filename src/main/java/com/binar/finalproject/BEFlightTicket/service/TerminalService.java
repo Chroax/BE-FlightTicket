@@ -9,5 +9,5 @@ public interface TerminalService {
     TerminalResponse addTerminal(TerminalRequest terminalRequest);
     List<TerminalResponse> searchAllTerminal();
     TerminalResponse updateTerminal(TerminalRequest terminalRequest, Integer terminalId);
-    TerminalResponse searchTerminalByName(String terminalName);
+    TerminalResponse searchTerminalById(Integer terminalId);
 }
