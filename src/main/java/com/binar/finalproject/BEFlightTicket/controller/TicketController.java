@@ -88,4 +88,20 @@ public class TicketController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+    @GetMapping("/get-all/{orderId}")
+    public ResponseEntity<MessageModel> getOrderTicket(@PathVariable UUID orderId){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<TicketResponse> ticketResponses = ticketService.searchOrderTicket(orderId);
+            messageModel.setMessage("Success get ticket by order id: " + orderId);
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(ticketResponses);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get ticket by order id: " + orderId + " not found");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
 }
