@@ -39,7 +39,7 @@ public class RouteController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
-    @GetMapping("/get-all/{departureCity}/{arrivalCity}")
+    @GetMapping("/get-all/city/{departureCity}/{arrivalCity}")
     public ResponseEntity<MessageModel> getRouteByDepartureAndArrivalCity(@PathVariable String departureCity,@PathVariable String arrivalCity){
         MessageModel messageModel = new MessageModel();
         try {
@@ -55,7 +55,7 @@ public class RouteController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-    @GetMapping("/getAll/{departureAirport}/{arrivalAirport}")
+    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}")
     public ResponseEntity<MessageModel> getRouteByDepartureAndArrivalAirport(@PathVariable String departureAirport,@PathVariable String arrivalAirport){
         MessageModel messageModel = new MessageModel();
         try {

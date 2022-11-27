@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface IdCardService {
-
     IdCardResponse registerIdCard(IdCardRequest idCardRequest);
     List<IdCardResponse> searchTravelerListIdCard(UUID travelerId);
     IdCardResponse searchIdCard(String idCardNumber);

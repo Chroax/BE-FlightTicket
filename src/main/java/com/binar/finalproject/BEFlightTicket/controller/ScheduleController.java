@@ -54,7 +54,7 @@ public class ScheduleController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
-    @GetMapping("/get-all/{airplaneName}")
+    @GetMapping("/get-all/airplane/{airplaneName}")
     public ResponseEntity<MessageModel> getAirplaneSchedule(@PathVariable String airplaneName){
         MessageModel messageModel = new MessageModel();
         try {
@@ -70,7 +70,7 @@ public class ScheduleController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-    @GetMapping("/get-all/{routeId}")
+    @GetMapping("/get-all/route/{routeId}")
     public ResponseEntity<MessageModel> getRouteSchedule(@PathVariable UUID routeId){
         MessageModel messageModel = new MessageModel();
         try {

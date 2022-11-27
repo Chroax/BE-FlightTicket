@@ -16,7 +16,6 @@ import java.util.UUID;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
-
     @Autowired
     private ScheduleRepository scheduleRepository;
     @Autowired
@@ -56,7 +55,6 @@ public class ScheduleServiceImpl implements ScheduleService {
         }
     }
 
-
     @Override
     public ScheduleResponse updateSchedule(ScheduleRequest scheduleRequest, UUID scheduleId) {
         Optional<Schedules> isSchedule = scheduleRepository.findById(scheduleId);
@@ -70,16 +68,19 @@ public class ScheduleServiceImpl implements ScheduleService {
             schedules.setArrivalTime(scheduleRequest.getArrivalTime());
             schedules.setPrice(scheduleRequest.getPrice());
             schedules.setStatus(scheduleRequest.getStatus());
+
             Optional<Airplanes> airplanes = airplanesRepository.findById(scheduleRequest.getAirplaneName());
             if (airplanes.isPresent())
                 schedules.setAirplanesSchedules(airplanes.get());
             else
                 message = "Airplane with this name doesnt exist";
+
             Optional<Routes> routes = routeRepository.findById(scheduleRequest.getRouteId());
             if (routes.isPresent())
                 schedules.setRoutesSchedules(routes.get());
             else
                 message = "Route with this id doesnt exist";
+
             if (message != null)
                 return null;
             else
@@ -92,34 +93,25 @@ public class ScheduleServiceImpl implements ScheduleService {
             return null;
     }
 
-
     @Override
     public List<ScheduleResponse> searchAirplaneSchedule(String airplaneName) {
         List<Schedules> allSchedule = scheduleRepository.getAllAirplaneSchedule(airplaneName);
-        List<ScheduleResponse> allScheduleResponse = new ArrayList<>();
-        for (Schedules schedules : allSchedule)
-        {
-            ScheduleResponse scheduleResponse = ScheduleResponse.build(schedules);
-            allScheduleResponse.add(scheduleResponse);
-        }
-        return allScheduleResponse;
+        return toListScheduleResponse(allSchedule);
     }
 
     @Override
     public List<ScheduleResponse> searchRouteSchedule(UUID routeId) {
         List<Schedules> allSchedule = scheduleRepository.getAllRouteSchedule(routeId);
-        List<ScheduleResponse> allScheduleResponse = new ArrayList<>();
-        for (Schedules schedules : allSchedule)
-        {
-            ScheduleResponse scheduleResponse = ScheduleResponse.build(schedules);
-            allScheduleResponse.add(scheduleResponse);
-        }
-        return allScheduleResponse;
+        return toListScheduleResponse(allSchedule);
     }
 
     @Override
     public List<ScheduleResponse> getAllSchedule() {
         List<Schedules> allSchedule = scheduleRepository.findAll();
+        return toListScheduleResponse(allSchedule);
+    }
+
+    private List<ScheduleResponse> toListScheduleResponse(List<Schedules> allSchedule) {
         List<ScheduleResponse> allScheduleResponse = new ArrayList<>();
         for (Schedules schedules : allSchedule)
         {

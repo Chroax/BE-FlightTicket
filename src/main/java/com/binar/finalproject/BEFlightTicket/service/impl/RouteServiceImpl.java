@@ -1,8 +1,14 @@
 package com.binar.finalproject.BEFlightTicket.service.impl;
 
 import com.binar.finalproject.BEFlightTicket.dto.*;
+import com.binar.finalproject.BEFlightTicket.model.Airports;
+import com.binar.finalproject.BEFlightTicket.model.Cities;
 import com.binar.finalproject.BEFlightTicket.model.Routes;
+import com.binar.finalproject.BEFlightTicket.model.Terminals;
+import com.binar.finalproject.BEFlightTicket.repository.AirportsRepository;
+import com.binar.finalproject.BEFlightTicket.repository.CitiesRepository;
 import com.binar.finalproject.BEFlightTicket.repository.RouteRepository;
+import com.binar.finalproject.BEFlightTicket.repository.TerminalsRepository;
 import com.binar.finalproject.BEFlightTicket.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,13 +20,37 @@ import java.util.UUID;
 
 @Service
 public class RouteServiceImpl implements RouteService {
-
     @Autowired
     RouteRepository routeRepository;
+    @Autowired
+    CitiesRepository citiesRepository;
+    @Autowired
+    AirportsRepository airportsRepository;
+    @Autowired
+    TerminalsRepository terminalsRepository;
 
     @Override
     public RouteResponse addRoute(RouteRequest routeRequest) {
         Routes routes = routeRequest.toRoutes();
+        Airports arrivalAirports = airportsRepository.findByAirportName(routeRequest.getArrivalAirport());
+        Airports departureAirports = airportsRepository.findByAirportName(routeRequest.getDepartureAirport());
+        Cities arrivalCities = citiesRepository.findByCityName(routeRequest.getArrivalCity());
+        Cities departureCities = citiesRepository.findByCityName(routeRequest.getDepartureCity());
+        Terminals arrivalTerminals = terminalsRepository.findByTerminalName(routeRequest.getArrivalTerminal());
+        Terminals departureTerminals = terminalsRepository.findByTerminalName(routeRequest.getDepartureTerminal());
+
+        if(arrivalAirports == null)
+            return null;
+        if(departureAirports == null)
+            return null;
+        if(arrivalCities == null)
+            return null;
+        if(departureCities == null)
+            return null;
+        if(arrivalTerminals == null)
+            return null;
+        if(departureTerminals == null)
+            return null;
 
         try {
             routeRepository.save(routes);
@@ -56,7 +86,6 @@ public class RouteServiceImpl implements RouteService {
         return allRouteResponse;
     }
 
-
     @Override
     public List<RouteResponse> getAllRoute() {
         List<Routes> allRoute = routeRepository.findAll();
@@ -72,6 +101,27 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public RouteResponse updateRoute(RouteRequest routeRequest, UUID routeId) {
         Optional<Routes> isRoutes = routeRepository.findById(routeId);
+
+        Airports arrivalAirports = airportsRepository.findByAirportName(routeRequest.getArrivalAirport());
+        Airports departureAirports = airportsRepository.findByAirportName(routeRequest.getDepartureAirport());
+        Cities arrivalCities = citiesRepository.findByCityName(routeRequest.getArrivalCity());
+        Cities departureCities = citiesRepository.findByCityName(routeRequest.getDepartureCity());
+        Terminals arrivalTerminals = terminalsRepository.findByTerminalName(routeRequest.getArrivalTerminal());
+        Terminals departureTerminals = terminalsRepository.findByTerminalName(routeRequest.getDepartureTerminal());
+
+        if(arrivalAirports == null)
+            return null;
+        if(departureAirports == null)
+            return null;
+        if(arrivalCities == null)
+            return null;
+        if(departureCities == null)
+            return null;
+        if(arrivalTerminals == null)
+            return null;
+        if(departureTerminals == null)
+            return null;
+
         if (isRoutes.isPresent())
         {
             Routes routes = isRoutes.get();

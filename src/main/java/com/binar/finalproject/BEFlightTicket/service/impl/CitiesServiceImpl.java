@@ -16,10 +16,8 @@ import java.util.Optional;
 
 @Service
 public class CitiesServiceImpl implements CitiesService {
-
     @Autowired
     private CitiesRepository citiesRepository;
-
     @Autowired
     private CountriesRepository countriesRepository;
 
@@ -81,18 +79,6 @@ public class CitiesServiceImpl implements CitiesService {
             return null;
         }
 
-    }
-
-
-    @Override
-    public Boolean deleteCity(String cityName) {
-        Cities cities = citiesRepository.findByCityName(cityName);
-        if(cities != null) {
-            citiesRepository.deleteById(cities.getCityCode());
-            return true;
-        }
-        else
-            return false;
     }
 
     @Override
