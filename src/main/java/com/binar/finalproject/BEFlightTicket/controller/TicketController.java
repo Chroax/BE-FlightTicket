@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 @RestController
 @RequestMapping("/ticket")
@@ -32,6 +33,23 @@ public class TicketController {
             messageModel.setMessage("Add new ticket");
             messageModel.setData(ticketResponse);
             return ResponseEntity.ok().body(messageModel);
+        }
+    }
+    @GetMapping("/get-all")
+    public ResponseEntity<MessageModel> getAllTicket()
+    {
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<TicketResponse> ticketGet = ticketService.getAllTicket();
+            messageModel.setMessage("Success get all ticket");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(ticketGet);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get all ticket");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
 }
