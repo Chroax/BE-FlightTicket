@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 @Builder
 public class AirplanesResponse {
-
     private String airplaneName;
     private String airplaneType;
 
@@ -17,5 +16,4 @@ public class AirplanesResponse {
                 .airplaneType(airplanes.getAirplaneType())
                 .build();
     }
-
 }

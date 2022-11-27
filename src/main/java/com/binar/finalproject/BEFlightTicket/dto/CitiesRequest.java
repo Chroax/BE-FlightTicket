@@ -8,15 +8,12 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 public class CitiesRequest {
-
+    @NotEmpty(message = "City code is required.")
     private String cityCode;
-
     @NotEmpty(message = "City name is required.")
     private String cityName;
-
     @NotEmpty(message = "Countries is required.")
     private String countryCode;
-
 
     public Cities toAirports(Countries countries) {
         return Cities.builder()
@@ -26,5 +23,4 @@ public class CitiesRequest {
                 .build();
 
     }
-
 }
