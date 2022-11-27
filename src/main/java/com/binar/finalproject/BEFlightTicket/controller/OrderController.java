@@ -14,5 +14,24 @@ import java.util.UUID;
 public class OrderController {
     @Autowired
     private OrderService orderService;
-
+    @PostMapping("/add")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<MessageModel> addOrder (@RequestBody OrderRequest orderRequest)
+    {
+        MessageModel messageModel = new MessageModel();
+        OrderResponse orderResponse = orderService.addOrder(orderRequest);
+        if(orderResponse == null)
+        {
+            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
+            messageModel.setMessage("Failed to add order");
+            return ResponseEntity.badRequest().body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Add new order");
+            messageModel.setData(orderResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }
+    }
 }
