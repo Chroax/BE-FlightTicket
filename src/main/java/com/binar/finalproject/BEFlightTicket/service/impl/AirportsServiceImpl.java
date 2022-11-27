@@ -8,12 +8,14 @@ import com.binar.finalproject.BEFlightTicket.model.Airports;
 import com.binar.finalproject.BEFlightTicket.model.Cities;
 import com.binar.finalproject.BEFlightTicket.model.Countries;
 import com.binar.finalproject.BEFlightTicket.repository.AirportsRepository;
+import com.binar.finalproject.BEFlightTicket.repository.CitiesRepository;
 import com.binar.finalproject.BEFlightTicket.service.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AirportsServiceImpl implements AirportService {
@@ -21,17 +23,38 @@ public class AirportsServiceImpl implements AirportService {
     @Autowired
     private AirportsRepository airportsRepository;
 
+    @Autowired
+    private CitiesRepository citiesRepository;
+
     @Override
     public AirportResponse addAirports(AirportRequest airportRequest) {
-        Airports airports = airportRequest.toAirports();
         try {
-            airportsRepository.save(airports);
-            return AirportResponse.build(airports);
+            Optional<Cities> cities = citiesRepository.findById(airportRequest.getCityCode());
+                if(cities.isPresent())
+                {
+                    Airports airports = Airports.builder()
+                            .iataCode(airportRequest.getIataCode())
+                            .airportName(airportRequest.getAirportName())
+                            .citiesAirport(cities.get())
+                            .build();
+                    airportsRepository.save(airports);
+                    return AirportResponse.build(airports);
+                }
+                else
+                    return null;
         }
-        catch(Exception exception)
-        {
+        catch (Exception ignore){
             return null;
         }
+//        Airports airports = airportRequest.toAirports();
+//        try {
+//            airportsRepository.save(airports);
+//            return AirportResponse.build(airports);
+//        }
+//        catch(Exception exception)
+//        {
+//            return null;
+//        }
     }
 
     @Override
