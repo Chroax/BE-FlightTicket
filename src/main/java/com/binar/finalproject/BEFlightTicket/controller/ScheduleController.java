@@ -70,4 +70,20 @@ public class ScheduleController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+    @GetMapping("/get-all/{routeId}")
+    public ResponseEntity<MessageModel> getRouteSchedule(@PathVariable UUID routeId){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<ScheduleResponse> scheduleResponses = scheduleService.searchRouteSchedule(routeId);
+            messageModel.setMessage("Success get schedule by route id : " + routeId);
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(scheduleResponses);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get schedule by route id, " + routeId + " not found");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
 }
