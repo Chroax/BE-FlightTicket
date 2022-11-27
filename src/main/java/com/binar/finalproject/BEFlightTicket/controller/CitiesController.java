@@ -36,11 +36,11 @@ public class CitiesController {
         }
     }
 
-    @PutMapping(value = "/update/{cityName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageModel> updateCity(@PathVariable String cityName, @RequestBody CitiesRequest citiesRequest)
+    @PutMapping(value = "/update/{cityCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> updateCity(@PathVariable String cityCode, @RequestBody CitiesRequest citiesRequest)
     {
         MessageModel messageModel = new MessageModel();
-        CitiesResponse citiesResponse = citiesService.updateCity(citiesRequest, cityName);
+        CitiesResponse citiesResponse = citiesService.updateCity(citiesRequest, cityCode);
         if(citiesResponse == null)
         {
             messageModel.setStatus(HttpStatus.CONFLICT.value());
