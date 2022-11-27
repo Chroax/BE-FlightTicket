@@ -8,11 +8,10 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 public class GatesRequest {
-
-    @NotEmpty(message = "gate name is required.")
+    @NotEmpty(message = "Gate name is required.")
     private String gateName;
 
-    @NotEmpty(message = "terminal is required.")
+    @NotEmpty(message = "Terminal is required.")
     private Integer terminalId;
 
     public Gates toGates(Terminals  terminals) {

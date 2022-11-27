@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/gates")
 public class GatesController {
-
     @Autowired
     private GatesService gatesService;
 
@@ -24,13 +23,13 @@ public class GatesController {
 
         GatesResponse gatesResponse = gatesService.addGates(gatesRequest);
         if(gatesResponse == null) {
-            messageModel.setMessage("Failed to create Gates");
+            messageModel.setMessage("Failed to create gates");
             messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
             return ResponseEntity.badRequest().body(messageModel);
         }
         else {
             messageModel.setStatus(HttpStatus.OK.value());
-            messageModel.setMessage("Create new Gates");
+            messageModel.setMessage("Create new gates");
             messageModel.setData(gatesResponse);
             return ResponseEntity.ok().body(messageModel);
         }
@@ -42,48 +41,31 @@ public class GatesController {
         MessageModel messageModel = new MessageModel();
         try {
             List<GatesResponse> getAllGates = gatesService.searchAllGates();
-            messageModel.setMessage("Success get all Gates");
+            messageModel.setMessage("Success get all gates");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(getAllGates);
             return ResponseEntity.ok().body(messageModel);
         }catch (Exception exception) {
-            messageModel.setMessage("Failed get all Gates");
+            messageModel.setMessage("Failed get all gates");
             messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
 
-    @PutMapping(value = "/update/{gateName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageModel> updateGates(@PathVariable String gateName, @RequestBody GatesRequest gatesRequest) {
+    @PutMapping(value = "/update/{gateId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> updateGates(@PathVariable Integer gateId, @RequestBody GatesRequest gatesRequest) {
         MessageModel messageModel = new MessageModel();
-        GatesResponse gatesResponse = gatesService.updateGates(gatesRequest, gateName);
+        GatesResponse gatesResponse = gatesService.updateGates(gatesRequest, gateId);
         if(gatesResponse == null) {
             messageModel.setStatus(HttpStatus.CONFLICT.value());
-            messageModel.setMessage("Failed to update Gates");
+            messageModel.setMessage("Failed to update gates");
             return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(messageModel);
         }
         else {
             messageModel.setStatus(HttpStatus.OK.value());
-            messageModel.setMessage("Update Gates with name : " + gatesResponse.getGateName());
+            messageModel.setMessage("Update gates with name : " + gatesResponse.getGateName());
             messageModel.setData(gatesResponse);
             return ResponseEntity.ok().body(messageModel);
-        }
-    }
-
-    @GetMapping(value = "/get-byName/{gateName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageModel> getGatesByName(@PathVariable String gateName){
-        MessageModel messageModel = new MessageModel();
-        try {
-            GatesResponse getGates = gatesService.searchGatesByName(gateName);
-            messageModel.setMessage("Success get Gates By name");
-            messageModel.setStatus(HttpStatus.OK.value());
-            messageModel.setData(getGates);
-            return ResponseEntity.ok().body(messageModel);
-        }catch (Exception exception)
-        {
-            messageModel.setMessage("Failed get Gates By Name");
-            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
-            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
 }

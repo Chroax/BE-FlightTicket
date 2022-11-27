@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 @Builder
 public class GatesResponse {
-
     private Integer gateId;
     private String gateName;
     private Integer terminalId;

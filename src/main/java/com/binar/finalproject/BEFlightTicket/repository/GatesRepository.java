@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GatesRepository extends JpaRepository<Gates, Integer> {
-
     @Query("SELECT g FROM Gates g WHERE LOWER(g.gateName) LIKE LOWER(:gateName)")
     Gates findByGatesName(@Param("gateName") String gateName);
 }

@@ -14,10 +14,8 @@ import java.util.Optional;
 
 @Service
 public class GatesServiceImpl implements GatesService {
-
     @Autowired
     private GatesRepository gatesRepository;
-
     @Autowired
     private TerminalsRepository terminalsRepository;
 
@@ -54,21 +52,21 @@ public class GatesServiceImpl implements GatesService {
     }
 
     @Override
-    public GatesResponse updateGates(GatesRequest gatesRequest, String gateName) {
-        Gates gates = gatesRepository.findByGatesName(gateName);
+    public GatesResponse updateGates(GatesRequest gatesRequest, Integer gateId) {
+        Optional<Gates> isGates = gatesRepository.findById(gateId);
         String message = null;
-        if (gates != null) {
-            if (gatesRequest.getGateName() != null)
-                gates.setGateName(gatesRequest.getGateName());
-            if (gatesRequest.getTerminalId() != null)
-            {
-                Optional<Terminals> terminals = terminalsRepository.findById(gatesRequest.getTerminalId());
-                if(terminals.isPresent())
-                    gates.setTerminalsGates(terminals.get());
-                else
-                    message = "Terminals with this id doesnt exist";
-            }
-            if(message == null)
+        if (isGates.isPresent()) {
+            Gates gates = isGates.get();
+
+            gates.setGateName(gatesRequest.getGateName());
+
+            Optional<Terminals> terminals = terminalsRepository.findById(gatesRequest.getTerminalId());
+            if(terminals.isPresent())
+                gates.setTerminalsGates(terminals.get());
+            else
+                message = "Terminals with this id doesnt exist";
+
+            if(message != null)
                 return null;
             else
             {
@@ -77,16 +75,5 @@ public class GatesServiceImpl implements GatesService {
             }
         } else
             return null;
-
-    }
-
-    @Override
-    public GatesResponse searchGatesByName(String gateName) {
-        Gates gates = gatesRepository.findByGatesName(gateName);
-        if (gates != null){
-            return GatesResponse.build(gates);
-        }else {
-            return null;
-        }
     }
 }
