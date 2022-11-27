@@ -19,7 +19,7 @@ public class TerminalController {
 
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<MessageModel> createCountries(@RequestBody TerminalRequest terminalRequest) {
+    public ResponseEntity<MessageModel> createTerminals(@RequestBody TerminalRequest terminalRequest) {
         MessageModel messageModel = new MessageModel();
         TerminalResponse terminalResponse = terminalService.addTerminal(terminalRequest);
         if(terminalResponse == null) {
@@ -37,7 +37,7 @@ public class TerminalController {
     }
 
     @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageModel> getAllRole() {
+    public ResponseEntity<MessageModel> getAllTerminal() {
         MessageModel messageModel = new MessageModel();
         try {
             List<TerminalResponse> getAllTerminal = terminalService.searchAllTerminal();
@@ -52,11 +52,11 @@ public class TerminalController {
         }
     }
 
-    @PutMapping(value = "/update/{terminalName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageModel> updateRole(@PathVariable String terminalName, @RequestBody TerminalRequest terminalRequest)
+    @PutMapping(value = "/update/{terminalId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> updateTerminal(@PathVariable Integer terminalId, @RequestBody TerminalRequest terminalRequest)
     {
         MessageModel messageModel = new MessageModel();
-        TerminalResponse terminalResponse = terminalService.updateTerminal(terminalRequest, terminalName);
+        TerminalResponse terminalResponse = terminalService.updateTerminal(terminalRequest, terminalId);
 
         if(terminalResponse == null)
         {

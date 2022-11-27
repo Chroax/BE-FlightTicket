@@ -9,7 +9,7 @@ public interface TerminalService {
 
     TerminalResponse addTerminal(TerminalRequest terminalRequest);
     List<TerminalResponse> searchAllTerminal();
-    TerminalResponse updateTerminal(TerminalRequest terminalRequest, String terminalName);
+    TerminalResponse updateTerminal(TerminalRequest terminalRequest, Integer terminalId);
     Boolean deleteTerminal(String terminalName);
     TerminalResponse searchTerminalByName(String terminalName);
 }
