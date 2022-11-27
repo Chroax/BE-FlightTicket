@@ -9,7 +9,7 @@ public interface CitiesService {
 
     CitiesResponse addCity(CitiesRequest citiesRequest);
     List<CitiesResponse> searchAllCity();
-    CitiesResponse updateCity(CitiesRequest citiesRequest, String cityCode);
+    CitiesResponse updateCity(CitiesRequest citiesRequest, String cityName);
     Boolean deleteCity(String cityName);
     CitiesResponse searchCityByName(String cityName);
 }
