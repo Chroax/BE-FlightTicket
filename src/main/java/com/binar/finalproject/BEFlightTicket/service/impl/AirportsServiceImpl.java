@@ -69,20 +69,30 @@ public class AirportsServiceImpl implements AirportService {
     }
 
     @Override
-    public AirportResponse updateAirports(AirportRequest airportRequest, String airportName) {
-        Airports airports = airportsRepository.findByAirportName(airportName);
-        if (airports != null) {
+    public AirportResponse updateAirports(AirportRequest airportRequest, String iataCode) {
+        Optional<Airports> isAirport = airportsRepository.findById(iataCode);
+        String message = null;
+        if (isAirport.isPresent()) {
+            Airports airports = isAirport.get();
             airports.setIataCode(airportRequest.getIataCode());
             airports.setAirportName(airportRequest.getAirportName());
-            try {
-                return AirportResponse.build(airports);
-            } catch (Exception exception) {
-                return null;
+            if (airportRequest.getCityCode() != null)
+            {
+                Optional<Cities> cities = citiesRepository.findById(airportRequest.getCityCode());
+                if(cities.isPresent())
+                    airports.setCitiesAirport(cities.get());
+                else
+                    message = "City with this code doesnt exist";
             }
-        }
-        else {
-            throw new RuntimeException("Airport with name : " + airportName + " is not found");
-        }
+            if(message != null)
+                return null;
+            else
+            {
+                airportsRepository.saveAndFlush(airports);
+                return AirportResponse.build(airports);
+            }
+        } else
+            return null;
     }
 
     @Override
