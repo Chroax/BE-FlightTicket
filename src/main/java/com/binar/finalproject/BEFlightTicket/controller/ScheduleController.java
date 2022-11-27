@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -51,6 +52,22 @@ public class ScheduleController {
             messageModel.setMessage("Success update schedule with id : " + scheduleId);
             messageModel.setData(scheduleResponse);
             return ResponseEntity.ok().body(messageModel);
+        }
+    }
+    @GetMapping("/get-all/{airplaneName}")
+    public ResponseEntity<MessageModel> getAirplaneSchedule(@PathVariable String airplaneName){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<ScheduleResponse> scheduleResponses = scheduleService.searchAirplaneSchedule(airplaneName);
+            messageModel.setMessage("Success get schedule by airplane name : " + airplaneName);
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(scheduleResponses);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get schedule by airplane name, " + airplaneName + " not found");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
 }
