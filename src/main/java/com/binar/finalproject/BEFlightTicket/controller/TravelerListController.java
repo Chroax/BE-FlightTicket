@@ -13,7 +13,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/traveler-list")
 public class TravelerListController {
-
     @Autowired
     private TravelerListService travelerListService;
 
@@ -38,7 +37,7 @@ public class TravelerListController {
         }
     }
 
-    @GetMapping("/get-all/{userId}")
+    @GetMapping("/get-all/user/{userId}")
     public ResponseEntity<MessageModel> getAllUserTravelerList(@PathVariable UUID userId){
         MessageModel messageModel = new MessageModel();
         try {

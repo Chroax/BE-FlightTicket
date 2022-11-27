@@ -13,11 +13,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/airports")
 public class AirportsController {
-
     @Autowired
     private AirportService airportService;
 
-    @PostMapping(value = "/add-airport", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> createAirports(@RequestBody AirportRequest airportRequest) {
         MessageModel messageModel = new MessageModel();

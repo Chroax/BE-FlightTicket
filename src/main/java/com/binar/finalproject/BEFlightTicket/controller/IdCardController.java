@@ -13,7 +13,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/id-card")
 public class IdCardController {
-
     @Autowired
     IdCardService idCardService;
 
@@ -38,7 +37,7 @@ public class IdCardController {
         }
     }
 
-    @GetMapping("/get-all/{travelerId}")
+    @GetMapping("/get-all/traveler/{travelerId}")
     public ResponseEntity<MessageModel> getTravelerIdCard(@PathVariable UUID travelerId){
         MessageModel messageModel = new MessageModel();
         try {
