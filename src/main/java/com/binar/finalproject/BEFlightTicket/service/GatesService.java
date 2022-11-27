@@ -9,6 +9,5 @@ public interface GatesService {
     GatesResponse addGates(GatesRequest  gatesRequest);
     List<GatesResponse> searchAllGates();
     GatesResponse updateGates(GatesRequest gatesRequest, String gateName);
-    Boolean deleteGates(String gateName);
     GatesResponse searchGatesByName(String gateName);
 }
