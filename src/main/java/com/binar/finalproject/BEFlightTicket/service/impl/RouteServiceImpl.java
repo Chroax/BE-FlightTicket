@@ -44,6 +44,18 @@ public class RouteServiceImpl implements RouteService {
         return allRouteResponse;
     }
 
+    @Override
+    public List<RouteResponse> findByDepartureAndArrivalAirport(String departureAirport, String arrivalAirport) {
+        List<Routes> allRoute = routeRepository.findRouteByDepartureAndArrivalAirport(departureAirport,arrivalAirport);
+        List<RouteResponse> allRouteResponse = new ArrayList<>();
+        for (Routes routes : allRoute)
+        {
+            RouteResponse routeResponse = RouteResponse.build(routes);
+            allRouteResponse.add(routeResponse);
+        }
+        return allRouteResponse;
+    }
+
 
     @Override
     public List<RouteResponse> getAllRoute() {
