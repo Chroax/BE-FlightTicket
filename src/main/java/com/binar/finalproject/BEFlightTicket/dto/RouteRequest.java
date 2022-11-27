@@ -7,7 +7,6 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 public class RouteRequest {
-
     @NotEmpty(message = "Departure City is required.")
     private String departureCity;
     @NotEmpty(message = "Arrival City is required.")

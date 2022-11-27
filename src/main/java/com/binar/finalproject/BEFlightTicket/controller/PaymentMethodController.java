@@ -12,9 +12,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/payment")
 public class PaymentMethodController {
-
     @Autowired
     PaymentMethodService paymentMethodService;
+
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> addPayment(@RequestBody PaymentMethodRequest paymentMethodRequest) {
@@ -35,6 +35,7 @@ public class PaymentMethodController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
+
     @GetMapping("/name/{paymentName}")
     public ResponseEntity<MessageModel> getPaymentByName(@PathVariable String paymentName){
         MessageModel messageModel = new MessageModel();
@@ -51,6 +52,7 @@ public class PaymentMethodController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+
     @GetMapping("/get-all")
     public ResponseEntity<MessageModel> getAllPayment()
     {
@@ -68,6 +70,7 @@ public class PaymentMethodController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+
     @PutMapping("/update/{paymentName}")
     public ResponseEntity<MessageModel> updatePayment(@PathVariable String paymentName, @RequestBody PaymentMethodRequest paymentMethodRequest)
     {
@@ -88,6 +91,7 @@ public class PaymentMethodController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
+
     @DeleteMapping("/delete/{paymentName}")
     public ResponseEntity<MessageModel> deletePayment(@PathVariable String paymentName)
     {

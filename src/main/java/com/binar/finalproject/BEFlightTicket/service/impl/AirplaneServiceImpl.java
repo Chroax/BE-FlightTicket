@@ -15,7 +15,6 @@ import java.util.Optional;
 
 @Service
 public class AirplaneServiceImpl implements AirplanesService {
-
     @Autowired
     private AirplanesRepository airplanesRepository;
 

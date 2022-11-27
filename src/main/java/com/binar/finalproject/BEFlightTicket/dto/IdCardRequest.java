@@ -10,8 +10,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
-public class IDCardRequest {
-
+public class IdCardRequest {
     @NotEmpty(message = "idCardNumber is required.")
     private String idCardNumber;
     @NotEmpty(message = "idCardExpiry is required.")

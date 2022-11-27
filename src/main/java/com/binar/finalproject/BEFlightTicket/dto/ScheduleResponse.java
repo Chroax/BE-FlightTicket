@@ -20,6 +20,7 @@ public class ScheduleResponse {
     private String status;
     private String airplaneName;
     private UUID routeId;
+
     public static ScheduleResponse build(Schedules schedules) {
         return ScheduleResponse.builder()
                 .scheduleId(schedules.getScheduleId())

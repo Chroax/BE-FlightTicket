@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 @Builder
 public class PaymentMethodResponse {
-
     private Integer paymentId;
     private String paymentName;
     private String paymentType;

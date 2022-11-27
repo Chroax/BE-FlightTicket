@@ -13,8 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/countries")
 public class CountriesController {
-
-
     @Autowired
     private CountriesService countriesService;
 
@@ -94,7 +92,7 @@ public class CountriesController {
         }
     }
 
-    @GetMapping(value = "/get-byName/{countryName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/name/{countryName}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MessageModel> getCountriesByName(@PathVariable String countryName){
         MessageModel messageModel = new MessageModel();
         try {

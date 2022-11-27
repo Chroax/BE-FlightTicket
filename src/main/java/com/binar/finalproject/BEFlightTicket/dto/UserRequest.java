@@ -9,7 +9,6 @@ import java.time.LocalDate;
 
 @Data
 public class UserRequest {
-
     @NotEmpty(message = "fullName is required.")
     private String fullName;
     @NotEmpty(message = "email is required.")

@@ -97,34 +97,27 @@ public class UserServiceImpl implements UserService {
         Users users = userRepository.findByName(fullName);
         String message = null;
         if (users != null) {
-            if (userUpdateRequest.getFullName() != null)
-                users.setFullName(userUpdateRequest.getFullName());
-            if (userUpdateRequest.getEmail() != null)
-            {
-                if(!isEmailExist(userUpdateRequest.getEmail()))
-                    users.setEmail(userUpdateRequest.getEmail());
-                else
-                    message = "Email already exist";
-            }
-            if (userUpdateRequest.getTelephone() != null)
-            {
-                if(!isPhoneNumberExist(userUpdateRequest.getTelephone()))
-                    users.setTelephone(userUpdateRequest.getTelephone());
-                else
-                    message = "Phone number already exist";
-            }
-            if (userUpdateRequest.getGender() != null)
-                users.setGender(userUpdateRequest.getGender());
-            if (userUpdateRequest.getBirthDate() != null)
-                users.setBirthDate(userUpdateRequest.getBirthDate());
-            if (userUpdateRequest.getRolesId() != null)
-            {
-                Optional<Roles> roles = roleRepository.findById(userUpdateRequest.getRolesId());
-                if(roles.isPresent())
-                    users.setRolesUsers(roles.get());
-                else
-                    message = "Role with this id doesnt exist";
-            }
+            users.setFullName(userUpdateRequest.getFullName());
+
+            if(!isEmailExist(userUpdateRequest.getEmail()))
+                users.setEmail(userUpdateRequest.getEmail());
+            else
+                message = "Email already exist";
+
+            if(!isPhoneNumberExist(userUpdateRequest.getTelephone()))
+                users.setTelephone(userUpdateRequest.getTelephone());
+            else
+                message = "Phone number already exist";
+
+            users.setGender(userUpdateRequest.getGender());
+            users.setBirthDate(userUpdateRequest.getBirthDate());
+
+            Optional<Roles> roles = roleRepository.findById(userUpdateRequest.getRolesId());
+            if(roles.isPresent())
+                users.setRolesUsers(roles.get());
+            else
+                message = "Role with this id doesnt exist";
+
             if(message == null)
                 return null;
             else

@@ -12,17 +12,16 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/id-card")
-public class IDCardController {
-
+public class IdCardController {
     @Autowired
     IdCardService idCardService;
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<MessageModel> registerIdCard(@RequestBody IDCardRequest idCardRequest) {
+    public ResponseEntity<MessageModel> registerIdCard(@RequestBody IdCardRequest idCardRequest) {
         MessageModel messageModel = new MessageModel();
 
-        IDCardResponse idCardResponse = idCardService.registerIdCard(idCardRequest);
+        IdCardResponse idCardResponse = idCardService.registerIdCard(idCardRequest);
         if(idCardResponse == null)
         {
             messageModel.setMessage("Failed register new id-card");
@@ -38,11 +37,11 @@ public class IDCardController {
         }
     }
 
-    @GetMapping("/get-all/{travelerId}")
+    @GetMapping("/get-all/traveler/{travelerId}")
     public ResponseEntity<MessageModel> getTravelerIdCard(@PathVariable UUID travelerId){
         MessageModel messageModel = new MessageModel();
         try {
-            List<IDCardResponse> idCardResponses = idCardService.searchTravelerListIdCard(travelerId);
+            List<IdCardResponse> idCardResponses = idCardService.searchTravelerListIdCard(travelerId);
             messageModel.setMessage("Success get id-card by traveler id : " + travelerId);
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(idCardResponses);
@@ -59,7 +58,7 @@ public class IDCardController {
     public ResponseEntity<MessageModel> getIdCard(@PathVariable String idCardNumber){
         MessageModel messageModel = new MessageModel();
         try {
-            IDCardResponse idCardResponses = idCardService.searchIdCard(idCardNumber);
+            IdCardResponse idCardResponses = idCardService.searchIdCard(idCardNumber);
             messageModel.setMessage("Success get id-card");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(idCardResponses);
@@ -73,9 +72,9 @@ public class IDCardController {
     }
     
     @PutMapping("/update/{idCardNumber}")
-    public ResponseEntity<MessageModel> updateIdCard(@PathVariable String idCardNumber, @RequestBody IDCardRequest idCardRequest) {
+    public ResponseEntity<MessageModel> updateIdCard(@PathVariable String idCardNumber, @RequestBody IdCardRequest idCardRequest) {
         MessageModel messageModel = new MessageModel();
-        IDCardResponse idCardResponse = idCardService.updateIdCard(idCardRequest, idCardNumber);
+        IdCardResponse idCardResponse = idCardService.updateIdCard(idCardRequest, idCardNumber);
 
         if(idCardResponse == null)
         {
