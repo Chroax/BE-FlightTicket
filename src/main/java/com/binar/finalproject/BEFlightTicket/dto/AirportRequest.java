@@ -1,6 +1,7 @@
 package com.binar.finalproject.BEFlightTicket.dto;
 
 import com.binar.finalproject.BEFlightTicket.model.Airports;
+import com.binar.finalproject.BEFlightTicket.model.Cities;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
@@ -13,10 +14,14 @@ public class AirportRequest {
     @NotEmpty(message = "Airports name is required.")
     private String airportName;
 
-    public Airports toAirports(){
-        return Airports.builder()
-                .iataCode(this.iataCode)
-                .airportName(this.airportName)
-                .build();
+    @NotEmpty(message = "city is required.")
+    private String cityCode;
+
+    public Airports toAirports(Cities cities){
+        Airports airports = new Airports();
+        airports.setIataCode(this.iataCode);
+        airports.setAirportName(this.airportName);
+        airports.setCitiesAirport(cities);
+        return airports;
     }
 }

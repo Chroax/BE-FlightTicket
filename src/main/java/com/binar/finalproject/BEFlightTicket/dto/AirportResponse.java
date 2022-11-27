@@ -10,11 +10,13 @@ public class AirportResponse {
 
     private String iataCode;
     private String airportName;
+    private String cityCode;
 
     public static AirportResponse build(Airports airports) {
         return AirportResponse.builder()
                 .iataCode(airports.getIataCode())
                 .airportName(airports.getAirportName())
+                .cityCode(airports.getCitiesAirport().getCityCode())
                 .build();
     }
 }
