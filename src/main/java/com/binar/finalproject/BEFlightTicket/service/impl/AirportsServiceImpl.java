@@ -93,4 +93,15 @@ public class AirportsServiceImpl implements AirportService {
             return null;
         }
     }
+
+    @Override
+    public List<AirportResponse> searchAirportByCityName(String cityCode) {
+        List<Airports> allAirports = airportsRepository.findAllAirportByCity(cityCode);
+        List<AirportResponse> allAirportResponse = new ArrayList<>();
+        for (Airports airports : allAirports) {
+            AirportResponse airportResponse = AirportResponse.build(airports);
+            allAirportResponse.add(airportResponse);
+        }
+        return allAirportResponse;
+    }
 }
