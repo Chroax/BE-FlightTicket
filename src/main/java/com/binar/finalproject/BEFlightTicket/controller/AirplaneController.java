@@ -40,7 +40,7 @@ public class AirplaneController {
     }
 
     @GetMapping("/name/{airplaneName}")
-    public ResponseEntity<MessageModel> getUserById(@PathVariable String airplaneName){
+    public ResponseEntity<MessageModel> getAirplaneByName(@PathVariable String airplaneName){
         MessageModel messageModel = new MessageModel();
         try {
             AirplanesResponse airplaneGet = airplanesService.searchAirplaneByName(airplaneName);
