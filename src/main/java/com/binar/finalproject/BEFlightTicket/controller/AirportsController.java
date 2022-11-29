@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class AirportsController {
     private AirportService airportService;
 
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> createAirports(@RequestBody AirportRequest airportRequest) {
         MessageModel messageModel = new MessageModel();
@@ -36,6 +38,7 @@ public class AirportsController {
     }
 
     @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAllAirports()
     {
         MessageModel messageModel = new MessageModel();
@@ -54,6 +57,7 @@ public class AirportsController {
     }
 
     @PutMapping(value = "/update/{iataCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> updateAirports(@PathVariable String iataCode, @RequestBody AirportRequest airportRequest)
     {
         MessageModel messageModel = new MessageModel();
@@ -74,6 +78,7 @@ public class AirportsController {
     }
 
     @GetMapping(value = "/name/{airportName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirportsByName(@PathVariable String airportName){
         MessageModel messageModel = new MessageModel();
         try {
@@ -91,6 +96,7 @@ public class AirportsController {
     }
 
     @GetMapping(value = "/city/{cityCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirportsByCity(@PathVariable String cityCode){
         MessageModel messageModel = new MessageModel();
         try {

@@ -19,6 +19,7 @@ public class AirplaneController {
     private AirplanesService airplanesService;
 
     @PostMapping("/add")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> addAirplane(@RequestBody AirplanesRequest airplanesRequest)
     {
@@ -41,7 +42,8 @@ public class AirplaneController {
     }
 
     @GetMapping("/name/{airplaneName}")
-    public ResponseEntity<MessageModel> getUserById(@PathVariable String airplaneName){
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
+    public ResponseEntity<MessageModel> getUserByName(@PathVariable String airplaneName){
         MessageModel messageModel = new MessageModel();
         try {
             AirplanesResponse airplaneGet = airplanesService.searchAirplaneByName(airplaneName);
@@ -58,6 +60,7 @@ public class AirplaneController {
     }
 
     @GetMapping("/get-all")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> getAllAirplane()
     {
         MessageModel messageModel = new MessageModel();
@@ -76,6 +79,7 @@ public class AirplaneController {
     }
 
     @PutMapping("/update/{airplaneName}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> updateAirplane(@PathVariable String airplaneName, @RequestBody AirplanesRequest airplanesRequest)
     {
         MessageModel messageModel = new MessageModel();
@@ -97,6 +101,7 @@ public class AirplaneController {
     }
 
     @DeleteMapping("/delete/{airplaneName}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> deleteAirplane(@PathVariable String airplaneName)
     {
         MessageModel messageModel = new MessageModel();

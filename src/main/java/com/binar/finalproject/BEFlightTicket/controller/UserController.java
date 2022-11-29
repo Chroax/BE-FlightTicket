@@ -7,6 +7,7 @@ import com.binar.finalproject.BEFlightTicket.service.impl.security.UserDetailsIm
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -30,6 +31,7 @@ public class UserController {
     JwtUtils jwtUtils;
 
     @PostMapping("/sign-up")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> registerUser(@RequestBody UserRequest userRequest) {
         MessageModel messageModel = new MessageModel();
@@ -51,6 +53,7 @@ public class UserController {
     }
 
     @PostMapping("/sign-in")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> registerUser(@RequestBody LoginRequest loginRequest) {
         MessageModel messageModel = new MessageModel();
@@ -69,6 +72,7 @@ public class UserController {
     }
 
     @GetMapping("/get-all")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> getAllUsers(){
         MessageModel messageModel = new MessageModel();
         try {
@@ -86,6 +90,7 @@ public class UserController {
     }
 
     @GetMapping("/name/{fullName}")
+    @PreAuthorize("hasAnyRole('BUYER')")
     public ResponseEntity<MessageModel> getUserById(@PathVariable String fullName){
         MessageModel messageModel = new MessageModel();
         try {
@@ -103,6 +108,7 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{fullName}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> deleteUser(@PathVariable String fullName){
         MessageModel messageModel = new MessageModel();
         Boolean deleteUser = userService.deleteUser(fullName);
@@ -121,6 +127,7 @@ public class UserController {
     }
 
     @PutMapping("/update/{fullName}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> updateUser(@PathVariable String fullName, @RequestBody UserUpdateRequest userUpdateRequest) {
         MessageModel messageModel = new MessageModel();
         UserResponse userResponse = userService.updateUser(userUpdateRequest, fullName);

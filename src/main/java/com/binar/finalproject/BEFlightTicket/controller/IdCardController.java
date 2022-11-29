@@ -5,6 +5,7 @@ import com.binar.finalproject.BEFlightTicket.service.IdCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class IdCardController {
     IdCardService idCardService;
 
     @PostMapping("/add")
+    @PreAuthorize("hasAnyRole('BUYER')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> registerIdCard(@RequestBody IdCardRequest idCardRequest) {
         MessageModel messageModel = new MessageModel();
@@ -38,6 +40,7 @@ public class IdCardController {
     }
 
     @GetMapping("/get-all/traveler/{travelerId}")
+    @PreAuthorize("hasAnyRole('BUYER')")
     public ResponseEntity<MessageModel> getTravelerIdCard(@PathVariable UUID travelerId){
         MessageModel messageModel = new MessageModel();
         try {
@@ -55,6 +58,7 @@ public class IdCardController {
     }
 
     @GetMapping("/get/{idCardNumber}")
+    @PreAuthorize("hasAnyRole('BUYER')")
     public ResponseEntity<MessageModel> getIdCard(@PathVariable String idCardNumber){
         MessageModel messageModel = new MessageModel();
         try {
@@ -72,6 +76,7 @@ public class IdCardController {
     }
     
     @PutMapping("/update/{idCardNumber}")
+    @PreAuthorize("hasAnyRole('BUYER')")
     public ResponseEntity<MessageModel> updateIdCard(@PathVariable String idCardNumber, @RequestBody IdCardRequest idCardRequest) {
         MessageModel messageModel = new MessageModel();
         IdCardResponse idCardResponse = idCardService.updateIdCard(idCardRequest, idCardNumber);

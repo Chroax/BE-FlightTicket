@@ -6,6 +6,7 @@ import com.binar.finalproject.BEFlightTicket.service.PassportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class PassportController {
     PassportService passportService;
 
     @PostMapping("/add")
+    @PreAuthorize("hasAnyRole('BUYER')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> registerPassport(@RequestBody PassportRequest passportRequest) {
         MessageModel messageModel = new MessageModel();
@@ -39,6 +41,7 @@ public class PassportController {
     }
 
     @GetMapping("/get-all/traveler/{travelerId}")
+    @PreAuthorize("hasAnyRole('BUYER')")
     public ResponseEntity<MessageModel> getTravelerPassport(@PathVariable UUID travelerId){
         MessageModel messageModel = new MessageModel();
         try {
@@ -56,6 +59,7 @@ public class PassportController {
     }
 
     @GetMapping("/get/{passportNumber}")
+    @PreAuthorize("hasAnyRole('BUYER')")
     public ResponseEntity<MessageModel> getPassport(@PathVariable String passportNumber){
         MessageModel messageModel = new MessageModel();
         try {
@@ -73,6 +77,7 @@ public class PassportController {
     }
 
     @PutMapping("/update/{passportNumber}")
+    @PreAuthorize("hasAnyRole('BUYER')")
     public ResponseEntity<MessageModel> updatePassport(@PathVariable String passportNumber, @RequestBody PassportRequest passportRequest) {
         MessageModel messageModel = new MessageModel();
         PassportResponse passportResponse = passportService.updatePassport(passportRequest, passportNumber);

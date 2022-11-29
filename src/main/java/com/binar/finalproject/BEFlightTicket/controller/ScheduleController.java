@@ -5,6 +5,7 @@ import com.binar.finalproject.BEFlightTicket.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class ScheduleController {
     private ScheduleService scheduleService;
 
     @PostMapping("/add")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> addSchedule (@RequestBody ScheduleRequest scheduleRequest)
     {
@@ -38,6 +40,7 @@ public class ScheduleController {
     }
 
     @PutMapping("/update/{scheduleId}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> updateSchedule(@PathVariable UUID scheduleId, @RequestBody ScheduleRequest scheduleRequest) {
         MessageModel messageModel = new MessageModel();
         ScheduleResponse scheduleResponse = scheduleService.updateSchedule(scheduleRequest, scheduleId);
@@ -92,6 +95,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/get-all")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAllSchedule()
     {
         MessageModel messageModel = new MessageModel();

@@ -5,6 +5,7 @@ import com.binar.finalproject.BEFlightTicket.service.PaymentMethodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class PaymentMethodController {
     PaymentMethodService paymentMethodService;
 
     @PostMapping("/add")
+    @PreAuthorize("hasAnyRole('BUYER')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> addPayment(@RequestBody PaymentMethodRequest paymentMethodRequest) {
         MessageModel messageModel = new MessageModel();
@@ -37,6 +39,7 @@ public class PaymentMethodController {
     }
 
     @GetMapping("/name/{paymentName}")
+    @PreAuthorize("hasAnyRole('BUYER')")
     public ResponseEntity<MessageModel> getPaymentByName(@PathVariable String paymentName){
         MessageModel messageModel = new MessageModel();
         try {
@@ -54,6 +57,7 @@ public class PaymentMethodController {
     }
 
     @GetMapping("/get-all")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> getAllPayment()
     {
         MessageModel messageModel = new MessageModel();
@@ -72,6 +76,7 @@ public class PaymentMethodController {
     }
 
     @PutMapping("/update/{paymentName}")
+    @PreAuthorize("hasAnyRole('BUYER')")
     public ResponseEntity<MessageModel> updatePayment(@PathVariable String paymentName, @RequestBody PaymentMethodRequest paymentMethodRequest)
     {
         MessageModel messageModel = new MessageModel();
@@ -93,6 +98,7 @@ public class PaymentMethodController {
     }
 
     @DeleteMapping("/delete/{paymentName}")
+    @PreAuthorize("hasAnyRole('BUYER')")
     public ResponseEntity<MessageModel> deletePayment(@PathVariable String paymentName)
     {
         MessageModel messageModel = new MessageModel();
