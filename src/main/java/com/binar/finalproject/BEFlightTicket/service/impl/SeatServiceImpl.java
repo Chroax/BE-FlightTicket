@@ -25,7 +25,7 @@ public class SeatServiceImpl implements SeatService {
     @Override
     public SeatResponse addSeat(SeatRequest seatRequest) {
        try {
-           Optional<Airplanes> airplanes = airplanesRepository.findById(seatRequest.getAirplane_name());
+           Optional<Airplanes> airplanes = airplanesRepository.findById(seatRequest.getAirplaneName());
            if (airplanes.isPresent())
            {
                Seats seats = seatRequest.toSeats(airplanes.get());
@@ -48,12 +48,9 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public SeatResponse searchSeatBySeatNumber(String seatNumber) {
-        Seats seats = seatRepository.findByNumber(seatNumber);
-        if (seats != null)
-            return SeatResponse.build(seats);
-        else
-            return null;
+    public SeatResponse searchSeatById(Integer seatId) {
+        Optional<Seats> seats = seatRepository.findById(seatId);
+        return seats.map(SeatResponse::build).orElse(null);
     }
 
     @Override
@@ -69,18 +66,15 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public SeatResponse updateSeat(SeatRequest seatRequest, String seatNumber) {
-        Seats seats = seatRepository.findByNumber(seatNumber);
+    public SeatResponse updateSeat(SeatRequest seatRequest, Integer seatId) {
+        Optional<Seats> isSeat = seatRepository.findById(seatId);
         String message = null;
-        if (seats != null)
+        if (isSeat.isPresent())
         {
-            if (seatRequest.getSeatNumber() != null)
-                seats.setSeatNumber(seatRequest.getSeatNumber());
-            else
-                message = "Seat with number: "+seatNumber+" not found";
-            if (seatRequest.getSeatType() != null)
-                seats.setSeatType(seatRequest.getSeatType());
-            Optional<Airplanes> airplanes = airplanesRepository.findById(seatRequest.getAirplane_name());
+            Seats seats = isSeat.get();
+            seats.setSeatNumber(seatRequest.getSeatNumber());
+            seats.setSeatType(seatRequest.getSeatType());
+            Optional<Airplanes> airplanes = airplanesRepository.findById(seatRequest.getAirplaneName());
             if (airplanes.isPresent())
                 seats.setAirplanesSeats(airplanes.get());
             else

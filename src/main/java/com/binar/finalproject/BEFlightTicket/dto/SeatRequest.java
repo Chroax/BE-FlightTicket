@@ -14,7 +14,7 @@ public class SeatRequest {
     @NotEmpty(message = "Seat type is required.")
     private String seatType;
     @NotEmpty(message = "Airplane name is required.")
-    private String airplane_name;
+    private String airplaneName;
     public Seats toSeats(Airplanes airplanes)
     {
         return Seats.builder()

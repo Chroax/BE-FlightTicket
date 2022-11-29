@@ -37,11 +37,11 @@ public class SeatController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
-    @GetMapping("/number/{seatNumber}")
-    public ResponseEntity<MessageModel> getSeatByNumber(@PathVariable String seatNumber){
+    @GetMapping("/id/{seatId}")
+    public ResponseEntity<MessageModel> getSeatByNumber(@PathVariable Integer seatId){
         MessageModel messageModel = new MessageModel();
         try {
-            SeatResponse seatGet = seatService.searchSeatBySeatNumber(seatNumber);
+            SeatResponse seatGet = seatService.searchSeatById(seatId);
             messageModel.setMessage("Success get seat");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(seatGet);
@@ -86,11 +86,12 @@ public class SeatController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-    @PutMapping(value = "/update/{seatNumber}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageModel> updateSeat(@PathVariable String seatNumber, @RequestBody SeatRequest seatRequest)
+
+    @PutMapping(value = "/update/{seatId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> updateSeat(@PathVariable Integer seatId, @RequestBody SeatRequest seatRequest)
     {
         MessageModel messageModel = new MessageModel();
-        SeatResponse seatResponse = seatService.updateSeat(seatRequest, seatNumber);
+        SeatResponse seatResponse = seatService.updateSeat(seatRequest, seatId);
 
         if(seatResponse == null)
         {
