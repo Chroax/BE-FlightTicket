@@ -4,6 +4,7 @@ package com.binar.finalproject.BEFlightTicket.config;
 import com.binar.finalproject.BEFlightTicket.security.AuthEntryPointJwt;
 import com.binar.finalproject.BEFlightTicket.security.AuthTokenFilter;
 import com.binar.finalproject.BEFlightTicket.service.impl.security.UserDetailsServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,16 +20,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@AllArgsConstructor
 public class SpringSecurityConfig {
 
     final UserDetailsServiceImpl userDetailsService;
 
     private final AuthEntryPointJwt unauthorizedHandler;
-
-    public SpringSecurityConfig(UserDetailsServiceImpl userDetailsService, AuthEntryPointJwt unauthorizedHandler) {
-        this.userDetailsService = userDetailsService;
-        this.unauthorizedHandler = unauthorizedHandler;
-    }
 
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
@@ -60,30 +57,29 @@ public class SpringSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();
-                http.exceptionHandling().authenticationEntryPoint(unauthorizedHandler);
-                http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and();
-                http.authorizeRequests().antMatchers("/user/**").permitAll()
-                        .antMatchers("/role/**").permitAll()
-                        .antMatchers("/airplane/**").permitAll()
-                        .antMatchers("/airports/**").permitAll()
-                        .antMatchers("/cities/**").permitAll()
-                        .antMatchers("/countries/**").permitAll()
-                        .antMatchers("/gates/**").permitAll()
-                        .antMatchers("/id-card/**").permitAll()
-                        .antMatchers("/order/**").permitAll()
-                        .antMatchers("/passport/**").permitAll()
-                        .antMatchers("/payment/**").permitAll()
-                        .antMatchers("/route/**").permitAll()
-                        .antMatchers("/schedule/**").permitAll()
-                        .antMatchers("/seat/**").permitAll()
-                        .antMatchers("/terminals/**").permitAll()
-                        .antMatchers("/ticket/**").permitAll()
-                        .antMatchers("/traveler-list/**").permitAll()
-                        .anyRequest().permitAll();
+        http.exceptionHandling().authenticationEntryPoint(unauthorizedHandler);
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and();
+        http.authorizeRequests().antMatchers("/user/**").permitAll()
+                .antMatchers("/role/**").permitAll()
+                .antMatchers("/airplane/**").permitAll()
+                .antMatchers("/airports/**").permitAll()
+                .antMatchers("/cities/**").permitAll()
+                .antMatchers("/countries/**").permitAll()
+                .antMatchers("/gates/**").permitAll()
+                .antMatchers("/id-card/**").permitAll()
+                .antMatchers("/order/**").permitAll()
+                .antMatchers("/passport/**").permitAll()
+                .antMatchers("/payment/**").permitAll()
+                .antMatchers("/route/**").permitAll()
+                .antMatchers("/schedule/**").permitAll()
+                .antMatchers("/seat/**").permitAll()
+                .antMatchers("/terminals/**").permitAll()
+                .antMatchers("/ticket/**").permitAll()
+                .antMatchers("/traveler-list/**").permitAll()
+                .anyRequest().permitAll();
 
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 }
