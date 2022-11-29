@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -110,7 +109,7 @@ public class ScheduleController {
         }
     }
     @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}")
-    public ResponseEntity<MessageModel> getAirplaneScheduleTicket(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable LocalDate departureDate){
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicket(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
         MessageModel messageModel = new MessageModel();
         try {
             List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketSchedule(departureAirport, arrivalAirport, departureDate);
