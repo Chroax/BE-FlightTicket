@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -104,6 +105,22 @@ public class ScheduleController {
         }catch (Exception exception)
         {
             messageModel.setMessage("Failed get all schedule");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+    @GetMapping("/get-all/city/date/{departureCity}/{arrivalCity}/{departureDate}")
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicket(@PathVariable String departureCity,@PathVariable String arrivalCity, @PathVariable LocalDate departureDate){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<ScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketSchedule(departureCity, arrivalCity, departureDate);
+            messageModel.setMessage("Success get schedule");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(scheduleResponses);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get schedule");
             messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
