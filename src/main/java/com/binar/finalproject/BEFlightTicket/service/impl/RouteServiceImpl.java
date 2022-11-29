@@ -36,8 +36,6 @@ public class RouteServiceImpl implements RouteService {
         Airports departureAirports = airportsRepository.findByAirportName(routeRequest.getDepartureAirport());
         Cities arrivalCities = citiesRepository.findByCityName(routeRequest.getArrivalCity());
         Cities departureCities = citiesRepository.findByCityName(routeRequest.getDepartureCity());
-        Terminals arrivalTerminals = terminalsRepository.findByTerminalName(routeRequest.getArrivalTerminal());
-        Terminals departureTerminals = terminalsRepository.findByTerminalName(routeRequest.getDepartureTerminal());
 
         if(arrivalAirports == null)
             return null;
@@ -46,10 +44,6 @@ public class RouteServiceImpl implements RouteService {
         if(arrivalCities == null)
             return null;
         if(departureCities == null)
-            return null;
-        if(arrivalTerminals == null)
-            return null;
-        if(departureTerminals == null)
             return null;
 
         try {
@@ -106,8 +100,6 @@ public class RouteServiceImpl implements RouteService {
         Airports departureAirports = airportsRepository.findByAirportName(routeRequest.getDepartureAirport());
         Cities arrivalCities = citiesRepository.findByCityName(routeRequest.getArrivalCity());
         Cities departureCities = citiesRepository.findByCityName(routeRequest.getDepartureCity());
-        Terminals arrivalTerminals = terminalsRepository.findByTerminalName(routeRequest.getArrivalTerminal());
-        Terminals departureTerminals = terminalsRepository.findByTerminalName(routeRequest.getDepartureTerminal());
 
         if(arrivalAirports == null)
             return null;
@@ -116,10 +108,6 @@ public class RouteServiceImpl implements RouteService {
         if(arrivalCities == null)
             return null;
         if(departureCities == null)
-            return null;
-        if(arrivalTerminals == null)
-            return null;
-        if(departureTerminals == null)
             return null;
 
         if (isRoutes.isPresent())
