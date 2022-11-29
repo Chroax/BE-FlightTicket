@@ -60,10 +60,31 @@ public class Schedules {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="airplane_name", nullable = false)
     private Airplanes airplanesSchedules;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "airplane_type", nullable = false)
+    private Airplanes airplaneTypeSchedule;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="route_id", nullable = false)
     private Routes routesSchedules;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "departure_city", nullable = false)
+    private Routes departureCitySchedule;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "arrival_city", nullable = false)
+    private Routes arrivalCitySchedule;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "departure_airport", nullable = false)
+    private Routes departureAirportSchedule;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "arrival_airport", nullable = false)
+    private Routes arrivalAirportSchedule;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "departure_terminal", nullable = false)
+    private Routes departureTerminalSchedule;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "arrival_terminal", nullable = false)
+    private Routes arrivalTerminalSchedule;
 
     @OneToMany(mappedBy = "schedules", cascade = CascadeType.ALL)
     private Set<ScheduleOrders> scheduleOrders;
