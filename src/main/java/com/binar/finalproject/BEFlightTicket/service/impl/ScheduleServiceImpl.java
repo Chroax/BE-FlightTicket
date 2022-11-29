@@ -9,6 +9,7 @@ import com.binar.finalproject.BEFlightTicket.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -103,6 +104,18 @@ public class ScheduleServiceImpl implements ScheduleService {
     public List<ScheduleResponse> searchRouteSchedule(UUID routeId) {
         List<Schedules> allSchedule = scheduleRepository.getAllRouteSchedule(routeId);
         return toListScheduleResponse(allSchedule);
+    }
+
+    @Override
+    public List<ScheduleResponse> searchAirplaneTicketSchedule(String arrivalCity, String departureCity, LocalDate departureDate) {
+        List<Schedules> allSchedule = scheduleRepository.findAirplaneTicketSchedule(departureCity,arrivalCity,departureDate);
+        List<ScheduleResponse> allScheduleResponse = new ArrayList<>();
+        for (Schedules schedules : allSchedule)
+        {
+            ScheduleResponse scheduleResponse = ScheduleResponse.searchAirplaneTicketSchedule(schedules);
+            allScheduleResponse.add(scheduleResponse);
+        }
+        return allScheduleResponse;
     }
 
     @Override
