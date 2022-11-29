@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,4 +14,6 @@ public interface RouteRepository extends JpaRepository<Routes, UUID> {
     List<Routes> findRouteByDepartureCityAndArrivalCity(@Param("departureCity") String departureCity, @Param("arrivalCity") String arrivalCity);
     @Query("SELECT r FROM Routes r WHERE LOWER(r.departureAirport) LIKE LOWER(:departureAirport) AND LOWER(r.arrivalAirport) LIKE LOWER(:arrivalAirport) ")
     List<Routes> findRouteByDepartureAndArrivalAirport(@Param("departureAirport") String departureAirport, @Param("arrivalAirport") String arrivalAirport);
+    @Query(nativeQuery = true, value = "SELECT*FROM schedules s INNER JOIN routes r ON s.route_id = r.route_id INNER JOIN airplanes a ON s.airplane_name = a.airplane_name where r.departure_airport = :departureAirport and r.arrival_airport = :arrivalAirport and s.departure_date = :departureDate")
+    List<Routes> searchRouteTicket(@Param("departureAirport") String departureAirport, @Param("arrivalAirport") String arrivalAirport, @Param("departureDate") LocalDate departureDate);
 }

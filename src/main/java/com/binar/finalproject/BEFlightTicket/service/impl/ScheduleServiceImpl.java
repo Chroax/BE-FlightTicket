@@ -9,6 +9,7 @@ import com.binar.finalproject.BEFlightTicket.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -103,6 +104,29 @@ public class ScheduleServiceImpl implements ScheduleService {
     public List<ScheduleResponse> searchRouteSchedule(UUID routeId) {
         List<Schedules> allSchedule = scheduleRepository.getAllRouteSchedule(routeId);
         return toListScheduleResponse(allSchedule);
+    }
+
+    @Override
+    public List<SearchScheduleResponse> searchAirplaneTicketSchedule(String arrivalAirport, String departureAirport, String departureDate) {
+        List<Schedules> allSchedule = scheduleRepository.searchScheduleTicket(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
+        List<Routes> allRoute = routeRepository.searchRouteTicket(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
+        List<Airplanes> allAirplane = airplanesRepository.searchAirplaneTicket(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
+        List<SearchScheduleResponse> allSearchScheduleResponse = new ArrayList<>();
+        for (Schedules schedules : allSchedule)
+        {
+            for (Routes routes : allRoute)
+            {
+                for (Airplanes airplanes : allAirplane)
+                {
+                    SearchScheduleResponse searchScheduleResponse = SearchScheduleResponse.build(schedules, routes, airplanes);
+                    allSearchScheduleResponse.add(searchScheduleResponse);
+                    break;
+                }
+                break;
+            }
+
+        }
+        return allSearchScheduleResponse;
     }
 
     @Override
