@@ -1,22 +1,33 @@
 package com.binar.finalproject.BEFlightTicket.controller;
 
-import com.binar.finalproject.BEFlightTicket.dto.MessageModel;
-import com.binar.finalproject.BEFlightTicket.dto.UserRequest;
-import com.binar.finalproject.BEFlightTicket.dto.UserResponse;
-import com.binar.finalproject.BEFlightTicket.dto.UserUpdateRequest;
+import com.binar.finalproject.BEFlightTicket.dto.*;
+import com.binar.finalproject.BEFlightTicket.security.JwtUtils;
 import com.binar.finalproject.BEFlightTicket.service.UserService;
+import com.binar.finalproject.BEFlightTicket.service.impl.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    JwtUtils jwtUtils;
 
     @PostMapping("/sign-up")
     @ResponseStatus(HttpStatus.CREATED)
@@ -37,6 +48,24 @@ public class UserController {
             messageModel.setData(userResponse);
             return ResponseEntity.ok().body(messageModel);
         }
+    }
+
+    @PostMapping("/sign-in")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<MessageModel> registerUser(@RequestBody LoginRequest loginRequest) {
+        MessageModel messageModel = new MessageModel();
+
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                loginRequest.getEmail(), loginRequest.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication);
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
+        messageModel.setData(LoginResponse.build(jwt, userDetails));
+        messageModel.setStatus(HttpStatus.OK.value());
+        messageModel.setMessage("Success Login");
+
+        return ResponseEntity.ok().body(messageModel);
     }
 
     @GetMapping("/get-all")

@@ -3,67 +3,58 @@ package com.binar.finalproject.BEFlightTicket.service.impl.security;
 
 import com.binar.finalproject.BEFlightTicket.model.Users;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serial;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Data
+@Builder
+@AllArgsConstructor
 public class UserDetailsImpl implements UserDetails {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
-
     private UUID userId;
 
     private String fullName;
 
     private String email;
-
+    private String telephone;
     @JsonIgnore
     private String password;
+    private LocalDate birthDate;
+    private Boolean gender;
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(UUID userId, String fullName, String email, String password,
-                           Collection<? extends GrantedAuthority> authorities) {
-        this.userId = userId;
-        this.fullName = fullName;
-        this.email = email;
-        this.password = password;
-        this.authorities = authorities;
-    }
-
     public static UserDetailsImpl build(Users users){
-        List<GrantedAuthority> authorities = users.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
+        List<GrantedAuthority> authorities = users.getRolesUsers().stream()
+                .map(roles -> new SimpleGrantedAuthority(roles.getRoleName()))
                 .collect(Collectors.toList());
 
-        return new UserDetailsImpl(
-                users.getUserId(),
-                users.getFullName(),
-                users.getEmail(),
-                users.getPassword(),
-                authorities);
+        return UserDetailsImpl.builder()
+                .userId(users.getUserId())
+                .email(users.getEmail())
+                .fullName(users.getFullName())
+                .telephone(users.getTelephone())
+                .password(users.getPassword())
+                .birthDate(users.getBirthDate())
+                .gender(users.getGender())
+                .authorities(authorities)
+                .build();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
-    }
-
-    public UUID getId() {
-        return userId;
-    }
-
-
-    public String getEmail() {
-        return email;
     }
 
     @Override
@@ -73,7 +64,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return fullName;
+        return email;
     }
 
     @Override
@@ -105,7 +96,4 @@ public class UserDetailsImpl implements UserDetails {
         UserDetailsImpl user = (UserDetailsImpl) o;
         return Objects.equals(userId, user.userId);
     }
-
-
-
 }

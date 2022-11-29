@@ -10,6 +10,7 @@ import com.binar.finalproject.BEFlightTicket.repository.RoleRepository;
 import com.binar.finalproject.BEFlightTicket.repository.UserRepository;
 import com.binar.finalproject.BEFlightTicket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,6 +25,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
     @Override
     public UserResponse registerUser(UserRequest userRequest) {
 
@@ -35,19 +39,9 @@ public class UserServiceImpl implements UserService {
                     Optional<Roles> roles = roleRepository.findById(userRequest.getRolesId());
                     if(roles.isPresent())
                     {
-                        Users users = Users.builder()
-                                .fullName(userRequest.getFullName())
-                                .email(userRequest.getEmail())
-                                .telephone(userRequest.getTelephone())
-                                .password(userRequest.getPassword())
-                                .birthDate(userRequest.getBirthDate())
-                                .gender(userRequest.getGender())
-                                .telephone(userRequest.getTelephone())
-                                .rolesUsers(roles.get())
-                                .statusActive(true)
-                                .build();
-
-                        users.setPassword(EncoderConfiguration.encrypt(users.getPassword()));
+                        Users users = userRequest.toUsers();
+                        users.getRolesUsers().add(roles.get());
+                        users.setPassword(encoder.encode(users.getPassword()));
                         userRepository.saveAndFlush(users);
                         return UserResponse.build(users);
                     }
@@ -82,8 +76,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean isEmailExist(String email) {
-        Users users = userRepository.findByEmail(email);
-        return users != null;
+        Optional<Users> users = userRepository.findByEmail(email);
+        return users.isPresent();
     }
 
     @Override
@@ -114,7 +108,7 @@ public class UserServiceImpl implements UserService {
 
             Optional<Roles> roles = roleRepository.findById(userUpdateRequest.getRolesId());
             if(roles.isPresent())
-                users.setRolesUsers(roles.get());
+                users.getRolesUsers().add(roles.get());
             else
                 message = "Role with this id doesnt exist";
 
