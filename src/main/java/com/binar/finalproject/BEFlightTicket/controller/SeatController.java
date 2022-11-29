@@ -37,7 +37,7 @@ public class SeatController {
         }
     }
     @GetMapping("/id/{seatId}")
-    public ResponseEntity<MessageModel> getSeatByNumber(@PathVariable Integer seatId){
+    public ResponseEntity<MessageModel> getSeatById(@PathVariable Integer seatId){
         MessageModel messageModel = new MessageModel();
         try {
             SeatResponse seatGet = seatService.searchSeatById(seatId);
