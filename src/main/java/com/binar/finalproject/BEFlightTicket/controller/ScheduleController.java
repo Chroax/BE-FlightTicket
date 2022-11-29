@@ -109,11 +109,11 @@ public class ScheduleController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-    @GetMapping("/get-all/city/date/{departureCity}/{arrivalCity}/{departureDate}")
-    public ResponseEntity<MessageModel> getAirplaneScheduleTicket(@PathVariable String departureCity,@PathVariable String arrivalCity, @PathVariable LocalDate departureDate){
+    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}")
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicket(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable LocalDate departureDate){
         MessageModel messageModel = new MessageModel();
         try {
-            List<ScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketSchedule(departureCity, arrivalCity, departureDate);
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketSchedule(departureAirport, arrivalAirport, departureDate);
             messageModel.setMessage("Success get schedule");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(scheduleResponses);

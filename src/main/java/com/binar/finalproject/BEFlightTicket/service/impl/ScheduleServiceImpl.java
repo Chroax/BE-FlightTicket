@@ -107,15 +107,8 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<ScheduleResponse> searchAirplaneTicketSchedule(String arrivalCity, String departureCity, LocalDate departureDate) {
-        List<Schedules> allSchedule = scheduleRepository.findAirplaneTicketSchedule(departureCity,arrivalCity,departureDate);
-        List<ScheduleResponse> allScheduleResponse = new ArrayList<>();
-        for (Schedules schedules : allSchedule)
-        {
-            ScheduleResponse scheduleResponse = ScheduleResponse.searchAirplaneTicketSchedule(schedules);
-            allScheduleResponse.add(scheduleResponse);
-        }
-        return allScheduleResponse;
+    public List<SearchScheduleResponse> searchAirplaneTicketSchedule(String arrivalAirport, String departureAirport, LocalDate departureDate) {
+        return scheduleRepository.searchScheduleTicket(arrivalAirport, departureAirport, departureDate);
     }
 
     @Override

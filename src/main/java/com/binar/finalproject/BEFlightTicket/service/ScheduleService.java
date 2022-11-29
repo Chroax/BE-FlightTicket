@@ -11,6 +11,6 @@ public interface ScheduleService {
     ScheduleResponse updateSchedule(ScheduleRequest scheduleRequest, UUID scheduleId);
     List<ScheduleResponse> searchAirplaneSchedule(String airplaneName);
     List<ScheduleResponse> searchRouteSchedule(UUID routeId);
-    List<ScheduleResponse> searchAirplaneTicketSchedule(String arrivalCity, String departureCity, LocalDate departureDate);
+    List<SearchScheduleResponse> searchAirplaneTicketSchedule(String arrivalAirport, String departureAirport, LocalDate departureDate);
     List<ScheduleResponse> getAllSchedule();
 }
