@@ -10,8 +10,6 @@ import com.binar.finalproject.BEFlightTicket.service.PassportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -57,25 +55,20 @@ public class PassportServiceImpl implements PassportService {
     }
 
     @Override
-    public List<PassportResponse> searchTravelerListPassport(UUID travelerId) {
-        List<Passport> allPassport = passportRepository.findAllPassportByTravelerList(travelerId);
-        List<PassportResponse> allPassportResponse = new ArrayList<>();
-        for (Passport passport: allPassport) {
-            PassportResponse passportResponse = PassportResponse.build(passport);
-            allPassportResponse.add(passportResponse);
-        }
-        return allPassportResponse;
+    public PassportResponse searchTravelerListPassport(UUID travelerId) {
+        Passport passport = passportRepository.findAllPassportByTravelerList(travelerId);
+        return PassportResponse.build(passport);
     }
 
     @Override
-    public PassportResponse searchPassport(String passportNumber) {
-        Optional<Passport> passport = passportRepository.findById(passportNumber);
+    public PassportResponse searchPassport(UUID passportId) {
+        Optional<Passport> passport = passportRepository.findById(passportId);
         return passport.map(PassportResponse::build).orElse(null);
     }
 
     @Override
-    public PassportResponse updatePassport(PassportRequest passportRequest, String passportNumber) {
-        Optional<Passport> isPassport = passportRepository.findById(passportNumber);
+    public PassportResponse updatePassport(PassportRequest passportRequest, UUID passportId) {
+        Optional<Passport> isPassport = passportRepository.findById(passportId);
         String message = null;
         if (isPassport.isPresent()) {
             Passport passport = isPassport.get();

@@ -10,6 +10,7 @@ import java.util.UUID;
 @Data
 @Builder
 public class PassportResponse {
+    private UUID passportId;
     private String passportNumber;
     private LocalDate passportExpiry;
     private String countryCode;
@@ -17,6 +18,7 @@ public class PassportResponse {
 
     public static PassportResponse build(Passport passport) {
         return PassportResponse.builder()
+                .passportId(passport.getPassportId())
                 .passportNumber(passport.getPassportNumber())
                 .passportExpiry(passport.getPassportExpiry())
                 .countryCode(passport.getCountriesPassport().getCountryCode())
