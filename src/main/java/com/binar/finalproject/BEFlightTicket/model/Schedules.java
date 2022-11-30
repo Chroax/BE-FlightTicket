@@ -1,21 +1,22 @@
 package com.binar.finalproject.BEFlightTicket.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -65,6 +66,7 @@ public class Schedules {
     @JoinColumn(name="route_id", nullable = false)
     private Routes routesSchedules;
 
-    @OneToMany(mappedBy = "schedules", cascade = CascadeType.ALL)
-    private Set<ScheduleOrders> scheduleOrders;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "scheduleOrders", cascade = CascadeType.ALL)
+    private List<Orders> orders;
 }
