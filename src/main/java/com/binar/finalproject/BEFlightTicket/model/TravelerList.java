@@ -61,7 +61,7 @@ public class TravelerList {
     @OneToOne(mappedBy = "travelerListPassport", cascade = CascadeType.ALL)
     private Passport passport;
 
-    @OneToOne(mappedBy = "travelerListIDCard", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "travelerListIdCard", cascade = CascadeType.ALL)
     private IdCard idCard;
 
     @OneToMany(mappedBy = "travelerListTicket", cascade = CascadeType.ALL)
