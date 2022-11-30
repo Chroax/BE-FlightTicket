@@ -5,20 +5,20 @@ import com.binar.finalproject.BEFlightTicket.dto.OrderResponse;
 import com.binar.finalproject.BEFlightTicket.model.*;
 import com.binar.finalproject.BEFlightTicket.repository.OrderRepository;
 import com.binar.finalproject.BEFlightTicket.repository.PaymentMethodRepository;
+import com.binar.finalproject.BEFlightTicket.repository.ScheduleRepository;
 import com.binar.finalproject.BEFlightTicket.repository.UserRepository;
 import com.binar.finalproject.BEFlightTicket.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private ScheduleRepository scheduleRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -34,11 +34,11 @@ public class OrderServiceImpl implements OrderService {
             {
                 if(paymentMethods.isPresent())
                 {
-                    Orders orders = orderRequest.toOrders(users.get(), paymentMethods.get());
-
+                    List<Schedules> allSchedules = scheduleRepository.findAllById(orderRequest.getScheduleId());
+                    Orders orders = orderRequest.toOrders(users.get(), paymentMethods.get(), (Set<Schedules>) allSchedules);
                     try {
                         orderRepository.save(orders);
-                        return OrderResponse.build(orders);
+                        return OrderResponse.build(orders, orderRequest.getScheduleId());
                     }
                     catch(Exception exception)
                     {
@@ -67,6 +67,9 @@ public class OrderServiceImpl implements OrderService {
             orders.setTotalPrice(orderRequest.getTotalPrice());
             orders.setPnrCode(orderRequest.getPnrCode());
             orders.setStatus(orderRequest.getStatus());
+            orders.getScheduleOrders().clear();
+            List<Schedules> allSchedules = scheduleRepository.findAllById(orderRequest.getScheduleId());
+            orders.setScheduleOrders((Set<Schedules>) allSchedules);
             Optional<Users> users = userRepository.findById(orderRequest.getUserId());
             if (users.isPresent())
                 orders.setUsersOrder(users.get());
@@ -82,7 +85,7 @@ public class OrderServiceImpl implements OrderService {
                 return null;
             else {
                 orderRepository.saveAndFlush(orders);
-                return OrderResponse.build(orders);
+                return OrderResponse.build(orders, orderRequest.getScheduleId());
             }
         }
         else
@@ -91,35 +94,34 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderResponse> getAllOrder() {
-        List<Orders> allOrders = orderRepository.findAll();
-        List<OrderResponse> allOrderResponse = new ArrayList<>();
-        for (Orders orders : allOrders)
-        {
-            OrderResponse orderResponse = OrderResponse.build(orders);
-            allOrderResponse.add(orderResponse);
-        }
-        return allOrderResponse;
+        List<Orders> allOrder = orderRepository.findAll();
+        return listToOrderResponses(allOrder);
     }
 
     @Override
     public List<OrderResponse> getAllOrderByUserId(UUID userId) {
         List<Orders> allOrder = orderRepository.findAllOrderByUserId(userId);
-        List<OrderResponse> allOrderResponse = new ArrayList<>();
-        for (Orders orders : allOrder)
-        {
-            OrderResponse orderResponse = OrderResponse.build(orders);
-            allOrderResponse.add(orderResponse);
-        }
-        return allOrderResponse;
+        return listToOrderResponses(allOrder);
     }
 
     @Override
     public List<OrderResponse> getAllOrderByPaymentId(Integer paymentId) {
         List<Orders> allOrder = orderRepository.findAllOrderByPaymentId(paymentId);
+        return listToOrderResponses(allOrder);
+    }
+
+    private List<OrderResponse> listToOrderResponses(List<Orders> allOrder) {
         List<OrderResponse> allOrderResponse = new ArrayList<>();
         for (Orders orders : allOrder)
         {
-            OrderResponse orderResponse = OrderResponse.build(orders);
+            Set<Schedules> schedules = orders.getScheduleOrders();
+            List<UUID> schedulesId = null;
+
+            for (Schedules schedule : schedules) {
+                assert false;
+                schedulesId.add(schedule.getScheduleId());
+            }
+            OrderResponse orderResponse = OrderResponse.build(orders, schedulesId);
             allOrderResponse.add(orderResponse);
         }
         return allOrderResponse;

@@ -4,6 +4,8 @@ import com.binar.finalproject.BEFlightTicket.model.*;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -20,8 +22,10 @@ public class OrderRequest {
     private UUID userId;
     @NotEmpty(message = "Payment ID is required.")
     private Integer paymentId;
+    @NotEmpty(message = "List of Schedule Id is required.")
+    private List<UUID> scheduleId;
 
-    public Orders toOrders (Users users, PaymentMethods paymentMethods)
+    public Orders toOrders (Users users, PaymentMethods paymentMethods, Set<Schedules> schedules)
     {
         return Orders.builder()
                 .totalTicket(this.totalTicket)
@@ -30,6 +34,7 @@ public class OrderRequest {
                 .status(this.status)
                 .usersOrder(users)
                 .paymentMethodsOrder(paymentMethods)
+                .scheduleOrders(schedules)
                 .build();
     }
 }

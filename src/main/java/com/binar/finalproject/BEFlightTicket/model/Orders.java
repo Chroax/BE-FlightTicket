@@ -56,6 +56,9 @@ public class Orders {
     @OneToMany(mappedBy = "ordersTicket", cascade = CascadeType.ALL)
     private Set<Tickets> tickets;
 
-    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
-    private Set<ScheduleOrders> scheduleOrders;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "schedule_orders",
+            joinColumns = @JoinColumn(name = "orderId"),
+            inverseJoinColumns = @JoinColumn(name = "scheduleId"))
+    private Set<Schedules> scheduleOrders;
 }

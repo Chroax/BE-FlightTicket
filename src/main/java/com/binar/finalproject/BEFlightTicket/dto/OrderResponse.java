@@ -4,6 +4,8 @@ import com.binar.finalproject.BEFlightTicket.model.Orders;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -15,8 +17,9 @@ public class OrderResponse {
     private String pnrCode;
     private UUID userId;
     private Integer paymentId;
+    private List<UUID> scheduleId;
 
-    public static OrderResponse build(Orders orders)
+    public static OrderResponse build(Orders orders, List<UUID> scheduleId)
     {
         return OrderResponse.builder()
                 .orderId(orders.getOrderId())
@@ -25,6 +28,7 @@ public class OrderResponse {
                 .pnrCode(orders.getPnrCode())
                 .userId(orders.getUsersOrder().getUserId())
                 .paymentId(orders.getPaymentMethodsOrder().getPaymentId())
+                .scheduleId(scheduleId)
                 .build();
     }
 }
