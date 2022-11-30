@@ -13,4 +13,10 @@ public interface ScheduleService {
     List<ScheduleResponse> searchRouteSchedule(UUID routeId);
     List<SearchScheduleResponse> searchAirplaneTicketSchedule(String arrivalAirport, String departureAirport, String departureDate);
     List<ScheduleResponse> getAllSchedule();
+    List<SearchScheduleResponse> searchAirplaneTicketOrderByLowerPrice(String arrivalAirport, String departureAirport, String departureDate);
+    List<SearchScheduleResponse> searchAirplaneTicketOrderByHigherPrice(String arrivalAirport, String departureAirport, String departureDate);
+    List<SearchScheduleResponse> searchAirplaneTicketOrderByEarliestDepartureTime(String arrivalAirport, String departureAirport, String departureDate);
+    List<SearchScheduleResponse> searchAirplaneTicketOrderByLatestDepartureTime(String arrivalAirport, String departureAirport, String departureDate);
+    List<SearchScheduleResponse> searchAirplaneTicketOrderByEarliestArrivalTime(String arrivalAirport, String departureAirport, String departureDate);
+    List<SearchScheduleResponse> searchAirplaneTicketOrderByLatestArrivalTime(String arrivalAirport, String departureAirport, String departureDate);
 }
