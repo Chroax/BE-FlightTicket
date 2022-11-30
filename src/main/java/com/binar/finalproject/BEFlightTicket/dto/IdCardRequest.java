@@ -20,12 +20,12 @@ public class IdCardRequest {
     @NotEmpty(message = "travelerId is required.")
     private UUID travelerId;
 
-    public IdCard toIDCard(Countries countries, TravelerList travelerList) {
+    public IdCard toIdCard(Countries countries, TravelerList travelerList) {
         return IdCard.builder()
                 .idCardNumber(this.idCardNumber)
                 .idCardExpiry(this.idCardExpiry)
-                .countriesIDCard(countries)
-                .travelerListIDCard(travelerList)
+                .countriesIdCard(countries)
+                .travelerListIdCard(travelerList)
                 .build();
     }
 }
