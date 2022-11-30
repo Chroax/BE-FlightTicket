@@ -1,5 +1,6 @@
 package com.binar.finalproject.BEFlightTicket.service.impl;
 
+import com.binar.finalproject.BEFlightTicket.config.PNRGenerator;
 import com.binar.finalproject.BEFlightTicket.dto.OrderRequest;
 import com.binar.finalproject.BEFlightTicket.dto.OrderResponse;
 import com.binar.finalproject.BEFlightTicket.model.*;
@@ -34,11 +35,25 @@ public class OrderServiceImpl implements OrderService {
             {
                 if(paymentMethods.isPresent())
                 {
-                    List<Schedules> allSchedules = scheduleRepository.findAllById(orderRequest.getScheduleId());
-                    Orders orders = orderRequest.toOrders(users.get(), paymentMethods.get(), (Set<Schedules>) allSchedules);
+                    Orders orders = orderRequest.toOrders(users.get(), paymentMethods.get());
                     try {
+                        Float totalPrice = 0f;
+                        List<UUID> allSchedulesId = new ArrayList<>();
+                        List<Schedules> allSchedules = new ArrayList<>();
+                        for (UUID schedulesId: orderRequest.getScheduleId()) {
+                            Optional<Schedules> schedules = scheduleRepository.findById(schedulesId);
+                            if(schedules.isPresent())
+                            {
+                                allSchedulesId.add(schedules.get().getScheduleId());
+                                allSchedules.add(schedules.get());
+                                totalPrice += schedules.get().getPrice();
+                            }
+                        }
+                        orders.setTotalTicket(allSchedulesId.size());
+                        orders.setTotalPrice(totalPrice);
+                        orders.setScheduleOrders(allSchedules);
                         orderRepository.save(orders);
-                        return OrderResponse.build(orders, orderRequest.getScheduleId());
+                        return OrderResponse.build(orders, allSchedulesId);
                     }
                     catch(Exception exception)
                     {
@@ -63,18 +78,40 @@ public class OrderServiceImpl implements OrderService {
         if (isOrders.isPresent())
         {
             Orders orders = isOrders.get();
-            orders.setTotalTicket(orderRequest.getTotalTicket());
-            orders.setTotalPrice(orderRequest.getTotalPrice());
-            orders.setPnrCode(orderRequest.getPnrCode());
-            orders.setStatus(orderRequest.getStatus());
+
+            if(orderRequest.getStatus().equals("ACCEPT")
+                    && orders.getPnrCode() == null)
+            {
+                orders.setStatus(orderRequest.getStatus());
+                orders.setPnrCode(PNRGenerator.generatePNR());
+            }
+            else
+                orders.setStatus(orderRequest.getStatus());
+
             orders.getScheduleOrders().clear();
-            List<Schedules> allSchedules = scheduleRepository.findAllById(orderRequest.getScheduleId());
-            orders.setScheduleOrders((Set<Schedules>) allSchedules);
+
+            Float totalPrice = 0f;
+            List<UUID> allSchedulesId = new ArrayList<>();
+            List<Schedules> allSchedules = new ArrayList<>();
+            for (UUID schedulesId: orderRequest.getScheduleId()) {
+                Optional<Schedules> schedules = scheduleRepository.findById(schedulesId);
+                if(schedules.isPresent())
+                {
+                    allSchedulesId.add(schedules.get().getScheduleId());
+                    allSchedules.add(schedules.get());
+                    totalPrice += schedules.get().getPrice();
+                }
+            }
+            orders.setTotalTicket(allSchedulesId.size());
+            orders.setTotalPrice(totalPrice);
+            orders.setScheduleOrders(allSchedules);
+
             Optional<Users> users = userRepository.findById(orderRequest.getUserId());
             if (users.isPresent())
                 orders.setUsersOrder(users.get());
             else
                 message = "User with this id doesnt exist";
+
             Optional<PaymentMethods> paymentMethods = paymentMethodRepository.findById(orderRequest.getPaymentId());
             if (paymentMethods.isPresent())
                 orders.setPaymentMethodsOrder(paymentMethods.get());
@@ -114,13 +151,14 @@ public class OrderServiceImpl implements OrderService {
         List<OrderResponse> allOrderResponse = new ArrayList<>();
         for (Orders orders : allOrder)
         {
-            Set<Schedules> schedules = orders.getScheduleOrders();
-            List<UUID> schedulesId = null;
+            List<Schedules> schedules = orders.getScheduleOrders();
+            List<UUID> schedulesId = new ArrayList<>();
 
             for (Schedules schedule : schedules) {
                 assert false;
                 schedulesId.add(schedule.getScheduleId());
             }
+
             OrderResponse orderResponse = OrderResponse.build(orders, schedulesId);
             allOrderResponse.add(orderResponse);
         }
