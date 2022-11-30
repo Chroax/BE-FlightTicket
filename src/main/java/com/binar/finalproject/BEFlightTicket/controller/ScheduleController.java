@@ -112,4 +112,116 @@ public class ScheduleController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}")
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicket(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketSchedule(departureAirport, arrivalAirport, departureDate);
+            messageModel.setMessage("Success get schedule");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(scheduleResponses);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get schedule");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-lower-price")
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLowerPrice(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLowerPrice(departureAirport, arrivalAirport, departureDate);
+            messageModel.setMessage("Success get schedule");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(scheduleResponses);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get schedule");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-higher-price")
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByHigherPrice(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByHigherPrice(departureAirport, arrivalAirport, departureDate);
+            messageModel.setMessage("Success get schedule");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(scheduleResponses);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get schedule");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-earliest-departure")
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByEarliestDepartureTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByEarliestDepartureTime(departureAirport, arrivalAirport, departureDate);
+            messageModel.setMessage("Success get schedule");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(scheduleResponses);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get schedule");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-latest-departure")
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLatestDepartureTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLatestDepartureTime(departureAirport, arrivalAirport, departureDate);
+            messageModel.setMessage("Success get schedule");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(scheduleResponses);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get schedule");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-earliest-arrival")
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByEarliestArrivalTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByEarliestArrivalTime(departureAirport, arrivalAirport, departureDate);
+            messageModel.setMessage("Success get schedule");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(scheduleResponses);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get schedule");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-latest-arrival")
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLatestArrivalTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLatestArrivalTime(departureAirport, arrivalAirport, departureDate);
+            messageModel.setMessage("Success get schedule");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(scheduleResponses);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get schedule");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
 }

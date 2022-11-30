@@ -38,13 +38,12 @@ public class SeatController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
-
     @GetMapping("/number/{seatNumber}")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getSeatByNumber(@PathVariable String seatNumber){
         MessageModel messageModel = new MessageModel();
         try {
-            SeatResponse seatGet = seatService.searchSeatBySeatNumber(seatNumber);
+            SeatResponse seatGet = seatService.searchSeatById(seatId);
             messageModel.setMessage("Success get seat");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(seatGet);
@@ -99,7 +98,7 @@ public class SeatController {
     public ResponseEntity<MessageModel> updateSeat(@PathVariable String seatNumber, @RequestBody SeatRequest seatRequest)
     {
         MessageModel messageModel = new MessageModel();
-        SeatResponse seatResponse = seatService.updateSeat(seatRequest, seatNumber);
+        SeatResponse seatResponse = seatService.updateSeat(seatRequest, seatId);
 
         if(seatResponse == null)
         {

@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface SeatService {
     SeatResponse addSeat(SeatRequest seatRequest);
-    SeatResponse searchSeatBySeatNumber(String seatNumber);
+    SeatResponse searchSeatById(Integer seatId);
     List<SeatResponse> getAllSeat();
-    SeatResponse updateSeat(SeatRequest seatRequest, String seatNumber);
+    SeatResponse updateSeat(SeatRequest seatRequest, Integer seatId);
     List<SeatResponse> searchAirplaneSeat(String airplaneName);
 }
