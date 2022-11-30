@@ -1,6 +1,6 @@
 package com.binar.finalproject.BEFlightTicket.dto;
 
-import com.binar.finalproject.BEFlightTicket.model.IDCard;
+import com.binar.finalproject.BEFlightTicket.model.IdCard;
 import lombok.Builder;
 import lombok.Data;
 
@@ -15,7 +15,7 @@ public class IdCardResponse {
     private String countryCode;
     private UUID travelerId;
 
-    public static IdCardResponse build(IDCard idCard) {
+    public static IdCardResponse build(IdCard idCard) {
         return IdCardResponse.builder()
                 .idCardNumber(idCard.getIdCardNumber())
                 .idCardExpiry(idCard.getIdCardExpiry())

@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "id_card")
-public class IDCard {
+public class IdCard {
     @Id
     @Column(name = "id_card_number", columnDefinition = "CHAR(50)")
     private String idCardNumber;
@@ -36,7 +36,7 @@ public class IDCard {
     @UpdateTimestamp
     private LocalDateTime modifiedAt;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="traveler_id", nullable = false)
     private TravelerList travelerListIDCard;
 

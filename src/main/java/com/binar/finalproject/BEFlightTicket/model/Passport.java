@@ -35,7 +35,7 @@ public class Passport {
     @UpdateTimestamp
     private LocalDateTime modifiedAt;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="traveler_id", nullable = false)
     private TravelerList travelerListPassport;
 

@@ -1,7 +1,7 @@
 package com.binar.finalproject.BEFlightTicket.dto;
 
 import com.binar.finalproject.BEFlightTicket.model.Countries;
-import com.binar.finalproject.BEFlightTicket.model.IDCard;
+import com.binar.finalproject.BEFlightTicket.model.IdCard;
 import com.binar.finalproject.BEFlightTicket.model.TravelerList;
 import lombok.Data;
 
@@ -20,8 +20,8 @@ public class IdCardRequest {
     @NotEmpty(message = "travelerId is required.")
     private UUID travelerId;
 
-    public IDCard toIDCard(Countries countries, TravelerList travelerList) {
-        return IDCard.builder()
+    public IdCard toIDCard(Countries countries, TravelerList travelerList) {
+        return IdCard.builder()
                 .idCardNumber(this.idCardNumber)
                 .idCardExpiry(this.idCardExpiry)
                 .countriesIDCard(countries)
