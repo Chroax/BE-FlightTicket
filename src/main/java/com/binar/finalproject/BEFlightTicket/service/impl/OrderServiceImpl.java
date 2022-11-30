@@ -1,13 +1,11 @@
 package com.binar.finalproject.BEFlightTicket.service.impl;
 
 import com.binar.finalproject.BEFlightTicket.config.PNRGenerator;
+import com.binar.finalproject.BEFlightTicket.dto.OrderDetailResponse;
 import com.binar.finalproject.BEFlightTicket.dto.OrderRequest;
 import com.binar.finalproject.BEFlightTicket.dto.OrderResponse;
 import com.binar.finalproject.BEFlightTicket.model.*;
-import com.binar.finalproject.BEFlightTicket.repository.OrderRepository;
-import com.binar.finalproject.BEFlightTicket.repository.PaymentMethodRepository;
-import com.binar.finalproject.BEFlightTicket.repository.ScheduleRepository;
-import com.binar.finalproject.BEFlightTicket.repository.UserRepository;
+import com.binar.finalproject.BEFlightTicket.repository.*;
 import com.binar.finalproject.BEFlightTicket.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +22,8 @@ public class OrderServiceImpl implements OrderService {
     private UserRepository userRepository;
     @Autowired
     private PaymentMethodRepository paymentMethodRepository;
+    @Autowired
+    private AirportsRepository airportsRepository;
 
     @Override
     public OrderResponse addOrder(OrderRequest orderRequest) {
@@ -48,6 +48,8 @@ public class OrderServiceImpl implements OrderService {
                                 allSchedules.add(schedules.get());
                                 totalPrice += schedules.get().getPrice();
                             }
+                            else
+                                return null;
                         }
                         orders.setTotalTicket(allSchedulesId.size());
                         orders.setTotalPrice(totalPrice);
@@ -93,6 +95,7 @@ public class OrderServiceImpl implements OrderService {
             Float totalPrice = 0f;
             List<UUID> allSchedulesId = new ArrayList<>();
             List<Schedules> allSchedules = new ArrayList<>();
+
             for (UUID schedulesId: orderRequest.getScheduleId()) {
                 Optional<Schedules> schedules = scheduleRepository.findById(schedulesId);
                 if(schedules.isPresent())
@@ -101,7 +104,10 @@ public class OrderServiceImpl implements OrderService {
                     allSchedules.add(schedules.get());
                     totalPrice += schedules.get().getPrice();
                 }
+                else
+                    return null;
             }
+
             orders.setTotalTicket(allSchedulesId.size());
             orders.setTotalPrice(totalPrice);
             orders.setScheduleOrders(allSchedules);
@@ -132,22 +138,52 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderResponse> getAllOrder() {
         List<Orders> allOrder = orderRepository.findAll();
-        return listToOrderResponses(allOrder);
+        return orderToOrderResponseList(allOrder);
     }
 
     @Override
     public List<OrderResponse> getAllOrderByUserId(UUID userId) {
         List<Orders> allOrder = orderRepository.findAllOrderByUserId(userId);
-        return listToOrderResponses(allOrder);
+        return orderToOrderResponseList(allOrder);
+    }
+
+    @Override
+    public List<OrderResponse> getAllOrderByUserIdAndStatus(UUID userId, String status) {
+        List<Orders> allOrder = orderRepository.findHistoryByStatus(userId, status);
+        return orderToOrderResponseList(allOrder);
     }
 
     @Override
     public List<OrderResponse> getAllOrderByPaymentId(Integer paymentId) {
         List<Orders> allOrder = orderRepository.findAllOrderByPaymentId(paymentId);
-        return listToOrderResponses(allOrder);
+        return orderToOrderResponseList(allOrder);
     }
 
-    private List<OrderResponse> listToOrderResponses(List<Orders> allOrder) {
+    @Override
+    public List<OrderDetailResponse> getOrderDetails(UUID orderId) {
+        Optional<Orders> isOrders = orderRepository.findById(orderId);
+        if(isOrders.isPresent())
+        {
+            Orders orders = isOrders.get();
+            List<Schedules> allSchedules = orders.getScheduleOrders();
+            List<OrderDetailResponse> orderDetailResponses = new ArrayList<>();
+            for (Schedules schedules : allSchedules) {
+                Routes routes = schedules.getRoutesSchedules();
+                Airplanes airplanes = schedules.getAirplanesSchedules();
+                Airports departureAirports = airportsRepository.findByAirportName(routes.getDepartureAirport());
+                Airports arrivalAirports = airportsRepository.findByAirportName(routes.getArrivalAirport());
+                Optional<PaymentMethods> paymentMethods = paymentMethodRepository.findById(orders.getPaymentMethodsOrder().getPaymentId());
+                orderDetailResponses.add(OrderDetailResponse.build(orders,
+                        airplanes, departureAirports, arrivalAirports, routes, schedules, paymentMethods.get()));
+            }
+            return orderDetailResponses;
+        }
+        else
+            return null;
+    }
+
+    private List<OrderResponse> orderToOrderResponseList(List<Orders> allOrder)
+    {
         List<OrderResponse> allOrderResponse = new ArrayList<>();
         for (Orders orders : allOrder)
         {
@@ -164,4 +200,5 @@ public class OrderServiceImpl implements OrderService {
         }
         return allOrderResponse;
     }
+
 }
