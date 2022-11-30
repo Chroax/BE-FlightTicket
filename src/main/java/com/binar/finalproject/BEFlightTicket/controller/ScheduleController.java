@@ -156,4 +156,20 @@ public class ScheduleController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-earliest-departure")
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByEarliestDepartureTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByEarliestDepartureTime(departureAirport, arrivalAirport, departureDate);
+            messageModel.setMessage("Success get schedule");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(scheduleResponses);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get schedule");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
 }
