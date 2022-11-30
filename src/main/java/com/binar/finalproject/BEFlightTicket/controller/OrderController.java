@@ -114,4 +114,38 @@ public class OrderController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+
+    @GetMapping("/id/{orderId}")
+    public ResponseEntity<MessageModel> getPaymentOrders(@PathVariable UUID orderId){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<OrderDetailResponse> orderResponses = orderService.getOrderDetails(orderId);
+            messageModel.setMessage("Success get order detail by id : " + orderId);
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(orderResponses);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get order detail by order id, " + orderId + " not found");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+
+    @GetMapping("/get-all/user/{userId}/status/{status}")
+    public ResponseEntity<MessageModel> getPaymentOrders(@PathVariable UUID userId, @PathVariable String status){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<OrderResponse> orderResponses = orderService.getAllOrderByUserIdAndStatus(userId, status);
+            messageModel.setMessage("Success get all order by user id : " + userId);
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(orderResponses);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get all order by user id, " + userId + " not found");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
 }
