@@ -140,7 +140,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         List<Schedules> allSchedule = scheduleRepository.searchScheduleTicketOrderByLowerPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
         List<Routes> allRoute = routeRepository.searchRouteTicketOrderByLowerPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
         List<Airplanes> allAirplane = airplanesRepository.searchAirplaneTicketOrderByLowerPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
-        List<SearchScheduleResponse> allSearchScheduleResponse = new ArrayList<>();
+        List<SearchScheduleResponse> orderByLowerPrice = new ArrayList<>();
         for (Schedules schedules : allSchedule)
         {
             for (Routes routes : allRoute)
@@ -148,14 +148,37 @@ public class ScheduleServiceImpl implements ScheduleService {
                 for (Airplanes airplanes : allAirplane)
                 {
                     SearchScheduleResponse searchScheduleResponse = SearchScheduleResponse.build(schedules, routes, airplanes);
-                    allSearchScheduleResponse.add(searchScheduleResponse);
+                    orderByLowerPrice.add(searchScheduleResponse);
                     break;
                 }
                 break;
             }
 
         }
-        return allSearchScheduleResponse;
+        return orderByLowerPrice;
+    }
+
+    @Override
+    public List<SearchScheduleResponse> searchAirplaneTicketOrderByHigherPrice(String arrivalAirport, String departureAirport, String departureDate) {
+        List<Schedules> allSchedule = scheduleRepository.searchScheduleTicketOrderByHigherPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
+        List<Routes> allRoute = routeRepository.searchRouteTicketOrderByHigherPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
+        List<Airplanes> allAirplane = airplanesRepository.searchAirplaneTicketOrderByHigherPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
+        List<SearchScheduleResponse> orderByHigherPrice = new ArrayList<>();
+        for (Schedules schedules : allSchedule)
+        {
+            for (Routes routes : allRoute)
+            {
+                for (Airplanes airplanes : allAirplane)
+                {
+                    SearchScheduleResponse searchScheduleResponse = SearchScheduleResponse.build(schedules, routes, airplanes);
+                    orderByHigherPrice.add(searchScheduleResponse);
+                    break;
+                }
+                break;
+            }
+
+        }
+        return orderByHigherPrice;
     }
 
     private List<ScheduleResponse> toListScheduleResponse(List<Schedules> allSchedule) {
