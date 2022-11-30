@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -45,7 +44,7 @@ public class PassportController {
     public ResponseEntity<MessageModel> getTravelerPassport(@PathVariable UUID travelerId){
         MessageModel messageModel = new MessageModel();
         try {
-            List<PassportResponse> passportResponse = passportService.searchTravelerListPassport(travelerId);
+            PassportResponse passportResponse = passportService.searchTravelerListPassport(travelerId);
             messageModel.setMessage("Success get passport by traveler id : " + travelerId);
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(passportResponse);
@@ -58,12 +57,12 @@ public class PassportController {
         }
     }
 
-    @GetMapping("/get/{passportNumber}")
     @PreAuthorize("hasAnyRole('BUYER')")
-    public ResponseEntity<MessageModel> getPassport(@PathVariable String passportNumber){
+    @GetMapping("/get/{passportId}")
+    public ResponseEntity<MessageModel> getPassport(@PathVariable UUID passportId){
         MessageModel messageModel = new MessageModel();
         try {
-            PassportResponse passportResponse = passportService.searchPassport(passportNumber);
+            PassportResponse passportResponse = passportService.searchPassport(passportId);
             messageModel.setMessage("Success get passport");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(passportResponse);
@@ -76,22 +75,22 @@ public class PassportController {
         }
     }
 
-    @PutMapping("/update/{passportNumber}")
+    @PutMapping("/update/{passportId}")
     @PreAuthorize("hasAnyRole('BUYER')")
-    public ResponseEntity<MessageModel> updatePassport(@PathVariable String passportNumber, @RequestBody PassportRequest passportRequest) {
+    public ResponseEntity<MessageModel> updatePassport(@PathVariable UUID passportId, @RequestBody PassportRequest passportRequest) {
         MessageModel messageModel = new MessageModel();
-        PassportResponse passportResponse = passportService.updatePassport(passportRequest, passportNumber);
+        PassportResponse passportResponse = passportService.updatePassport(passportRequest, passportId);
 
         if(passportResponse == null)
         {
             messageModel.setStatus(HttpStatus.CONFLICT.value());
-            messageModel.setMessage("Failed update passport with number : " + passportNumber);
+            messageModel.setMessage("Failed update passport with id : " + passportId);
             return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(messageModel);
         }
         else
         {
             messageModel.setStatus(HttpStatus.OK.value());
-            messageModel.setMessage("Success update passport with number : " + passportNumber);
+            messageModel.setMessage("Success update passport with id : " + passportId);
             messageModel.setData(passportResponse);
             return ResponseEntity.ok().body(messageModel);
         }

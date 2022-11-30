@@ -11,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -18,8 +19,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "id_card")
-public class IDCard {
+public class IdCard {
     @Id
+    @GeneratedValue
+    @Column(name = "id_card_id")
+    private UUID idCardId;
+
     @Column(name = "id_card_number", columnDefinition = "CHAR(50)")
     private String idCardNumber;
 
@@ -36,11 +41,11 @@ public class IDCard {
     @UpdateTimestamp
     private LocalDateTime modifiedAt;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="traveler_id", nullable = false)
-    private TravelerList travelerListIDCard;
+    private TravelerList travelerListIdCard;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="id_card_country", nullable = false)
-    private Countries countriesIDCard;
+    private Countries countriesIdCard;
 }

@@ -39,6 +39,27 @@ public class TravelerListController {
         }
     }
 
+    @PostMapping("/add/from-order")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<MessageModel> registerTravelerListFromOrder(@RequestBody List<TravelerListDetailRequest> travelerListDetailRequest) {
+        MessageModel messageModel = new MessageModel();
+
+        List<TravelerListDetailResponse> travelerListDetailResponse = travelerListService.registerTravelerListFromOrder(travelerListDetailRequest);
+        if(travelerListDetailResponse == null)
+        {
+            messageModel.setMessage("Failed register new traveler list from order");
+            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
+            return ResponseEntity.badRequest().body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Register new traveler list from order");
+            messageModel.setData(travelerListDetailResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }
+    }
+
     @GetMapping("/get-all/user/{userId}")
     @PreAuthorize("hasAnyRole('BUYER')")
     public ResponseEntity<MessageModel> getAllUserTravelerList(@PathVariable UUID userId){

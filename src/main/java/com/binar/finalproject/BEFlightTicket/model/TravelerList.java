@@ -58,11 +58,11 @@ public class TravelerList {
     @JoinColumn(name="nationality", nullable = false)
     private Countries countriesTravelerList;
 
-    @OneToMany(mappedBy = "travelerListPassport", cascade = CascadeType.ALL)
-    private Set<Passport> passports;
+    @OneToOne(mappedBy = "travelerListPassport", cascade = CascadeType.ALL)
+    private Passport passport;
 
-    @OneToMany(mappedBy = "travelerListIDCard", cascade = CascadeType.ALL)
-    private Set<IDCard> idCards;
+    @OneToOne(mappedBy = "travelerListIdCard", cascade = CascadeType.ALL)
+    private IdCard idCard;
 
     @OneToMany(mappedBy = "travelerListTicket", cascade = CascadeType.ALL)
     private Set<Tickets> tickets;
