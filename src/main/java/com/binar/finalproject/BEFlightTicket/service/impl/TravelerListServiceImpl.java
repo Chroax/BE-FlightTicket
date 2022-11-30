@@ -1,14 +1,8 @@
 package com.binar.finalproject.BEFlightTicket.service.impl;
 
-import com.binar.finalproject.BEFlightTicket.dto.TravelerListRequest;
-import com.binar.finalproject.BEFlightTicket.dto.TravelerListResponse;
-import com.binar.finalproject.BEFlightTicket.dto.TravelerListUpdateRequest;
-import com.binar.finalproject.BEFlightTicket.model.Countries;
-import com.binar.finalproject.BEFlightTicket.model.TravelerList;
-import com.binar.finalproject.BEFlightTicket.model.Users;
-import com.binar.finalproject.BEFlightTicket.repository.TravelerListRepository;
-import com.binar.finalproject.BEFlightTicket.repository.UserRepository;
-import com.binar.finalproject.BEFlightTicket.repository.CountriesRepository;
+import com.binar.finalproject.BEFlightTicket.dto.*;
+import com.binar.finalproject.BEFlightTicket.model.*;
+import com.binar.finalproject.BEFlightTicket.repository.*;
 import com.binar.finalproject.BEFlightTicket.service.TravelerListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,18 +20,22 @@ public class TravelerListServiceImpl implements TravelerListService {
     UserRepository userRepository;
     @Autowired
     CountriesRepository countriesRepository;
+    @Autowired
+    PassportRepository passportRepository;
+    @Autowired
+    IdCardRepository idCardRepository;
 
     @Override
-    public TravelerListResponse registerTravelerList(TravelerListRequest userRequest) {
+    public TravelerListResponse registerTravelerList(TravelerListRequest travelerListRequest) {
         try{
-            Optional<Users> users = userRepository.findById(userRequest.getUserId());
-            Optional<Countries> countries = countriesRepository.findById(userRequest.getCountryCode());
+            Optional<Users> users = userRepository.findById(travelerListRequest.getUserId());
+            Optional<Countries> countries = countriesRepository.findById(travelerListRequest.getCountryCode());
 
             if(users.isPresent())
             {
                 if(countries.isPresent())
                 {
-                    TravelerList travelerList = userRequest.toTravelerList(users.get(), countries.get());
+                    TravelerList travelerList = travelerListRequest.toTravelerList(users.get(), countries.get());
 
                     try {
                         travelerListRepository.save(travelerList);
@@ -109,5 +107,60 @@ public class TravelerListServiceImpl implements TravelerListService {
             }
         } else
             return null;
+    }
+
+    @Override
+    public List<TravelerListDetailResponse> registerTravelerListFromOrder(List<TravelerListDetailRequest> listTravelerListDetailRequest) {
+        List<TravelerListDetailResponse> allTravelerListDetailResponse = new ArrayList<>();
+        for (TravelerListDetailRequest travelerListDetailRequest: listTravelerListDetailRequest) {
+            TravelerList travelerList = new TravelerList();
+            travelerList.setFirstName(travelerListDetailRequest.getFirstName());
+            travelerList.setLastName(travelerListDetailRequest.getLastName());
+            travelerList.setType(travelerListDetailRequest.getType());
+            travelerList.setTitle(travelerListDetailRequest.getTitle());
+            travelerList.setBirthDate(travelerListDetailRequest.getBirthDate());
+
+            Optional<Users> users = userRepository.findById(travelerListDetailRequest.getUserId());
+            if(users.isPresent())
+                travelerList.setUsersTravelerList(users.get());
+            else
+                return null;
+
+            Countries countries = countriesRepository.findByCountriesName(travelerListDetailRequest.getNationality());
+            if(countries != null)
+                travelerList.setCountriesTravelerList(countries);
+            else
+                return null;
+
+            travelerListRepository.save(travelerList);
+
+            Passport passport = new Passport();
+            passport.setPassportNumber(travelerListDetailRequest.getPassportNumber());
+            passport.setPassportExpiry(travelerListDetailRequest.getPassportExpiry());
+            Countries countriesPassport = countriesRepository.findByCountriesName(travelerListDetailRequest.getPassportCardCountry());
+
+            if(countriesPassport != null)
+                passport.setCountriesPassport(countriesPassport);
+            else
+                return null;
+
+            passport.setTravelerListPassport(travelerList);
+            passportRepository.save(passport);
+
+            IdCard idCard = new IdCard();
+            idCard.setIdCardNumber(travelerListDetailRequest.getIdCardNumber());
+            idCard.setIdCardExpiry(travelerListDetailRequest.getIdCardExpiry());
+            Countries countriesIdCard = countriesRepository.findByCountriesName(travelerListDetailRequest.getIdCardCountry());
+            if(countriesIdCard != null)
+                idCard.setCountriesIdCard(countriesIdCard);
+            else
+                return null;
+
+            idCard.setTravelerListIdCard(travelerList);
+            idCardRepository.save(idCard);
+
+            allTravelerListDetailResponse.add(TravelerListDetailResponse.build(travelerList, idCard, passport));
+        }
+        return allTravelerListDetailResponse;
     }
 }
