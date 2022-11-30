@@ -135,6 +135,29 @@ public class ScheduleServiceImpl implements ScheduleService {
         return toListScheduleResponse(allSchedule);
     }
 
+    @Override
+    public List<SearchScheduleResponse> searchAirplaneTicketOrderByLowerPrice(String arrivalAirport, String departureAirport, String departureDate) {
+        List<Schedules> allSchedule = scheduleRepository.searchScheduleTicketOrderByLowerPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
+        List<Routes> allRoute = routeRepository.searchRouteTicketOrderByLowerPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
+        List<Airplanes> allAirplane = airplanesRepository.searchAirplaneTicketOrderByLowerPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
+        List<SearchScheduleResponse> allSearchScheduleResponse = new ArrayList<>();
+        for (Schedules schedules : allSchedule)
+        {
+            for (Routes routes : allRoute)
+            {
+                for (Airplanes airplanes : allAirplane)
+                {
+                    SearchScheduleResponse searchScheduleResponse = SearchScheduleResponse.build(schedules, routes, airplanes);
+                    allSearchScheduleResponse.add(searchScheduleResponse);
+                    break;
+                }
+                break;
+            }
+
+        }
+        return allSearchScheduleResponse;
+    }
+
     private List<ScheduleResponse> toListScheduleResponse(List<Schedules> allSchedule) {
         List<ScheduleResponse> allScheduleResponse = new ArrayList<>();
         for (Schedules schedules : allSchedule)
