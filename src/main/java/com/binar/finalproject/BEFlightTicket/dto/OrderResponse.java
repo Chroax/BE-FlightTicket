@@ -12,6 +12,7 @@ import java.util.UUID;
 @Builder
 public class OrderResponse {
     private UUID orderId;
+    private String status;
     private Integer totalTicket;
     private Float totalPrice;
     private String pnrCode;
@@ -23,6 +24,7 @@ public class OrderResponse {
     {
         return OrderResponse.builder()
                 .orderId(orders.getOrderId())
+                .status(orders.getStatus())
                 .totalTicket(orders.getTotalTicket())
                 .totalPrice(orders.getTotalPrice())
                 .pnrCode(orders.getPnrCode())
