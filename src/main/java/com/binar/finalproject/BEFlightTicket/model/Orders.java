@@ -1,19 +1,16 @@
 package com.binar.finalproject.BEFlightTicket.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -58,7 +55,7 @@ public class Orders {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "schedule_orders",
-            joinColumns = @JoinColumn(name = "orderId"),
-            inverseJoinColumns = @JoinColumn(name = "scheduleId"))
-    private Set<Schedules> scheduleOrders;
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "schedule_id"))
+    private List<Schedules> scheduleOrders;
 }

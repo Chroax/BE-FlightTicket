@@ -36,7 +36,7 @@ public class OrderController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
-    
+
     @PutMapping("/update/{orderId}")
     public ResponseEntity<MessageModel> updateOrder(@PathVariable UUID orderId, @RequestBody OrderRequest orderRequest) {
         MessageModel messageModel = new MessageModel();
