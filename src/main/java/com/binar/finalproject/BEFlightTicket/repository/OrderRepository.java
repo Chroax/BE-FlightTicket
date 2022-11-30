@@ -15,6 +15,6 @@ public interface OrderRepository extends JpaRepository<Orders, UUID> {
     List<Orders> findAllOrderByUserId(@Param("userId") UUID userId);
     @Query(nativeQuery = true, value = "SELECT * FROM orders o where o.payment_id = :paymentId")
     List<Orders> findAllOrderByPaymentId(@Param("paymentId") Integer paymentId);
-    @Query(nativeQuery = true, value = "SELECT * FROM orders o where o.status = :status and o.userId = :userId")
+    @Query(nativeQuery = true, value = "SELECT * FROM orders o where o.status = :status and o.user_id = :userId")
     List<Orders> findHistoryByStatus(@Param("userId") UUID userId, @Param("status") String status);
 }
