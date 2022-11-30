@@ -48,6 +48,8 @@ public class OrderServiceImpl implements OrderService {
                                 allSchedules.add(schedules.get());
                                 totalPrice += schedules.get().getPrice();
                             }
+                            else
+                                return null;
                         }
                         orders.setTotalTicket(allSchedulesId.size());
                         orders.setTotalPrice(totalPrice);
@@ -93,6 +95,7 @@ public class OrderServiceImpl implements OrderService {
             Float totalPrice = 0f;
             List<UUID> allSchedulesId = new ArrayList<>();
             List<Schedules> allSchedules = new ArrayList<>();
+
             for (UUID schedulesId: orderRequest.getScheduleId()) {
                 Optional<Schedules> schedules = scheduleRepository.findById(schedulesId);
                 if(schedules.isPresent())
@@ -101,7 +104,10 @@ public class OrderServiceImpl implements OrderService {
                     allSchedules.add(schedules.get());
                     totalPrice += schedules.get().getPrice();
                 }
+                else
+                    return null;
             }
+
             orders.setTotalTicket(allSchedulesId.size());
             orders.setTotalPrice(totalPrice);
             orders.setScheduleOrders(allSchedules);
@@ -166,9 +172,9 @@ public class OrderServiceImpl implements OrderService {
                 Airplanes airplanes = schedules.getAirplanesSchedules();
                 Airports departureAirports = airportsRepository.findByAirportName(routes.getDepartureAirport());
                 Airports arrivalAirports = airportsRepository.findByAirportName(routes.getArrivalAirport());
-                
+                Optional<PaymentMethods> paymentMethods = paymentMethodRepository.findById(orders.getPaymentMethodsOrder().getPaymentId());
                 orderDetailResponses.add(OrderDetailResponse.build(orders,
-                        airplanes, departureAirports, arrivalAirports, routes, schedules));
+                        airplanes, departureAirports, arrivalAirports, routes, schedules, paymentMethods.get()));
             }
             return orderDetailResponses;
         }
