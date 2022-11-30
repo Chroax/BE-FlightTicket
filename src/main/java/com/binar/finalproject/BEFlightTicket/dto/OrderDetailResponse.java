@@ -8,7 +8,6 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -21,7 +20,7 @@ public class OrderDetailResponse {
     private Float totalPrice;
     private String pnrCode;
 
-    @JsonProperty("Order_Date")
+    @JsonProperty("orderDate")
     private LocalDateTime createdAt;
 
     private String airplaneName;
@@ -35,15 +34,16 @@ public class OrderDetailResponse {
     private LocalDate departureDate;
     private LocalTime departureTime;
 
-    private TravelerListResponse travelerListResponses;
+    private String paymentName;
+    private String paymentType;
 
     public static OrderDetailResponse build(Orders orders, Airplanes airplanes, Airports departureAirport,
-                                            Airports arrivalAirport, Routes routes, Schedules schedules)
+                                            Airports arrivalAirport, Routes routes, Schedules schedules, PaymentMethods paymentMethods)
     {
         return OrderDetailResponse.builder()
                 .orderId(orders.getOrderId())
                 .status(orders.getStatus())
-                .totalPrice(orders.getTotalPrice())
+                .totalPrice(schedules.getPrice())
                 .pnrCode(orders.getPnrCode())
                 .createdAt(orders.getCreatedAt())
                 .airplaneName(airplanes.getAirplaneName())
@@ -54,6 +54,8 @@ public class OrderDetailResponse {
                 .departureTerminal(routes.getDepartureTerminal())
                 .departureDate(schedules.getDepartureDate())
                 .departureTime(schedules.getDepartureTime())
+                .paymentName(paymentMethods.getPaymentName())
+                .paymentType(paymentMethods.getPaymentType())
                 .build();
     }
 }
