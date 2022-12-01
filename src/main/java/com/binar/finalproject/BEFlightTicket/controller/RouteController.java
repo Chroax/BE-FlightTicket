@@ -43,7 +43,7 @@ public class RouteController {
     }
 
     @GetMapping("/get-all/city/{departureCity}/{arrivalCity}")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getRouteByDepartureAndArrivalCity(@PathVariable String departureCity,@PathVariable String arrivalCity){
         MessageModel messageModel = new MessageModel();
         try {
@@ -61,7 +61,7 @@ public class RouteController {
     }
 
     @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getRouteByDepartureAndArrivalAirport(@PathVariable String departureAirport,@PathVariable String arrivalAirport){
         MessageModel messageModel = new MessageModel();
         try {

@@ -18,7 +18,7 @@ public class TravelerListController {
     private TravelerListService travelerListService;
 
     @PostMapping("/add")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> registerTravelerList(@RequestBody TravelerListRequest travelerListRequest) {
         MessageModel messageModel = new MessageModel();
@@ -40,6 +40,7 @@ public class TravelerListController {
     }
 
     @PostMapping("/add/from-order")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> registerTravelerListFromOrder(@RequestBody List<TravelerListDetailRequest> travelerListDetailRequest) {
         MessageModel messageModel = new MessageModel();
@@ -61,7 +62,7 @@ public class TravelerListController {
     }
 
     @GetMapping("/get-all/user/{userId}")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAllUserTravelerList(@PathVariable UUID userId){
         MessageModel messageModel = new MessageModel();
         try {
@@ -79,7 +80,7 @@ public class TravelerListController {
     }
 
     @GetMapping("/get-all")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAllTravelerList(){
         MessageModel messageModel = new MessageModel();
         try {
@@ -97,7 +98,7 @@ public class TravelerListController {
     }
 
     @PutMapping("/update/{travelerId}")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> updateUser(@PathVariable UUID travelerId, @RequestBody TravelerListUpdateRequest travelerListUpdateRequest) {
         MessageModel messageModel = new MessageModel();
         TravelerListResponse travelerListResponse = travelerListService.updateTravelerList(travelerListUpdateRequest, travelerId);

@@ -31,7 +31,6 @@ public class UserController {
     JwtUtils jwtUtils;
 
     @PostMapping("/sign-up")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> registerUser(@RequestBody UserRequest userRequest) {
         MessageModel messageModel = new MessageModel();
@@ -53,7 +52,6 @@ public class UserController {
     }
 
     @PostMapping("/sign-in")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> registerUser(@RequestBody LoginRequest loginRequest) {
         MessageModel messageModel = new MessageModel();
@@ -90,8 +88,8 @@ public class UserController {
     }
 
     @GetMapping("/name/{fullName}")
-    @PreAuthorize("hasAnyRole('BUYER')")
-    public ResponseEntity<MessageModel> getUserById(@PathVariable String fullName){
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
+    public ResponseEntity<MessageModel> getUserByfullName(@PathVariable String fullName){
         MessageModel messageModel = new MessageModel();
         try {
             UserResponse userGet = userService.searchUserByName(fullName);

@@ -61,6 +61,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/get-all/airplane/{airplaneName}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirplaneSchedule(@PathVariable String airplaneName){
         MessageModel messageModel = new MessageModel();
         try {
@@ -78,6 +79,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/get-all/route/{routeId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MessageModel> getRouteSchedule(@PathVariable UUID routeId){
         MessageModel messageModel = new MessageModel();
         try {
@@ -113,6 +115,7 @@ public class ScheduleController {
         }
     }
     @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirplaneScheduleTicket(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
         MessageModel messageModel = new MessageModel();
         try {
@@ -129,6 +132,7 @@ public class ScheduleController {
         }
     }
     @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-lower-price")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLowerPrice(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
         MessageModel messageModel = new MessageModel();
         try {
@@ -145,6 +149,7 @@ public class ScheduleController {
         }
     }
     @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-higher-price")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByHigherPrice(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
         MessageModel messageModel = new MessageModel();
         try {
@@ -161,6 +166,7 @@ public class ScheduleController {
         }
     }
     @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-earliest-departure")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByEarliestDepartureTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
         MessageModel messageModel = new MessageModel();
         try {
@@ -177,6 +183,7 @@ public class ScheduleController {
         }
     }
     @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-latest-departure")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLatestDepartureTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
         MessageModel messageModel = new MessageModel();
         try {
@@ -193,6 +200,7 @@ public class ScheduleController {
         }
     }
     @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-earliest-arrival")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByEarliestArrivalTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
         MessageModel messageModel = new MessageModel();
         try {
@@ -209,6 +217,7 @@ public class ScheduleController {
         }
     }
     @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-latest-arrival")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLatestArrivalTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
         MessageModel messageModel = new MessageModel();
         try {

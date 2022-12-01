@@ -43,7 +43,7 @@ public class AirplaneController {
 
     @GetMapping("/name/{airplaneName}")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getUserByName(@PathVariable String airplaneName){
+    public ResponseEntity<MessageModel> getAirplaneByName(@PathVariable String airplaneName){
         MessageModel messageModel = new MessageModel();
         try {
             AirplanesResponse airplaneGet = airplanesService.searchAirplaneByName(airplaneName);

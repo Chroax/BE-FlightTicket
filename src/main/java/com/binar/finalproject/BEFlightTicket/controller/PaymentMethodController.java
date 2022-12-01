@@ -17,7 +17,7 @@ public class PaymentMethodController {
     PaymentMethodService paymentMethodService;
 
     @PostMapping("/add")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> addPayment(@RequestBody PaymentMethodRequest paymentMethodRequest) {
         MessageModel messageModel = new MessageModel();
@@ -39,7 +39,7 @@ public class PaymentMethodController {
     }
 
     @GetMapping("/name/{paymentName}")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getPaymentByName(@PathVariable String paymentName){
         MessageModel messageModel = new MessageModel();
         try {
@@ -57,7 +57,7 @@ public class PaymentMethodController {
     }
 
     @GetMapping("/get-all")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAllPayment()
     {
         MessageModel messageModel = new MessageModel();
@@ -76,7 +76,7 @@ public class PaymentMethodController {
     }
 
     @PutMapping("/update/{paymentName}")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> updatePayment(@PathVariable String paymentName, @RequestBody PaymentMethodRequest paymentMethodRequest)
     {
         MessageModel messageModel = new MessageModel();
@@ -98,7 +98,7 @@ public class PaymentMethodController {
     }
 
     @DeleteMapping("/delete/{paymentName}")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> deletePayment(@PathVariable String paymentName)
     {
         MessageModel messageModel = new MessageModel();

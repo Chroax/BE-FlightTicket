@@ -18,7 +18,7 @@ public class PassportController {
     PassportService passportService;
 
     @PostMapping("/add")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> registerPassport(@RequestBody PassportRequest passportRequest) {
         MessageModel messageModel = new MessageModel();
@@ -40,7 +40,7 @@ public class PassportController {
     }
 
     @GetMapping("/get-all/traveler/{travelerId}")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getTravelerPassport(@PathVariable UUID travelerId){
         MessageModel messageModel = new MessageModel();
         try {
@@ -57,7 +57,7 @@ public class PassportController {
         }
     }
 
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @GetMapping("/get/{passportId}")
     public ResponseEntity<MessageModel> getPassport(@PathVariable UUID passportId){
         MessageModel messageModel = new MessageModel();
@@ -76,7 +76,7 @@ public class PassportController {
     }
 
     @PutMapping("/update/{passportId}")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> updatePassport(@PathVariable UUID passportId, @RequestBody PassportRequest passportRequest) {
         MessageModel messageModel = new MessageModel();
         PassportResponse passportResponse = passportService.updatePassport(passportRequest, passportId);

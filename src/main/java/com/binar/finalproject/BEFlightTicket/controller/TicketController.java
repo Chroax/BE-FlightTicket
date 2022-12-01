@@ -77,7 +77,7 @@ public class TicketController {
         }
     }
     @GetMapping("/get-by/{ticketId}")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getTicketById(@PathVariable UUID ticketId){
         MessageModel messageModel = new MessageModel();
         try {
@@ -94,7 +94,7 @@ public class TicketController {
         }
     }
     @GetMapping("/get-all/{orderId}")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getOrderTicket(@PathVariable UUID orderId){
         MessageModel messageModel = new MessageModel();
         try {

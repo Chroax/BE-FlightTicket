@@ -18,7 +18,7 @@ public class GatesController {
     private GatesService gatesService;
 
     @PostMapping("/add")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> createGates(@RequestBody GatesRequest gatesRequest) {
         MessageModel messageModel = new MessageModel();
@@ -38,7 +38,7 @@ public class GatesController {
     }
 
     @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<MessageModel> getAllGates() {
         MessageModel messageModel = new MessageModel();

@@ -18,7 +18,7 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping("/add")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> addOrder (@RequestBody OrderRequest orderRequest)
     {
@@ -40,7 +40,7 @@ public class OrderController {
     }
 
     @PutMapping("/update/{orderId}")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MessageModel> updateOrder(@PathVariable UUID orderId, @RequestBody OrderRequest orderRequest) {
         MessageModel messageModel = new MessageModel();
         OrderResponse orderResponse = orderService.updateOrder(orderRequest, orderId);
@@ -61,7 +61,7 @@ public class OrderController {
     }
 
     @GetMapping("/get-all")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MessageModel> getAllOrders()
     {
         MessageModel messageModel = new MessageModel();
@@ -80,7 +80,7 @@ public class OrderController {
     }
 
     @GetMapping("/get-all/user/{userId}")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getUserOrders(@PathVariable UUID userId){
         MessageModel messageModel = new MessageModel();
         try {
@@ -98,7 +98,7 @@ public class OrderController {
     }
 
     @GetMapping("/get-all/payment/{paymentId}")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MessageModel> getPaymentOrders(@PathVariable Integer paymentId){
         MessageModel messageModel = new MessageModel();
         try {
@@ -116,7 +116,8 @@ public class OrderController {
     }
 
     @GetMapping("/id/{orderId}")
-    public ResponseEntity<MessageModel> getPaymentOrders(@PathVariable UUID orderId){
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
+    public ResponseEntity<MessageModel> getOrdersDetail(@PathVariable UUID orderId){
         MessageModel messageModel = new MessageModel();
         try {
             List<OrderDetailResponse> orderResponses = orderService.getOrderDetails(orderId);
@@ -133,7 +134,8 @@ public class OrderController {
     }
 
     @GetMapping("/get-all/user/{userId}/status/{status}")
-    public ResponseEntity<MessageModel> getPaymentOrders(@PathVariable UUID userId, @PathVariable String status){
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
+    public ResponseEntity<MessageModel> getUserOrdersStatus(@PathVariable UUID userId, @PathVariable String status){
         MessageModel messageModel = new MessageModel();
         try {
             List<OrderResponse> orderResponses = orderService.getAllOrderByUserIdAndStatus(userId, status);

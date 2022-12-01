@@ -17,7 +17,7 @@ public class IdCardController {
     IdCardService idCardService;
 
     @PostMapping("/add")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> registerIdCard(@RequestBody IdCardRequest idCardRequest) {
         MessageModel messageModel = new MessageModel();
@@ -39,7 +39,7 @@ public class IdCardController {
     }
 
     @GetMapping("/get-all/traveler/{travelerId}")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getTravelerIdCard(@PathVariable UUID travelerId){
         MessageModel messageModel = new MessageModel();
         try {
@@ -57,8 +57,8 @@ public class IdCardController {
     }
 
 
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @GetMapping("/get/{idCardId}")
-    @PreAuthorize("hasAnyRole('BUYER')")
     public ResponseEntity<MessageModel> getIdCard(@PathVariable UUID idCardId){
         MessageModel messageModel = new MessageModel();
         try {
@@ -76,7 +76,7 @@ public class IdCardController {
     }
     
     @PutMapping("/update/{idCardId}")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> updateIdCard(@PathVariable UUID idCardId, @RequestBody IdCardRequest idCardRequest) {
         MessageModel messageModel = new MessageModel();
         IdCardResponse idCardResponse = idCardService.updateIdCard(idCardRequest, idCardId);

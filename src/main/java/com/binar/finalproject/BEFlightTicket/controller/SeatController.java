@@ -38,9 +38,9 @@ public class SeatController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
-    @GetMapping("/number/{seatNumber}")
+    @GetMapping("/id/{seatId}")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getSeatByNumber(@PathVariable String seatNumber){
+    public ResponseEntity<MessageModel> getSeatById(@PathVariable Integer seatId){
         MessageModel messageModel = new MessageModel();
         try {
             SeatResponse seatGet = seatService.searchSeatById(seatId);
@@ -57,7 +57,7 @@ public class SeatController {
     }
 
     @GetMapping("/get-all")
-    @PreAuthorize("hasAnyRole('BUYER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAllSeats()
     {
         MessageModel messageModel = new MessageModel();
@@ -93,9 +93,9 @@ public class SeatController {
         }
     }
 
-    @PutMapping(value = "/update/{seatNumber}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/update/{seatId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<MessageModel> updateSeat(@PathVariable String seatNumber, @RequestBody SeatRequest seatRequest)
+    public ResponseEntity<MessageModel> updateSeat(@PathVariable Integer seatId, @RequestBody SeatRequest seatRequest)
     {
         MessageModel messageModel = new MessageModel();
         SeatResponse seatResponse = seatService.updateSeat(seatRequest, seatId);
