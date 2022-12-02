@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class SeatController {
     private SeatService seatService;
 
     @PostMapping("/add")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> addSeat (@RequestBody SeatRequest seatRequest)
     {
@@ -37,6 +39,7 @@ public class SeatController {
         }
     }
     @GetMapping("/id/{seatId}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getSeatById(@PathVariable Integer seatId){
         MessageModel messageModel = new MessageModel();
         try {
@@ -54,6 +57,7 @@ public class SeatController {
     }
 
     @GetMapping("/get-all")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAllSeats()
     {
         MessageModel messageModel = new MessageModel();
@@ -72,6 +76,7 @@ public class SeatController {
     }
 
     @GetMapping("/get-all/airplane/{airplaneName}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirplaneSeat(@PathVariable String airplaneName){
         MessageModel messageModel = new MessageModel();
         try {
@@ -89,6 +94,7 @@ public class SeatController {
     }
 
     @PutMapping(value = "/update/{seatId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> updateSeat(@PathVariable Integer seatId, @RequestBody SeatRequest seatRequest)
     {
         MessageModel messageModel = new MessageModel();

@@ -5,6 +5,7 @@ import com.binar.finalproject.BEFlightTicket.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class ScheduleController {
     private ScheduleService scheduleService;
 
     @PostMapping("/add")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> addSchedule (@RequestBody ScheduleRequest scheduleRequest)
     {
@@ -38,6 +40,7 @@ public class ScheduleController {
     }
 
     @PutMapping("/update/{scheduleId}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> updateSchedule(@PathVariable UUID scheduleId, @RequestBody ScheduleRequest scheduleRequest) {
         MessageModel messageModel = new MessageModel();
         ScheduleResponse scheduleResponse = scheduleService.updateSchedule(scheduleRequest, scheduleId);
@@ -58,6 +61,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/get-all/airplane/{airplaneName}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirplaneSchedule(@PathVariable String airplaneName){
         MessageModel messageModel = new MessageModel();
         try {
@@ -75,6 +79,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/get-all/route/{routeId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MessageModel> getRouteSchedule(@PathVariable UUID routeId){
         MessageModel messageModel = new MessageModel();
         try {
@@ -92,6 +97,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/get-all")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAllSchedule()
     {
         MessageModel messageModel = new MessageModel();
@@ -109,6 +115,7 @@ public class ScheduleController {
         }
     }
     @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirplaneScheduleTicket(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
         MessageModel messageModel = new MessageModel();
         try {
@@ -125,6 +132,7 @@ public class ScheduleController {
         }
     }
     @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-lower-price")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLowerPrice(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
         MessageModel messageModel = new MessageModel();
         try {
@@ -141,6 +149,7 @@ public class ScheduleController {
         }
     }
     @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-higher-price")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByHigherPrice(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
         MessageModel messageModel = new MessageModel();
         try {
@@ -157,6 +166,7 @@ public class ScheduleController {
         }
     }
     @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-earliest-departure")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByEarliestDepartureTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
         MessageModel messageModel = new MessageModel();
         try {
@@ -173,6 +183,7 @@ public class ScheduleController {
         }
     }
     @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-latest-departure")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLatestDepartureTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
         MessageModel messageModel = new MessageModel();
         try {
@@ -189,6 +200,7 @@ public class ScheduleController {
         }
     }
     @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-earliest-arrival")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByEarliestArrivalTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
         MessageModel messageModel = new MessageModel();
         try {
@@ -205,6 +217,7 @@ public class ScheduleController {
         }
     }
     @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-latest-arrival")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLatestArrivalTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
         MessageModel messageModel = new MessageModel();
         try {

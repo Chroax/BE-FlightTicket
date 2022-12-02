@@ -19,7 +19,6 @@ public class UserResponse {
     private String telephone;
     private LocalDate birthDate;
     private Boolean gender;
-    private Integer rolesId;
 
     public static UserResponse build(Users users) {
         return UserResponse.builder()
@@ -29,7 +28,6 @@ public class UserResponse {
                 .telephone(users.getTelephone())
                 .birthDate(users.getBirthDate())
                 .gender(users.getGender())
-                .rolesId(users.getRolesUsers().getRoleId())
                 .build();
     }
 }

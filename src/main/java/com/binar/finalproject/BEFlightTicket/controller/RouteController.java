@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class RouteController {
     private RouteService routeService;
 
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> addRoute(@RequestBody RouteRequest routeRequest)
     {
@@ -41,6 +43,7 @@ public class RouteController {
     }
 
     @GetMapping("/get-all/city/{departureCity}/{arrivalCity}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getRouteByDepartureAndArrivalCity(@PathVariable String departureCity,@PathVariable String arrivalCity){
         MessageModel messageModel = new MessageModel();
         try {
@@ -58,6 +61,7 @@ public class RouteController {
     }
 
     @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getRouteByDepartureAndArrivalAirport(@PathVariable String departureAirport,@PathVariable String arrivalAirport){
         MessageModel messageModel = new MessageModel();
         try {
@@ -75,6 +79,7 @@ public class RouteController {
     }
 
     @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> getAllRoute()
     {
         MessageModel messageModel = new MessageModel();
@@ -93,6 +98,7 @@ public class RouteController {
     }
 
     @PutMapping("/update/{routeId}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> updateRoute(@PathVariable UUID routeId, @RequestBody RouteRequest routeRequest) {
         MessageModel messageModel = new MessageModel();
         RouteResponse routeResponse = routeService.updateRoute(routeRequest, routeId);
@@ -113,6 +119,7 @@ public class RouteController {
     }
 
     @DeleteMapping("/delete/{routeId}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> deleteRoute(@PathVariable UUID routeId)
     {
         MessageModel messageModel = new MessageModel();

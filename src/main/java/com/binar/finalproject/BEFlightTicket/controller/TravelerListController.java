@@ -5,6 +5,7 @@ import com.binar.finalproject.BEFlightTicket.service.TravelerListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class TravelerListController {
     private TravelerListService travelerListService;
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> registerTravelerList(@RequestBody TravelerListRequest travelerListRequest) {
         MessageModel messageModel = new MessageModel();
@@ -38,6 +40,7 @@ public class TravelerListController {
     }
 
     @PostMapping("/add/from-order")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> registerTravelerListFromOrder(@RequestBody List<TravelerListDetailRequest> travelerListDetailRequest) {
         MessageModel messageModel = new MessageModel();
@@ -59,6 +62,7 @@ public class TravelerListController {
     }
 
     @GetMapping("/get-all/user/{userId}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAllUserTravelerList(@PathVariable UUID userId){
         MessageModel messageModel = new MessageModel();
         try {
@@ -76,6 +80,7 @@ public class TravelerListController {
     }
 
     @GetMapping("/get-all")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAllTravelerList(){
         MessageModel messageModel = new MessageModel();
         try {
@@ -93,6 +98,7 @@ public class TravelerListController {
     }
 
     @PutMapping("/update/{travelerId}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> updateUser(@PathVariable UUID travelerId, @RequestBody TravelerListUpdateRequest travelerListUpdateRequest) {
         MessageModel messageModel = new MessageModel();
         TravelerListResponse travelerListResponse = travelerListService.updateTravelerList(travelerListUpdateRequest, travelerId);
