@@ -5,7 +5,6 @@ import com.binar.finalproject.BEFlightTicket.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +17,6 @@ public class TicketController {
     private TicketService ticketService;
 
     @PostMapping("/add")
-    @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> addTicket (@RequestBody TicketRequest ticketRequest)
     {
@@ -39,7 +37,6 @@ public class TicketController {
         }
     }
     @GetMapping("/get-all")
-    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> getAllTicket()
     {
         MessageModel messageModel = new MessageModel();
@@ -57,7 +54,6 @@ public class TicketController {
         }
     }
     @PutMapping("/update/{ticketId}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> updateTicket(@PathVariable UUID ticketId, @RequestBody TicketRequest ticketRequest) {
         MessageModel messageModel = new MessageModel();
         TicketResponse ticketResponse = ticketService.updateTicket(ticketRequest, ticketId);
@@ -77,7 +73,6 @@ public class TicketController {
         }
     }
     @GetMapping("/get-by/{ticketId}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getTicketById(@PathVariable UUID ticketId){
         MessageModel messageModel = new MessageModel();
         try {
@@ -94,7 +89,6 @@ public class TicketController {
         }
     }
     @GetMapping("/get-all/{orderId}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getOrderTicket(@PathVariable UUID orderId){
         MessageModel messageModel = new MessageModel();
         try {

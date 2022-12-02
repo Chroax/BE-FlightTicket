@@ -6,7 +6,6 @@ import com.binar.finalproject.BEFlightTicket.service.PassportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -18,7 +17,6 @@ public class PassportController {
     PassportService passportService;
 
     @PostMapping("/add")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> registerPassport(@RequestBody PassportRequest passportRequest) {
         MessageModel messageModel = new MessageModel();
@@ -40,7 +38,6 @@ public class PassportController {
     }
 
     @GetMapping("/get-all/traveler/{travelerId}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getTravelerPassport(@PathVariable UUID travelerId){
         MessageModel messageModel = new MessageModel();
         try {
@@ -57,7 +54,6 @@ public class PassportController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @GetMapping("/get/{passportId}")
     public ResponseEntity<MessageModel> getPassport(@PathVariable UUID passportId){
         MessageModel messageModel = new MessageModel();
@@ -76,7 +72,6 @@ public class PassportController {
     }
 
     @PutMapping("/update/{passportId}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> updatePassport(@PathVariable UUID passportId, @RequestBody PassportRequest passportRequest) {
         MessageModel messageModel = new MessageModel();
         PassportResponse passportResponse = passportService.updatePassport(passportRequest, passportId);

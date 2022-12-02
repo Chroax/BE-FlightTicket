@@ -24,7 +24,7 @@ public class UserRequest {
     @NotEmpty(message = "rolesUsers is required.")
     private Integer rolesId;
 
-    public Users toUsers() {
+    public Users toUsers(Roles roles) {
         Users users = new Users();
         users.setFullName(this.fullName);
         users.setEmail(this.email);
@@ -32,7 +32,7 @@ public class UserRequest {
         users.setTelephone(this.telephone);
         users.setBirthDate(this.birthDate);
         users.setGender(this.gender);
-        users.setStatusActive(true);
+        users.setRolesUsers(roles);
         return users;
     }
 }

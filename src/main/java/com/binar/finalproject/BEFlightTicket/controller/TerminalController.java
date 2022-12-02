@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +17,6 @@ public class TerminalController {
     private TerminalService terminalService;
 
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> createTerminals(@RequestBody TerminalRequest terminalRequest) {
         MessageModel messageModel = new MessageModel();
@@ -38,7 +36,6 @@ public class TerminalController {
     }
 
     @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAllTerminal() {
         MessageModel messageModel = new MessageModel();
         try {
@@ -55,7 +52,6 @@ public class TerminalController {
     }
 
     @PutMapping(value = "/update/{terminalId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> updateTerminal(@PathVariable Integer terminalId, @RequestBody TerminalRequest terminalRequest)
     {
         MessageModel messageModel = new MessageModel();
@@ -77,7 +73,6 @@ public class TerminalController {
     }
 
     @GetMapping(value = "/id/{terminalId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getTerminalById(@PathVariable Integer terminalId){
         MessageModel messageModel = new MessageModel();
         try {

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +17,6 @@ public class CitiesController {
     private CitiesService citiesService;
 
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> createCity(@RequestBody CitiesRequest citiesRequest) {
         MessageModel messageModel = new MessageModel();
@@ -38,7 +36,6 @@ public class CitiesController {
     }
 
     @PutMapping(value = "/update/{cityCode}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> updateCity(@PathVariable String cityCode, @RequestBody CitiesRequest citiesRequest)
     {
         MessageModel messageModel = new MessageModel();
@@ -59,7 +56,6 @@ public class CitiesController {
     }
 
     @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<MessageModel> getAllCity() {
         MessageModel messageModel = new MessageModel();
@@ -78,8 +74,7 @@ public class CitiesController {
     }
 
     @GetMapping(value = "/name/{cityName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getCityByName(@PathVariable String cityName){
+    public ResponseEntity<MessageModel> getCountriesByName(@PathVariable String cityName){
         MessageModel messageModel = new MessageModel();
         try {
             CitiesResponse getCity = citiesService.searchCityByName(cityName);

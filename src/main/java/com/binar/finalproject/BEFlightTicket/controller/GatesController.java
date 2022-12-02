@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +17,6 @@ public class GatesController {
     private GatesService gatesService;
 
     @PostMapping("/add")
-    @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> createGates(@RequestBody GatesRequest gatesRequest) {
         MessageModel messageModel = new MessageModel();
@@ -38,7 +36,6 @@ public class GatesController {
     }
 
     @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<MessageModel> getAllGates() {
         MessageModel messageModel = new MessageModel();
@@ -56,7 +53,6 @@ public class GatesController {
     }
 
     @PutMapping(value = "/update/{gateId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> updateGates(@PathVariable Integer gateId, @RequestBody GatesRequest gatesRequest) {
         MessageModel messageModel = new MessageModel();
         GatesResponse gatesResponse = gatesService.updateGates(gatesRequest, gateId);

@@ -1,19 +1,20 @@
 package com.binar.finalproject.BEFlightTicket.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Getter
-@Setter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -59,21 +60,13 @@ public class Users {
     @UpdateTimestamp
     private LocalDateTime modifiedAt;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(	name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Roles> rolesUsers = new HashSet<>();
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="role_id", nullable = false)
+    private Roles rolesUsers;
 
     @OneToMany(mappedBy = "usersTravelerList", cascade = CascadeType.ALL)
     private Set<TravelerList> travelerList;
 
     @OneToMany(mappedBy = "usersOrder", cascade = CascadeType.ALL)
     private Set<Orders> orders;
-
-    public void addRoles(Roles roles)
-    {
-        this.rolesUsers.add(roles);
-    }
-
 }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +17,6 @@ public class CountriesController {
     private CountriesService countriesService;
 
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> createCountries(@RequestBody CountriesRequest countriesRequest) {
         MessageModel messageModel = new MessageModel();
@@ -38,7 +36,6 @@ public class CountriesController {
     }
 
     @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<MessageModel> getAllCountries() {
         MessageModel messageModel = new MessageModel();
@@ -57,7 +54,6 @@ public class CountriesController {
     }
 
     @PutMapping(value = "/update/{countryName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MessageModel> updateCountries(@PathVariable String countryName, @RequestBody CountriesRequest countriesRequest)
     {
         MessageModel messageModel = new MessageModel();
@@ -78,7 +74,6 @@ public class CountriesController {
     }
 
     @DeleteMapping(value = "/delete/{countryName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MessageModel> deleteCountriesByName(@PathVariable String countryName)
     {
         MessageModel messageModel = new MessageModel();
@@ -98,7 +93,6 @@ public class CountriesController {
     }
 
     @GetMapping(value = "/name/{countryName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getCountriesByName(@PathVariable String countryName){
         MessageModel messageModel = new MessageModel();
         try {
