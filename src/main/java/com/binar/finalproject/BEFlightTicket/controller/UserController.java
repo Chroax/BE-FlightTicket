@@ -1,22 +1,34 @@
 package com.binar.finalproject.BEFlightTicket.controller;
 
-import com.binar.finalproject.BEFlightTicket.dto.MessageModel;
-import com.binar.finalproject.BEFlightTicket.dto.UserRequest;
-import com.binar.finalproject.BEFlightTicket.dto.UserResponse;
-import com.binar.finalproject.BEFlightTicket.dto.UserUpdateRequest;
+import com.binar.finalproject.BEFlightTicket.dto.*;
+import com.binar.finalproject.BEFlightTicket.security.JwtUtils;
 import com.binar.finalproject.BEFlightTicket.service.UserService;
+import com.binar.finalproject.BEFlightTicket.service.impl.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    JwtUtils jwtUtils;
 
     @PostMapping("/sign-up")
     @ResponseStatus(HttpStatus.CREATED)
@@ -39,7 +51,26 @@ public class UserController {
         }
     }
 
+    @PostMapping("/sign-in")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<MessageModel> registerUser(@RequestBody LoginRequest loginRequest) {
+        MessageModel messageModel = new MessageModel();
+
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                loginRequest.getEmail(), loginRequest.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication);
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
+        messageModel.setData(LoginResponse.build(jwt, userDetails));
+        messageModel.setStatus(HttpStatus.OK.value());
+        messageModel.setMessage("Success Login");
+
+        return ResponseEntity.ok().body(messageModel);
+    }
+
     @GetMapping("/get-all")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> getAllUsers(){
         MessageModel messageModel = new MessageModel();
         try {
@@ -57,7 +88,8 @@ public class UserController {
     }
 
     @GetMapping("/name/{fullName}")
-    public ResponseEntity<MessageModel> getUserById(@PathVariable String fullName){
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
+    public ResponseEntity<MessageModel> getUserByfullName(@PathVariable String fullName){
         MessageModel messageModel = new MessageModel();
         try {
             UserResponse userGet = userService.searchUserByName(fullName);
@@ -74,6 +106,7 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{fullName}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> deleteUser(@PathVariable String fullName){
         MessageModel messageModel = new MessageModel();
         Boolean deleteUser = userService.deleteUser(fullName);
@@ -92,6 +125,7 @@ public class UserController {
     }
 
     @PutMapping("/update/{fullName}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> updateUser(@PathVariable String fullName, @RequestBody UserUpdateRequest userUpdateRequest) {
         MessageModel messageModel = new MessageModel();
         UserResponse userResponse = userService.updateUser(userUpdateRequest, fullName);

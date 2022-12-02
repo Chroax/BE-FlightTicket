@@ -1,15 +1,18 @@
 package com.binar.finalproject.BEFlightTicket.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,6 +39,7 @@ public class Roles{
     @UpdateTimestamp
     private LocalDateTime modifiedAt;
 
-    @OneToMany(mappedBy = "rolesUsers", cascade = CascadeType.ALL)
-    private Set<Users> users;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "rolesUsers", cascade = CascadeType.ALL)
+    private Set<Users> users = new HashSet<>();
 }
