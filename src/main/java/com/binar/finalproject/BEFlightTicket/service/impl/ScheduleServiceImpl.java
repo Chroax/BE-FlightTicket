@@ -7,6 +7,7 @@ import com.binar.finalproject.BEFlightTicket.repository.RouteRepository;
 import com.binar.finalproject.BEFlightTicket.repository.ScheduleRepository;
 import com.binar.finalproject.BEFlightTicket.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -137,49 +138,19 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<SearchScheduleResponse> searchAirplaneTicketOrderByLowerPrice(String arrivalAirport, String departureAirport, String departureDate) {
-        List<Schedules> allSchedule = scheduleRepository.searchScheduleTicketOrderByLowerPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
-        List<Routes> allRoute = routeRepository.searchRouteTicketOrderByLowerPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
-        List<Airplanes> allAirplane = airplanesRepository.searchAirplaneTicketOrderByLowerPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
-        List<SearchScheduleResponse> orderByLowerPrice = new ArrayList<>();
-        for (Schedules schedules : allSchedule)
-        {
-            for (Routes routes : allRoute)
-            {
-                for (Airplanes airplanes : allAirplane)
-                {
-                    SearchScheduleResponse searchScheduleResponse = SearchScheduleResponse.build(schedules, routes, airplanes);
-                    orderByLowerPrice.add(searchScheduleResponse);
-                    break;
-                }
-                break;
-            }
-
-        }
-        return orderByLowerPrice;
+    public List<SearchScheduleResponse> searchAirplaneTicketOrderByLowerPrice(String arrivalAirport, String departureAirport, String departureDate, Pageable pageable) {
+        Iterable<Schedules> allSchedule = scheduleRepository.searchScheduleTicketOrderByLowerPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
+        Iterable<Routes> allRoute = routeRepository.searchRouteTicketOrderByLowerPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
+        Iterable<Airplanes> allAirplane = airplanesRepository.searchAirplaneTicketOrderByLowerPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
+        return toListSearchScheduleResponse(allSchedule, allRoute, allAirplane);
     }
 
     @Override
-    public List<SearchScheduleResponse> searchAirplaneTicketOrderByHigherPrice(String arrivalAirport, String departureAirport, String departureDate) {
-        List<Schedules> allSchedule = scheduleRepository.searchScheduleTicketOrderByHigherPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
-        List<Routes> allRoute = routeRepository.searchRouteTicketOrderByHigherPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
-        List<Airplanes> allAirplane = airplanesRepository.searchAirplaneTicketOrderByHigherPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
-        List<SearchScheduleResponse> orderByHigherPrice = new ArrayList<>();
-        for (Schedules schedules : allSchedule)
-        {
-            for (Routes routes : allRoute)
-            {
-                for (Airplanes airplanes : allAirplane)
-                {
-                    SearchScheduleResponse searchScheduleResponse = SearchScheduleResponse.build(schedules, routes, airplanes);
-                    orderByHigherPrice.add(searchScheduleResponse);
-                    break;
-                }
-                break;
-            }
-
-        }
-        return orderByHigherPrice;
+    public List<SearchScheduleResponse> searchAirplaneTicketOrderByHigherPrice(String arrivalAirport, String departureAirport, String departureDate, Pageable pageable) {
+        Page<Schedules> allSchedule = scheduleRepository.searchScheduleTicketOrderByHigherPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
+        Page<Routes> allRoute = routeRepository.searchRouteTicketOrderByHigherPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
+        Page<Airplanes> allAirplane = airplanesRepository.searchAirplaneTicketOrderByHigherPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
+        return toListSearchScheduleResponse(allSchedule, allRoute, allAirplane);
     }
 
     @Override
