@@ -7,6 +7,7 @@ import com.binar.finalproject.BEFlightTicket.repository.RouteRepository;
 import com.binar.finalproject.BEFlightTicket.repository.ScheduleRepository;
 import com.binar.finalproject.BEFlightTicket.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -272,6 +273,13 @@ public class ScheduleServiceImpl implements ScheduleService {
         }
         return orderByLatestArrivalTime;
     }
+    @Override
+    public Iterable<SearchScheduleResponse> findByDepartureArrivalAirportAndDepartureDate(String departureAirport, String arrivalAirport, String departureDate, Pageable pageable) {
+        Iterable<Schedules> allSchedule = scheduleRepository.searchTicket(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
+        Iterable<Routes> allRoute = routeRepository.searchTicket(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
+        Iterable<Airplanes> allAirplane = airplanesRepository.searchTicket(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
+        return toListSearchScheduleResponse(allSchedule, allRoute, allAirplane);
+    }
 
     private List<ScheduleResponse> toListScheduleResponse(List<Schedules> allSchedule) {
         List<ScheduleResponse> allScheduleResponse = new ArrayList<>();
@@ -281,5 +289,23 @@ public class ScheduleServiceImpl implements ScheduleService {
             allScheduleResponse.add(scheduleResponse);
         }
         return allScheduleResponse;
+    }
+    private List<SearchScheduleResponse> toListSearchScheduleResponse(Iterable<Schedules> allSchedule, Iterable<Routes> allRoute, Iterable<Airplanes> allAirplane) {
+        List<SearchScheduleResponse> allSearchScheduleResponse = new ArrayList<>();
+        for (Schedules schedules : allSchedule)
+        {
+            for (Routes routes : allRoute)
+            {
+                for (Airplanes airplanes : allAirplane)
+                {
+                    SearchScheduleResponse searchScheduleResponse = SearchScheduleResponse.build(schedules, routes, airplanes);
+                    allSearchScheduleResponse.add(searchScheduleResponse);
+                    break;
+                }
+                break;
+            }
+
+        }
+        return allSearchScheduleResponse;
     }
 }
