@@ -124,4 +124,21 @@ public class ScheduleController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
+
+    @GetMapping("/id/{scheduleId}")
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicket(@PathVariable UUID scheduleId){
+        MessageModel messageModel = new MessageModel();
+        try {
+            SearchScheduleResponse scheduleResponses = scheduleService.searchScheduleDetails(scheduleId);
+            messageModel.setMessage("Success get schedule details");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(scheduleResponses);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get schedule details");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
 }
