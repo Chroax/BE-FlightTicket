@@ -1,6 +1,6 @@
 package com.binar.finalproject.BEFlightTicket.service.impl;
 
-import com.binar.finalproject.BEFlightTicket.config.PNRGenerator;
+import com.binar.finalproject.BEFlightTicket.utility.PNRGenerator;
 import com.binar.finalproject.BEFlightTicket.dto.OrderDetailResponse;
 import com.binar.finalproject.BEFlightTicket.dto.OrderRequest;
 import com.binar.finalproject.BEFlightTicket.dto.OrderResponse;

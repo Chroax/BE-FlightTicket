@@ -1,4 +1,4 @@
-package com.binar.finalproject.BEFlightTicket.config;
+package com.binar.finalproject.BEFlightTicket.utility;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
