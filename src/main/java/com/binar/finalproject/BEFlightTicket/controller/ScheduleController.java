@@ -3,6 +3,8 @@ package com.binar.finalproject.BEFlightTicket.controller;
 import com.binar.finalproject.BEFlightTicket.dto.*;
 import com.binar.finalproject.BEFlightTicket.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -131,12 +133,13 @@ public class ScheduleController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-lower-price")
+    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-lower-price/page/{page}/size{size}")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLowerPrice(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLowerPrice(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate,@PathVariable Integer size, @PathVariable Integer page){
         MessageModel messageModel = new MessageModel();
         try {
-            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLowerPrice(departureAirport, arrivalAirport, departureDate);
+            Pageable pageable = PageRequest.of(page, size);
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLowerPrice(departureAirport, arrivalAirport, departureDate, pageable);
             messageModel.setMessage("Success get schedule");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(scheduleResponses);
@@ -148,12 +151,13 @@ public class ScheduleController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-higher-price")
+    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-higher-price/page/{page}/size{size}")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByHigherPrice(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByHighestPrice(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate,@PathVariable Integer size, @PathVariable Integer page){
         MessageModel messageModel = new MessageModel();
         try {
-            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByHigherPrice(departureAirport, arrivalAirport, departureDate);
+            Pageable pageable = PageRequest.of(page, size);
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByHigherPrice(departureAirport, arrivalAirport, departureDate, pageable);
             messageModel.setMessage("Success get schedule");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(scheduleResponses);
@@ -165,12 +169,13 @@ public class ScheduleController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-earliest-departure")
+    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-earliest-departure/page/{page}/size{size}")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByEarliestDepartureTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByEarliestDepartureTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate,@PathVariable Integer size, @PathVariable Integer page){
         MessageModel messageModel = new MessageModel();
         try {
-            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByEarliestDepartureTime(departureAirport, arrivalAirport, departureDate);
+            Pageable pageable = PageRequest.of(page, size);
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByEarliestDepartureTime(departureAirport, arrivalAirport, departureDate, pageable);
             messageModel.setMessage("Success get schedule");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(scheduleResponses);
@@ -182,12 +187,13 @@ public class ScheduleController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-latest-departure")
+    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-latest-departure/page/{page}/size{size}")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLatestDepartureTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLatestDepartureTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate,@PathVariable Integer size, @PathVariable Integer page){
         MessageModel messageModel = new MessageModel();
         try {
-            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLatestDepartureTime(departureAirport, arrivalAirport, departureDate);
+            Pageable pageable = PageRequest.of(page, size);
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLatestDepartureTime(departureAirport, arrivalAirport, departureDate, pageable);
             messageModel.setMessage("Success get schedule");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(scheduleResponses);
@@ -199,12 +205,13 @@ public class ScheduleController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-earliest-arrival")
+    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-earliest-arrival/page/{page}/size{size}")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByEarliestArrivalTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByEarliestArrivalTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate,@PathVariable Integer size, @PathVariable Integer page){
         MessageModel messageModel = new MessageModel();
         try {
-            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByEarliestArrivalTime(departureAirport, arrivalAirport, departureDate);
+            Pageable pageable = PageRequest.of(page, size);
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByEarliestArrivalTime(departureAirport, arrivalAirport, departureDate, pageable);
             messageModel.setMessage("Success get schedule");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(scheduleResponses);
@@ -216,12 +223,30 @@ public class ScheduleController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-latest-arrival")
+    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/sort-latest-arrival/page/{page}/size{size}")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLatestArrivalTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLatestArrivalTime(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate,@PathVariable Integer size, @PathVariable Integer page){
         MessageModel messageModel = new MessageModel();
         try {
-            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLatestArrivalTime(departureAirport, arrivalAirport, departureDate);
+            Pageable pageable = PageRequest.of(page, size);
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLatestArrivalTime(departureAirport, arrivalAirport, departureDate, pageable);
+            messageModel.setMessage("Success get schedule");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(scheduleResponses);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get schedule");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}/date/{departureDate}/page/{page}/size{size}")
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicket(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate, @PathVariable Integer size, @PathVariable Integer page){
+        MessageModel messageModel = new MessageModel();
+        try {
+            Pageable pageable = PageRequest.of(page, size);
+            Iterable<SearchScheduleResponse> scheduleResponses = scheduleService.findByDepartureArrivalAirportAndDepartureDate(departureAirport, arrivalAirport, departureDate, pageable);
             messageModel.setMessage("Success get schedule");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(scheduleResponses);
