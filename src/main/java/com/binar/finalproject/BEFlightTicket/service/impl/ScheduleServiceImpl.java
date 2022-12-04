@@ -192,6 +192,18 @@ public class ScheduleServiceImpl implements ScheduleService {
         return toListSearchScheduleResponse(allSchedule, allRoute, allAirplane);
     }
 
+    public SearchScheduleResponse searchScheduleDetails(UUID scheduleId) {
+        Optional<Schedules> schedules = scheduleRepository.findById(scheduleId);
+        if(schedules.isPresent())
+        {
+            Optional<Routes> routes = routeRepository.findById(schedules.get().getRoutesSchedules().getRouteId());
+            Optional<Airplanes> airplanes = airplanesRepository.findById(schedules.get().getAirplanesSchedules().getAirplaneName());
+            return SearchScheduleResponse.build(schedules.get(), routes.get(), airplanes.get());
+        }
+        else
+            return null;
+    }
+
     private List<ScheduleResponse> toListScheduleResponse(List<Schedules> allSchedule) {
         List<ScheduleResponse> allScheduleResponse = new ArrayList<>();
         for (Schedules schedules : allSchedule)

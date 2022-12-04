@@ -21,4 +21,5 @@ public interface ScheduleService {
     List<SearchScheduleResponse> searchAirplaneTicketOrderByEarliestArrivalTime(String arrivalAirport, String departureAirport, String departureDate, Pageable pageable);
     List<SearchScheduleResponse> searchAirplaneTicketOrderByLatestArrivalTime(String arrivalAirport, String departureAirport, String departureDate, Pageable pageable);
     Iterable<SearchScheduleResponse> findByDepartureArrivalAirportAndDepartureDate(String departureAirport, String arrivalAirport, String departureDate, Pageable pageable);
+    SearchScheduleResponse searchScheduleDetails(UUID scheduleId);
 }
