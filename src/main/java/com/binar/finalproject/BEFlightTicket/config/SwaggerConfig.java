@@ -26,7 +26,7 @@ public class SwaggerConfig {
                 .components(new Components()
                         .addSecuritySchemes("bearer-key",
                                 new SecurityScheme()
-                                        .type(SecurityScheme.Type.APIKEY)
+                                        .type(SecurityScheme.Type.HTTP)
                                         .scheme("bearer")
                                         .bearerFormat("JWT")
                         )
@@ -35,6 +35,22 @@ public class SwaggerConfig {
                         new SecurityRequirement()
                                 .addList("bearer-jwt", Arrays.asList("read", "write"))
                                 .addList("bearer-key", Collections.emptyList())
-                );
+                )
+                .servers(servers());
+    }
+
+    private List<Server> servers() {
+        List<Server> servers = new ArrayList<>();
+
+        Server serverDev = new Server();
+        serverDev.setUrl("http://localhost:8080/");
+        serverDev.setDescription("Main server for Dev");
+
+        Server serverProd = new Server();
+        serverProd.setUrl("https://api-flight.up.railway.app/");
+        serverProd.setDescription("Main server for Production");
+
+        servers.add(serverDev);
+        return servers;
     }
 }
