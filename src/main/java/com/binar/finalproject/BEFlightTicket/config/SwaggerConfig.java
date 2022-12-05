@@ -35,18 +35,6 @@ public class SwaggerConfig {
                         new SecurityRequirement()
                                 .addList("bearer-jwt", Arrays.asList("read", "write"))
                                 .addList("bearer-key", Collections.emptyList())
-                )
-                .servers(servers());
-    }
-
-    private List<Server> servers() {
-        List<Server> servers = new ArrayList<>();
-
-        Server serverDev = new Server();
-        serverDev.setUrl("http://localhost:8080/");
-        serverDev.setDescription("Main server for Dev");
-
-        servers.add(serverDev);
-        return servers;
+                );
     }
 }
