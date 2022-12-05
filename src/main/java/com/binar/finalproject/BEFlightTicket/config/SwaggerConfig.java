@@ -51,6 +51,7 @@ public class SwaggerConfig {
         serverProd.setDescription("Main server for Production");
 
         servers.add(serverDev);
+        servers.add(serverProd);
         return servers;
     }
 }
