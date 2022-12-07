@@ -38,6 +38,27 @@ public class SeatController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
+    @PostMapping("/add-all")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<MessageModel> addSeat (@RequestBody List<SeatRequest> seatAllRequest)
+    {
+        MessageModel messageModel = new MessageModel();
+        List<SeatResponse> seatResponse = seatService.addAllSeat(seatAllRequest);
+        if(seatResponse == null)
+        {
+            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
+            messageModel.setMessage("Failed to add seat");
+            return ResponseEntity.badRequest().body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Add new seat");
+            messageModel.setData(seatResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }
+    }
     @GetMapping("/id/{seatId}")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getSeatById(@PathVariable Integer seatId){

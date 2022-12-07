@@ -6,7 +6,8 @@ import com.binar.finalproject.BEFlightTicket.dto.SeatResponse;
 import java.util.List;
 
 public interface SeatService {
-    SeatResponse addSeat(SeatRequest seatRequest);
+    SeatResponse addSeat(SeatRequest seatAllRequest);
+    List<SeatResponse> addAllSeat(List<SeatRequest> seatRequest);
     SeatResponse searchSeatById(Integer seatId);
     List<SeatResponse> getAllSeat();
     SeatResponse updateSeat(SeatRequest seatRequest, Integer seatId);

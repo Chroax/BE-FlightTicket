@@ -47,6 +47,39 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
+    public List<SeatResponse> addAllSeat(List<SeatRequest> seatAllRequest) {
+        List<SeatResponse> allSeatResponse = new ArrayList<>();
+        for (SeatRequest seatRequest : seatAllRequest)
+        {
+            try {
+                Optional<Airplanes> airplanes = airplanesRepository.findById(seatRequest.getAirplaneName());
+                if (airplanes.isPresent())
+                {
+                    Seats seats = seatRequest.toSeats(airplanes.get());
+                    try {
+                        seatRepository.save(seats);
+                        allSeatResponse.add(SeatResponse.build(seats));
+                    }
+                    catch (Exception exception)
+                    {
+                        return null;
+                    }
+                }
+                else
+                    return null;
+            }
+            catch (Exception exception)
+            {
+                return null;
+            }
+        }
+        if(allSeatResponse.isEmpty())
+            return null;
+        else
+            return allSeatResponse;
+    }
+
+    @Override
     public SeatResponse searchSeatById(Integer seatId) {
         Optional<Seats> seats = seatRepository.findById(seatId);
         return seats.map(SeatResponse::build).orElse(null);
