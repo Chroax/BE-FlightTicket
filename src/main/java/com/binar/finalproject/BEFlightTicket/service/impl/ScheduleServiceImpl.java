@@ -59,6 +59,45 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
+    public List<ScheduleResponse> addAllSchedule(List<ScheduleRequest> allScheduleRequest) {
+        List<ScheduleResponse> allScheduleResponse = new ArrayList<>();
+        for (ScheduleRequest scheduleRequest : allScheduleRequest) {
+            try{
+                Optional<Airplanes> airplanes = airplanesRepository.findById(scheduleRequest.getAirplaneName());
+                Optional<Routes> routes = routeRepository.findById(scheduleRequest.getRouteId());
+
+                if(airplanes.isPresent())
+                {
+                    if(routes.isPresent())
+                    {
+                        Schedules schedules = scheduleRequest.toSchedule(airplanes.get(), routes.get());
+
+                        try {
+                            scheduleRepository.save(schedules);
+                            allScheduleResponse.add(ScheduleResponse.build(schedules));
+                        }
+                        catch(Exception exception)
+                        {
+                            return null;
+                        }
+                    }
+                    else
+                        return null;
+                }
+                else
+                    return null;
+            }catch (Exception exception)
+            {
+                return null;
+            }
+        }
+        if(allScheduleResponse.isEmpty())
+            return null;
+        else
+            return allScheduleResponse;
+    }
+
+    @Override
     public ScheduleResponse updateSchedule(ScheduleRequest scheduleRequest, UUID scheduleId) {
         Optional<Schedules> isSchedule = scheduleRepository.findById(scheduleId);
         String message = null;

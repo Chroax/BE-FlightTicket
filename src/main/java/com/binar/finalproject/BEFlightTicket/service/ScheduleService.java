@@ -9,6 +9,7 @@ import java.util.UUID;
 
 public interface ScheduleService {
     ScheduleResponse addSchedule(ScheduleRequest scheduleRequest);
+    List<ScheduleResponse> addAllSchedule(List<ScheduleRequest> allScheduleRequest);
     ScheduleResponse updateSchedule(ScheduleRequest scheduleRequest, UUID scheduleId);
     List<ScheduleResponse> searchAirplaneSchedule(String airplaneName);
     List<ScheduleResponse> searchRouteSchedule(UUID routeId);

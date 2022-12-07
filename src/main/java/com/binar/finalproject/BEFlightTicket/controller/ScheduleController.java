@@ -40,6 +40,27 @@ public class ScheduleController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
+    @PostMapping("/add-all")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<MessageModel> addSchedule (@RequestBody List<ScheduleRequest> allScheduleRequest)
+    {
+        MessageModel messageModel = new MessageModel();
+        List<ScheduleResponse> scheduleResponse = scheduleService.addAllSchedule(allScheduleRequest);
+        if(scheduleResponse == null)
+        {
+            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
+            messageModel.setMessage("Failed to add schedule");
+            return ResponseEntity.badRequest().body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Add new schedule");
+            messageModel.setData(scheduleResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }
+    }
 
     @PutMapping("/update/{scheduleId}")
     @PreAuthorize("hasAnyRole('ADMIN')")

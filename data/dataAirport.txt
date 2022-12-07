@@ -5,7 +5,7 @@
 }
 {
   "iataCode": "SUB",
-  "airportName": "Surabaya",
+  "airportName": "Djuanda",
   "cityCode": "SBY"
 }
 {
