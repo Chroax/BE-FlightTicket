@@ -1,0 +1,20 @@
+{
+  "iataCode": "JKT",
+  "airportName": "Soekarno Hatta",
+  "cityCode": "JKT"
+}
+{
+  "iataCode": "SUB",
+  "airportName": "Surabaya",
+  "cityCode": "SBY"
+}
+{
+  "iataCode": "DPS",
+  "airportName": "Ngurah Rai",
+  "cityCode": "BLI"
+}
+{
+  "iataCode": "PNK",
+  "airportName": "Supadio",
+  "cityCode": "PTK"
+}
