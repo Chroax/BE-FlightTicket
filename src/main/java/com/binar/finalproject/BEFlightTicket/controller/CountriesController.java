@@ -38,7 +38,6 @@ public class CountriesController {
     }
 
     @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<MessageModel> getAllCountries() {
         MessageModel messageModel = new MessageModel();
@@ -98,7 +97,6 @@ public class CountriesController {
     }
 
     @GetMapping(value = "/name/{countryName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getCountriesByName(@PathVariable String countryName){
         MessageModel messageModel = new MessageModel();
         try {

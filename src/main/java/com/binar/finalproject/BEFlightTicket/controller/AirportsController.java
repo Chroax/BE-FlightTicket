@@ -38,7 +38,6 @@ public class AirportsController {
     }
 
     @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAllAirports()
     {
         MessageModel messageModel = new MessageModel();
@@ -78,7 +77,6 @@ public class AirportsController {
     }
 
     @GetMapping(value = "/name/{airportName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirportsByName(@PathVariable String airportName){
         MessageModel messageModel = new MessageModel();
         try {
@@ -96,7 +94,6 @@ public class AirportsController {
     }
 
     @GetMapping(value = "/city/{cityCode}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirportsByCity(@PathVariable String cityCode){
         MessageModel messageModel = new MessageModel();
         try {

@@ -59,7 +59,6 @@ public class CitiesController {
     }
 
     @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<MessageModel> getAllCity() {
         MessageModel messageModel = new MessageModel();
@@ -78,7 +77,6 @@ public class CitiesController {
     }
 
     @GetMapping(value = "/name/{cityName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getCityByName(@PathVariable String cityName){
         MessageModel messageModel = new MessageModel();
         try {
