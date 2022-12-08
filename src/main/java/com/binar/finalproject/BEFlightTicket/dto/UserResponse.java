@@ -1,5 +1,6 @@
 package com.binar.finalproject.BEFlightTicket.dto;
 
+import com.binar.finalproject.BEFlightTicket.model.AuthenticationProvider;
 import com.binar.finalproject.BEFlightTicket.model.Roles;
 import com.binar.finalproject.BEFlightTicket.model.Users;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -19,6 +20,7 @@ public class UserResponse {
     private String telephone;
     private LocalDate birthDate;
     private Boolean gender;
+    private AuthenticationProvider authProvider;
 
     public static UserResponse build(Users users) {
         return UserResponse.builder()
@@ -28,6 +30,7 @@ public class UserResponse {
                 .telephone(users.getTelephone())
                 .birthDate(users.getBirthDate())
                 .gender(users.getGender())
+                .authProvider(users.getAuthProvider())
                 .build();
     }
 }
