@@ -93,11 +93,11 @@ public class AirportsController {
         }
     }
 
-    @GetMapping(value = "/city/{cityCode}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageModel> getAirportsByCity(@PathVariable String cityCode){
+    @GetMapping(value = "/city/{cityName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> getAirportsByCity(@PathVariable String cityName){
         MessageModel messageModel = new MessageModel();
         try {
-            List<AirportResponse> getAirport = airportService.searchAirportByCityName(cityCode);
+            List<AirportResponse> getAirport = airportService.searchAirportByCityName(cityName);
             messageModel.setMessage("Success get Airport By City");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(getAirport);

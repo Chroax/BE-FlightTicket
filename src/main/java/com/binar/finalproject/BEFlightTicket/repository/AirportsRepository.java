@@ -13,6 +13,6 @@ public interface AirportsRepository extends JpaRepository<Airports, String> {
     @Query("SELECT u FROM Airports u WHERE LOWER(u.airportName) LIKE LOWER(:airportName)")
     Airports findByAirportName(@Param("airportName") String airportName);
 
-    @Query(nativeQuery = true, value = "SELECT a.* FROM airports a INNER JOIN cities c ON a.city_code = c.city_code where c.city_code = :cityCode")
-    List<Airports> findAllAirportByCity(@Param("cityCode") String cityCode);
+    @Query(nativeQuery = true, value = "SELECT a.* FROM airports a INNER JOIN cities c ON a.city_code = c.city_code where c.city_name = :cityName")
+    List<Airports> findAllAirportByCity(@Param("cityCode") String cityName);
 }
