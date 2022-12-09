@@ -96,7 +96,7 @@ public class AirportsServiceImpl implements AirportService {
 
     @Override
     public List<AirportResponse> searchAirportByCityName(String cityName) {
-        List<Airports> allAirports = airportsRepository.findAllAirportByCity(cityName);
+        List<Airports> allAirports = airportsRepository.findByCityName(cityName);
         List<AirportResponse> allAirportResponse = new ArrayList<>();
         for (Airports airports : allAirports) {
             AirportResponse airportResponse = AirportResponse.build(airports);
