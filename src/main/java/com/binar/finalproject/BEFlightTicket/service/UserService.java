@@ -14,4 +14,5 @@ public interface UserService {
     Boolean isPhoneNumberExist(String telephone);
     UserResponse updateUser(UserUpdateRequest userUpdateRequest, String fullName);
     Boolean deleteUser(String fullName);
+    UserResponse searchUserByNameOAuth(String fullName);
 }

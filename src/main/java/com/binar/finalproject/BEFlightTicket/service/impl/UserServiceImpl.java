@@ -136,6 +136,15 @@ public class UserServiceImpl implements UserService {
             return false;
     }
 
+    @Override
+    public UserResponse searchUserByNameOAuth(String fullName) {
+        Users user = userRepository.findByNameOAuth(fullName);
+        if(user != null)
+            return UserResponse.build(user);
+        else
+            return null;
+    }
+
     private List<UserResponse> toListUserResponses(List<Users> allUser) {
         List<UserResponse> allUserResponse = new ArrayList<>();
         for (Users user : allUser) {
