@@ -3,8 +3,11 @@ package com.binar.finalproject.BEFlightTicket.config;
 
 import com.binar.finalproject.BEFlightTicket.security.AuthEntryPointJwt;
 import com.binar.finalproject.BEFlightTicket.security.AuthTokenFilter;
+import com.binar.finalproject.BEFlightTicket.security.oauth2.CustomOAuth2UserService;
+import com.binar.finalproject.BEFlightTicket.security.oauth2.OAuthLoginSuccessHandler;
 import com.binar.finalproject.BEFlightTicket.service.impl.security.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -53,7 +56,29 @@ public class SpringSecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception
+    {
+        httpSecurity.authorizeHttpRequests()
+                .antMatchers("oauth/**").permitAll()
+                .anyRequest().permitAll()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .usernameParameter("email")
+                .permitAll()
+                .defaultSuccessUrl("/")
+                .and()
+                .logout().permitAll()
+                .and()
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(oAuth2UserService)
+                .and()
+                .successHandler(oAuthLoginSuccessHandler);
 
+                return httpSecurity.build();
+    }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();
@@ -82,4 +107,10 @@ public class SpringSecurityConfig {
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
+
+    @Autowired
+    private CustomOAuth2UserService oAuth2UserService;
+    @Autowired
+    private OAuthLoginSuccessHandler oAuthLoginSuccessHandler;
 }
