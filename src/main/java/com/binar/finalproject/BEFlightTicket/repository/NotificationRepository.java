@@ -11,7 +11,7 @@ import java.util.UUID;
 public interface NotificationRepository extends JpaRepository<Notification, UUID> {
 
     @Query(nativeQuery = true, value = "SELECT * FROM notification\n" + "WHERE user_id = :userId")
-    List<Notification> findAllNotificationByUserId(@Param("userId") UUID userId);
+    List<Notification> getAllNotificationByUserId(@Param("userId") UUID userId);
 
     @Query(nativeQuery = true, value = "SELECT count(*) FROM notification WHERE is_read = false")
     Integer getUnreadNotification();
