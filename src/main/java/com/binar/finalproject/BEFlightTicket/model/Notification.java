@@ -27,7 +27,7 @@ public class Notification {
     private String title;
 
     @Column(name = "detail")
-    private String detailNotification;
+    private String content;
 
     @Column(name = "is_read")
     private boolean isRead = Boolean.FALSE;
