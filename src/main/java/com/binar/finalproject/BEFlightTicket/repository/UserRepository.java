@@ -15,4 +15,6 @@ public interface UserRepository extends JpaRepository<Users, UUID> {
     Optional<Users> findByEmail(@Param("email") String email);
     @Query("SELECT u FROM Users u WHERE (u.telephone) = (:telephone)")
     Users findPhoneNumber(@Param("telephone") String telephone);
+    @Query("SELECT fullName AS fullName, email AS email FROM Users u WHERE LOWER(u.fullName) LIKE LOWER(:fullName)")
+    Users findByNameOAuth(@Param("fullName") String fullName);
 }
