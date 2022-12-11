@@ -21,7 +21,7 @@ import java.util.UUID;
         uniqueConstraints = {
                 @UniqueConstraint(name = "email", columnNames = "email"),
                 @UniqueConstraint(name = "telephone", columnNames = "telephone")
-        })
+        }, schema = "public")
 public class Users {
     @Id
     @GeneratedValue
@@ -34,14 +34,14 @@ public class Users {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "telephone", columnDefinition = "CHAR(16)", nullable = false)
+    @Column(name = "telephone", columnDefinition = "CHAR(16)")
     private String telephone;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "birth_date", nullable = false, columnDefinition="DATE")
+    @Column(name = "birth_date", columnDefinition="DATE")
     private LocalDate birthDate;
 
     @Column(name = "gender")
