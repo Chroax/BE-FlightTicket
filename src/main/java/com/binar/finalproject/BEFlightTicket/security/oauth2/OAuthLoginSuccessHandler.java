@@ -1,5 +1,6 @@
 package com.binar.finalproject.BEFlightTicket.security.oauth2;
 
+import com.binar.finalproject.BEFlightTicket.dto.UserOauth2Request;
 import com.binar.finalproject.BEFlightTicket.dto.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -20,6 +21,10 @@ public class OAuthLoginSuccessHandler extends SavedRequestAwareAuthenticationSuc
         String email = oAuth2User.getEmail();
         String fullName = oAuth2User.getName();
         UserResponse user = customOAuth2UserService.searchUserByNameOAuth(fullName);
+        if (user == null)
+        {
+            customOAuth2UserService.createNewCustomerAfterOAuthLoginSuccess(email, fullName);
+        }
         System.out.println("Customer's email: "+email);
         super.onAuthenticationSuccess(request, response, authentication);
     }

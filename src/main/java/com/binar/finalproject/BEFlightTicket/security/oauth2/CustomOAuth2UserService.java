@@ -26,4 +26,11 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         else
             return null;
     }
+    public void createNewCustomerAfterOAuthLoginSuccess(String email, String fullName) {
+        Users users = new Users();
+        users.setEmail(email);
+        users.setFullName(fullName);
+        users.setStatusActive(true);
+        userRepository.save(users);
+    }
 }
