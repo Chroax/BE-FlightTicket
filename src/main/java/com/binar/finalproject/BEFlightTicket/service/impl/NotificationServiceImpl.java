@@ -74,6 +74,7 @@ public class NotificationServiceImpl implements NotificationService {
             Users users = userRepository.findById(userId)
                     .orElseThrow(() -> new RuntimeException("User account not found"));
             Notification notification = Notification.builder()
+                    .notificationId(userId)
                     .user(users)
                     .title(notificationRequest.getTitle())
                     .content(notificationRequest.getContent())
@@ -95,6 +96,7 @@ public class NotificationServiceImpl implements NotificationService {
             Notification notification = isNotification.get();
             notification.setTitle(notificationRequest.getTitle());
             notification.setContent(notification.getContent());
+            notification.setRead(false);
             Optional<Users> users = userRepository.findById(userId);
             if (users.isPresent())
                 notification.setUser(users.get());
