@@ -34,8 +34,11 @@ public class Users {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "google_id")
+    private String googleId;
 
     @Column(name = "telephone", columnDefinition = "CHAR(16)")
     private String telephone;
