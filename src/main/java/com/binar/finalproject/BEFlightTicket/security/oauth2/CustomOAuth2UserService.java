@@ -1,6 +1,6 @@
 package com.binar.finalproject.BEFlightTicket.security.oauth2;
 
-import com.binar.finalproject.BEFlightTicket.dto.UserResponse;
+import com.binar.finalproject.BEFlightTicket.model.AuthenticationProvider;
 import com.binar.finalproject.BEFlightTicket.model.Users;
 import com.binar.finalproject.BEFlightTicket.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +19,27 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         OAuth2User user = super.loadUser(userRequest);
         return new CustomOAuth2User(user);
     }
-    public UserResponse searchUserByNameOAuth(String fullName) {
-        Users user = userRepository.findByNameOAuth(fullName);
-        if(user != null)
-            return UserResponse.build(user);
-        else
-            return null;
+
+    public void oAuthLoginSuccess(Users users, String email, String fullName, String googleId) {
+        Users userGoogle = userRepository.findByGoogleId(googleId);
+        if (userGoogle == null) {
+            Users userWithGmail = userRepository.findByGmail(email);
+            if (userWithGmail == null) {
+                users.setEmail(email);
+                users.setFullName(fullName);
+                users.setStatusActive(true);
+                users.setAuthProvider(AuthenticationProvider.GOOGLE);
+                users.setGoogleId(googleId);
+                oAuth2Password(users);
+                userRepository.save(users);
+            }
+        }
     }
-    public void createNewCustomerAfterOAuthLoginSuccess(String email, String fullName) {
-        Users users = new Users();
-        users.setEmail(email);
-        users.setFullName(fullName);
-        users.setStatusActive(true);
-        userRepository.save(users);
+
+    public void oAuth2Password(Users users){
+        String googleId = users.getGoogleId();
+        String clientId = "953090499155-f5pgpt16s6lhge53hhi4s5cm5dg18in3.apps.googleusercontent.com";
+        String googlePassword = googleId + clientId;
+        users.setPassword(String.valueOf(googlePassword.hashCode()));
     }
 }
