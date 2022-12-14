@@ -1,5 +1,6 @@
 package com.binar.finalproject.BEFlightTicket.security.oauth2;
 
+import com.binar.finalproject.BEFlightTicket.dto.UserResponse;
 import com.binar.finalproject.BEFlightTicket.model.AuthenticationProvider;
 import com.binar.finalproject.BEFlightTicket.model.Users;
 import com.binar.finalproject.BEFlightTicket.repository.UserRepository;
@@ -20,11 +21,12 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         return new CustomOAuth2User(user);
     }
 
-    public void oAuthLoginSuccess(Users users, String email, String fullName, String googleId) {
+    public UserResponse oAuthLoginSuccess(String email, String fullName, String googleId) {
         Users userGoogle = userRepository.findByGoogleId(googleId);
         if (userGoogle == null) {
             Users userWithGmail = userRepository.findByGmail(email);
             if (userWithGmail == null) {
+                Users users = new Users();
                 users.setEmail(email);
                 users.setFullName(fullName);
                 users.setStatusActive(true);
@@ -34,6 +36,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 userRepository.save(users);
             }
         }
+        return null;
     }
 
     public void oAuth2Password(Users users){

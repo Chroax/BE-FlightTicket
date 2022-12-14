@@ -1,5 +1,4 @@
 package com.binar.finalproject.BEFlightTicket.security.oauth2;
-import com.binar.finalproject.BEFlightTicket.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
@@ -16,11 +15,10 @@ public class OAuthLoginSuccessHandler extends SavedRequestAwareAuthenticationSuc
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException,  IOException{
         CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
-        Users users = new Users();
         String email = oAuth2User.getEmail();
         String fullName = oAuth2User.getName();
         String googleId = oAuth2User.getGoogleId();
-        customOAuth2UserService.oAuthLoginSuccess(users, email, fullName, googleId);
+        customOAuth2UserService.oAuthLoginSuccess(email, fullName, googleId);
         super.onAuthenticationSuccess(request, response, authentication);
     }
 }
