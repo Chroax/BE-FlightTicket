@@ -15,6 +15,7 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserResponse {
     private UUID userId;
+    private String googleId;
     private String fullName;
     private String email;
     private String telephone;
@@ -25,6 +26,7 @@ public class UserResponse {
     public static UserResponse build(Users users) {
         return UserResponse.builder()
                 .userId(users.getUserId())
+                .googleId(users.getGoogleId())
                 .fullName(users.getFullName())
                 .email(users.getEmail())
                 .telephone(users.getTelephone())
