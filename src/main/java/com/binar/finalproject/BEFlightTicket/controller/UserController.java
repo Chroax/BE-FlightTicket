@@ -40,14 +40,14 @@ public class UserController {
         UserResponse userResponse = userService.registerUser(userRequest);
         if(userResponse == null)
         {
-            messageModel.setMessage("Failed register new user with google account");
+            messageModel.setMessage("Failed register new user");
             messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
             return ResponseEntity.badRequest().body(messageModel);
         }
         else
         {
             messageModel.setStatus(HttpStatus.OK.value());
-            messageModel.setMessage("Register new user with google account");
+            messageModel.setMessage("Register new user");
             messageModel.setData(userResponse);
             return ResponseEntity.ok().body(messageModel);
         }
@@ -61,14 +61,14 @@ public class UserController {
         UserResponse userResponse = customOAuth2UserService.oAuthLoginSuccess(email, fullname, googleId);
         if(userResponse == null)
         {
-            messageModel.setMessage("Failed register new user");
+            messageModel.setMessage("Failed register new user with google account");
             messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
             return ResponseEntity.badRequest().body(messageModel);
         }
         else
         {
             messageModel.setStatus(HttpStatus.OK.value());
-            messageModel.setMessage("Register new user");
+            messageModel.setMessage("Register new user with google account");
             messageModel.setData(userResponse);
             return ResponseEntity.ok().body(messageModel);
         }
