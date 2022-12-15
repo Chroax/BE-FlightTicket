@@ -76,6 +76,7 @@ public class SpringSecurityConfig {
                 .antMatchers("/terminals/**").permitAll()
                 .antMatchers("/ticket/**").permitAll()
                 .antMatchers("/traveler-list/**").permitAll()
+                .antMatchers("/notification/**").permitAll()
                 .anyRequest().permitAll();
 
         http.authenticationProvider(authenticationProvider());
