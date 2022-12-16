@@ -2,9 +2,11 @@ package com.binar.finalproject.BEFlightTicket.dto;
 
 import com.binar.finalproject.BEFlightTicket.model.Notification;
 import com.binar.finalproject.BEFlightTicket.model.Users;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class NotificationRequest {
 
     private String title;
@@ -17,6 +19,5 @@ public class NotificationRequest {
         notification.setContent(this.content);
         notification.setUser(users);
         return notification;
-
     }
 }

@@ -1,5 +1,6 @@
 package com.binar.finalproject.BEFlightTicket.service.impl;
 
+import com.binar.finalproject.BEFlightTicket.dto.NotificationRequest;
 import com.binar.finalproject.BEFlightTicket.utility.PNRGenerator;
 import com.binar.finalproject.BEFlightTicket.dto.OrderDetailResponse;
 import com.binar.finalproject.BEFlightTicket.dto.OrderRequest;
@@ -24,6 +25,8 @@ public class OrderServiceImpl implements OrderService {
     private PaymentMethodRepository paymentMethodRepository;
     @Autowired
     private AirportsRepository airportsRepository;
+    @Autowired
+    private NotificationRepository notificationRepository;
 
     @Override
     public OrderResponse addOrder(OrderRequest orderRequest) {
@@ -86,6 +89,11 @@ public class OrderServiceImpl implements OrderService {
             {
                 orders.setStatus(orderRequest.getStatus());
                 orders.setPnrCode(PNRGenerator.generatePNR());
+                NotificationRequest notificationRequest = new NotificationRequest("Order : " + orders.getOrderId().toString(),
+                        "Pesanan kamu sudah dikonfirmasi");
+                Optional<Users> users = userRepository.findById(orders.getOrderId());
+                Notification notification = notificationRequest.toNotification(users.get());
+                notificationRepository.save(notification);
             }
             else
                 orders.setStatus(orderRequest.getStatus());
