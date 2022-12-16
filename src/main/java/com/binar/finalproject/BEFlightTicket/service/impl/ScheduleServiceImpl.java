@@ -161,7 +161,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             for (Routes routes : allRoute)
             {
                 Airports findDepartureAirport = airportsRepository.findByAirportName(routes.getDepartureAirport());
-                Airports findArrivalAirport = airportsRepository.findByAirportName(routes.getDepartureAirport());
+                Airports findArrivalAirport = airportsRepository.findByAirportName(routes.getArrivalAirport());
                 for (Airplanes airplanes : allAirplane)
                 {
                     SearchScheduleResponse searchScheduleResponse = SearchScheduleResponse.build(schedules, routes, airplanes, findDepartureAirport.getIataCode(), findArrivalAirport.getIataCode());
@@ -245,7 +245,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             if(routes.isPresent())
             {
                 Airports findDepartureAirport = airportsRepository.findByAirportName(routes.get().getDepartureAirport());
-                Airports findArrivalAirport = airportsRepository.findByAirportName(routes.get().getDepartureAirport());
+                Airports findArrivalAirport = airportsRepository.findByAirportName(routes.get().getArrivalAirport());
                 return SearchScheduleResponse.build(schedules.get(), routes.get(), airplanes.get(), findDepartureAirport.getIataCode(), findArrivalAirport.getIataCode());
             }
             else
@@ -271,7 +271,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             for (Routes routes : allRoute)
             {
                 Airports findDepartureAirport = airportsRepository.findByAirportName(routes.getDepartureAirport());
-                Airports findArrivalAirport = airportsRepository.findByAirportName(routes.getDepartureAirport());
+                Airports findArrivalAirport = airportsRepository.findByAirportName(routes.getArrivalAirport());
                 for (Airplanes airplanes : allAirplane)
                 {
                     SearchScheduleResponse searchScheduleResponse = SearchScheduleResponse.build(schedules, routes, airplanes, findDepartureAirport.getIataCode(), findArrivalAirport.getIataCode());
