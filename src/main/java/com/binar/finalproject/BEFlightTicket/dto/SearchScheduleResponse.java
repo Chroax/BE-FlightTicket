@@ -38,7 +38,7 @@ public class SearchScheduleResponse {
         return SearchScheduleResponse.builder()
                 .scheduleId(schedules.getScheduleId())
                 .departureIATACode(departureIATACode)
-                .departureIATACode(arrivalIATACode)
+                .arrivalIATACode(arrivalIATACode)
                 .departureDate(schedules.getDepartureDate())
                 .arrivalDate(schedules.getArrivalDate())
                 .departureTime(schedules.getDepartureTime())
