@@ -42,7 +42,7 @@ public class AirportsController {
     {
         MessageModel messageModel = new MessageModel();
         try {
-            List<AirportResponse> getAirport = airportService.searchAllAirports();
+            List<AirportGetAllResponse> getAirport = airportService.searchAllAirports();
             messageModel.setMessage("Success get all Airports");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(getAirport);
