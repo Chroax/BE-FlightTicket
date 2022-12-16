@@ -141,7 +141,7 @@ public class ScheduleController {
     public ResponseEntity<MessageModel> getAirplaneScheduleTicket(@PathVariable String departureAirport,@PathVariable String arrivalAirport, @PathVariable String departureDate){
         MessageModel messageModel = new MessageModel();
         try {
-            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketSchedule(departureAirport, arrivalAirport, departureDate);
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketSchedule(arrivalAirport, departureAirport, departureDate);
             messageModel.setMessage("Success get schedule");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(scheduleResponses);
@@ -159,7 +159,7 @@ public class ScheduleController {
         MessageModel messageModel = new MessageModel();
         try {
             Pageable pageable = PageRequest.of(page, size);
-            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLowerPrice(departureAirport, arrivalAirport, departureDate, pageable);
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLowerPrice(arrivalAirport, departureAirport, departureDate, pageable);
             messageModel.setMessage("Success get schedule");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(scheduleResponses);
@@ -177,7 +177,7 @@ public class ScheduleController {
         MessageModel messageModel = new MessageModel();
         try {
             Pageable pageable = PageRequest.of(page, size);
-            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByHigherPrice(departureAirport, arrivalAirport, departureDate, pageable);
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByHigherPrice(arrivalAirport, departureAirport, departureDate, pageable);
             messageModel.setMessage("Success get schedule");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(scheduleResponses);
@@ -195,7 +195,7 @@ public class ScheduleController {
         MessageModel messageModel = new MessageModel();
         try {
             Pageable pageable = PageRequest.of(page, size);
-            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByEarliestDepartureTime(departureAirport, arrivalAirport, departureDate, pageable);
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByEarliestDepartureTime(arrivalAirport, departureAirport, departureDate, pageable);
             messageModel.setMessage("Success get schedule");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(scheduleResponses);
@@ -213,7 +213,7 @@ public class ScheduleController {
         MessageModel messageModel = new MessageModel();
         try {
             Pageable pageable = PageRequest.of(page, size);
-            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLatestDepartureTime(departureAirport, arrivalAirport, departureDate, pageable);
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLatestDepartureTime(arrivalAirport, departureAirport, departureDate, pageable);
             messageModel.setMessage("Success get schedule");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(scheduleResponses);
@@ -231,7 +231,7 @@ public class ScheduleController {
         MessageModel messageModel = new MessageModel();
         try {
             Pageable pageable = PageRequest.of(page, size);
-            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByEarliestArrivalTime(departureAirport, arrivalAirport, departureDate, pageable);
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByEarliestArrivalTime(arrivalAirport, departureAirport, departureDate, pageable);
             messageModel.setMessage("Success get schedule");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(scheduleResponses);
@@ -249,7 +249,7 @@ public class ScheduleController {
         MessageModel messageModel = new MessageModel();
         try {
             Pageable pageable = PageRequest.of(page, size);
-            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLatestArrivalTime(departureAirport, arrivalAirport, departureDate, pageable);
+            List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLatestArrivalTime(arrivalAirport, departureAirport, departureDate, pageable);
             messageModel.setMessage("Success get schedule");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(scheduleResponses);
