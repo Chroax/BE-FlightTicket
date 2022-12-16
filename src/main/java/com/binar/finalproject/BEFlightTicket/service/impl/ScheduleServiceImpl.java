@@ -3,6 +3,7 @@ package com.binar.finalproject.BEFlightTicket.service.impl;
 import com.binar.finalproject.BEFlightTicket.dto.*;
 import com.binar.finalproject.BEFlightTicket.model.*;
 import com.binar.finalproject.BEFlightTicket.repository.AirplanesRepository;
+import com.binar.finalproject.BEFlightTicket.repository.AirportsRepository;
 import com.binar.finalproject.BEFlightTicket.repository.RouteRepository;
 import com.binar.finalproject.BEFlightTicket.repository.ScheduleRepository;
 import com.binar.finalproject.BEFlightTicket.service.ScheduleService;
@@ -25,6 +26,8 @@ public class ScheduleServiceImpl implements ScheduleService {
     private AirplanesRepository airplanesRepository;
     @Autowired
     private RouteRepository routeRepository;
+    @Autowired
+    private AirportsRepository airportsRepository;
 
     @Override
     public ScheduleResponse addSchedule(ScheduleRequest scheduleRequest) {
@@ -157,9 +160,11 @@ public class ScheduleServiceImpl implements ScheduleService {
         {
             for (Routes routes : allRoute)
             {
+                Airports findDepartureAirport = airportsRepository.findByAirportName(routes.getDepartureAirport());
+                Airports findArrivalAirport = airportsRepository.findByAirportName(routes.getDepartureAirport());
                 for (Airplanes airplanes : allAirplane)
                 {
-                    SearchScheduleResponse searchScheduleResponse = SearchScheduleResponse.build(schedules, routes, airplanes);
+                    SearchScheduleResponse searchScheduleResponse = SearchScheduleResponse.build(schedules, routes, airplanes, findDepartureAirport.getIataCode(), findArrivalAirport.getIataCode());
                     allSearchScheduleResponse.add(searchScheduleResponse);
                     break;
                 }
@@ -237,7 +242,14 @@ public class ScheduleServiceImpl implements ScheduleService {
         {
             Optional<Routes> routes = routeRepository.findById(schedules.get().getRoutesSchedules().getRouteId());
             Optional<Airplanes> airplanes = airplanesRepository.findById(schedules.get().getAirplanesSchedules().getAirplaneName());
-            return SearchScheduleResponse.build(schedules.get(), routes.get(), airplanes.get());
+            if(routes.isPresent())
+            {
+                Airports findDepartureAirport = airportsRepository.findByAirportName(routes.get().getDepartureAirport());
+                Airports findArrivalAirport = airportsRepository.findByAirportName(routes.get().getDepartureAirport());
+                return SearchScheduleResponse.build(schedules.get(), routes.get(), airplanes.get(), findDepartureAirport.getIataCode(), findArrivalAirport.getIataCode());
+            }
+            else
+                return null;
         }
         else
             return null;
@@ -258,9 +270,11 @@ public class ScheduleServiceImpl implements ScheduleService {
         {
             for (Routes routes : allRoute)
             {
+                Airports findDepartureAirport = airportsRepository.findByAirportName(routes.getDepartureAirport());
+                Airports findArrivalAirport = airportsRepository.findByAirportName(routes.getDepartureAirport());
                 for (Airplanes airplanes : allAirplane)
                 {
-                    SearchScheduleResponse searchScheduleResponse = SearchScheduleResponse.build(schedules, routes, airplanes);
+                    SearchScheduleResponse searchScheduleResponse = SearchScheduleResponse.build(schedules, routes, airplanes, findDepartureAirport.getIataCode(), findArrivalAirport.getIataCode());
                     allSearchScheduleResponse.add(searchScheduleResponse);
                     break;
                 }

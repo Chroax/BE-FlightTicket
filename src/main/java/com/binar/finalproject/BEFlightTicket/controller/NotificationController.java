@@ -74,8 +74,7 @@ public class NotificationController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
-
-
+    
     @PutMapping(value = "/update/{notificationId}/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> updateNotification(@RequestBody NotificationRequest notificationRequest, @PathVariable UUID notificationId, @PathVariable UUID userId)

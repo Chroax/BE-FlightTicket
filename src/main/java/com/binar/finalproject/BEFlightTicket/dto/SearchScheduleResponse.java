@@ -1,6 +1,7 @@
 package com.binar.finalproject.BEFlightTicket.dto;
 
 import com.binar.finalproject.BEFlightTicket.model.Airplanes;
+import com.binar.finalproject.BEFlightTicket.model.Airports;
 import com.binar.finalproject.BEFlightTicket.model.Routes;
 import com.binar.finalproject.BEFlightTicket.model.Schedules;
 import lombok.Builder;
@@ -20,6 +21,8 @@ public class SearchScheduleResponse {
     private LocalTime arrivalTime;
     private Float price;
     private String status;
+    private String departureIATACode;
+    private String arrivalIATACode;
 
     private String airplaneName;
     private String airplaneType;
@@ -31,9 +34,11 @@ public class SearchScheduleResponse {
     private String arrivalAirport;
     private String departureTerminal;
     private String arrivalTerminal;
-    public static SearchScheduleResponse build (Schedules schedules, Routes routes, Airplanes airplanes) {
+    public static SearchScheduleResponse build (Schedules schedules, Routes routes, Airplanes airplanes, String departureIATACode, String arrivalIATACode) {
         return SearchScheduleResponse.builder()
                 .scheduleId(schedules.getScheduleId())
+                .departureIATACode(departureIATACode)
+                .departureIATACode(arrivalIATACode)
                 .departureDate(schedules.getDepartureDate())
                 .arrivalDate(schedules.getArrivalDate())
                 .departureTime(schedules.getDepartureTime())
