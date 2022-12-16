@@ -97,7 +97,7 @@ public class AirportsController {
     public ResponseEntity<MessageModel> getAirportsByCity(@PathVariable String cityName){
         MessageModel messageModel = new MessageModel();
         try {
-            List<AirportSearchResponse> getAirport = airportService.searchAirportByCityName(cityName);
+            List<AirportResponse> getAirport = airportService.searchAirportByCityName(cityName);
             messageModel.setMessage("Success get Airport By City");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(getAirport);
