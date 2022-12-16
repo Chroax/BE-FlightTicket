@@ -1,14 +1,12 @@
 package com.binar.finalproject.BEFlightTicket.service.impl;
 
-import com.binar.finalproject.BEFlightTicket.dto.AirportRequest;
-import com.binar.finalproject.BEFlightTicket.dto.AirportResponse;
-import com.binar.finalproject.BEFlightTicket.dto.CitiesResponse;
-import com.binar.finalproject.BEFlightTicket.dto.CountriesResponse;
+import com.binar.finalproject.BEFlightTicket.dto.*;
 import com.binar.finalproject.BEFlightTicket.model.Airports;
 import com.binar.finalproject.BEFlightTicket.model.Cities;
 import com.binar.finalproject.BEFlightTicket.model.Countries;
 import com.binar.finalproject.BEFlightTicket.repository.AirportsRepository;
 import com.binar.finalproject.BEFlightTicket.repository.CitiesRepository;
+import com.binar.finalproject.BEFlightTicket.repository.CountriesRepository;
 import com.binar.finalproject.BEFlightTicket.service.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +21,8 @@ public class AirportsServiceImpl implements AirportService {
     private AirportsRepository airportsRepository;
     @Autowired
     private CitiesRepository citiesRepository;
+    @Autowired
+    private CountriesRepository countriesRepository;
 
     @Override
     public AirportResponse addAirports(AirportRequest airportRequest) {
@@ -95,11 +95,14 @@ public class AirportsServiceImpl implements AirportService {
     }
 
     @Override
-    public List<AirportResponse> searchAirportByCityName(String cityName) {
+    public List<AirportSearchResponse> searchAirportByCityName(String cityName) {
+        Cities cities = citiesRepository.findByCityName(cityName);
+        Optional<Countries> countries = countriesRepository.findById(cities.getCityCode());
+
         List<Airports> allAirports = airportsRepository.findAllAirportByCity(cityName);
-        List<AirportResponse> allAirportResponse = new ArrayList<>();
+        List<AirportSearchResponse> allAirportResponse = new ArrayList<>();
         for (Airports airports : allAirports) {
-            AirportResponse airportResponse = AirportResponse.build(airports);
+            AirportSearchResponse airportResponse = AirportSearchResponse.build(airports, cityName, countries.get().getCountryName());
             allAirportResponse.add(airportResponse);
         }
         return allAirportResponse;
