@@ -52,27 +52,6 @@ public class UserController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
-    @PostMapping("/sign-up-google")
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<MessageModel> registerGoogleUser(@RequestParam("email") String email, @RequestParam("fullName") String fullname) {
-        MessageModel messageModel = new MessageModel();
-        Users users = new Users();
-        String googleId = users.getGoogleId();
-        UserResponse userResponse = customOAuth2UserService.oAuthLoginSuccess(email, fullname, googleId);
-        if(userResponse == null)
-        {
-            messageModel.setMessage("Failed register new user with google account");
-            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
-            return ResponseEntity.badRequest().body(messageModel);
-        }
-        else
-        {
-            messageModel.setStatus(HttpStatus.OK.value());
-            messageModel.setMessage("Register new user with google account");
-            messageModel.setData(userResponse);
-            return ResponseEntity.ok().body(messageModel);
-        }
-    }
 
     @PostMapping("/sign-in")
     @ResponseStatus(HttpStatus.CREATED)
