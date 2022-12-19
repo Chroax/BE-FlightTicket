@@ -9,5 +9,5 @@ public interface CitiesService {
     CitiesResponse addCity(CitiesRequest citiesRequest);
     List<CitiesResponse> searchAllCity();
     CitiesResponse updateCity(CitiesRequest citiesRequest, String cityCode);
-    CitiesResponse searchCityByName(String cityName);
+    List<CitiesResponse> searchCityByName(String cityName);
 }

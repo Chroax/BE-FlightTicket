@@ -25,12 +25,18 @@ public class GatesServiceImpl implements GatesService {
             Optional<Terminals> terminals = terminalsRepository.findById(gatesRequest.getTerminalId());
             if(terminals.isPresent())
             {
-                Gates gates = Gates.builder()
-                        .gateName(gatesRequest.getGateName())
-                        .terminalsGates(terminals.get())
-                        .build();
-                gatesRepository.saveAndFlush(gates);
-                return GatesResponse.build(gates);
+                Gates gatesExist = gatesRepository.findGateExist(gatesRequest.getGateName(), gatesRequest.getTerminalId());
+                if(gatesExist == null)
+                {
+                    Gates gates = Gates.builder()
+                            .gateName(gatesRequest.getGateName())
+                            .terminalsGates(terminals.get())
+                            .build();
+                    gatesRepository.saveAndFlush(gates);
+                    return GatesResponse.build(gates);
+                }
+                else
+                    return null;
             }
             else
                 return null;
@@ -58,7 +64,12 @@ public class GatesServiceImpl implements GatesService {
         if (isGates.isPresent()) {
             Gates gates = isGates.get();
 
-            gates.setGateName(gatesRequest.getGateName());
+            Gates gatesExist = gatesRepository.findGateExist(gatesRequest.getGateName(), gatesRequest.getTerminalId());
+            if(gatesExist == null)
+                gates.setGateName(gatesRequest.getGateName());
+            else
+                return null;
+
 
             Optional<Terminals> terminals = terminalsRepository.findById(gatesRequest.getTerminalId());
             if(terminals.isPresent())

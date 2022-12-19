@@ -80,7 +80,7 @@ public class CitiesController {
     public ResponseEntity<MessageModel> getCityByName(@PathVariable String cityName){
         MessageModel messageModel = new MessageModel();
         try {
-            CitiesResponse getCity = citiesService.searchCityByName(cityName);
+            List<CitiesResponse> getCity = citiesService.searchCityByName(cityName);
             messageModel.setMessage("Success get City By name");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(getCity);

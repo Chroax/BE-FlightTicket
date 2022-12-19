@@ -44,7 +44,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public JasperPrint generateInvoice(UUID orderId){
         Optional<Orders> isOrders = orderRepository.findById(orderId);
-        if(isOrders.isPresent())
+        if(isOrders.isPresent() && !isOrders.get().getPnrCode().isEmpty())
         {
             try {
                 File fileReport = ResourceUtils.getFile("classpath:reports/Invoice.jrxml");

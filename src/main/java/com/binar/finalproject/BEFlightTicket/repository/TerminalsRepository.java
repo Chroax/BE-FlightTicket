@@ -10,4 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface TerminalsRepository extends JpaRepository<Terminals, Integer> {
     @Query("SELECT t FROM Terminals t WHERE LOWER(t.terminalName) LIKE LOWER(:terminalName)")
     Terminals findByTerminalName(@Param("terminalName") String terminalName);
+
+    @Query("SELECT t FROM Terminals t WHERE LOWER(t.terminalName) = LOWER(:terminalName) AND LOWER(t.airportsTerminals.iataCode) = LOWER(:iataCode)")
+    Terminals findTerminalExist(@Param("terminalName") String terminalName, @Param("iataCode") String iataCode);
 }
