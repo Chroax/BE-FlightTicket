@@ -280,8 +280,8 @@ public class ScheduleController {
         }
     }
     
-    @GetMapping("/id/{scheduleId}")
-    public ResponseEntity<MessageModel> getAirplaneScheduleTicket(@PathVariable UUID scheduleId){
+    @GetMapping("/id")
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicket(@RequestParam ("scheduleId") UUID scheduleId){
         MessageModel messageModel = new MessageModel();
         try {
             SearchScheduleResponse scheduleResponses = scheduleService.searchScheduleDetails(scheduleId);
