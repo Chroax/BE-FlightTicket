@@ -17,10 +17,12 @@ public class OrderResponse {
     private Float totalPrice;
     private String pnrCode;
     private UUID userId;
+    private List<String> departureCity;
+    private List<String> arrivalCity;
     private Integer paymentId;
     private List<UUID> scheduleId;
 
-    public static OrderResponse build(Orders orders, List<UUID> scheduleId)
+    public static OrderResponse build(Orders orders, List<UUID> scheduleId, List<String> departureCity, List<String> arrivalCity)
     {
         return OrderResponse.builder()
                 .orderId(orders.getOrderId())
@@ -30,6 +32,8 @@ public class OrderResponse {
                 .pnrCode(orders.getPnrCode())
                 .userId(orders.getUsersOrder().getUserId())
                 .paymentId(orders.getPaymentMethodsOrder().getPaymentId())
+                .departureCity(departureCity)
+                .arrivalCity(arrivalCity)
                 .scheduleId(scheduleId)
                 .build();
     }

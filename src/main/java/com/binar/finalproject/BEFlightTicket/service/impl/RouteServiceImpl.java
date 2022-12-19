@@ -36,8 +36,8 @@ public class RouteServiceImpl implements RouteService {
         Airports departureAirports = airportsRepository.findByAirportName(routeRequest.getDepartureAirport());
         Cities arrivalCities = citiesRepository.findByCityName(routeRequest.getArrivalCity());
         Cities departureCities = citiesRepository.findByCityName(routeRequest.getDepartureCity());
-        Terminals arrivalTerminals = terminalsRepository.findByTerminalName(routeRequest.getArrivalTerminal());
-        Terminals departureTerminals = terminalsRepository.findByTerminalName(routeRequest.getDepartureTerminal());
+        Terminals arrivalTerminals = terminalsRepository.findTerminalExist(routeRequest.getArrivalTerminal(), arrivalAirports.getIataCode());
+        Terminals departureTerminals = terminalsRepository.findTerminalExist(routeRequest.getDepartureTerminal(), departureAirports.getIataCode());
 
         if(arrivalAirports == null)
             return null;

@@ -27,6 +27,8 @@ public class OrderServiceImpl implements OrderService {
     private AirportsRepository airportsRepository;
     @Autowired
     private NotificationRepository notificationRepository;
+    @Autowired
+    private RouteRepository routeRepository;
 
     @Override
     public OrderResponse addOrder(OrderRequest orderRequest) {
@@ -43,10 +45,16 @@ public class OrderServiceImpl implements OrderService {
                         Float totalPrice = 0f;
                         List<UUID> allSchedulesId = new ArrayList<>();
                         List<Schedules> allSchedules = new ArrayList<>();
+                        List<String> departureCity = new ArrayList<>();
+                        List<String> arrivalCity = new ArrayList<>();
+
                         for (UUID schedulesId: orderRequest.getScheduleId()) {
                             Optional<Schedules> schedules = scheduleRepository.findById(schedulesId);
                             if(schedules.isPresent())
                             {
+                                Optional<Routes> routes = routeRepository.findById(schedules.get().getRoutesSchedules().getRouteId());
+                                departureCity.add(routes.get().getDepartureCity());
+                                arrivalCity.add(routes.get().getArrivalCity());
                                 allSchedulesId.add(schedules.get().getScheduleId());
                                 allSchedules.add(schedules.get());
                                 totalPrice += schedules.get().getPrice();
@@ -59,7 +67,7 @@ public class OrderServiceImpl implements OrderService {
                         orders.setScheduleOrders(allSchedules);
                         orders.setStatus("WAITING");
                         orderRepository.save(orders);
-                        return OrderResponse.build(orders, allSchedulesId);
+                        return OrderResponse.build(orders, allSchedulesId, departureCity, arrivalCity);
                     }
                     catch(Exception exception)
                     {
@@ -92,7 +100,7 @@ public class OrderServiceImpl implements OrderService {
                 orders.setPnrCode(PNRGenerator.generatePNR());
                 NotificationRequest notificationRequest = new NotificationRequest("Order : " + orders.getOrderId().toString(),
                         "Pesanan kamu sudah dikonfirmasi");
-                Optional<Users> users = userRepository.findById(orders.getOrderId());
+                Optional<Users> users = userRepository.findById(orders.getUsersOrder().getUserId());
                 Notification notification = notificationRequest.toNotification(users.get());
                 notificationRepository.save(notification);
             }
@@ -104,11 +112,16 @@ public class OrderServiceImpl implements OrderService {
             Float totalPrice = 0f;
             List<UUID> allSchedulesId = new ArrayList<>();
             List<Schedules> allSchedules = new ArrayList<>();
+            List<String> departureCity = new ArrayList<>();
+            List<String> arrivalCity = new ArrayList<>();
 
             for (UUID schedulesId: orderRequest.getScheduleId()) {
                 Optional<Schedules> schedules = scheduleRepository.findById(schedulesId);
                 if(schedules.isPresent())
                 {
+                    Optional<Routes> routes = routeRepository.findById(schedules.get().getRoutesSchedules().getRouteId());
+                    departureCity.add(routes.get().getDepartureCity());
+                    arrivalCity.add(routes.get().getArrivalCity());
                     allSchedulesId.add(schedules.get().getScheduleId());
                     allSchedules.add(schedules.get());
                     totalPrice += schedules.get().getPrice();
@@ -137,7 +150,7 @@ public class OrderServiceImpl implements OrderService {
                 return null;
             else {
                 orderRepository.saveAndFlush(orders);
-                return OrderResponse.build(orders, orderRequest.getScheduleId());
+                return OrderResponse.build(orders, orderRequest.getScheduleId(), departureCity, arrivalCity);
             }
         }
         else
@@ -198,13 +211,18 @@ public class OrderServiceImpl implements OrderService {
         {
             List<Schedules> schedules = orders.getScheduleOrders();
             List<UUID> schedulesId = new ArrayList<>();
+            List<String> departureCity = new ArrayList<>();
+            List<String> arrivalCity = new ArrayList<>();
 
             for (Schedules schedule : schedules) {
                 assert false;
+                Optional<Routes> routes = routeRepository.findById(schedule.getRoutesSchedules().getRouteId());
+                departureCity.add(routes.get().getDepartureCity());
+                arrivalCity.add(routes.get().getArrivalCity());
                 schedulesId.add(schedule.getScheduleId());
             }
 
-            OrderResponse orderResponse = OrderResponse.build(orders, schedulesId);
+            OrderResponse orderResponse = OrderResponse.build(orders, schedulesId, departureCity, arrivalCity);
             allOrderResponse.add(orderResponse);
         }
         return allOrderResponse;
