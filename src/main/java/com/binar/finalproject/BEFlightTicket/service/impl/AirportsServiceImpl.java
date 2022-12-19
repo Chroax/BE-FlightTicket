@@ -85,18 +85,19 @@ public class AirportsServiceImpl implements AirportService {
     }
 
     @Override
-    public AirportResponse searchAirportsByName(String airportName) {
-        Airports airports = airportsRepository.findByAirportName(airportName);
-        if (airports != null){
-            return AirportResponse.build(airports);
-        }else {
-            return null;
+    public List<AirportResponse> searchAirportsByName(String airportName) {
+        List<Airports> allAirports = airportsRepository.findAllByAirportName(airportName + "%");
+        List<AirportResponse> allAirportResponse = new ArrayList<>();
+        for (Airports airports : allAirports) {
+            AirportResponse airportResponse = AirportResponse.build(airports);
+            allAirportResponse.add(airportResponse);
         }
+        return allAirportResponse;
     }
 
     @Override
     public List<AirportResponse> searchAirportByCityName(String cityName) {
-        List<Airports> allAirports = airportsRepository.findAllAirportByCity(cityName);
+        List<Airports> allAirports = airportsRepository.findAllAirportByCity(cityName + "%");
         List<AirportResponse> allAirportResponse = new ArrayList<>();
         for (Airports airports : allAirports) {
             AirportResponse airportResponse = AirportResponse.build(airports);

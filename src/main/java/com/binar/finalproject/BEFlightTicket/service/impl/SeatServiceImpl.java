@@ -2,8 +2,10 @@ package com.binar.finalproject.BEFlightTicket.service.impl;
 
 import com.binar.finalproject.BEFlightTicket.dto.SeatRequest;
 import com.binar.finalproject.BEFlightTicket.dto.SeatResponse;
+import com.binar.finalproject.BEFlightTicket.dto.TerminalResponse;
 import com.binar.finalproject.BEFlightTicket.model.Airplanes;
 import com.binar.finalproject.BEFlightTicket.model.Seats;
+import com.binar.finalproject.BEFlightTicket.model.Terminals;
 import com.binar.finalproject.BEFlightTicket.repository.AirplanesRepository;
 import com.binar.finalproject.BEFlightTicket.repository.SeatRepository;
 import com.binar.finalproject.BEFlightTicket.service.SeatService;
@@ -27,15 +29,20 @@ public class SeatServiceImpl implements SeatService {
            Optional<Airplanes> airplanes = airplanesRepository.findById(seatRequest.getAirplaneName());
            if (airplanes.isPresent())
            {
-               Seats seats = seatRequest.toSeats(airplanes.get());
-               try {
-                   seatRepository.save(seats);
-                   return SeatResponse.build(seats);
+               Seats seatsExist = seatRepository.findSeatExist(seatRequest.getSeatNumber(), seatRequest.getAirplaneName());
+               if(seatsExist == null) {
+                   Seats seats = seatRequest.toSeats(airplanes.get());
+                   try {
+                       seatRepository.save(seats);
+                       return SeatResponse.build(seats);
+                   }
+                   catch (Exception exception)
+                   {
+                       return null;
+                   }
                }
-               catch (Exception exception)
-               {
+               else
                    return null;
-               }
            }
            else
                return null;
@@ -55,15 +62,21 @@ public class SeatServiceImpl implements SeatService {
                 Optional<Airplanes> airplanes = airplanesRepository.findById(seatRequest.getAirplaneName());
                 if (airplanes.isPresent())
                 {
-                    Seats seats = seatRequest.toSeats(airplanes.get());
-                    try {
-                        seatRepository.save(seats);
-                        allSeatResponse.add(SeatResponse.build(seats));
-                    }
-                    catch (Exception exception)
+                    Seats seatsExist = seatRepository.findSeatExist(seatRequest.getSeatNumber(), seatRequest.getAirplaneName());
+                    if(seatsExist == null)
                     {
-                        return null;
+                        Seats seats = seatRequest.toSeats(airplanes.get());
+                        try {
+                            seatRepository.save(seats);
+                            allSeatResponse.add(SeatResponse.build(seats));
+                        }
+                        catch (Exception exception)
+                        {
+                            return null;
+                        }
                     }
+                    else
+                        return null;
                 }
                 else
                     return null;
@@ -104,7 +117,13 @@ public class SeatServiceImpl implements SeatService {
         if (isSeat.isPresent())
         {
             Seats seats = isSeat.get();
-            seats.setSeatNumber(seatRequest.getSeatNumber());
+            Seats seatsExist = seatRepository.findSeatExist(seatRequest.getSeatNumber(), seatRequest.getAirplaneName());
+
+            if(seatsExist == null)
+                seats.setSeatNumber(seatRequest.getSeatNumber());
+            else
+                return null;
+
             seats.setSeatType(seatRequest.getSeatType());
             Optional<Airplanes> airplanes = airplanesRepository.findById(seatRequest.getAirplaneName());
             if (airplanes.isPresent())

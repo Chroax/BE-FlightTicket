@@ -71,12 +71,13 @@ public class CountriesServiceImpl implements CountriesService {
     }
 
     @Override
-    public CountriesResponse searchCountriesByName(String countryName) {
-        Countries countries = countriesRepository.findByCountriesName(countryName);
-        if (countries != null){
-            return CountriesResponse.build(countries);
-        }else {
-            return null;
+    public List<CountriesResponse> searchCountriesByName(String countryName) {
+        List<Countries> allCountries = countriesRepository.findAllByCountriesName(countryName+"%");
+        List<CountriesResponse> allCountriesResponse = new ArrayList<>();
+        for (Countries countries : allCountries) {
+            CountriesResponse countriesResponse = CountriesResponse.build(countries);
+            allCountriesResponse.add(countriesResponse);
         }
+        return allCountriesResponse;
     }
 }

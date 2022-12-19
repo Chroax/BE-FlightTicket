@@ -54,6 +54,7 @@ public class OrderServiceImpl implements OrderService {
                         orders.setTotalTicket(allSchedulesId.size());
                         orders.setTotalPrice(totalPrice);
                         orders.setScheduleOrders(allSchedules);
+                        orders.setStatus("WAITING");
                         orderRepository.save(orders);
                         return OrderResponse.build(orders, allSchedulesId);
                     }

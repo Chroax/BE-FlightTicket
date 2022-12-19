@@ -80,7 +80,7 @@ public class AirportsController {
     public ResponseEntity<MessageModel> getAirportsByName(@PathVariable String airportName){
         MessageModel messageModel = new MessageModel();
         try {
-            AirportResponse getAirport = airportService.searchAirportsByName(airportName);
+            List<AirportResponse> getAirport = airportService.searchAirportsByName(airportName);
             messageModel.setMessage("Success get Airport By name");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(getAirport);

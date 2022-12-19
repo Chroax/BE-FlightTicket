@@ -100,7 +100,7 @@ public class CountriesController {
     public ResponseEntity<MessageModel> getCountriesByName(@PathVariable String countryName){
         MessageModel messageModel = new MessageModel();
         try {
-            CountriesResponse getCountries = countriesService.searchCountriesByName(countryName);
+            List<CountriesResponse> getCountries = countriesService.searchCountriesByName(countryName);
             messageModel.setMessage("Success get Countries By name");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(getCountries);
