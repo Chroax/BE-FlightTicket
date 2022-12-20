@@ -151,28 +151,11 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<SearchScheduleResponse> searchAirplaneTicketSchedule(String arrivalAirport, String departureAirport, String departureDate) {
-        List<Schedules> allSchedule = scheduleRepository.searchScheduleTicket(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
-        List<Routes> allRoute = routeRepository.searchRouteTicket(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
-        List<Airplanes> allAirplane = airplanesRepository.searchAirplaneTicket(arrivalAirport, departureAirport, LocalDate.parse(departureDate));
-        List<SearchScheduleResponse> allSearchScheduleResponse = new ArrayList<>();
-        for (Schedules schedules : allSchedule)
-        {
-            for (Routes routes : allRoute)
-            {
-                Airports findDepartureAirport = airportsRepository.findByAirportName(routes.getDepartureAirport());
-                Airports findArrivalAirport = airportsRepository.findByAirportName(routes.getArrivalAirport());
-                for (Airplanes airplanes : allAirplane)
-                {
-                    SearchScheduleResponse searchScheduleResponse = SearchScheduleResponse.build(schedules, routes, airplanes, findDepartureAirport.getIataCode(), findArrivalAirport.getIataCode());
-                    allSearchScheduleResponse.add(searchScheduleResponse);
-                    break;
-                }
-                break;
-            }
-
-        }
-        return allSearchScheduleResponse;
+    public List<SearchScheduleResponse> searchAirplaneTicketSchedule(String departureAirport, String arrivalAirport, String departureDate) {
+        List<Schedules> allSchedule = scheduleRepository.searchScheduleTicket(departureAirport, arrivalAirport, LocalDate.parse(departureDate));
+        List<Routes> allRoute = routeRepository.searchRouteTicket(departureAirport, arrivalAirport, LocalDate.parse(departureDate));
+        List<Airplanes> allAirplane = airplanesRepository.searchAirplaneTicket(departureAirport, arrivalAirport, LocalDate.parse(departureDate));
+        return toListSearchScheduleResponse(allSchedule, allRoute, allAirplane);
     }
 
     @Override
@@ -182,50 +165,50 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<SearchScheduleResponse> searchAirplaneTicketOrderByLowerPrice(String arrivalAirport, String departureAirport, String departureDate, Pageable pageable) {
-        Iterable<Schedules> allSchedule = scheduleRepository.searchScheduleTicketOrderByLowerPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
-        Iterable<Routes> allRoute = routeRepository.searchRouteTicketOrderByLowerPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
-        Iterable<Airplanes> allAirplane = airplanesRepository.searchAirplaneTicketOrderByLowerPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
+    public List<SearchScheduleResponse> searchAirplaneTicketOrderByLowerPrice(String departureAirport, String arrivalAirport, String departureDate, Pageable pageable) {
+        Iterable<Schedules> allSchedule = scheduleRepository.searchScheduleTicketOrderByLowerPrice(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
+        Iterable<Routes> allRoute = routeRepository.searchRouteTicketOrderByLowerPrice(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
+        Iterable<Airplanes> allAirplane = airplanesRepository.searchAirplaneTicketOrderByLowerPrice(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
         return toListSearchScheduleResponse(allSchedule, allRoute, allAirplane);
     }
 
     @Override
-    public List<SearchScheduleResponse> searchAirplaneTicketOrderByHigherPrice(String arrivalAirport, String departureAirport, String departureDate, Pageable pageable) {
-        Page<Schedules> allSchedule = scheduleRepository.searchScheduleTicketOrderByHigherPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
-        Page<Routes> allRoute = routeRepository.searchRouteTicketOrderByHigherPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
-        Page<Airplanes> allAirplane = airplanesRepository.searchAirplaneTicketOrderByHigherPrice(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
+    public List<SearchScheduleResponse> searchAirplaneTicketOrderByHigherPrice(String departureAirport, String arrivalAirport, String departureDate, Pageable pageable) {
+        Page<Schedules> allSchedule = scheduleRepository.searchScheduleTicketOrderByHigherPrice(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
+        Page<Routes> allRoute = routeRepository.searchRouteTicketOrderByHigherPrice(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
+        Page<Airplanes> allAirplane = airplanesRepository.searchAirplaneTicketOrderByHigherPrice(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
         return toListSearchScheduleResponse(allSchedule, allRoute, allAirplane);
     }
 
     @Override
-    public List<SearchScheduleResponse> searchAirplaneTicketOrderByEarliestDepartureTime(String arrivalAirport, String departureAirport, String departureDate, Pageable pageable) {
-        Page<Schedules> allSchedule = scheduleRepository.searchScheduleTicketByEarliestDepartureTime(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
-        Page<Routes> allRoute = routeRepository.searchRouteTicketByEarliestDepartureTime(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
-        Page<Airplanes> allAirplane = airplanesRepository.searchScheduleTicketByEarliestDepartureTime(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
+    public List<SearchScheduleResponse> searchAirplaneTicketOrderByEarliestDepartureTime(String departureAirport, String arrivalAirport, String departureDate, Pageable pageable) {
+        Page<Schedules> allSchedule = scheduleRepository.searchScheduleTicketByEarliestDepartureTime(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
+        Page<Routes> allRoute = routeRepository.searchRouteTicketByEarliestDepartureTime(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
+        Page<Airplanes> allAirplane = airplanesRepository.searchScheduleTicketByEarliestDepartureTime(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
         return toListSearchScheduleResponse(allSchedule, allRoute, allAirplane);
     }
 
     @Override
-    public List<SearchScheduleResponse> searchAirplaneTicketOrderByLatestDepartureTime(String arrivalAirport, String departureAirport, String departureDate, Pageable pageable) {
-        Page<Schedules> allSchedule = scheduleRepository.searchScheduleTicketByLatestDepartureTime(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
-        Page<Routes> allRoute = routeRepository.searchRouteTicketByLatestDepartureTime(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
-        Page<Airplanes> allAirplane = airplanesRepository.searchAirplaneTicketByLatestDepartureTime(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
+    public List<SearchScheduleResponse> searchAirplaneTicketOrderByLatestDepartureTime(String departureAirport, String arrivalAirport, String departureDate, Pageable pageable) {
+        Page<Schedules> allSchedule = scheduleRepository.searchScheduleTicketByLatestDepartureTime(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
+        Page<Routes> allRoute = routeRepository.searchRouteTicketByLatestDepartureTime(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
+        Page<Airplanes> allAirplane = airplanesRepository.searchAirplaneTicketByLatestDepartureTime(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
         return toListSearchScheduleResponse(allSchedule, allRoute, allAirplane);
     }
 
     @Override
-    public List<SearchScheduleResponse> searchAirplaneTicketOrderByEarliestArrivalTime(String arrivalAirport, String departureAirport, String departureDate, Pageable pageable) {
-        Page<Schedules> allSchedule = scheduleRepository.searchScheduleTicketByEarliestArrivalTime(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
-        Page<Routes> allRoute = routeRepository.searchScheduleTicketByEarliestArrivalTime(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
-        Page<Airplanes> allAirplane = airplanesRepository.searchScheduleTicketByEarliestArrivalTime(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
+    public List<SearchScheduleResponse> searchAirplaneTicketOrderByEarliestArrivalTime(String departureAirport, String arrivalAirport, String departureDate, Pageable pageable) {
+        Page<Schedules> allSchedule = scheduleRepository.searchScheduleTicketByEarliestArrivalTime(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
+        Page<Routes> allRoute = routeRepository.searchScheduleTicketByEarliestArrivalTime(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
+        Page<Airplanes> allAirplane = airplanesRepository.searchScheduleTicketByEarliestArrivalTime(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
         return toListSearchScheduleResponse(allSchedule, allRoute, allAirplane);
     }
 
     @Override
-    public List<SearchScheduleResponse> searchAirplaneTicketOrderByLatestArrivalTime(String arrivalAirport, String departureAirport, String departureDate, Pageable pageable) {
-        Page<Schedules> allSchedule = scheduleRepository.searchScheduleTicketByLatestArrivalTime(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
-        Page<Routes> allRoute = routeRepository.searchScheduleTicketByLatestArrivalTime(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
-        Page<Airplanes> allAirplane = airplanesRepository.searchScheduleTicketByLatestArrivalTime(arrivalAirport, departureAirport, LocalDate.parse(departureDate), pageable);
+    public List<SearchScheduleResponse> searchAirplaneTicketOrderByLatestArrivalTime(String departureAirport, String arrivalAirport, String departureDate, Pageable pageable) {
+        Page<Schedules> allSchedule = scheduleRepository.searchScheduleTicketByLatestArrivalTime(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
+        Page<Routes> allRoute = routeRepository.searchScheduleTicketByLatestArrivalTime(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
+        Page<Airplanes> allAirplane = airplanesRepository.searchScheduleTicketByLatestArrivalTime(departureAirport, arrivalAirport, LocalDate.parse(departureDate), pageable);
         return toListSearchScheduleResponse(allSchedule, allRoute, allAirplane);
     }
     @Override

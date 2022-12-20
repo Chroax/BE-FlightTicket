@@ -13,14 +13,14 @@ public interface ScheduleService {
     ScheduleResponse updateSchedule(ScheduleRequest scheduleRequest, UUID scheduleId);
     List<ScheduleResponse> searchAirplaneSchedule(String airplaneName);
     List<ScheduleResponse> searchRouteSchedule(UUID routeId);
-    List<SearchScheduleResponse> searchAirplaneTicketSchedule(String arrivalAirport, String departureAirport, String departureDate);
+    List<SearchScheduleResponse> searchAirplaneTicketSchedule(String departureAirport, String arrivalAirport, String departureDate);
     List<ScheduleResponse> getAllSchedule();
-    List<SearchScheduleResponse> searchAirplaneTicketOrderByLowerPrice(String arrivalAirport, String departureAirport, String departureDate, Pageable pageable);
-    List<SearchScheduleResponse> searchAirplaneTicketOrderByHigherPrice(String arrivalAirport, String departureAirport, String departureDate, Pageable pageable);
-    List<SearchScheduleResponse> searchAirplaneTicketOrderByEarliestDepartureTime(String arrivalAirport, String departureAirport, String departureDate, Pageable pageable);
-    List<SearchScheduleResponse> searchAirplaneTicketOrderByLatestDepartureTime(String arrivalAirport, String departureAirport, String departureDate, Pageable pageable);
-    List<SearchScheduleResponse> searchAirplaneTicketOrderByEarliestArrivalTime(String arrivalAirport, String departureAirport, String departureDate, Pageable pageable);
-    List<SearchScheduleResponse> searchAirplaneTicketOrderByLatestArrivalTime(String arrivalAirport, String departureAirport, String departureDate, Pageable pageable);
+    List<SearchScheduleResponse> searchAirplaneTicketOrderByLowerPrice(String departureAirport, String arrivalAirport, String departureDate, Pageable pageable);
+    List<SearchScheduleResponse> searchAirplaneTicketOrderByHigherPrice(String departureAirport, String arrivalAirport, String departureDate, Pageable pageable);
+    List<SearchScheduleResponse> searchAirplaneTicketOrderByEarliestDepartureTime(String departureAirport, String arrivalAirport, String departureDate, Pageable pageable);
+    List<SearchScheduleResponse> searchAirplaneTicketOrderByLatestDepartureTime(String departureAirport, String arrivalAirport, String departureDate, Pageable pageable);
+    List<SearchScheduleResponse> searchAirplaneTicketOrderByEarliestArrivalTime(String departureAirport, String arrivalAirport, String departureDate, Pageable pageable);
+    List<SearchScheduleResponse> searchAirplaneTicketOrderByLatestArrivalTime(String departureAirport, String arrivalAirport, String departureDate, Pageable pageable);
     Iterable<SearchScheduleResponse> findByDepartureArrivalAirportAndDepartureDate(String departureAirport, String arrivalAirport, String departureDate, Pageable pageable);
     SearchScheduleResponse searchScheduleDetails(UUID scheduleId);
 }
