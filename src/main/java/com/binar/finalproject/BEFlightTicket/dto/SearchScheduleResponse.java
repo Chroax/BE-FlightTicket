@@ -50,7 +50,7 @@ public class SearchScheduleResponse {
                 .routeId(routes.getRouteId())
                 .departureCity(routes.getDepartureCity())
                 .arrivalCity(routes.getArrivalCity())
-                .departureAirport(routes.getArrivalAirport())
+                .departureAirport(routes.getDepartureAirport())
                 .arrivalAirport(routes.getArrivalAirport())
                 .departureTerminal(routes.getDepartureTerminal())
                 .arrivalTerminal(routes.getArrivalTerminal())
