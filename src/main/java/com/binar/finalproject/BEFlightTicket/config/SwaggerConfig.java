@@ -51,8 +51,8 @@ public class SwaggerConfig {
         serverProd.setDescription("Main server for Production");
 
         Server serverDev = new Server();
-        serverProd.setUrl("https://api-flight.up.railway.app/");
-        serverProd.setDescription("Main server for Development");
+        serverDev.setUrl("https://api-flight.up.railway.app/");
+        serverDev.setDescription("Main server for Development");
 
         servers.add(serverDevLocal);
         servers.add(serverDev);
