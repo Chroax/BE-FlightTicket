@@ -6,7 +6,9 @@ import com.binar.finalproject.BEFlightTicket.dto.RoleResponse;
 import com.binar.finalproject.BEFlightTicket.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,11 +16,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/role")
 public class RoleController {
-
     @Autowired
     private RoleService roleService;
 
-    @PostMapping("/add")
+    @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> createRole(@RequestBody RoleRequest roleRequest)
     {
@@ -40,7 +41,8 @@ public class RoleController {
         }
     }
 
-    @GetMapping("/get-all")
+    @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> getAllRole()
     {
         MessageModel messageModel = new MessageModel();
@@ -58,7 +60,8 @@ public class RoleController {
         }
     }
 
-    @PutMapping("/update/{roleName}")
+    @PutMapping(value = "/update/{roleName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> updateRole(@PathVariable String roleName, @RequestBody RoleRequest roleRequest)
     {
         MessageModel messageModel = new MessageModel();
@@ -79,7 +82,8 @@ public class RoleController {
         }
     }
 
-    @DeleteMapping("/delete/{roleName}")
+    @DeleteMapping(value = "/delete/{roleName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> deleteRole(@PathVariable String roleName)
     {
         MessageModel messageModel = new MessageModel();

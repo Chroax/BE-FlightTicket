@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -19,6 +20,10 @@ import java.time.LocalDateTime;
 @Table(name = "passport")
 public class Passport {
     @Id
+    @GeneratedValue
+    @Column(name = "passport_id")
+    private UUID passportId;
+
     @Column(name = "passport_number", columnDefinition = "CHAR(50)")
     private String passportNumber;
 
@@ -35,7 +40,7 @@ public class Passport {
     @UpdateTimestamp
     private LocalDateTime modifiedAt;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="traveler_id", nullable = false)
     private TravelerList travelerListPassport;
 

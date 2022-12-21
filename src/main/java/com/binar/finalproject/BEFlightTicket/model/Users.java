@@ -1,20 +1,20 @@
 package com.binar.finalproject.BEFlightTicket.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -49,7 +49,7 @@ public class Users {
     private Boolean gender;
 
     @Column(name = "status_active", nullable = false)
-    private Boolean statusActive;
+    private Boolean statusActive = true;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
@@ -60,13 +60,24 @@ public class Users {
     @UpdateTimestamp
     private LocalDateTime modifiedAt;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="role_id", nullable = false)
-    private Roles rolesUsers;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Roles> rolesUsers = new HashSet<>();
 
     @OneToMany(mappedBy = "usersTravelerList", cascade = CascadeType.ALL)
     private Set<TravelerList> travelerList;
 
     @OneToMany(mappedBy = "usersOrder", cascade = CascadeType.ALL)
     private Set<Orders> orders;
+
+    public void addRoles(Roles roles)
+    {
+        this.rolesUsers.add(roles);
+    }
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Notification> notifications;
+
 }
