@@ -57,5 +57,7 @@ public class SwaggerConfig {
         servers.add(serverDevLocal);
         servers.add(serverDev);
         servers.add(serverProd);
+
+        return servers;
     }
 }
