@@ -1,0 +1,69 @@
+package com.binar.finalproject.BEFlightTicket.model;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Set;
+import java.util.UUID;
+
+@Entity
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "traveler_list")
+public class TravelerList {
+    @Id
+    @GeneratedValue
+    @Column(name = "traveler_id")
+    private UUID travelerId;
+
+    @Column(name = "type", length = 20 ,nullable = false)
+    private String type;
+
+    @Column(name = "title", columnDefinition = "CHAR(4)")
+    private String title;
+
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "birth_date", nullable = false, columnDefinition="DATE")
+    private LocalDate birthDate;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime createdAt;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(name = "modified_at", insertable = false)
+    @UpdateTimestamp
+    private LocalDateTime modifiedAt;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id", nullable = false)
+    private Users usersTravelerList;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="nationality", nullable = false)
+    private Countries countriesTravelerList;
+
+    @OneToMany(mappedBy = "travelerListPassport", cascade = CascadeType.ALL)
+    private Set<Passport> passports;
+
+    @OneToMany(mappedBy = "travelerListIDCard", cascade = CascadeType.ALL)
+    private Set<IDCard> idCards;
+
+    @OneToMany(mappedBy = "travelerListTicket", cascade = CascadeType.ALL)
+    private Set<Tickets> tickets;
+}
