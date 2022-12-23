@@ -22,9 +22,9 @@ public class NotificationController {
     NotificationService notificationService;
 
     @ResponseBody
-    @PostMapping("/add/{userid}")
+    @PostMapping("/add")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<MessageModel> addNotification(@RequestBody NotificationRequest notificationRequest, @PathVariable("userid") UUID userId) {
+    public ResponseEntity<MessageModel> addNotification(@RequestBody NotificationRequest notificationRequest, @RequestParam UUID userId) {
         MessageModel messageModel =  new MessageModel();
         NotificationResponse notificationResponse = notificationService.addNotification(notificationRequest, userId);
         if (notificationResponse == null) {
@@ -40,9 +40,9 @@ public class NotificationController {
     }
 
     @ResponseBody
-    @GetMapping("/get/{userId}")
+    @GetMapping("/get")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BUYER')")
-    public ResponseEntity<MessageModel> getAll(@PathVariable("userId") UUID userId) {
+    public ResponseEntity<MessageModel> getAll(@RequestParam UUID userId) {
         MessageModel messageModel = new MessageModel();
         NotificationDetailResponse notificationDetailResponse = notificationService.getAllNotificationByUserId(userId);
         if (notificationDetailResponse == null) {
@@ -58,9 +58,9 @@ public class NotificationController {
     }
 
     @ResponseBody
-    @PutMapping("/update-status/{userId}/{notificationId}")
+    @PutMapping("/update-status")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    public ResponseEntity<MessageModel> updateReadStatus(@PathVariable("userId") UUID userId, @PathVariable("notificationId") UUID notificationId) {
+    public ResponseEntity<MessageModel> updateReadStatus(@RequestParam UUID userId, @RequestParam UUID notificationId) {
         MessageModel messageModel = new MessageModel();
         NotificationResponse notificationDetailResponse = notificationService.updateIsRead(userId, notificationId);
         if (notificationDetailResponse == null) {
@@ -75,9 +75,9 @@ public class NotificationController {
         }
     }
     
-    @PutMapping(value = "/update/{notificationId}/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<MessageModel> updateNotification(@RequestBody NotificationRequest notificationRequest, @PathVariable UUID notificationId, @PathVariable UUID userId)
+    public ResponseEntity<MessageModel> updateNotification(@RequestBody NotificationRequest notificationRequest, @RequestParam UUID notificationId, @RequestParam UUID userId)
     {
         MessageModel messageModel = new MessageModel();
         NotificationResponse notificationResponse = notificationService.updateNotification(notificationRequest, notificationId, userId);
