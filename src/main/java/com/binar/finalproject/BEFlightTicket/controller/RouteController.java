@@ -60,7 +60,7 @@ public class RouteController {
         }
     }
 
-    @GetMapping("findby-airport")
+    @GetMapping("/findby-airport")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getRouteByDepartureAndArrivalAirport(@RequestParam String departureAirport,@RequestParam String arrivalAirport){
         MessageModel messageModel = new MessageModel();
