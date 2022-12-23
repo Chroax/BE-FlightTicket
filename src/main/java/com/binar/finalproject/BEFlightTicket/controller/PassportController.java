@@ -39,9 +39,9 @@ public class PassportController {
         }
     }
 
-    @GetMapping("/get-all/traveler/{travelerId}")
+    @GetMapping("/findby-traveler")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getTravelerPassport(@PathVariable UUID travelerId){
+    public ResponseEntity<MessageModel> getTravelerPassport(@RequestParam UUID travelerId){
         MessageModel messageModel = new MessageModel();
         try {
             PassportResponse passportResponse = passportService.searchTravelerListPassport(travelerId);
@@ -58,8 +58,8 @@ public class PassportController {
     }
 
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    @GetMapping("/get/{passportId}")
-    public ResponseEntity<MessageModel> getPassport(@PathVariable UUID passportId){
+    @GetMapping("/findby-id")
+    public ResponseEntity<MessageModel> getPassport(@RequestParam UUID passportId){
         MessageModel messageModel = new MessageModel();
         try {
             PassportResponse passportResponse = passportService.searchPassport(passportId);
@@ -75,9 +75,9 @@ public class PassportController {
         }
     }
 
-    @PutMapping("/update/{passportId}")
+    @PutMapping("/update")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> updatePassport(@PathVariable UUID passportId, @RequestBody PassportRequest passportRequest) {
+    public ResponseEntity<MessageModel> updatePassport(@RequestParam UUID passportId, @RequestBody PassportRequest passportRequest) {
         MessageModel messageModel = new MessageModel();
         PassportResponse passportResponse = passportService.updatePassport(passportRequest, passportId);
 
