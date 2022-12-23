@@ -89,7 +89,7 @@ public class UserController {
 
     @GetMapping("/findby-fullname")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getUserByfullName(@RequestParam("FullName") String fullName){
+    public ResponseEntity<MessageModel> getUserByfullName(@RequestParam String fullName){
         MessageModel messageModel = new MessageModel();
         try {
             UserResponse userGet = userService.searchUserByName(fullName);
@@ -107,7 +107,7 @@ public class UserController {
 
     @DeleteMapping("/delete")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> deleteUser(@RequestParam("Full Name") String fullName){
+    public ResponseEntity<MessageModel> deleteUser(@RequestParam String fullName){
         MessageModel messageModel = new MessageModel();
         Boolean deleteUser = userService.deleteUser(fullName);
         if(deleteUser)
@@ -126,7 +126,7 @@ public class UserController {
 
     @PutMapping("/update")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> updateUser(@RequestParam("Full Name") String fullName, @RequestBody UserUpdateRequest userUpdateRequest) {
+    public ResponseEntity<MessageModel> updateUser(@RequestParam String fullName, @RequestBody UserUpdateRequest userUpdateRequest) {
         MessageModel messageModel = new MessageModel();
         UserResponse userResponse = userService.updateUser(userUpdateRequest, fullName);
 
