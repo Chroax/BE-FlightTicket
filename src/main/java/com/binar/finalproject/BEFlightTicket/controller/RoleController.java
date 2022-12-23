@@ -60,9 +60,9 @@ public class RoleController {
         }
     }
 
-    @PutMapping(value = "/update/{roleName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<MessageModel> updateRole(@PathVariable String roleName, @RequestBody RoleRequest roleRequest)
+    public ResponseEntity<MessageModel> updateRole(@RequestParam String roleName, @RequestBody RoleRequest roleRequest)
     {
         MessageModel messageModel = new MessageModel();
         RoleResponse roleResponse = roleService.updateRole(roleRequest, roleName);
@@ -82,9 +82,9 @@ public class RoleController {
         }
     }
 
-    @DeleteMapping(value = "/delete/{roleName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<MessageModel> deleteRole(@PathVariable String roleName)
+    public ResponseEntity<MessageModel> deleteRole(@RequestParam String roleName)
     {
         MessageModel messageModel = new MessageModel();
         Boolean deleteRole = roleService.deleteRole(roleName);
