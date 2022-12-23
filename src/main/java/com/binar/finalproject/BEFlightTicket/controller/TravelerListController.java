@@ -99,7 +99,7 @@ public class TravelerListController {
 
     @PutMapping("/update")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> updateUser(@RequestParam("Traveler Id") UUID travelerId, @RequestBody TravelerListUpdateRequest travelerListUpdateRequest) {
+    public ResponseEntity<MessageModel> updateUser(@RequestParam("TravelerId") UUID travelerId, @RequestBody TravelerListUpdateRequest travelerListUpdateRequest) {
         MessageModel messageModel = new MessageModel();
         TravelerListResponse travelerListResponse = travelerListService.updateTravelerList(travelerListUpdateRequest, travelerId);
 
