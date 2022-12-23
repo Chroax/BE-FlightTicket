@@ -57,7 +57,7 @@ public class CountriesController {
 
     @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<MessageModel> updateCountries(@RequestParam("Country Name") String countryName, @RequestBody CountriesRequest countriesRequest)
+    public ResponseEntity<MessageModel> updateCountries(@RequestParam String countryName, @RequestBody CountriesRequest countriesRequest)
     {
         MessageModel messageModel = new MessageModel();
         CountriesResponse countriesResponse = countriesService.updateCountries(countriesRequest, countryName);
@@ -78,7 +78,7 @@ public class CountriesController {
 
     @DeleteMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<MessageModel> deleteCountriesByName(@RequestParam("Country Name") String countryName)
+    public ResponseEntity<MessageModel> deleteCountriesByName(@RequestParam String countryName)
     {
         MessageModel messageModel = new MessageModel();
         Boolean deleteCountries = countriesService.deleteCountries(countryName);
@@ -97,7 +97,7 @@ public class CountriesController {
     }
 
     @GetMapping(value = "/findby-name", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageModel> getCountriesByName(@RequestParam("Country Name") String countryName){
+    public ResponseEntity<MessageModel> getCountriesByName(@RequestParam String countryName){
         MessageModel messageModel = new MessageModel();
         try {
             List<CountriesResponse> getCountries = countriesService.searchCountriesByName(countryName);
