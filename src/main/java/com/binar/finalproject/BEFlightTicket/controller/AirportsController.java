@@ -55,9 +55,9 @@ public class AirportsController {
         }
     }
 
-    @PutMapping(value = "/update/{iataCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<MessageModel> updateAirports(@PathVariable String iataCode, @RequestBody AirportRequest airportRequest)
+    public ResponseEntity<MessageModel> updateAirports(@RequestParam("IATA Code") String iataCode, @RequestBody AirportRequest airportRequest)
     {
         MessageModel messageModel = new MessageModel();
         AirportResponse airportResponse = airportService.updateAirports(airportRequest, iataCode);
@@ -76,8 +76,8 @@ public class AirportsController {
         }
     }
 
-    @GetMapping(value = "/name/{airportName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageModel> getAirportsByName(@PathVariable String airportName){
+    @GetMapping(value = "/findby-name", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> getAirportsByName(@RequestParam("Airport Name") String airportName){
         MessageModel messageModel = new MessageModel();
         try {
             List<AirportResponse> getAirport = airportService.searchAirportsByName(airportName);
@@ -93,8 +93,8 @@ public class AirportsController {
         }
     }
 
-    @GetMapping(value = "/city/{cityName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageModel> getAirportsByCity(@PathVariable String cityName){
+    @GetMapping(value = "/findby-city", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> getAirportsByCity(@RequestParam("City Namen") String cityName){
         MessageModel messageModel = new MessageModel();
         try {
             List<AirportResponse> getAirport = airportService.searchAirportByCityName(cityName);
