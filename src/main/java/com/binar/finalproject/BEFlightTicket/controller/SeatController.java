@@ -59,9 +59,9 @@ public class SeatController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
-    @GetMapping("/id/{seatId}")
+    @GetMapping("/findby-id")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getSeatById(@PathVariable Integer seatId){
+    public ResponseEntity<MessageModel> getSeatById(@RequestParam Integer seatId){
         MessageModel messageModel = new MessageModel();
         try {
             SeatResponse seatGet = seatService.searchSeatById(seatId);
@@ -96,9 +96,9 @@ public class SeatController {
         }
     }
 
-    @GetMapping("/get-all/airplane/{airplaneName}")
+    @GetMapping("/findby-airplane")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getAirplaneSeat(@PathVariable String airplaneName){
+    public ResponseEntity<MessageModel> getAirplaneSeat(@RequestParam String airplaneName){
         MessageModel messageModel = new MessageModel();
         try {
             List<SeatResponse> seatResponses = seatService.searchAirplaneSeat(airplaneName);
@@ -114,9 +114,9 @@ public class SeatController {
         }
     }
 
-    @PutMapping(value = "/update/{seatId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<MessageModel> updateSeat(@PathVariable Integer seatId, @RequestBody SeatRequest seatRequest)
+    public ResponseEntity<MessageModel> updateSeat(@RequestParam Integer seatId, @RequestBody SeatRequest seatRequest)
     {
         MessageModel messageModel = new MessageModel();
         SeatResponse seatResponse = seatService.updateSeat(seatRequest, seatId);
