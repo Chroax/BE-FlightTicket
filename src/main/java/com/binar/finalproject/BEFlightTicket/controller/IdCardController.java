@@ -38,9 +38,9 @@ public class IdCardController {
         }
     }
 
-    @GetMapping("/findby-travelerId")
+    @GetMapping("get-all/traveler/{travelerId}")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getTravelerIdCard(@RequestParam UUID travelerId){
+    public ResponseEntity<MessageModel> getTravelerIdCard(@PathVariable UUID travelerId){
         MessageModel messageModel = new MessageModel();
         try {
             IdCardResponse idCardResponses = idCardService.searchTravelerListIdCard(travelerId);
