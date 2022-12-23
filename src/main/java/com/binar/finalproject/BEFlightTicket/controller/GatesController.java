@@ -55,9 +55,9 @@ public class GatesController {
         }
     }
 
-    @PutMapping(value = "/update/{gateId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<MessageModel> updateGates(@PathVariable Integer gateId, @RequestBody GatesRequest gatesRequest) {
+    public ResponseEntity<MessageModel> updateGates(@RequestParam Integer gateId, @RequestBody GatesRequest gatesRequest) {
         MessageModel messageModel = new MessageModel();
         GatesResponse gatesResponse = gatesService.updateGates(gatesRequest, gateId);
         if(gatesResponse == null) {
