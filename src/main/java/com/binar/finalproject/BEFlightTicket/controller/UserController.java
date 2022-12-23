@@ -89,7 +89,7 @@ public class UserController {
 
     @GetMapping("/findby-fullname")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getUserByfullName(@RequestParam("Full Name") String fullName){
+    public ResponseEntity<MessageModel> getUserByfullName(@RequestParam("FullName") String fullName){
         MessageModel messageModel = new MessageModel();
         try {
             UserResponse userGet = userService.searchUserByName(fullName);
