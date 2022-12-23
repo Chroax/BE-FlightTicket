@@ -87,9 +87,9 @@ public class UserController {
         }
     }
 
-    @GetMapping("/name/{fullName}")
+    @GetMapping("/findby-fullname")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getUserByfullName(@PathVariable String fullName){
+    public ResponseEntity<MessageModel> getUserByfullName(@RequestParam("Full Name") String fullName){
         MessageModel messageModel = new MessageModel();
         try {
             UserResponse userGet = userService.searchUserByName(fullName);
@@ -105,9 +105,9 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/delete/{fullName}")
+    @DeleteMapping("/delete")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> deleteUser(@PathVariable String fullName){
+    public ResponseEntity<MessageModel> deleteUser(@RequestParam("Full Name") String fullName){
         MessageModel messageModel = new MessageModel();
         Boolean deleteUser = userService.deleteUser(fullName);
         if(deleteUser)
@@ -124,9 +124,9 @@ public class UserController {
         }
     }
 
-    @PutMapping("/update/{fullName}")
+    @PutMapping("/update")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> updateUser(@PathVariable String fullName, @RequestBody UserUpdateRequest userUpdateRequest) {
+    public ResponseEntity<MessageModel> updateUser(@RequestParam("Full Name") String fullName, @RequestBody UserUpdateRequest userUpdateRequest) {
         MessageModel messageModel = new MessageModel();
         UserResponse userResponse = userService.updateUser(userUpdateRequest, fullName);
 
