@@ -157,9 +157,10 @@ public class ScheduleController {
     }
 
     @GetMapping("lower-price")
-    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLowerPrice(@RequestParam("depAirport") String departureAirport,@RequestParam("arrAirport") String arrivalAirport, @RequestParam("depDate") String departureDate, @RequestParam Integer size, @RequestParam Integer page){
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLowerPrice(@RequestParam("depAirport") String departureAirport,@RequestParam("arrAirport") String arrivalAirport, @RequestParam("depDate") String departureDate, @RequestParam Integer page){
         MessageModel messageModel = new MessageModel();
         try {
+            int size = 5;
             Pageable pageable = PageRequest.of(page, size);
             List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLowerPrice(departureAirport, arrivalAirport, departureDate, pageable);
             messageModel.setMessage("Success get schedule");
@@ -175,9 +176,10 @@ public class ScheduleController {
     }
 
     @GetMapping("higher-price")
-    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByHighestPrice(@RequestParam("depAirport") String departureAirport,@RequestParam("arrAirport") String arrivalAirport, @RequestParam("depDate") String departureDate, @RequestParam Integer size, @RequestParam Integer page){
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByHighestPrice(@RequestParam("depAirport") String departureAirport,@RequestParam("arrAirport") String arrivalAirport, @RequestParam("depDate") String departureDate, @RequestParam Integer page){
         MessageModel messageModel = new MessageModel();
         try {
+            int size = 5;
             Pageable pageable = PageRequest.of(page, size);
             List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByHigherPrice(departureAirport, arrivalAirport, departureDate, pageable);
             messageModel.setMessage("Success get schedule");
@@ -193,9 +195,10 @@ public class ScheduleController {
     }
 
     @GetMapping("earliest-departure")
-    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByEarliestDepartureTime(@RequestParam("depAirport") String departureAirport,@RequestParam("arrAirport") String arrivalAirport, @RequestParam("depDate") String departureDate, @RequestParam Integer size, @RequestParam Integer page){
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByEarliestDepartureTime(@RequestParam("depAirport") String departureAirport,@RequestParam("arrAirport") String arrivalAirport, @RequestParam("depDate") String departureDate, @RequestParam Integer page){
         MessageModel messageModel = new MessageModel();
         try {
+            int size = 5;
             Pageable pageable = PageRequest.of(page, size);
             List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByEarliestDepartureTime(departureAirport, arrivalAirport, departureDate, pageable);
             messageModel.setMessage("Success get schedule");
@@ -211,9 +214,10 @@ public class ScheduleController {
     }
 
     @GetMapping("latest-departure")
-    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLatestDepartureTime(@RequestParam("depAirport") String departureAirport,@RequestParam("arrAirport") String arrivalAirport, @RequestParam("depDate") String departureDate, @RequestParam Integer size, @RequestParam Integer page){
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLatestDepartureTime(@RequestParam("depAirport") String departureAirport,@RequestParam("arrAirport") String arrivalAirport, @RequestParam("depDate") String departureDate, @RequestParam Integer page){
         MessageModel messageModel = new MessageModel();
         try {
+            int size = 5;
             Pageable pageable = PageRequest.of(page, size);
             List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLatestDepartureTime(departureAirport, arrivalAirport, departureDate, pageable);
             messageModel.setMessage("Success get schedule");
@@ -229,9 +233,10 @@ public class ScheduleController {
     }
 
     @GetMapping("earliest-arrival")
-    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByEarliestArrivalTime(@RequestParam("depAirport") String departureAirport,@RequestParam("arrAirport") String arrivalAirport, @RequestParam("depDate") String departureDate, @RequestParam Integer size, @RequestParam Integer page){
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByEarliestArrivalTime(@RequestParam("depAirport") String departureAirport,@RequestParam("arrAirport") String arrivalAirport, @RequestParam("depDate") String departureDate, @RequestParam Integer page){
         MessageModel messageModel = new MessageModel();
         try {
+            int size = 5;
             Pageable pageable = PageRequest.of(page, size);
             List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByEarliestArrivalTime(departureAirport, arrivalAirport, departureDate, pageable);
             messageModel.setMessage("Success get schedule");
@@ -247,9 +252,10 @@ public class ScheduleController {
     }
 
     @GetMapping("latest-arrival")
-    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLatestArrivalTime(@RequestParam("depAirport") String departureAirport,@RequestParam("arrAirport") String arrivalAirport, @RequestParam("depDate") String departureDate, @RequestParam Integer size, @RequestParam Integer page){
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicketOrderByLatestArrivalTime(@RequestParam("depAirport") String departureAirport,@RequestParam("arrAirport") String arrivalAirport, @RequestParam("depDate") String departureDate, @RequestParam Integer page){
         MessageModel messageModel = new MessageModel();
         try {
+            int size = 5;
             Pageable pageable = PageRequest.of(page, size);
             List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLatestArrivalTime(departureAirport, arrivalAirport, departureDate, pageable);
             messageModel.setMessage("Success get schedule");
@@ -265,9 +271,10 @@ public class ScheduleController {
     }
 
     @GetMapping("paging")
-    public ResponseEntity<MessageModel> getAirplaneScheduleTicket(@RequestParam("depAirport") String departureAirport,@RequestParam("arrAirport") String arrivalAirport, @RequestParam("depDate") String departureDate, @RequestParam Integer size, @RequestParam Integer page){
+    public ResponseEntity<MessageModel> getAirplaneScheduleTicket(@RequestParam("depAirport") String departureAirport,@RequestParam("arrAirport") String arrivalAirport, @RequestParam("depDate") String departureDate, @RequestParam Integer page){
         MessageModel messageModel = new MessageModel();
         try {
+            int size = 5;
             Pageable pageable = PageRequest.of(page, size);
             Iterable<SearchScheduleResponse> scheduleResponses = scheduleService.findByDepartureArrivalAirportAndDepartureDate(departureAirport, arrivalAirport, departureDate, pageable);
             messageModel.setMessage("Success get schedule");
