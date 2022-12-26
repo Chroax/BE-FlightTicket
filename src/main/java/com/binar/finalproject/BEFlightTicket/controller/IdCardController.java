@@ -38,9 +38,9 @@ public class IdCardController {
         }
     }
 
-    @GetMapping("/get-all/traveler/{travelerId}")
+    @GetMapping("/findby-travelerId")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getTravelerIdCard(@PathVariable UUID travelerId){
+    public ResponseEntity<MessageModel> getTravelerIdCard(@RequestParam UUID travelerId){
         MessageModel messageModel = new MessageModel();
         try {
             IdCardResponse idCardResponses = idCardService.searchTravelerListIdCard(travelerId);
@@ -58,8 +58,8 @@ public class IdCardController {
 
 
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    @GetMapping("/get/{idCardId}")
-    public ResponseEntity<MessageModel> getIdCard(@PathVariable UUID idCardId){
+    @GetMapping("/findby-id")
+    public ResponseEntity<MessageModel> getIdCard(@RequestParam UUID idCardId){
         MessageModel messageModel = new MessageModel();
         try {
             IdCardResponse idCardResponses = idCardService.searchIdCard(idCardId);
@@ -75,9 +75,9 @@ public class IdCardController {
         }
     }
     
-    @PutMapping("/update/{idCardId}")
+    @PutMapping("/update")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> updateIdCard(@PathVariable UUID idCardId, @RequestBody IdCardRequest idCardRequest) {
+    public ResponseEntity<MessageModel> updateIdCard(@RequestParam UUID idCardId, @RequestBody IdCardRequest idCardRequest) {
         MessageModel messageModel = new MessageModel();
         IdCardResponse idCardResponse = idCardService.updateIdCard(idCardRequest, idCardId);
 

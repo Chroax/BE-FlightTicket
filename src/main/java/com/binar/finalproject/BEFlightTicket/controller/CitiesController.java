@@ -37,9 +37,9 @@ public class CitiesController {
         }
     }
 
-    @PutMapping(value = "/update/{cityCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<MessageModel> updateCity(@PathVariable String cityCode, @RequestBody CitiesRequest citiesRequest)
+    public ResponseEntity<MessageModel> updateCity(@RequestParam String cityCode, @RequestBody CitiesRequest citiesRequest)
     {
         MessageModel messageModel = new MessageModel();
         CitiesResponse citiesResponse = citiesService.updateCity(citiesRequest, cityCode);
@@ -76,8 +76,8 @@ public class CitiesController {
         }
     }
 
-    @GetMapping(value = "/name/{cityName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageModel> getCityByName(@PathVariable String cityName){
+    @GetMapping(value = "/findby-name", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> getCityByName(@RequestParam String cityName){
         MessageModel messageModel = new MessageModel();
         try {
             List<CitiesResponse> getCity = citiesService.searchCityByName(cityName);

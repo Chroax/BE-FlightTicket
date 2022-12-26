@@ -56,9 +56,9 @@ public class TicketController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-    @PutMapping("/update/{ticketId}")
+    @PutMapping("/update")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<MessageModel> updateTicket(@PathVariable UUID ticketId, @RequestBody TicketRequest ticketRequest) {
+    public ResponseEntity<MessageModel> updateTicket(@RequestParam UUID ticketId, @RequestBody TicketRequest ticketRequest) {
         MessageModel messageModel = new MessageModel();
         TicketResponse ticketResponse = ticketService.updateTicket(ticketRequest, ticketId);
 
@@ -76,9 +76,9 @@ public class TicketController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
-    @GetMapping("/get-by/{ticketId}")
+    @GetMapping("/findby-id")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getTicketById(@PathVariable UUID ticketId){
+    public ResponseEntity<MessageModel> getTicketById(@RequestParam UUID ticketId){
         MessageModel messageModel = new MessageModel();
         try {
             TicketResponse ticketGet = ticketService.searchTicketById(ticketId);
@@ -93,9 +93,9 @@ public class TicketController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-    @GetMapping("/get-all/{orderId}")
+    @GetMapping("/findby-order")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getOrderTicket(@PathVariable UUID orderId){
+    public ResponseEntity<MessageModel> getOrderTicket(@RequestParam UUID orderId){
         MessageModel messageModel = new MessageModel();
         try {
             List<TicketResponse> ticketResponses = ticketService.searchOrderTicket(orderId);

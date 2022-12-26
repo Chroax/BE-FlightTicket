@@ -41,8 +41,8 @@ public class AirplaneController {
         }
     }
 
-    @GetMapping("/name/{airplaneName}")
-    public ResponseEntity<MessageModel> getAirplaneByName(@PathVariable String airplaneName){
+    @GetMapping("/findby-name")
+    public ResponseEntity<MessageModel> getAirplaneByName(@RequestParam String airplaneName){
         MessageModel messageModel = new MessageModel();
         try {
             AirplanesResponse airplaneGet = airplanesService.searchAirplaneByName(airplaneName);
@@ -77,9 +77,9 @@ public class AirplaneController {
         }
     }
 
-    @PutMapping("/update/{airplaneName}")
+    @PutMapping("/update")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<MessageModel> updateAirplane(@PathVariable String airplaneName, @RequestBody AirplanesRequest airplanesRequest)
+    public ResponseEntity<MessageModel> updateAirplane(@RequestParam String airplaneName, @RequestBody AirplanesRequest airplanesRequest)
     {
         MessageModel messageModel = new MessageModel();
         AirplanesResponse airplanesResponse = airplanesService.updateAirplane(airplanesRequest, airplaneName);
@@ -99,9 +99,9 @@ public class AirplaneController {
         }
     }
 
-    @DeleteMapping("/delete/{airplaneName}")
+    @DeleteMapping("/delete")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<MessageModel> deleteAirplane(@PathVariable String airplaneName)
+    public ResponseEntity<MessageModel> deleteAirplane(@RequestParam String airplaneName)
     {
         MessageModel messageModel = new MessageModel();
         Boolean deleteAirplane = airplanesService.deleteAirplane(airplaneName);

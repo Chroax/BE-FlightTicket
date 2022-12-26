@@ -47,9 +47,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         if(isOrders.isPresent() && !isOrders.get().getPnrCode().isEmpty())
         {
             try {
-                File fileReport = ResourceUtils.getFile("classpath:reports/Invoice.jrxml");
-                System.out.println(fileReport.getAbsolutePath());
-                JasperReport jasperReport = JasperCompileManager.compileReport(fileReport.getAbsolutePath());
+                JasperReport jasperReport = JasperCompileManager.compileReport(getClass().getResourceAsStream("/reports/Invoice.jrxml"));
                 Map<String, Object> params = new HashMap<>();
                 params.put("ORDER_ID", orderId.toString());
                 params.put("QR", new ByteArrayInputStream(

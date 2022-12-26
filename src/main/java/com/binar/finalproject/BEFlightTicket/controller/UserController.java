@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -87,12 +88,12 @@ public class UserController {
         }
     }
 
-    @GetMapping("/name/{fullName}")
+    @GetMapping("/findby-id")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getUserByfullName(@PathVariable String fullName){
+    public ResponseEntity<MessageModel> getUserByfullName(@RequestParam UUID userId){
         MessageModel messageModel = new MessageModel();
         try {
-            UserResponse userGet = userService.searchUserByName(fullName);
+            UserResponse userGet = userService.searchUserById(userId);
             messageModel.setMessage("Success get user");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(userGet);
@@ -105,9 +106,9 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/delete/{fullName}")
+    @DeleteMapping("/delete")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> deleteUser(@PathVariable String fullName){
+    public ResponseEntity<MessageModel> deleteUser(@RequestParam String fullName){
         MessageModel messageModel = new MessageModel();
         Boolean deleteUser = userService.deleteUser(fullName);
         if(deleteUser)
@@ -124,22 +125,22 @@ public class UserController {
         }
     }
 
-    @PutMapping("/update/{fullName}")
+    @PutMapping("/update")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> updateUser(@PathVariable String fullName, @RequestBody UserUpdateRequest userUpdateRequest) {
+    public ResponseEntity<MessageModel> updateUser(@RequestParam UUID userId, @RequestBody UserUpdateRequest userUpdateRequest) {
         MessageModel messageModel = new MessageModel();
-        UserResponse userResponse = userService.updateUser(userUpdateRequest, fullName);
+        UserResponse userResponse = userService.updateUser(userUpdateRequest, userId);
 
         if(userResponse == null)
         {
             messageModel.setStatus(HttpStatus.CONFLICT.value());
-            messageModel.setMessage("Failed update user with name : " + fullName);
+            messageModel.setMessage("Failed update user with id : " + userId);
             return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(messageModel);
         }
         else
         {
             messageModel.setStatus(HttpStatus.OK.value());
-            messageModel.setMessage("Update user with name : " + fullName);
+            messageModel.setMessage("Update user with name : " + userId);
             messageModel.setData(userResponse);
             return ResponseEntity.ok().body(messageModel);
         }
