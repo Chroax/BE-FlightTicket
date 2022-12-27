@@ -82,12 +82,13 @@ public class CitiesServiceImpl implements CitiesService {
     }
 
     @Override
-    public CitiesResponse searchCityByName(String cityName) {
-        Cities cities = citiesRepository.findByCityName(cityName);
-        if (cities != null){
-            return CitiesResponse.build(cities);
-        }else {
-            return null;
+    public List<CitiesResponse> searchCityByName(String cityName) {
+        List<Cities> allCity = citiesRepository.findAllByCityName(cityName  + "%");
+        List<CitiesResponse> allCityResponse = new ArrayList<>();
+        for (Cities cities : allCity) {
+            CitiesResponse citiesResponse = CitiesResponse.build(cities);
+            allCityResponse.add(citiesResponse);
         }
+        return allCityResponse;
     }
 }

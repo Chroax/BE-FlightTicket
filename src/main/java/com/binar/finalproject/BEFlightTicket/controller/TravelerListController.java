@@ -61,9 +61,9 @@ public class TravelerListController {
         }
     }
 
-    @GetMapping("/get-all/user/{userId}")
+    @GetMapping("/findby-userId")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getAllUserTravelerList(@PathVariable UUID userId){
+    public ResponseEntity<MessageModel> getAllUserTravelerList(@RequestParam UUID userId){
         MessageModel messageModel = new MessageModel();
         try {
             List<TravelerListResponse> travelerListGet = travelerListService.searchAllUserTravelerList(userId);
@@ -97,9 +97,9 @@ public class TravelerListController {
         }
     }
 
-    @PutMapping("/update/{travelerId}")
+    @PutMapping("/update")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> updateUser(@PathVariable UUID travelerId, @RequestBody TravelerListUpdateRequest travelerListUpdateRequest) {
+    public ResponseEntity<MessageModel> updateUser(@RequestParam UUID travelerId, @RequestBody TravelerListUpdateRequest travelerListUpdateRequest) {
         MessageModel messageModel = new MessageModel();
         TravelerListResponse travelerListResponse = travelerListService.updateTravelerList(travelerListUpdateRequest, travelerId);
 

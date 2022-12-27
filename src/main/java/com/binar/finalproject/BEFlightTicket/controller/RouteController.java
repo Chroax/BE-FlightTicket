@@ -42,9 +42,9 @@ public class RouteController {
         }
     }
 
-    @GetMapping("/get-all/city/{departureCity}/{arrivalCity}")
+    @GetMapping("/findby-city")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getRouteByDepartureAndArrivalCity(@PathVariable String departureCity,@PathVariable String arrivalCity){
+    public ResponseEntity<MessageModel> getRouteByDepartureAndArrivalCity(@RequestParam String departureCity,@RequestParam String arrivalCity){
         MessageModel messageModel = new MessageModel();
         try {
             List<RouteResponse> routeResponse = routeService.findByDepartureCityAndArrivalCity(departureCity, arrivalCity);
@@ -60,9 +60,9 @@ public class RouteController {
         }
     }
 
-    @GetMapping("/get-all/airport/{departureAirport}/{arrivalAirport}")
+    @GetMapping("/findby-airport")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getRouteByDepartureAndArrivalAirport(@PathVariable String departureAirport,@PathVariable String arrivalAirport){
+    public ResponseEntity<MessageModel> getRouteByDepartureAndArrivalAirport(@RequestParam String departureAirport,@RequestParam String arrivalAirport){
         MessageModel messageModel = new MessageModel();
         try {
             List<RouteResponse> routeResponse = routeService.findByDepartureAndArrivalAirport(departureAirport, arrivalAirport);
@@ -97,9 +97,9 @@ public class RouteController {
         }
     }
 
-    @PutMapping("/update/{routeId}")
+    @PutMapping("/update")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<MessageModel> updateRoute(@PathVariable UUID routeId, @RequestBody RouteRequest routeRequest) {
+    public ResponseEntity<MessageModel> updateRoute(@RequestParam UUID routeId, @RequestBody RouteRequest routeRequest) {
         MessageModel messageModel = new MessageModel();
         RouteResponse routeResponse = routeService.updateRoute(routeRequest, routeId);
 
@@ -118,9 +118,9 @@ public class RouteController {
         }
     }
 
-    @DeleteMapping("/delete/{routeId}")
+    @DeleteMapping("/delete")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<MessageModel> deleteRoute(@PathVariable UUID routeId)
+    public ResponseEntity<MessageModel> deleteRoute(@RequestParam UUID routeId)
     {
         MessageModel messageModel = new MessageModel();
         Boolean deleteRoute = routeService.deleteRoute(routeId);

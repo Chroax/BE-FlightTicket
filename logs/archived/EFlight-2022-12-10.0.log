@@ -8595,3 +8595,32 @@ java.lang.IllegalStateException: Ambiguous handler methods mapped for '/schedule
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-12-10 13:26:54,341 INFO org.hibernate.validator.internal.util.Version [background-preinit] HV000001: Hibernate Validator 6.2.5.Final
+2022-12-10 13:26:54,346 INFO org.springframework.boot.StartupInfoLogger [main] Starting BeFlightTicketApplication using Java 18.0.2 on LAPTOP-LNOPSK9G with PID 7364 (D:\User\D_Cahyadi\Documents\Binar Academy\Challenge\BE-Platinum\BE-FlightTicket\target\classes started by cahya in D:\User\D_Cahyadi\Documents\Binar Academy\Challenge\BE-Platinum\BE-FlightTicket)
+2022-12-10 13:26:54,347 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v2.7.5, Spring v5.3.23
+2022-12-10 13:26:54,348 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2022-12-10 13:26:55,301 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-12-10 13:26:55,432 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 122 ms. Found 17 JPA repository interfaces.
+2022-12-10 13:26:55,971 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2022-12-10 13:26:55,980 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2022-12-10 13:26:55,981 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2022-12-10 13:26:55,981 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.68]
+2022-12-10 13:26:56,342 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2022-12-10 13:26:56,342 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1947 ms
+2022-12-10 13:26:56,487 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-12-10 13:26:56,518 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 5.6.12.Final
+2022-12-10 13:26:56,610 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-12-10 13:26:56,666 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2022-12-10 13:26:56,790 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2022-12-10 13:26:56,801 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2022-12-10 13:26:57,794 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-12-10 13:26:57,802 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-12-10 13:26:58,306 DEBUG org.springframework.web.filter.GenericFilterBean [main] Filter 'authenticationJwtTokenFilter' configured for use
+2022-12-10 13:26:59,087 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-12-10 13:26:59,764 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1146e32e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@511ad0dd, org.springframework.security.web.context.SecurityContextPersistenceFilter@58c80957, org.springframework.security.web.header.HeaderWriterFilter@7a6e0f3c, org.springframework.web.filter.CorsFilter@634d56eb, org.springframework.security.web.authentication.logout.LogoutFilter@2e3b4394, com.binar.finalproject.BEFlightTicket.security.AuthTokenFilter@7d7c05fa, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@78c5ef58, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1fce6eb4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4cd7128, org.springframework.security.web.session.SessionManagementFilter@5b8b9b2d, org.springframework.security.web.access.ExceptionTranslationFilter@63ede2a0, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2284058a]
+2022-12-10 13:27:00,004 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2022-12-10 13:27:00,029 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2022-12-10 13:27:00,040 INFO org.springframework.boot.StartupInfoLogger [main] Started BeFlightTicketApplication in 6.047 seconds (JVM running for 7.209)
+2022-12-10 13:27:03,531 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-12-10 13:27:03,534 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2022-12-10 13:27:03,537 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.

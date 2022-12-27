@@ -42,7 +42,7 @@ public class AirportsController {
     {
         MessageModel messageModel = new MessageModel();
         try {
-            List<AirportResponse> getAirport = airportService.searchAllAirports();
+            List<AirportGetAllResponse> getAirport = airportService.searchAllAirports();
             messageModel.setMessage("Success get all Airports");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(getAirport);
@@ -55,9 +55,9 @@ public class AirportsController {
         }
     }
 
-    @PutMapping(value = "/update/{iataCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<MessageModel> updateAirports(@PathVariable String iataCode, @RequestBody AirportRequest airportRequest)
+    public ResponseEntity<MessageModel> updateAirports(@RequestParam String iataCode, @RequestBody AirportRequest airportRequest)
     {
         MessageModel messageModel = new MessageModel();
         AirportResponse airportResponse = airportService.updateAirports(airportRequest, iataCode);
@@ -76,11 +76,11 @@ public class AirportsController {
         }
     }
 
-    @GetMapping(value = "/name/{airportName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageModel> getAirportsByName(@PathVariable String airportName){
+    @GetMapping(value = "/findby-name", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> getAirportsByName(@RequestParam String airportName){
         MessageModel messageModel = new MessageModel();
         try {
-            AirportResponse getAirport = airportService.searchAirportsByName(airportName);
+            List<AirportResponse> getAirport = airportService.searchAirportsByName(airportName);
             messageModel.setMessage("Success get Airport By name");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(getAirport);
@@ -93,11 +93,11 @@ public class AirportsController {
         }
     }
 
-    @GetMapping(value = "/city/{cityCode}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageModel> getAirportsByCity(@PathVariable String cityCode){
+    @GetMapping(value = "/findby-city", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageModel> getAirportsByCity(@RequestParam String cityName){
         MessageModel messageModel = new MessageModel();
         try {
-            List<AirportResponse> getAirport = airportService.searchAirportByCityName(cityCode);
+            List<AirportResponse> getAirport = airportService.searchAirportByCityName(cityName);
             messageModel.setMessage("Success get Airport By City");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(getAirport);

@@ -38,9 +38,9 @@ public class PaymentMethodController {
         }
     }
 
-    @GetMapping("/name/{paymentName}")
+    @GetMapping("/findby-name")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getPaymentByName(@PathVariable String paymentName){
+    public ResponseEntity<MessageModel> getPaymentByName(@RequestParam String paymentName){
         MessageModel messageModel = new MessageModel();
         try {
             PaymentMethodResponse paymentGet = paymentMethodService.searchPaymentByName(paymentName);
@@ -75,9 +75,9 @@ public class PaymentMethodController {
         }
     }
 
-    @PutMapping("/update/{paymentName}")
+    @PutMapping("/update")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<MessageModel> updatePayment(@PathVariable String paymentName, @RequestBody PaymentMethodRequest paymentMethodRequest)
+    public ResponseEntity<MessageModel> updatePayment(@RequestParam String paymentName, @RequestBody PaymentMethodRequest paymentMethodRequest)
     {
         MessageModel messageModel = new MessageModel();
         PaymentMethodResponse paymentMethodResponse = paymentMethodService.updatePayment(paymentMethodRequest, paymentName);
@@ -97,9 +97,9 @@ public class PaymentMethodController {
         }
     }
 
-    @DeleteMapping("/delete/{paymentName}")
+    @DeleteMapping("/delete")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<MessageModel> deletePayment(@PathVariable String paymentName)
+    public ResponseEntity<MessageModel> deletePayment(@RequestParam String paymentName)
     {
         MessageModel messageModel = new MessageModel();
         Boolean deletePayment = paymentMethodService.deletePayment(paymentName);

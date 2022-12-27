@@ -10,5 +10,5 @@ public interface CountriesService {
     List<CountriesResponse> searchAllCountries();
     CountriesResponse updateCountries(CountriesRequest countriesRequest, String countryName);
     Boolean deleteCountries(String countryName);
-    CountriesResponse searchCountriesByName(String countryName);
+    List<CountriesResponse> searchCountriesByName(String countryName);
 }

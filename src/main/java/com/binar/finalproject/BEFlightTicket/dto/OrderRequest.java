@@ -11,8 +11,7 @@ import java.util.UUID;
 @Data
 public class OrderRequest {
 
-    @NotEmpty(message = "Order status is required.")
-    private String status;
+    private String status = "WAITING";
     @NotEmpty(message = "User ID is required.")
     private UUID userId;
     @NotEmpty(message = "Payment ID is required.")

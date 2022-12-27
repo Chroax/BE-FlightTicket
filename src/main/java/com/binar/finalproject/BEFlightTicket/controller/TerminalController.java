@@ -54,9 +54,9 @@ public class TerminalController {
         }
     }
 
-    @PutMapping(value = "/update/{terminalId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<MessageModel> updateTerminal(@PathVariable Integer terminalId, @RequestBody TerminalRequest terminalRequest)
+    public ResponseEntity<MessageModel> updateTerminal(@RequestParam Integer terminalId, @RequestBody TerminalRequest terminalRequest)
     {
         MessageModel messageModel = new MessageModel();
         TerminalResponse terminalResponse = terminalService.updateTerminal(terminalRequest, terminalId);
@@ -76,9 +76,9 @@ public class TerminalController {
         }
     }
 
-    @GetMapping(value = "/id/{terminalId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/findby-id", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> getTerminalById(@PathVariable Integer terminalId){
+    public ResponseEntity<MessageModel> getTerminalById(@RequestParam Integer terminalId){
         MessageModel messageModel = new MessageModel();
         try {
             TerminalResponse getTerminal = terminalService.searchTerminalById(terminalId);

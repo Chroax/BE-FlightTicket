@@ -27,12 +27,18 @@ public class TerminalServiceImpl implements TerminalService {
             Optional<Airports> airports = airportsRepository.findById(terminalRequest.getIataCode());
             if(airports.isPresent())
             {
-                Terminals  terminals = Terminals.builder()
-                        .terminalName(terminalRequest.getTerminalName())
-                        .airportsTerminals(airports.get())
-                        .build();
-                terminalsRepository.saveAndFlush(terminals);
-                return TerminalResponse.build(terminals);
+                Terminals terminalsExist = terminalsRepository.findTerminalExist(terminalRequest.getTerminalName(), terminalRequest.getIataCode());
+                if(terminalsExist == null)
+                {
+                    Terminals  terminals = Terminals.builder()
+                            .terminalName(terminalRequest.getTerminalName())
+                            .airportsTerminals(airports.get())
+                            .build();
+                    terminalsRepository.saveAndFlush(terminals);
+                    return TerminalResponse.build(terminals);
+                }
+                else
+                    return null;
             }
             else
                 return null;
@@ -59,15 +65,23 @@ public class TerminalServiceImpl implements TerminalService {
         String message = null;
         if (isTerminal.isPresent()) {
             Terminals terminals = isTerminal.get();
-            terminals.setTerminalName(terminalRequest.getTerminalName());
-            if (terminalRequest.getTerminalName() != null)
+
+            Terminals terminalsExist = terminalsRepository.findTerminalExist(terminalRequest.getTerminalName(), terminalRequest.getIataCode());
+
+            if(terminalsExist == null)
+                terminals.setTerminalName(terminalRequest.getTerminalName());
+            else
+                return null;
+
+            if (terminalRequest.getIataCode() != null)
             {
                 Optional<Airports> airports = airportsRepository.findById(terminalRequest.getIataCode());
                 if(airports.isPresent())
                     terminals.setAirportsTerminals(airports.get());
                 else
-                    message = "Terminal with this code doesnt exist";
+                    message = "Airport with this iata code doesnt exist";
             }
+
             if(message != null)
                 return null;
             else
@@ -75,7 +89,8 @@ public class TerminalServiceImpl implements TerminalService {
                 terminalsRepository.saveAndFlush(terminals);
                 return TerminalResponse.build(terminals);
             }
-        } else
+        }
+        else
             return null;
     }
 

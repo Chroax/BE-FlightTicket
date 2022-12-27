@@ -42,16 +42,22 @@ public class SwaggerConfig {
     private List<Server> servers() {
         List<Server> servers = new ArrayList<>();
 
-        Server serverDev = new Server();
-        serverDev.setUrl("http://localhost:8080/");
-        serverDev.setDescription("Main server for Dev");
+        Server serverDevLocal = new Server();
+        serverDevLocal.setUrl("http://localhost:8080/");
+        serverDevLocal.setDescription("Main server for Development local");
 
         Server serverProd = new Server();
-        serverProd.setUrl("https://api-flight.up.railway.app/");
+        serverProd.setUrl("https://be-flightticket-production.up.railway.app/");
         serverProd.setDescription("Main server for Production");
 
+        Server serverDev = new Server();
+        serverDev.setUrl("https://api-flight.up.railway.app/");
+        serverDev.setDescription("Main server for Development");
+
+        servers.add(serverDevLocal);
         servers.add(serverDev);
         servers.add(serverProd);
+
         return servers;
     }
 }

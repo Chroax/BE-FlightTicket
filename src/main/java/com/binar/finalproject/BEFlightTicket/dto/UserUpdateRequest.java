@@ -10,9 +10,7 @@ import java.time.LocalDate;
 public class UserUpdateRequest {
     private String fullName;
     private String email;
-    private String password;
     private String telephone;
     private LocalDate birthDate;
     private Boolean gender;
-    private Integer rolesId;
 }

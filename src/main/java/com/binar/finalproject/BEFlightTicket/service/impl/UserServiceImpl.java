@@ -4,6 +4,7 @@ import com.binar.finalproject.BEFlightTicket.config.EncoderConfiguration;
 import com.binar.finalproject.BEFlightTicket.dto.UserRequest;
 import com.binar.finalproject.BEFlightTicket.dto.UserResponse;
 import com.binar.finalproject.BEFlightTicket.dto.UserUpdateRequest;
+import com.binar.finalproject.BEFlightTicket.model.Countries;
 import com.binar.finalproject.BEFlightTicket.model.Roles;
 import com.binar.finalproject.BEFlightTicket.model.Users;
 import com.binar.finalproject.BEFlightTicket.repository.RoleRepository;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -66,12 +68,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponse searchUserByName(String fullName) {
-        Users users = userRepository.findByName(fullName);
-        if(users != null)
-            return UserResponse.build(users);
-        else
+    public UserResponse searchUserById(UUID userId) {
+        Optional<Users> users = userRepository.findById(userId);
+        if(users.isEmpty())
             return null;
+        else
+            return UserResponse.build(users.get());
     }
 
     @Override
@@ -87,8 +89,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponse updateUser(UserUpdateRequest userUpdateRequest, String fullName) {
-        Users users = userRepository.findByName(fullName);
+    public UserResponse updateUser(UserUpdateRequest userUpdateRequest, UUID userId) {
+        Users users = userRepository.findById(userId).get();
         String message = null;
         if (users != null) {
             users.setFullName(userUpdateRequest.getFullName());
@@ -105,12 +107,7 @@ public class UserServiceImpl implements UserService {
 
             users.setGender(userUpdateRequest.getGender());
             users.setBirthDate(userUpdateRequest.getBirthDate());
-
-            Optional<Roles> roles = roleRepository.findById(userUpdateRequest.getRolesId());
-            if(roles.isPresent())
-                users.getRolesUsers().add(roles.get());
-            else
-                message = "Role with this id doesnt exist";
+            users.setRolesUsers(users.getRolesUsers());
 
             if(message == null)
                 return null;

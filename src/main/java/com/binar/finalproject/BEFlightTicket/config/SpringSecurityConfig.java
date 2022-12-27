@@ -79,6 +79,7 @@ public class SpringSecurityConfig {
                 .antMatchers("/ticket/**").permitAll()
                 .antMatchers("/traveler-list/**").permitAll()
                 .antMatchers("/oauth/**").permitAll()
+                .antMatchers("/notification/**").permitAll()
                 .anyRequest().permitAll();
         http.oauth2Login()
                 .userInfoEndpoint()
