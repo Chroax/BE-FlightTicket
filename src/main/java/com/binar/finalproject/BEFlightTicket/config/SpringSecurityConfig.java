@@ -3,8 +3,11 @@ package com.binar.finalproject.BEFlightTicket.config;
 
 import com.binar.finalproject.BEFlightTicket.security.AuthEntryPointJwt;
 import com.binar.finalproject.BEFlightTicket.security.AuthTokenFilter;
+import com.binar.finalproject.BEFlightTicket.security.oauth2.CustomOAuth2UserService;
+import com.binar.finalproject.BEFlightTicket.security.oauth2.OAuthLoginSuccessHandler;
 import com.binar.finalproject.BEFlightTicket.service.impl.security.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -53,7 +56,6 @@ public class SpringSecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();
@@ -76,11 +78,22 @@ public class SpringSecurityConfig {
                 .antMatchers("/terminals/**").permitAll()
                 .antMatchers("/ticket/**").permitAll()
                 .antMatchers("/traveler-list/**").permitAll()
+                .antMatchers("/oauth/**").permitAll()
                 .antMatchers("/notification/**").permitAll()
                 .anyRequest().permitAll();
+        http.oauth2Login()
+                .userInfoEndpoint()
+                .userService(oAuth2UserService)
+                .and()
+                .successHandler(oAuthLoginSuccessHandler);;
 
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
+    @Autowired
+    CustomOAuth2UserService oAuth2UserService;
+    @Autowired
+    OAuthLoginSuccessHandler oAuthLoginSuccessHandler;
 }

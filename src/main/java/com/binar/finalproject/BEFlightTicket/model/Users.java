@@ -22,7 +22,7 @@ import java.util.UUID;
         uniqueConstraints = {
                 @UniqueConstraint(name = "email", columnNames = "email"),
                 @UniqueConstraint(name = "telephone", columnNames = "telephone")
-        })
+        }, schema = "public")
 public class Users {
     @Id
     @GeneratedValue
@@ -38,11 +38,14 @@ public class Users {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "telephone", columnDefinition = "CHAR(16)", nullable = false)
+    @Column(name = "google_id")
+    private String googleId;
+
+    @Column(name = "telephone", columnDefinition = "CHAR(16)")
     private String telephone;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "birth_date", nullable = false, columnDefinition="DATE")
+    @Column(name = "birth_date", columnDefinition="DATE")
     private LocalDate birthDate;
 
     @Column(name = "gender")
@@ -59,6 +62,10 @@ public class Users {
     @Column(name = "modified_at", insertable = false)
     @UpdateTimestamp
     private LocalDateTime modifiedAt;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "auth_provider")
+    private AuthenticationProvider authProvider;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "user_roles",
