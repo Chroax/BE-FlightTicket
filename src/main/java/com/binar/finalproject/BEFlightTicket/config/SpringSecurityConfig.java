@@ -57,29 +57,6 @@ public class SpringSecurityConfig {
         return new BCryptPasswordEncoder();
     }
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception
-    {
-        httpSecurity.authorizeHttpRequests()
-                .antMatchers("oauth/**").permitAll()
-                .anyRequest().permitAll()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .usernameParameter("email")
-                .permitAll()
-                .defaultSuccessUrl("/")
-                .and()
-                .logout().permitAll()
-                .and()
-                .oauth2Login()
-                .userInfoEndpoint()
-                .userService(oAuth2UserService)
-                .and()
-                .successHandler(oAuthLoginSuccessHandler);
-
-                return httpSecurity.build();
-    }
-    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();
         http.exceptionHandling().authenticationEntryPoint(unauthorizedHandler);
@@ -101,16 +78,21 @@ public class SpringSecurityConfig {
                 .antMatchers("/terminals/**").permitAll()
                 .antMatchers("/ticket/**").permitAll()
                 .antMatchers("/traveler-list/**").permitAll()
+                .antMatchers("/oauth/**").permitAll()
                 .anyRequest().permitAll();
+        http.oauth2Login()
+                .userInfoEndpoint()
+                .userService(oAuth2UserService)
+                .and()
+                .successHandler(oAuthLoginSuccessHandler);;
 
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
-
     @Autowired
-    private CustomOAuth2UserService oAuth2UserService;
+    CustomOAuth2UserService oAuth2UserService;
     @Autowired
-    private OAuthLoginSuccessHandler oAuthLoginSuccessHandler;
+    OAuthLoginSuccessHandler oAuthLoginSuccessHandler;
 }
