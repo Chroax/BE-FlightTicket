@@ -39,10 +39,6 @@ public class ScheduleServiceImpl implements ScheduleService {
             LocalTime requestDepartureTime = scheduleRequest.getDepartureTime();
             LocalDateTime requestDeparture = requestDepartureTime.atDate(requestDepartureDate);
 
-            LocalDate requestArrivalDate = scheduleRequest.getArrivalDate();
-            LocalTime requestArrivalTime = scheduleRequest.getArrivalTime();
-            LocalDateTime requestArrival = requestArrivalTime.atDate(requestArrivalDate);
-
             if(airplanes.isPresent())
             {
                 List<Schedules> allSchedules = scheduleRepository.getAllAirplaneSchedule(airplanes.get().getAirplaneName());
