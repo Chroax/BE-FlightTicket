@@ -8,6 +8,7 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -37,8 +38,11 @@ public class OrderDetailResponse {
     private String paymentName;
     private String paymentType;
 
+    private List<String> travelerListName;
+
     public static OrderDetailResponse build(Orders orders, Airplanes airplanes, Airports departureAirport,
-                                            Airports arrivalAirport, Routes routes, Schedules schedules, PaymentMethods paymentMethods)
+                                            Airports arrivalAirport, Routes routes, Schedules schedules, PaymentMethods paymentMethods,
+                                            List<String> travelerListName)
     {
         return OrderDetailResponse.builder()
                 .orderId(orders.getOrderId())
@@ -56,6 +60,7 @@ public class OrderDetailResponse {
                 .departureTime(schedules.getDepartureTime())
                 .paymentName(paymentMethods.getPaymentName())
                 .paymentType(paymentMethods.getPaymentType())
+                .travelerListName(travelerListName)
                 .build();
     }
 }

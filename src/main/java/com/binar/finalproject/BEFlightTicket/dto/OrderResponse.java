@@ -22,7 +22,8 @@ public class OrderResponse {
     private Integer paymentId;
     private List<UUID> scheduleId;
 
-    public static OrderResponse build(Orders orders, List<UUID> scheduleId, List<String> departureCity, List<String> arrivalCity)
+    public static OrderResponse build(Orders orders, List<UUID> scheduleId,
+                                      List<String> departureCity, List<String> arrivalCity)
     {
         return OrderResponse.builder()
                 .orderId(orders.getOrderId())

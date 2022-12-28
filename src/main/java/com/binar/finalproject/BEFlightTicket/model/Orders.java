@@ -58,4 +58,10 @@ public class Orders {
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "schedule_id"))
     private List<Schedules> scheduleOrders;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "traveler_orders",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "traveler_id"))
+    private List<TravelerList> travelerListsOrder;
 }

@@ -18,6 +18,8 @@ public class OrderRequest {
     private Integer paymentId;
     @NotEmpty(message = "List of Schedule Id is required.")
     private List<UUID> scheduleId;
+    @NotEmpty(message = "List of Traveler List Id is required.")
+    private List<UUID> travelerListId;
 
     public Orders toOrders (Users users, PaymentMethods paymentMethods)
     {
