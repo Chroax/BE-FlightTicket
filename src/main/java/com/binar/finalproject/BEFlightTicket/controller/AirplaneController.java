@@ -59,7 +59,6 @@ public class AirplaneController {
     }
 
     @GetMapping("/get-all")
-    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> getAllAirplane()
     {
         MessageModel messageModel = new MessageModel();
