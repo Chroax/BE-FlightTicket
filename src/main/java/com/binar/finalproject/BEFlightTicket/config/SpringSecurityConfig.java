@@ -81,11 +81,6 @@ public class SpringSecurityConfig {
                 .antMatchers("/oauth/**").permitAll()
                 .antMatchers("/notification/**").permitAll()
                 .anyRequest().permitAll();
-        http.oauth2Login()
-                .userInfoEndpoint()
-                .userService(oAuth2UserService)
-                .and()
-                .successHandler(oAuthLoginSuccessHandler);;
 
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
