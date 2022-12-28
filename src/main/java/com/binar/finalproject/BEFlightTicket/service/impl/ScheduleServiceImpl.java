@@ -12,11 +12,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.*;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
@@ -35,8 +35,32 @@ public class ScheduleServiceImpl implements ScheduleService {
             Optional<Airplanes> airplanes = airplanesRepository.findById(scheduleRequest.getAirplaneName());
             Optional<Routes> routes = routeRepository.findById(scheduleRequest.getRouteId());
 
+            LocalDate requestDepartureDate = scheduleRequest.getDepartureDate();
+            LocalTime requestDepartureTime = scheduleRequest.getDepartureTime();
+            LocalDateTime requestDeparture = requestDepartureTime.atDate(requestDepartureDate);
+
+            LocalDate requestArrivalDate = scheduleRequest.getArrivalDate();
+            LocalTime requestArrivalTime = scheduleRequest.getArrivalTime();
+            LocalDateTime requestArrival = requestArrivalTime.atDate(requestArrivalDate);
+
             if(airplanes.isPresent())
             {
+                List<Schedules> allSchedules = scheduleRepository.getAllAirplaneSchedule(airplanes.get().getAirplaneName());
+                for (Schedules schedules: allSchedules) {
+
+                    LocalDate departureDate = schedules.getDepartureDate();
+                    LocalTime departureTime = schedules.getDepartureTime();
+                    LocalDateTime departure = departureTime.atDate(departureDate);
+
+                    LocalDate arrivalDate = schedules.getArrivalDate();
+                    LocalTime arrivalTime = schedules.getArrivalTime();
+                    LocalDateTime arrival = arrivalTime.atDate(arrivalDate);
+                    if((requestDeparture.isAfter(departure) || requestDeparture.isEqual(departure)) &&
+                            (requestDeparture.isBefore(arrival)  || requestDeparture.isEqual(arrival))){
+                        return null;
+                    }
+                }
+
                 if(routes.isPresent())
                 {
                     Schedules schedules = scheduleRequest.toSchedule(airplanes.get(), routes.get());
