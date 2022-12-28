@@ -215,7 +215,7 @@ public class OrderServiceImpl implements OrderService {
             List<String> travelerListName = new ArrayList<>();
             for (TravelerList travelerList: allTravelerList) {
                 String travelerName = travelerList.getTitle().replaceAll(" ", "") + ". " + travelerList.getFirstName() + " "
-                        + travelerList.getLastName() + "  (" + travelerList.getType() + ")";
+                        + travelerList.getLastName();
 
                 travelerListName.add(travelerName);
             }
