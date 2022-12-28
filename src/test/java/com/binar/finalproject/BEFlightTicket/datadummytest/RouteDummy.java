@@ -9,17 +9,6 @@ import java.util.List;
 
 public class RouteDummy {
 
-    public static Routes  getRoute() {
-        RouteRequest routeRequest = new RouteRequest();
-        routeRequest.setDepartureCity("semarang");
-        routeRequest.setArrivalCity("bali");
-        routeRequest.setDepartureAirport("ahmad yani");
-        routeRequest.setArrivalAirport("ngurah rai");
-        routeRequest.setDepartureTerminal("A1");
-        routeRequest.setArrivalTerminal("B1");
-        return routeRequest.toRoutes();
-    }
-
     public static List<Routes> getAllRoutes() {
         List<Routes> listRoutes = new ArrayList<>();
         RouteRequest routeRequest = new RouteRequest();
