@@ -1,9 +1,9 @@
 package com.binar.finalproject.BEFlightTicket.service.impl;
 
-import com.binar.finalproject.BEFlightTicket.datadummytest.AirportDummy;
-import com.binar.finalproject.BEFlightTicket.datadummytest.CityDummy;
-import com.binar.finalproject.BEFlightTicket.datadummytest.RouteDummy;
-import com.binar.finalproject.BEFlightTicket.datadummytest.TerminalDummy;
+import com.binar.finalproject.BEFlightTicket.dummy.AirportDummy;
+import com.binar.finalproject.BEFlightTicket.dummy.CityDummy;
+import com.binar.finalproject.BEFlightTicket.dummy.RouteDummy;
+import com.binar.finalproject.BEFlightTicket.dummy.TerminalDummy;
 import com.binar.finalproject.BEFlightTicket.dto.RouteRequest;
 import com.binar.finalproject.BEFlightTicket.model.Routes;
 import com.binar.finalproject.BEFlightTicket.repository.AirportsRepository;
@@ -83,6 +83,27 @@ class RouteServiceImplTest {
         Assertions.assertEquals(expectedArrivalCity, actualValue.getArrivalCity());
         Assertions.assertEquals(expectedArrivalAirport, actualValue.getArrivalAirport());
         Assertions.assertEquals(expectedArrivalTerminal, actualValue.getArrivalTerminal());
+    }
+
+    @Test
+    @DisplayName("Test Add Route, Negative")
+    void testAddRouteNotFound() {
+        RouteRequest routeRequest = new RouteRequest();
+        routeRequest.setDepartureCity("semarang");
+        routeRequest.setArrivalCity("bali");
+        routeRequest.setDepartureAirport("ahmad yani");
+        routeRequest.setArrivalAirport("ngurah rai");
+        routeRequest.setDepartureTerminal("A1");
+        routeRequest.setArrivalTerminal("B1");
+
+        UUID routeId = UUID.randomUUID();
+
+        Mockito.when(routeRepository.findById(routeId)).thenReturn(Optional.empty());
+
+        Assertions.assertThrows(Exception.class, () -> {
+            routeService.addRoute(routeRequest);
+        });
+
     }
 
     @Test

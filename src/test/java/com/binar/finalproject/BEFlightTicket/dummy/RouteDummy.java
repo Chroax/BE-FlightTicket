@@ -1,7 +1,6 @@
-package com.binar.finalproject.BEFlightTicket.datadummytest;
+package com.binar.finalproject.BEFlightTicket.dummy;
 
 import com.binar.finalproject.BEFlightTicket.dto.RouteRequest;
-import com.binar.finalproject.BEFlightTicket.model.Airports;
 import com.binar.finalproject.BEFlightTicket.model.Routes;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.binar.finalproject.BEFlightTicket.datadummytest;
+package com.binar.finalproject.BEFlightTicket.dummy;
 
 import com.binar.finalproject.BEFlightTicket.model.Cities;
 
