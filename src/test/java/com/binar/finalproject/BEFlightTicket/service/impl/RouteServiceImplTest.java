@@ -1,5 +1,6 @@
 package com.binar.finalproject.BEFlightTicket.service.impl;
 
+import com.binar.finalproject.BEFlightTicket.dto.RouteResponse;
 import com.binar.finalproject.BEFlightTicket.dummy.AirportDummy;
 import com.binar.finalproject.BEFlightTicket.dummy.CityDummy;
 import com.binar.finalproject.BEFlightTicket.dummy.RouteDummy;
@@ -19,6 +20,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -104,6 +106,71 @@ class RouteServiceImplTest {
             routeService.addRoute(routeRequest);
         });
 
+    }
+
+    @Test
+    @DisplayName("Test Find Route By Departure City And Arrival City")
+    void testFindByDepartureCityAndArrivalCity() {
+        RouteRequest routeRequest = new RouteRequest();
+        routeRequest.setDepartureCity("semarang");
+        routeRequest.setArrivalCity("bali");
+        routeRequest.setDepartureAirport("ahmad yani");
+        routeRequest.setArrivalAirport("ngurah rai");
+        routeRequest.setDepartureTerminal("A1");
+        routeRequest.setArrivalTerminal("B1");
+
+        Routes route = Routes.builder()
+                .departureCity("semarang")
+                .arrivalCity("bali")
+                .departureAirport("ahmad yani")
+                .arrivalAirport("ngurah rai")
+                .departureTerminal("A1")
+                .arrivalTerminal("B1")
+                .build();
+
+        List<Routes> routes =new ArrayList<>();
+        routes.add(route);
+
+        Mockito.when(routeRepository.findRouteByDepartureCityAndArrivalCity(routeRequest.getDepartureCity(), routeRequest.getArrivalCity()))
+                .thenReturn(routes);
+
+        List<RouteResponse> routeResponse = routeService.findByDepartureCityAndArrivalCity(routeRequest.getDepartureCity(), routeRequest.getArrivalCity());
+
+        Assertions.assertEquals(1, routeResponse.size());
+        Mockito.verify(routeRepository).findRouteByDepartureCityAndArrivalCity(route.getDepartureCity(), route.getArrivalCity());
+
+    }
+
+    @Test
+    @DisplayName("Test Find Route By Departure Airport And Arrival Airport")
+    void TestFindByDepartureAndArrivalAirport() {
+        RouteRequest routeRequest = new RouteRequest();
+        routeRequest.setDepartureCity("semarang");
+        routeRequest.setArrivalCity("bali");
+        routeRequest.setDepartureAirport("ahmad yani");
+        routeRequest.setArrivalAirport("ngurah rai");
+        routeRequest.setDepartureTerminal("A1");
+        routeRequest.setArrivalTerminal("B1");
+
+        Routes route = Routes.builder()
+                .departureCity("semarang")
+                .arrivalCity("bali")
+                .departureAirport("ahmad yani")
+                .arrivalAirport("ngurah rai")
+                .departureTerminal("A1")
+                .arrivalTerminal("B1")
+                .build();
+
+        List<Routes> routes =new ArrayList<>();
+        routes.add(route);
+
+        Mockito.when(routeRepository.findRouteByDepartureAndArrivalAirport(routeRequest.getDepartureAirport(), routeRequest.getArrivalAirport()))
+                .thenReturn(routes);
+
+        List<RouteResponse> routeResponse = routeService.findByDepartureAndArrivalAirport(routeRequest.getDepartureAirport(), routeRequest.getArrivalAirport());
+
+        Assertions.assertEquals(1, routeResponse.size());
+        Mockito.verify(routeRepository).findRouteByDepartureAndArrivalAirport(route.getDepartureAirport(), route.getArrivalAirport());
     }
 
     @Test
