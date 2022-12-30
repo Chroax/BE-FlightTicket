@@ -21,8 +21,6 @@ public class UserRequest {
     private LocalDate birthDate;
     @NotEmpty(message = "gender is required.")
     private Boolean gender;
-    @NotEmpty(message = "rolesUsers is required.")
-    private Integer rolesId;
 
     public Users toUsers() {
         Users users = new Users();
