@@ -38,11 +38,11 @@ public class UserServiceImpl implements UserService {
             if(!isPhoneNumberExist(userRequest.getTelephone()))
             {
                 try {
-                    Optional<Roles> roles = roleRepository.findById(userRequest.getRolesId());
-                    if(roles.isPresent())
+                    Roles roles = roleRepository.findByName("ROLE_BUYER");
+                    if(roles != null)
                     {
                         Users users = userRequest.toUsers();
-                        users.getRolesUsers().add(roles.get());
+                        users.getRolesUsers().add(roles);
                         users.setPassword(encoder.encode(users.getPassword()));
                         userRepository.saveAndFlush(users);
                         return UserResponse.build(users);
@@ -95,12 +95,12 @@ public class UserServiceImpl implements UserService {
         if (users != null) {
             users.setFullName(userUpdateRequest.getFullName());
 
-            if(!isEmailExist(userUpdateRequest.getEmail()))
+            if(!isEmailExist(userUpdateRequest.getEmail()) || users.getEmail().equals(userUpdateRequest.getEmail()))
                 users.setEmail(userUpdateRequest.getEmail());
             else
                 message = "Email already exist";
 
-            if(!isPhoneNumberExist(userUpdateRequest.getTelephone()))
+            if(!isPhoneNumberExist(userUpdateRequest.getTelephone())  || users.getTelephone().equals(userUpdateRequest.getTelephone()))
                 users.setTelephone(userUpdateRequest.getTelephone());
             else
                 message = "Phone number already exist";
@@ -121,12 +121,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean deleteUser(String fullName) {
-        Users users = userRepository.findByName(fullName);
-        if(users != null)
+    public Boolean deleteUser(String email) {
+        Optional<Users> users = userRepository.findByEmail(email);
+        if(users.isPresent())
         {
-            users.setStatusActive(false);
-            userRepository.saveAndFlush(users);
+            users.get().setStatusActive(false);
+            userRepository.saveAndFlush(users.get());
             return true;
         }
         else
