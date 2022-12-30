@@ -25,6 +25,7 @@ public class OAuthLoginSuccessHandler implements AuthenticationSuccessHandler {
         customOAuth2UserService.token(authentication);
         PrintWriter pwriter = response.getWriter();
         pwriter.println(customOAuth2UserService.token(authentication));
+        pwriter.println(oAuth2User.getAttributes());
         pwriter.close();
     }
 
