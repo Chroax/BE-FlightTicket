@@ -1,11 +1,8 @@
 package com.binar.finalproject.BEFlightTicket.dummy;
 
 import com.binar.finalproject.BEFlightTicket.dto.UserRequest;
-import com.binar.finalproject.BEFlightTicket.model.Roles;
 import com.binar.finalproject.BEFlightTicket.model.Users;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
