@@ -86,12 +86,6 @@ public class UserServiceImplTest {
     }
 
     @Test
-    @DisplayName("[Negative] Get all user")
-    void testNegativeGetAllUser(){
-
-    }
-
-    @Test
     @DisplayName("[Positive] Find if email exist")
     void testPositiveFindEmailExist(){
         String email = "cahyadisn6@gmail.com";
@@ -108,7 +102,11 @@ public class UserServiceImplTest {
     @Test
     @DisplayName("[Negative] Find if email exist")
     void testNegativeFindEmailExist(){
-
+        String email = "cahyadisn6@gmail.com";
+        Mockito.when(userRepository.findByEmail(email)).thenReturn(Optional.empty());
+        var actualValue = userService.isEmailExist(email);
+        var expectedValue = false;
+        Assertions.assertEquals(expectedValue, actualValue);
     }
 
     @Test
@@ -129,7 +127,10 @@ public class UserServiceImplTest {
     @Test
     @DisplayName("[Negative] Find if phone number exist")
     void testNegativePhoneExist(){
-
+        Mockito.when(userRepository.findByEmail(Mockito.any())).thenReturn(null);
+        var actualValue = userService.isPhoneNumberExist(Mockito.any());
+        var expectedValue = false;
+        Assertions.assertEquals(expectedValue, actualValue);
     }
 
     @Test
@@ -155,6 +156,10 @@ public class UserServiceImplTest {
     @Test
     @DisplayName("[Negative] Delete user")
     void testNegativeDeleteUser(){
-
+        String email = "cahyadisn6@gmail.com";
+        Mockito.when(userRepository.findByEmail(email)).thenReturn(Optional.empty());
+        var actualValue = userService.deleteUser(email);
+        var expectedValue = false;
+        Assertions.assertEquals(expectedValue, actualValue);
     }
 }
