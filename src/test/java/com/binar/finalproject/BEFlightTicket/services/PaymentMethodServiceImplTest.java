@@ -2,6 +2,8 @@ package com.binar.finalproject.BEFlightTicket.services;
 
 import com.binar.finalproject.BEFlightTicket.dto.PaymentMethodRequest;
 import com.binar.finalproject.BEFlightTicket.dummy.DataDummyPaymentMethod;
+import com.binar.finalproject.BEFlightTicket.exception.DataAlreadyExistException;
+import com.binar.finalproject.BEFlightTicket.exception.DataNotFoundException;
 import com.binar.finalproject.BEFlightTicket.model.PaymentMethods;
 import com.binar.finalproject.BEFlightTicket.repository.PaymentMethodRepository;
 import com.binar.finalproject.BEFlightTicket.service.impl.PaymentMethodServiceImpl;
@@ -41,6 +43,7 @@ public class PaymentMethodServiceImplTest {
     @Test
     @DisplayName("[Positive] Register new payment method")
     void testPositiveRegisterPaymentMethod(){
+        Mockito.when(paymentMethodRepository.findByName(dataPaymentMethodRequest.get(0).getPaymentName())).thenReturn(null);
         Mockito.when(paymentMethodRepository.save(dataPaymentMethods.get(0))).thenReturn(dataPaymentMethods.get(0));
         var actualValue = paymentMethodService.addPaymentMethod(dataPaymentMethodRequest.get(0));
         var expectedValue1 = dataPaymentMethodRequest.get(0).getPaymentType();
@@ -58,7 +61,13 @@ public class PaymentMethodServiceImplTest {
     @Test
     @DisplayName("[Negative] Register new payment method")
     void testNegativeRegisterPaymentMethod(){
+        DataAlreadyExistException exception = Assertions.assertThrows(DataAlreadyExistException.class, () -> {
+            Mockito.when(paymentMethodRepository.findByName(dataPaymentMethodRequest.get(0).getPaymentName())).thenReturn(dataPaymentMethods.get(0));
+            paymentMethodService.addPaymentMethod(dataPaymentMethodRequest.get(0));
+        });
 
+        var expectedValue = "Payment method with this name already exist";
+        Assertions.assertEquals(expectedValue, exception.getMessage());
     }
 
     @Test
@@ -120,7 +129,13 @@ public class PaymentMethodServiceImplTest {
     @Test
     @DisplayName("[Negative] Get payment method by payment name")
     void testNegativeSearchPaymentMethodByName(){
-
+        String paymentName = "Mandiri";
+        DataNotFoundException exception = Assertions.assertThrows(DataNotFoundException.class, () -> {
+            Mockito.when(paymentMethodRepository.findByName(dataPaymentMethods.get(0).getPaymentName())).thenReturn(null);
+            paymentMethodService.searchPaymentByName(paymentName);
+        });
+        var expectedValue = "Payment method not found";
+        Assertions.assertEquals(expectedValue, exception.getMessage());
     }
 
     @Test
@@ -151,7 +166,20 @@ public class PaymentMethodServiceImplTest {
     @Test
     @DisplayName("[Negative] Update payment method")
     void testNegativeUpdatePaymentMethod(){
+        String paymentName =  "BCA";
 
+        DataNotFoundException exception = Assertions.assertThrows(DataNotFoundException.class, () -> {
+            Mockito.when(paymentMethodRepository.findByName(paymentName)).thenReturn(null);
+            paymentMethodService.updatePayment(dataPaymentMethodRequest.get(0), paymentName);
+        });
+
+        DataAlreadyExistException exception2 = Assertions.assertThrows(DataAlreadyExistException.class, () -> {
+            Mockito.when(paymentMethodRepository.findByName(paymentName)).thenReturn(dataPaymentMethods.get(0));
+            paymentMethodService.updatePayment(dataPaymentMethodRequest.get(0), paymentName);
+        });
+
+        Assertions.assertEquals("Payment method not found", exception.getMessage());
+        Assertions.assertEquals("Payment method with this name already exist", exception2.getMessage());
     }
 
     @Test
@@ -176,6 +204,12 @@ public class PaymentMethodServiceImplTest {
     @Test
     @DisplayName("[Negative] Delete payment method")
     void testNegativeDeletePaymentMethod(){
-
+        String paymentName = "Mandiri";
+        DataNotFoundException exception = Assertions.assertThrows(DataNotFoundException.class, () -> {
+            Mockito.when(paymentMethodRepository.findByName(dataPaymentMethods.get(0).getPaymentName())).thenReturn(null);
+            paymentMethodService.deletePayment(paymentName);
+        });
+        var expectedValue = "Payment method not found";
+        Assertions.assertEquals(expectedValue, exception.getMessage());
     }
 }

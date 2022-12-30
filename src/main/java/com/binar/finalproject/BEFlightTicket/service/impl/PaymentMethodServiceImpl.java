@@ -3,6 +3,7 @@ package com.binar.finalproject.BEFlightTicket.service.impl;
 import com.binar.finalproject.BEFlightTicket.dto.PaymentMethodRequest;
 import com.binar.finalproject.BEFlightTicket.dto.PaymentMethodResponse;
 import com.binar.finalproject.BEFlightTicket.exception.DataAlreadyExistException;
+import com.binar.finalproject.BEFlightTicket.exception.DataNotFoundException;
 import com.binar.finalproject.BEFlightTicket.model.PaymentMethods;
 import com.binar.finalproject.BEFlightTicket.repository.PaymentMethodRepository;
 import com.binar.finalproject.BEFlightTicket.service.PaymentMethodService;
@@ -19,14 +20,13 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
 
     @Override
     public PaymentMethodResponse addPaymentMethod(PaymentMethodRequest paymentMethodRequest) {
-        PaymentMethods paymentMethods = paymentMethodRequest.toPaymentMethods();
-        try
-        {
+        PaymentMethods isPaymentExist = paymentMethodRepository.findByName(paymentMethodRequest.getPaymentName());
+        if(isPaymentExist == null){
+            PaymentMethods paymentMethods = paymentMethodRequest.toPaymentMethods();
             paymentMethodRepository.save(paymentMethods);
             return PaymentMethodResponse.build(paymentMethods);
         }
-        catch (Exception exception)
-        {
+        else {
             throw new DataAlreadyExistException ("Payment method with this name already exist");
         }
     }
@@ -37,7 +37,7 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
         if (paymentMethods != null)
             return PaymentMethodResponse.build(paymentMethods);
         else
-            return null;
+            throw new DataNotFoundException("Payment method not found");
     }
 
     @Override
@@ -55,27 +55,26 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
     @Override
     public PaymentMethodResponse updatePayment(PaymentMethodRequest paymentMethodRequest, String paymentName) {
         PaymentMethods paymentMethods = paymentMethodRepository.findByName(paymentName);
-        String message = null;
         if (paymentMethods != null)
         {
             if (paymentMethodRequest.getPaymentName() != null)
-                paymentMethods.setPaymentName(paymentMethodRequest.getPaymentName());
-            else
-                message = "Payment with name: "+paymentName+" not found";
+            {
+                PaymentMethods paymentMethods1 = paymentMethodRepository.findByName(paymentMethodRequest.getPaymentName());
+                if(paymentMethods1 == null)
+                    paymentMethods.setPaymentName(paymentMethodRequest.getPaymentName());
+                else
+                    throw new DataAlreadyExistException("Payment method with this name already exist");
+            }
             if (paymentMethodRequest.getPaymentType() != null)
                 paymentMethods.setPaymentType(paymentMethodRequest.getPaymentType());
             if (paymentMethodRequest.getImagePath() != null)
                 paymentMethods.setImagePath(paymentMethodRequest.getImagePath());
-            if (message != null)
-                return null;
-            else
-            {
-                paymentMethodRepository.save(paymentMethods);
-                return PaymentMethodResponse.build(paymentMethods);
-            }
+
+            paymentMethodRepository.save(paymentMethods);
+            return PaymentMethodResponse.build(paymentMethods);
         }
         else
-            return null;
+            throw new DataNotFoundException("Payment method not found");
     }
 
     @Override
@@ -86,6 +85,8 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
             paymentMethodRepository.deleteById(paymentMethods.getPaymentId());
             return true;
         }
-        return false;
+        else {
+            throw new DataNotFoundException("Payment method not found");
+        }
     }
 }
