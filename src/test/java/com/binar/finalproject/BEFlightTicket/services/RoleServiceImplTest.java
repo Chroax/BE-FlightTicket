@@ -2,6 +2,8 @@ package com.binar.finalproject.BEFlightTicket.services;
 
 import com.binar.finalproject.BEFlightTicket.dto.RoleRequest;
 import com.binar.finalproject.BEFlightTicket.dummy.DataDummyRoles;
+import com.binar.finalproject.BEFlightTicket.exception.DataAlreadyExistException;
+import com.binar.finalproject.BEFlightTicket.exception.DataNotFoundException;
 import com.binar.finalproject.BEFlightTicket.model.Roles;
 import com.binar.finalproject.BEFlightTicket.repository.RoleRepository;
 import com.binar.finalproject.BEFlightTicket.service.impl.RoleServiceImpl;
@@ -17,6 +19,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public class RoleServiceImplTest {
 
@@ -41,6 +44,7 @@ public class RoleServiceImplTest {
     @Test
     @DisplayName("[Positive] Register new role")
     void testPositiveRegisterRole(){
+        Mockito.when(roleRepository.findByName(dataRoleRequest.get(0).getRoleName())).thenReturn(null);
         Mockito.when(roleRepository.save(dataRoles.get(0))).thenReturn(dataRoles.get(0));
         var actualValue = roleService.registerRole(dataRoleRequest.get(0));
         var expectedValue = dataRoleRequest.get(0).getRoleName();
@@ -53,6 +57,13 @@ public class RoleServiceImplTest {
     @DisplayName("[Negative] Register new role")
     void testNegativeRegisterRole(){
 
+        DataAlreadyExistException exception = Assertions.assertThrows(DataAlreadyExistException.class, () -> {
+            Mockito.when(roleRepository.findByName(dataRoleRequest.get(0).getRoleName())).thenReturn(dataRoles.get(0));
+            roleService.registerRole(dataRoleRequest.get(0));
+        });
+
+        var expectedValue = "Role with this name already exist";
+        Assertions.assertEquals(expectedValue, exception.getMessage());
     }
 
     @Test
@@ -72,12 +83,6 @@ public class RoleServiceImplTest {
         Assertions.assertEquals(expectedValue1.getRoleName(), actualValue.get(0).getRoleName());
         Assertions.assertEquals(expectedValue2.getRoleName(), actualValue.get(1).getRoleName());
         Assertions.assertEquals(expectedValue3.getRoleName(), actualValue.get(2).getRoleName());
-    }
-
-    @Test
-    @DisplayName("[Negative] Get all role")
-    void testNegativeGetAllRole(){
-
     }
 
     @Test
@@ -107,7 +112,20 @@ public class RoleServiceImplTest {
     @Test
     @DisplayName("[Negative] Update role")
     void testNegativeUpdateRole(){
+        String roleName =  "ROLE_SUPER-ADMIN";
 
+        DataNotFoundException exception = Assertions.assertThrows(DataNotFoundException.class, () -> {
+            Mockito.when(roleRepository.findByName(roleName)).thenReturn(null);
+            roleService.updateRole(dataRoleRequest.get(0), roleName);
+        });
+
+        DataAlreadyExistException exception2 = Assertions.assertThrows(DataAlreadyExistException.class, () -> {
+            Mockito.when(roleRepository.findByName(roleName)).thenReturn(dataRoles.get(0));
+            roleService.updateRole(dataRoleRequest.get(0), roleName);
+        });
+
+        Assertions.assertEquals("Roles not found", exception.getMessage());
+        Assertions.assertEquals("Role with this name already exist", exception2.getMessage());
     }
 
     @Test
@@ -132,6 +150,13 @@ public class RoleServiceImplTest {
     @Test
     @DisplayName("[Negative] Delete role")
     void testNegativeUDeleteRole(){
+        String roleName =  "ROLE_SUPER-ADMIN";
 
+        DataNotFoundException exception = Assertions.assertThrows(DataNotFoundException.class, () -> {
+            Mockito.when(roleRepository.findByName(roleName)).thenReturn(null);
+            roleService.deleteRole(dataRoleRequest.get(0).getRoleName());
+        });
+
+        Assertions.assertEquals("Role not found", exception.getMessage());
     }
 }
