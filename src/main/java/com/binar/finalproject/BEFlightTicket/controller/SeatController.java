@@ -2,6 +2,10 @@ package com.binar.finalproject.BEFlightTicket.controller;
 
 import com.binar.finalproject.BEFlightTicket.dto.*;
 import com.binar.finalproject.BEFlightTicket.service.SeatService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,6 +21,24 @@ public class SeatController {
     @Autowired
     private SeatService seatService;
 
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Add Seats",
+                            description = "Menambahkan Seats Baru",
+                            value = """
+                                      {
+                                      "responseCode": 200,
+                                      "responseMessage": "Add new seat",
+                                      "data": [
+                                        {
+                                           "seatNumber": "1A",
+                                           "seatType": "GREEN",
+                                           "airplaneName": "Garuda"
+                                        }
+                                      ]
+                                    }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @PostMapping("/add")
     @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
@@ -38,6 +60,25 @@ public class SeatController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
+
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Add All Seats",
+                            description = "Menambahkan Semua Seats Baru",
+                            value = """
+                                      {
+                                      "responseCode": 200,
+                                      "responseMessage": "Add new seat",
+                                      "data": [
+                                        {
+                                           "seatNumber": "1A",
+                                           "seatType": "GREEN",
+                                           "airplaneName": "Garuda"
+                                         }
+                                      ]
+                                    }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @PostMapping("/add-all")
     @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
@@ -59,6 +100,24 @@ public class SeatController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
+
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Get Seats By seatId",
+                            description = "Menampilkan Seat dengan seatId",
+                            value = """
+                                    {
+                                       "status": 200,
+                                       "message": "Success get seat",
+                                       "data": {
+                                            "seatId": 11,
+                                            "seatNumber": "1A ",
+                                            "seatType": "GREEN",
+                                            "airplaneName": "JT 150"
+                                        }
+                                    }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @GetMapping("/findby-id")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getSeatById(@RequestParam Integer seatId){
@@ -77,6 +136,25 @@ public class SeatController {
         }
     }
 
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Get All Seats",
+                            description = "Menampilkan Semua Seat",
+                            value = """
+                                    {
+                                      "status": 200,
+                                      "message": "Success get all seats",
+                                      "data": [
+                                        {
+                                          "seatId": 11,
+                                          "seatNumber": "1A ",
+                                          "seatType": "GREEN",
+                                          "airplaneName": "JT 150"
+                                        }
+                                      ]
+                                    }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @GetMapping("/get-all")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAllSeats()
@@ -96,6 +174,25 @@ public class SeatController {
         }
     }
 
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Get Seats By airplaneName",
+                            description = "Menampilkan Seat dengan airplaneName",
+                            value = """
+                                    {
+                                      "status": 200,
+                                      "message": "Success get seat by airplane name : JT 150",
+                                      "data": [
+                                        {
+                                          "seatId": 11,
+                                          "seatNumber": "1A ",
+                                          "seatType": "GREEN",
+                                          "airplaneName": "JT 150"
+                                        }
+                                       ]
+                                    }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @GetMapping("/findby-airplane")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAirplaneSeat(@RequestParam String airplaneName){
@@ -114,6 +211,25 @@ public class SeatController {
         }
     }
 
+
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Update Seats By seatId",
+                            description = "Menampilkan Seat dengan seatId",
+                            value = """
+                                   {
+                                      "status": 200,
+                                      "message": "Update seat with number: 11",
+                                      "data": [
+                                        {
+                                          "seatNumber": "1A ",
+                                          "seatType": "GREEN",
+                                          "airplaneName": "JT 150"
+                                        }
+                                      ]
+                                   }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> updateSeat(@RequestParam Integer seatId, @RequestBody SeatRequest seatRequest)
