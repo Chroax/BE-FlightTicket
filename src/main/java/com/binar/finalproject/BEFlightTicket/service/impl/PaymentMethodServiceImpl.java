@@ -60,7 +60,7 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
             if (paymentMethodRequest.getPaymentName() != null)
             {
                 PaymentMethods paymentMethods1 = paymentMethodRepository.findByName(paymentMethodRequest.getPaymentName());
-                if(paymentMethods1 == null)
+                if(paymentMethods1 == null || paymentMethods.getPaymentName().equals(paymentMethodRequest.getPaymentName()))
                     paymentMethods.setPaymentName(paymentMethodRequest.getPaymentName());
                 else
                     throw new DataAlreadyExistException("Payment method with this name already exist");
