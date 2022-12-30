@@ -111,18 +111,18 @@ public class UserController {
 
     @DeleteMapping("/delete")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> deleteUser(@RequestParam String fullName){
+    public ResponseEntity<MessageModel> deleteUser(@RequestParam String email){
         MessageModel messageModel = new MessageModel();
-        Boolean deleteUser = userService.deleteUser(fullName);
+        Boolean deleteUser = userService.deleteUser(email);
         if(deleteUser)
         {
-            messageModel.setMessage("Success non-active user by name : " + fullName);
+            messageModel.setMessage("Success non-active user by email : " + email);
             messageModel.setStatus(HttpStatus.OK.value());
             return ResponseEntity.ok().body(messageModel);
         }
         else
         {
-            messageModel.setMessage("Failed non-active user by name : " + fullName + ", not found");
+            messageModel.setMessage("Failed non-active user by email : " + email + ", not found");
             messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
             return ResponseEntity.badRequest().body(messageModel);
         }

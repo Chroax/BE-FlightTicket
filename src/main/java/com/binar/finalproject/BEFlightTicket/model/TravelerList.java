@@ -1,6 +1,7 @@
 package com.binar.finalproject.BEFlightTicket.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -66,4 +68,8 @@ public class TravelerList {
 
     @OneToMany(mappedBy = "travelerListTicket", cascade = CascadeType.ALL)
     private Set<Tickets> tickets;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "travelerListsOrder", cascade = CascadeType.ALL)
+    private List<Orders> orders;
 }

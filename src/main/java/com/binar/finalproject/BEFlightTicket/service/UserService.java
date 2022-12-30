@@ -14,5 +14,5 @@ public interface UserService {
     Boolean isEmailExist(String email);
     Boolean isPhoneNumberExist(String telephone);
     UserResponse updateUser(UserUpdateRequest userUpdateRequest, UUID userId);
-    Boolean deleteUser(String fullName);
+    Boolean deleteUser(String email);
 }

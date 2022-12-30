@@ -79,7 +79,6 @@ public class RouteController {
     }
 
     @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> getAllRoute()
     {
         MessageModel messageModel = new MessageModel();

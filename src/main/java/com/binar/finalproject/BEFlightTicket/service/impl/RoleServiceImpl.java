@@ -2,6 +2,8 @@ package com.binar.finalproject.BEFlightTicket.service.impl;
 
 import com.binar.finalproject.BEFlightTicket.dto.RoleRequest;
 import com.binar.finalproject.BEFlightTicket.dto.RoleResponse;
+import com.binar.finalproject.BEFlightTicket.exception.DataAlreadyExistException;
+import com.binar.finalproject.BEFlightTicket.exception.DataNotFoundException;
 import com.binar.finalproject.BEFlightTicket.model.Roles;
 import com.binar.finalproject.BEFlightTicket.repository.RoleRepository;
 import com.binar.finalproject.BEFlightTicket.service.RoleService;
@@ -18,15 +20,14 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RoleResponse registerRole(RoleRequest roleRequest) {
-        Roles roles = roleRequest.toRoles();
-
-        try {
-            roleRepository.save(roles);
-            return RoleResponse.build(roles);
+        Roles roles = roleRepository.findByName(roleRequest.getRoleName());
+        if(roles == null){
+            Roles roleData = roleRequest.toRoles();
+            roleRepository.save(roleData);
+            return RoleResponse.build(roleData);
         }
-        catch(Exception exception)
-        {
-            return null;
+        else {
+            throw new DataAlreadyExistException("Role with this name already exist");
         }
     }
 
@@ -45,18 +46,18 @@ public class RoleServiceImpl implements RoleService {
     public RoleResponse updateRole(RoleRequest roleRequest, String roleName) {
         Roles roles = roleRepository.findByName(roleName);
         if(roles != null){
-            roles.setRoleName(roleRequest.getRoleName());
-            try {
+            Roles isRoleExist = roleRepository.findByName(roleRequest.getRoleName());
+            if(isRoleExist == null){
+                roles.setRoleName(roleRequest.getRoleName());
                 roleRepository.save(roles);
                 return RoleResponse.build(roles);
             }
-            catch(Exception exception)
-            {
-                return null;
+            else {
+                throw new DataAlreadyExistException("Role with this name already exist");
             }
         }
         else
-            throw new RuntimeException("Roles with name : " + roleName + " not found");
+            throw new DataNotFoundException("Roles not found");
     }
 
     @Override
@@ -67,6 +68,6 @@ public class RoleServiceImpl implements RoleService {
             return true;
         }
         else
-            return false;
+            throw new DataNotFoundException("Role not found");
     }
 }
