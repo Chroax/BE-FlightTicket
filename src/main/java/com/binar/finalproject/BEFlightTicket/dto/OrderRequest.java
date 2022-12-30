@@ -5,7 +5,6 @@ import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @Data

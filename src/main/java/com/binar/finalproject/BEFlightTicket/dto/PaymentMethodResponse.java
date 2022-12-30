@@ -10,14 +10,14 @@ public class PaymentMethodResponse {
     private Integer paymentId;
     private String paymentName;
     private String paymentType;
-    private String ImagePath;
+    private String imagePath;
 
     public static PaymentMethodResponse build(PaymentMethods paymentMethods){
         return PaymentMethodResponse.builder()
                 .paymentId(paymentMethods.getPaymentId())
                 .paymentName(paymentMethods.getPaymentName())
                 .paymentType(paymentMethods.getPaymentType())
-                .ImagePath(paymentMethods.getImagePath())
+                .imagePath(paymentMethods.getImagePath())
                 .build();
     }
 }
