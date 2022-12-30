@@ -1,9 +1,7 @@
 package com.binar.finalproject.BEFlightTicket.controller;
 
 import com.binar.finalproject.BEFlightTicket.dto.*;
-import com.binar.finalproject.BEFlightTicket.model.Schedules;
 import com.binar.finalproject.BEFlightTicket.service.ScheduleService;
-import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -163,13 +161,13 @@ public class ScheduleController {
             int size = 5;
             Pageable pageable = PageRequest.of(page, size);
             List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLowerPrice(departureAirport, arrivalAirport, departureDate, pageable);
-            messageModel.setMessage("Success get schedule");
+            messageModel.setMessage("Success sort schedule by price (low)");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(scheduleResponses);
             return ResponseEntity.ok().body(messageModel);
         }catch (Exception exception)
         {
-            messageModel.setMessage("Failed get schedule");
+            messageModel.setMessage("Failed sort schedule by price (low)");
             messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
@@ -182,13 +180,13 @@ public class ScheduleController {
             int size = 5;
             Pageable pageable = PageRequest.of(page, size);
             List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByHigherPrice(departureAirport, arrivalAirport, departureDate, pageable);
-            messageModel.setMessage("Success get schedule");
+            messageModel.setMessage("Success sort schedule by price (high)");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(scheduleResponses);
             return ResponseEntity.ok().body(messageModel);
         }catch (Exception exception)
         {
-            messageModel.setMessage("Failed get schedule");
+            messageModel.setMessage("Failed sort schedule by price (high)");
             messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
@@ -201,13 +199,13 @@ public class ScheduleController {
             int size = 5;
             Pageable pageable = PageRequest.of(page, size);
             List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByEarliestDepartureTime(departureAirport, arrivalAirport, departureDate, pageable);
-            messageModel.setMessage("Success get schedule");
+            messageModel.setMessage("Success sort schedule by earliest departure");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(scheduleResponses);
             return ResponseEntity.ok().body(messageModel);
         }catch (Exception exception)
         {
-            messageModel.setMessage("Failed get schedule");
+            messageModel.setMessage("Failed sort schedule by earliest departure");
             messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
@@ -220,13 +218,13 @@ public class ScheduleController {
             int size = 5;
             Pageable pageable = PageRequest.of(page, size);
             List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLatestDepartureTime(departureAirport, arrivalAirport, departureDate, pageable);
-            messageModel.setMessage("Success get schedule");
+            messageModel.setMessage("Success sort schedule by latest departure");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(scheduleResponses);
             return ResponseEntity.ok().body(messageModel);
         }catch (Exception exception)
         {
-            messageModel.setMessage("Failed get schedule");
+            messageModel.setMessage("Failed sort schedule by latest departure");
             messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
@@ -239,13 +237,13 @@ public class ScheduleController {
             int size = 5;
             Pageable pageable = PageRequest.of(page, size);
             List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByEarliestArrivalTime(departureAirport, arrivalAirport, departureDate, pageable);
-            messageModel.setMessage("Success get schedule");
+            messageModel.setMessage("Success sort schedule by earliest arrival");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(scheduleResponses);
             return ResponseEntity.ok().body(messageModel);
         }catch (Exception exception)
         {
-            messageModel.setMessage("Failed get schedule");
+            messageModel.setMessage("Failed sort schedule by earliest arrival");
             messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
@@ -258,13 +256,13 @@ public class ScheduleController {
             int size = 5;
             Pageable pageable = PageRequest.of(page, size);
             List<SearchScheduleResponse> scheduleResponses = scheduleService.searchAirplaneTicketOrderByLatestArrivalTime(departureAirport, arrivalAirport, departureDate, pageable);
-            messageModel.setMessage("Success get schedule");
+            messageModel.setMessage("Success sort schedule by latest arrival");
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setData(scheduleResponses);
             return ResponseEntity.ok().body(messageModel);
         }catch (Exception exception)
         {
-            messageModel.setMessage("Failed get schedule");
+            messageModel.setMessage("Failed sort schedule by latest arrival");
             messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }

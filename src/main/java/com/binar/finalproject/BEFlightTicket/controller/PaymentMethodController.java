@@ -103,7 +103,7 @@ public class PaymentMethodController {
     {
         MessageModel messageModel = new MessageModel();
         Boolean deletePayment = paymentMethodService.deletePayment(paymentName);
-        if(deletePayment)
+        if(Boolean.TRUE.equals(deletePayment))
         {
             messageModel.setMessage("Success delete payment by name: " + paymentName);
             messageModel.setStatus(HttpStatus.OK.value());

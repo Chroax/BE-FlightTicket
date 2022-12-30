@@ -109,7 +109,7 @@ public class OrderController {
             return ResponseEntity.ok().body(messageModel);
         }catch (Exception exception)
         {
-            messageModel.setMessage("Failed get order by payment id, " + paymentId + " not found");
+            messageModel.setMessage("Failed get order, payment id not found");
             messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
@@ -145,7 +145,7 @@ public class OrderController {
             return ResponseEntity.ok().body(messageModel);
         }catch (Exception exception)
         {
-            messageModel.setMessage("Failed get all order by user id, " + userId + " not found");
+            messageModel.setMessage("Failed get all order, user id not found");
             messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }

@@ -123,7 +123,7 @@ public class RouteController {
     {
         MessageModel messageModel = new MessageModel();
         Boolean deleteRoute = routeService.deleteRoute(routeId);
-        if(deleteRoute)
+        if(Boolean.TRUE.equals(deleteRoute))
         {
             messageModel.setMessage("Success delete route by id: " + routeId);
             messageModel.setStatus(HttpStatus.OK.value());
