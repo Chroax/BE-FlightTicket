@@ -3,6 +3,7 @@ package com.binar.finalproject.BEFlightTicket.services;
 import com.binar.finalproject.BEFlightTicket.dto.AirplanesRequest;
 import com.binar.finalproject.BEFlightTicket.dummy.DataDummyAirplane;
 import com.binar.finalproject.BEFlightTicket.exception.DataAlreadyExistException;
+import com.binar.finalproject.BEFlightTicket.exception.DataNotFoundException;
 import com.binar.finalproject.BEFlightTicket.model.Airplanes;
 import com.binar.finalproject.BEFlightTicket.repository.AirplanesRepository;
 import com.binar.finalproject.BEFlightTicket.service.impl.AirplaneServiceImpl;
@@ -14,6 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +44,7 @@ public class AirplaneServiceImplTest {
     @Test
     @DisplayName("[Positive] Add new airplane")
     void testPositiveInsertAirplane(){
-        Mockito.when(airplanesRepository.findById(dataAirplaneRequest.get(0).getAirplaneName())).thenReturn(null);
+        Mockito.when(airplanesRepository.findByName(dataAirplaneRequest.get(0).getAirplaneName())).thenReturn(null);
         Mockito.when(airplanesRepository.save(dataAirplane.get(0))).thenReturn(dataAirplane.get(0));
         var actualValue = airplaneService.insertAirplane(dataAirplaneRequest.get(0));
         var expectedValue1 = dataAirplaneRequest.get(0).getAirplaneName();
@@ -53,18 +55,41 @@ public class AirplaneServiceImplTest {
         Assertions.assertEquals(expectedValue1, actualValue.getAirplaneName());
         Assertions.assertEquals(expectedValue2, actualValue.getAirplaneType());
     }
+
+    @Test
+    @DisplayName("[Negative] Add new airplane")
+    void testNegativeInsertAirplane(){
+        DataAlreadyExistException exception = Assertions.assertThrows(DataAlreadyExistException.class, () ->{
+            Mockito.when(airplanesRepository.findByName(dataAirplaneRequest.get(0).getAirplaneName())).thenReturn(dataAirplane.get(0));
+            airplaneService.insertAirplane(dataAirplaneRequest.get(0));
+        });
+        var expectedValue = "Airplane with this name already exist";
+        Assertions.assertEquals(expectedValue, exception.getMessage());
+    }
+
     @Test
     @DisplayName("[Positive] Search airplane by name")
     void testPositiveSearchAirplaneByName(){
         String airplaneName = "JET123";
         Optional<Airplanes> airplanes = dataDummyAirplane.getAirplaneByName(airplaneName);
         Airplanes airplaneData = airplanes.get();
-        Mockito.when(airplanesRepository.findById(airplaneName)).thenReturn(Optional.of(airplaneData));
+        Mockito.when(airplanesRepository.findByName(airplaneName)).thenReturn(airplaneData);
         var actualValue = airplaneService.searchAirplaneByName(airplaneName);
 
         Assertions.assertNotNull(airplaneData);
         Assertions.assertNotNull(actualValue);
         Assertions.assertEquals(airplaneName, actualValue.getAirplaneName());
+    }
+    @Test
+    @DisplayName("[Negative] Search airplane by name")
+    void testNegativeSearchAirplaneByName(){
+        String airplaneName = "JET123";
+        DataNotFoundException exception = Assertions.assertThrows(DataNotFoundException.class, ()->{
+           Mockito.when(airplanesRepository.findByName(dataAirplane.get(0).getAirplaneName())).thenReturn(null);
+           airplaneService.searchAirplaneByName(airplaneName);
+        });
+        var expectedValue = "Airplane not found";
+        Assertions.assertEquals(expectedValue, exception.getMessage());
     }
     @Test
     @DisplayName("[Positive] Get all airplane")
@@ -113,7 +138,7 @@ public class AirplaneServiceImplTest {
 
         Airplanes airplaneData = airplanes.get();
 
-        Mockito.when(airplanesRepository.findById(airplanesRequest.getAirplaneName())).thenReturn(Optional.of(airplaneData));
+        Mockito.when(airplanesRepository.findByName(airplanesRequest.getAirplaneName())).thenReturn(airplaneData);
 
         airplaneData.setAirplaneType(dataUpdateAirplane.getAirplaneType());
 
@@ -126,6 +151,16 @@ public class AirplaneServiceImplTest {
         Assertions.assertEquals(dataUpdateAirplane.getAirplaneType(), actualValue.getAirplaneType());
     }
     @Test
+    @DisplayName("[Negative] Update airplane")
+    void testNegativeUpdateAirplane(){
+        String airplaneName = "JET123";
+        DataNotFoundException exception = Assertions.assertThrows(DataNotFoundException.class, ()->{
+           Mockito.when(airplanesRepository.findByName(airplaneName)).thenReturn(null);
+           airplaneService.updateAirplane(dataAirplaneRequest.get(0), airplaneName);
+        });
+        Assertions.assertEquals("Airplane not found", exception.getMessage());
+    }
+    @Test
     @DisplayName("[Positive] Delete airplane")
     void testPositiveDeleteAirplane(){
         String airplaneName = "JET123";
@@ -134,7 +169,7 @@ public class AirplaneServiceImplTest {
 
         Airplanes airplaneData = airplanes.get();
 
-        Mockito.when(airplanesRepository.findById(airplaneName)).thenReturn(Optional.of(airplaneData));
+        Mockito.when(airplanesRepository.findByName(airplaneName)).thenReturn(airplaneData);
         Mockito.doNothing().when(airplanesRepository).deleteById(airplaneData.getAirplaneName());
 
         var actualValue = airplaneService.deleteAirplane(airplaneName);
@@ -142,5 +177,16 @@ public class AirplaneServiceImplTest {
 
         Assertions.assertNotNull(airplaneData);
         Assertions.assertEquals(expectedValue, actualValue);
+    }
+    @Test
+    @DisplayName("[Negative] Delete airplane")
+    void testNegativeDeleteAirplane(){
+        String airplaneName = "JET123";
+        DataNotFoundException exception = Assertions.assertThrows(DataNotFoundException.class, () -> {
+            Mockito.when(airplanesRepository.findByName(dataAirplane.get(0).getAirplaneName())).thenReturn(null);
+            airplaneService.deleteAirplane(airplaneName);
+        });
+        var expectedValue = "Airplane not found";
+        Assertions.assertEquals(expectedValue, exception.getMessage());
     }
 }
