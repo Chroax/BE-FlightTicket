@@ -32,17 +32,6 @@ public class JwtUtils {
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
-//    public String generateJwtTokenGoogle(Authentication authentication) {
-//
-//        CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
-//
-//        return Jwts.builder()
-//                .setSubject((oAuth2User.getEmail()))
-//                .setIssuedAt(new Date())
-//                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-//                .signWith(SignatureAlgorithm.HS512, jwtSecret)
-//                .compact();
-//    }
 
     public String getEmailFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
