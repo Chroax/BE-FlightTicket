@@ -4,6 +4,10 @@ import com.binar.finalproject.BEFlightTicket.dto.MessageModel;
 import com.binar.finalproject.BEFlightTicket.dto.RouteRequest;
 import com.binar.finalproject.BEFlightTicket.dto.RouteResponse;
 import com.binar.finalproject.BEFlightTicket.service.RouteService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,6 +24,27 @@ public class RouteController {
     @Autowired
     private RouteService routeService;
 
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Add Route",
+                            description = "Menambahkan Route baru",
+                            value = """
+                                      {
+                                      "responseCode": 200,
+                                      "responseMessage": "Create new Route",
+                                      "data": [
+                                        {
+                                          "departureCity": "Jakarta",
+                                          "arrivalCity": "Bali",
+                                          "departureAirport": "Soekarno Hatta",
+                                          "arrivalAirport": "Ngurah Rai",
+                                          "departureTerminal": "A1",
+                                          "arrivalTerminal": "B2"
+                                        }
+                                      ]
+                                    }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
@@ -42,6 +67,28 @@ public class RouteController {
         }
     }
 
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Find Route By City",
+                            description = "Menampilkan Route dengan kota",
+                            value = """
+                                    {
+                                      "status": 200,
+                                      "message": "Success get route",
+                                      "data": [
+                                        {
+                                          "routeId": "f4aa97ed-bd89-4595-9c16-8005fffb4ba1",
+                                          "departureCity": "Jakarta",
+                                          "arrivalCity": "Surabaya",
+                                          "departureAirport": "Soekarno Hatta",
+                                          "arrivalAirport": "Djuanda",
+                                          "departureTerminal": "1A",
+                                          "arrivalTerminal": "1B"
+                                        }
+                                      ]
+                                      }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @GetMapping("/findby-city")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getRouteByDepartureAndArrivalCity(@RequestParam String departureCity,@RequestParam String arrivalCity){
@@ -60,7 +107,29 @@ public class RouteController {
         }
     }
 
-    @GetMapping("/findby-airport")
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Find Route By Airport",
+                            description = "Menampilkan Route dengan Airport",
+                            value = """
+                                    {
+                                      "status": 200,
+                                      "message": "Success get route",
+                                      "data": [
+                                        {
+                                          "routeId": "f4aa97ed-bd89-4595-9c16-8005fffb4ba1",
+                                          "departureCity": "Jakarta",
+                                          "arrivalCity": "Surabaya",
+                                          "departureAirport": "Soekarno Hatta",
+                                          "arrivalAirport": "Djuanda",
+                                          "departureTerminal": "1A",
+                                          "arrivalTerminal": "1B"
+                                        }
+                                      ]
+                                    }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
+    @GetMapping("findby-airport")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getRouteByDepartureAndArrivalAirport(@RequestParam String departureAirport,@RequestParam String arrivalAirport){
         MessageModel messageModel = new MessageModel();
@@ -78,6 +147,27 @@ public class RouteController {
         }
     }
 
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Find All Route",
+                            description = "Menampilkan Semua Route",
+                            value = """
+                                    {
+                                      "status": 200,
+                                      "message": "Success get all route",
+                                      "data": [
+                                        {
+                                          "routeId": "f4aa97ed-bd89-4595-9c16-8005fffb4ba1",
+                                          "departureCity": "Jakarta",
+                                          "arrivalCity": "Surabaya",
+                                          "departureAirport": "Soekarno Hatta",
+                                          "arrivalAirport": "Djuanda",
+                                          "departureTerminal": "1A",
+                                          "arrivalTerminal": "1B"
+                                        }
+                                        ]""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MessageModel> getAllRoute()
     {
@@ -96,6 +186,28 @@ public class RouteController {
         }
     }
 
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Update Route By Route Id",
+                            description = "Mengubah Route dengan Route Id",
+                            value = """
+                                    {
+                                      "status": 200,
+                                      "message": "Success update route with id : f4aa97ed-bd89-4595-9c16-8005fffb4ba1",
+                                      "data": [
+                                        {
+                                          "routeId": "f4aa97ed-bd89-4595-9c16-8005fffb4ba1",
+                                          "departureCity": "Jakarta",
+                                          "arrivalCity": "Surabaya",
+                                          "departureAirport": "Soekarno Hatta",
+                                          "arrivalAirport": "Djuanda",
+                                          "departureTerminal": "1A",
+                                          "arrivalTerminal": "1B"
+                                        }
+                                      ]
+                                    }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @PutMapping("/update")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> updateRoute(@RequestParam UUID routeId, @RequestBody RouteRequest routeRequest) {
@@ -117,6 +229,17 @@ public class RouteController {
         }
     }
 
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "delete Route By Route Id",
+                            description = "menghapus Route dengan Route Id",
+                            value = """
+                                    {
+                                      "status": 200,
+                                      "message": "Success delete route by id : f4aa97ed-bd89-4595-9c16-8005fffb4ba1"
+                                    }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @DeleteMapping("/delete")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> deleteRoute(@RequestParam UUID routeId)
