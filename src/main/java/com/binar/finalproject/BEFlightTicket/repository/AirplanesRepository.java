@@ -1,6 +1,7 @@
 package com.binar.finalproject.BEFlightTicket.repository;
 
 import com.binar.finalproject.BEFlightTicket.model.Airplanes;
+import com.binar.finalproject.BEFlightTicket.model.PaymentMethods;
 import com.binar.finalproject.BEFlightTicket.model.Routes;
 import com.binar.finalproject.BEFlightTicket.model.Schedules;
 import org.springframework.data.domain.Page;
@@ -15,7 +16,8 @@ import java.util.List;
 public interface AirplanesRepository extends JpaRepository <Airplanes, String> {
     @Query(nativeQuery = true, value = "SELECT*FROM schedules s INNER JOIN routes r ON s.route_id = r.route_id INNER JOIN airplanes a ON s.airplane_name = a.airplane_name where r.departure_airport = :departureAirport and r.arrival_airport = :arrivalAirport and s.departure_date = :departureDate")
     List<Airplanes> searchAirplaneTicket(@Param("departureAirport") String departureAirport, @Param("arrivalAirport") String arrivalAirport, @Param("departureDate") LocalDate departureDate);
-
+    @Query("SELECT a FROM Airplanes a WHERE LOWER(a.airplaneName) LIKE LOWER(:airplaneName)")
+    Airplanes findByName(@Param("airplaneName") String airplaneName);
     @Query("SELECT a FROM Airplanes a INNER JOIN Schedules s ON s.airplanesSchedules = a.airplaneName INNER JOIN Routes r ON s.routesSchedules = r.routeId where r.departureAirport = :departureAirport and r.arrivalAirport = :arrivalAirport and s.departureDate = :departureDate ORDER BY s.price ASC ")
     Page<Airplanes> searchAirplaneTicketOrderByLowerPrice(@Param("departureAirport") String departureAirport, @Param("arrivalAirport") String arrivalAirport, @Param("departureDate") LocalDate departureDate, Pageable pageable);
     @Query("SELECT a FROM Airplanes a INNER JOIN Schedules s ON s.airplanesSchedules = a.airplaneName INNER JOIN Routes r ON s.routesSchedules = r.routeId where r.departureAirport = :departureAirport and r.arrivalAirport = :arrivalAirport and s.departureDate = :departureDate ORDER BY s.price DESC")
