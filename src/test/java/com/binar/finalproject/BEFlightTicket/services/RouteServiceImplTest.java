@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class RouteServiceImplTest {
+class RouteServiceImplTest {
 
     @InjectMocks
     RouteServiceImpl routeService;
@@ -258,7 +258,6 @@ public class RouteServiceImplTest {
         Assertions.assertThrows(RuntimeException.class, () -> {
             routeService.updateRoute(routeRequest, routeRequest.toRoutes().getRouteId());
         });
-
     }
 
     @Test

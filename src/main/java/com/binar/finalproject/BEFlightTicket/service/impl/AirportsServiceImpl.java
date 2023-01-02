@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,9 +53,18 @@ public class AirportsServiceImpl implements AirportService {
         List<AirportGetAllResponse> allAirportResponse = new ArrayList<>();
         for (Airports airports : allAirports) {
             Optional<Cities> cities = citiesRepository.findById(airports.getCitiesAirport().getCityCode());
-            Optional<Countries> countries = countriesRepository.findById(cities.get().getCountriesCities().getCountryCode());
-            AirportGetAllResponse airportResponse = AirportGetAllResponse.build(airports, cities.get(), countries.get());
-            allAirportResponse.add(airportResponse);
+            if(cities.isPresent())
+            {
+                Optional<Countries> countries = countriesRepository.findById(cities.get().getCountriesCities().getCountryCode());
+                if(countries.isPresent()){
+                    AirportGetAllResponse airportResponse = AirportGetAllResponse.build(airports, cities.get(), countries.get());
+                    allAirportResponse.add(airportResponse);
+                }
+                else
+                    return Collections.emptyList();
+            }
+            else
+                return Collections.emptyList();
         }
         return allAirportResponse;
     }

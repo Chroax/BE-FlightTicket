@@ -34,25 +34,15 @@ public class TicketServiceImpl implements TicketService {
             Optional<Orders> orders = orderRepository.findById(ticketRequest.getOrderId());
             Optional<Seats> seats = seatRepository.findById(ticketRequest.getSeatId());
 
-            if (travelerList.isPresent()) {
-                if (orders.isPresent()) {
-                    if (seats.isPresent()) {
-                        Tickets tickets = ticketRequest.toTickets(travelerList.get(), orders.get(), seats.get());
-                        try {
-                            ticketRepository.save(tickets);
-                            return TicketResponse.build(tickets);
-                        } catch (Exception exception) {
-                            return null;
-                        }
-                    }
-
-                }
+            if (travelerList.isPresent() && orders.isPresent() && seats.isPresent()) {
+                Tickets tickets = ticketRequest.toTickets(travelerList.get(), orders.get(), seats.get());
+                ticketRepository.save(tickets);
+                return TicketResponse.build(tickets);
             } else
                 return null;
         } catch (Exception exception) {
             return null;
         }
-        return null;
     }
 
 

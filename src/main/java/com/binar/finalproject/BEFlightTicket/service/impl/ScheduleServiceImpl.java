@@ -12,7 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -60,15 +59,8 @@ public class ScheduleServiceImpl implements ScheduleService {
                 if(routes.isPresent())
                 {
                     Schedules schedules = scheduleRequest.toSchedule(airplanes.get(), routes.get());
-
-                    try {
-                        scheduleRepository.save(schedules);
-                        return ScheduleResponse.build(schedules);
-                    }
-                    catch(Exception exception)
-                    {
-                        return null;
-                    }
+                    scheduleRepository.save(schedules);
+                    return ScheduleResponse.build(schedules);
                 }
                 else
                     return null;
@@ -94,28 +86,21 @@ public class ScheduleServiceImpl implements ScheduleService {
                     if(routes.isPresent())
                     {
                         Schedules schedules = scheduleRequest.toSchedule(airplanes.get(), routes.get());
-
-                        try {
-                            scheduleRepository.save(schedules);
-                            allScheduleResponse.add(ScheduleResponse.build(schedules));
-                        }
-                        catch(Exception exception)
-                        {
-                            return null;
-                        }
+                        scheduleRepository.save(schedules);
+                        allScheduleResponse.add(ScheduleResponse.build(schedules));
                     }
                     else
-                        return null;
+                        return Collections.emptyList();
                 }
                 else
-                    return null;
+                    return Collections.emptyList();
             }catch (Exception exception)
             {
-                return null;
+                return Collections.emptyList();
             }
         }
         if(allScheduleResponse.isEmpty())
-            return null;
+            return Collections.emptyList();
         else
             return allScheduleResponse;
     }
@@ -249,7 +234,9 @@ public class ScheduleServiceImpl implements ScheduleService {
             {
                 Airports findDepartureAirport = airportsRepository.findByAirportName(routes.get().getDepartureAirport());
                 Airports findArrivalAirport = airportsRepository.findByAirportName(routes.get().getArrivalAirport());
-                return SearchScheduleResponse.build(schedules.get(), routes.get(), airplanes.get(), findDepartureAirport.getIataCode(), findArrivalAirport.getIataCode());
+                if(airplanes.isPresent())
+                    return SearchScheduleResponse.build(schedules.get(), routes.get(), airplanes.get(), findDepartureAirport.getIataCode(), findArrivalAirport.getIataCode());
+                return null;
             }
             else
                 return null;

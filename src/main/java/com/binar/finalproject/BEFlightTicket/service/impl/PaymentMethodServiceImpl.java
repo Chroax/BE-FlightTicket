@@ -17,7 +17,7 @@ import java.util.List;
 public class PaymentMethodServiceImpl implements PaymentMethodService {
     @Autowired
     private PaymentMethodRepository paymentMethodRepository;
-
+    private String notFound = "Payment method not found";
     @Override
     public PaymentMethodResponse addPaymentMethod(PaymentMethodRequest paymentMethodRequest) {
         PaymentMethods isPaymentExist = paymentMethodRepository.findByName(paymentMethodRequest.getPaymentName());
@@ -37,7 +37,7 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
         if (paymentMethods != null)
             return PaymentMethodResponse.build(paymentMethods);
         else
-            throw new DataNotFoundException("Payment method not found");
+            throw new DataNotFoundException(notFound);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
             return true;
         }
         else {
-            throw new DataNotFoundException("Payment method not found");
+            throw new DataNotFoundException(notFound);
         }
     }
 }

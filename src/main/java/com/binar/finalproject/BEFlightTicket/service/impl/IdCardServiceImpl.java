@@ -35,15 +35,8 @@ public class IdCardServiceImpl implements IdCardService {
                 if(countries.isPresent())
                 {
                     IdCard idCard = idCardRequest.toIdCard(countries.get(), travelerList.get());
-
-                    try {
-                        idCardRepository.save(idCard);
-                        return IdCardResponse.build(idCard);
-                    }
-                    catch(Exception exception)
-                    {
-                        return null;
-                    }
+                    idCardRepository.save(idCard);
+                    return IdCardResponse.build(idCard);
                 }
                 else
                     return null;

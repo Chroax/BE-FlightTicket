@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class RoleServiceImplTest {
+class RoleServiceImplTest {
 
     @Mock
     RoleRepository roleRepository;

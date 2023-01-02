@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class TravelerListServiceImplTest {
+class TravelerListServiceImplTest {
 
     @InjectMocks
     TravelerListServiceImpl travelerListService;

@@ -1,6 +1,5 @@
 package com.binar.finalproject.BEFlightTicket.security.oauth2;
 
-import com.binar.finalproject.BEFlightTicket.controller.OAuthController;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizationRequestResolver;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestResolver;

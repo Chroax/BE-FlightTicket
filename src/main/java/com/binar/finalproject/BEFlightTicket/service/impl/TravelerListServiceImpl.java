@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -35,22 +36,7 @@ public class TravelerListServiceImpl implements TravelerListService {
             {
                 if(countries.isPresent())
                 {
-                    TravelerList travelerListExist = travelerListRepository.findTravelerListExist(travelerListRequest.getFirstName(), travelerListRequest.getLastName(), travelerListRequest.getUserId());
-                    if(travelerListExist == null)
-                    {
-                        TravelerList travelerList = travelerListRequest.toTravelerList(users.get(), countries.get());
-
-                        try {
-                            travelerListRepository.save(travelerList);
-                            return TravelerListResponse.build(travelerList);
-                        }
-                        catch(Exception exception)
-                        {
-                            return null;
-                        }
-                    }
-                    else
-                        return null;
+                    return saveUser(users.get(), countries.get(), travelerListRequest);
                 }
                 else
                     return null;
@@ -61,6 +47,18 @@ public class TravelerListServiceImpl implements TravelerListService {
         {
             return null;
         }
+    }
+
+    private TravelerListResponse saveUser(Users users, Countries countries, TravelerListRequest travelerListRequest){
+        TravelerList travelerListExist = travelerListRepository.findTravelerListExist(travelerListRequest.getFirstName(), travelerListRequest.getLastName(), travelerListRequest.getUserId());
+        if(travelerListExist == null)
+        {
+            TravelerList travelerList = travelerListRequest.toTravelerList(users, countries);
+            travelerListRepository.save(travelerList);
+            return TravelerListResponse.build(travelerList);
+        }
+        else
+            return null;
     }
 
     @Override
@@ -81,8 +79,12 @@ public class TravelerListServiceImpl implements TravelerListService {
         for (TravelerList travelerList: allTravelerList) {
             Optional<IdCard> idCard = idCardRepository.findById(travelerList.getIdCard().getIdCardId());
             Optional<Passport> passport = passportRepository.findById(travelerList.getPassport().getPassportId());
-            TravelerListDetailResponse travelerListResponse = TravelerListDetailResponse.build(travelerList, idCard.get(), passport.get());
-            allTravelerListResponse.add(travelerListResponse);
+            if(idCard.isPresent() && passport.isPresent()){
+                TravelerListDetailResponse travelerListResponse = TravelerListDetailResponse.build(travelerList, idCard.get(), passport.get());
+                allTravelerListResponse.add(travelerListResponse);
+            }
+            else
+                return Collections.emptyList();
         }
         return allTravelerListResponse;
     }
@@ -147,13 +149,13 @@ public class TravelerListServiceImpl implements TravelerListService {
                 if(users.isPresent())
                     travelerList.setUsersTravelerList(users.get());
                 else
-                    return null;
+                    return Collections.emptyList();
 
                 Countries countries = countriesRepository.findByCountriesName(travelerListDetailRequest.getNationality());
                 if(countries != null)
                     travelerList.setCountriesTravelerList(countries);
                 else
-                    return null;
+                    return Collections.emptyList();
 
                 travelerListRepository.save(travelerList);
 
@@ -165,7 +167,7 @@ public class TravelerListServiceImpl implements TravelerListService {
                 if(countriesPassport != null)
                     passport.setCountriesPassport(countriesPassport);
                 else
-                    return null;
+                    return Collections.emptyList();
 
                 passport.setTravelerListPassport(travelerList);
                 passportRepository.save(passport);
@@ -177,7 +179,7 @@ public class TravelerListServiceImpl implements TravelerListService {
                 if(countriesIdCard != null)
                     idCard.setCountriesIdCard(countriesIdCard);
                 else
-                    return null;
+                    return Collections.emptyList();
 
                 idCard.setTravelerListIdCard(travelerList);
                 idCardRepository.save(idCard);

@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class PassportServiceImplTest {
+class PassportServiceImplTest {
 
     @InjectMocks
     PassportServiceImpl passportService;
@@ -176,10 +176,8 @@ public class PassportServiceImplTest {
 
         PassportResponse passportResponse = passportService.searchPassport(passportId);
         Assertions.assertNotNull(passportResponse);
-        Assertions.assertEquals(passportId, passportId);
 
         Mockito.verify(passportRepository).findById(passportId);
-
     }
 
     @Test

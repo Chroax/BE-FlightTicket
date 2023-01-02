@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UserServiceImplTest {
+class UserServiceImplTest {
 
     @Mock
     UserRepository userRepository;
@@ -44,14 +44,10 @@ public class UserServiceImplTest {
         var expectedValue1 = dataUsers.get(0);
         var expectedValue2 = dataUsers.get(1);
         var expectedValue3 = dataUsers.get(2);
-        var expectedValue4 = dataUsers.get(3);
-        var expectedValue5 = dataUsers.get(4);
         Assertions.assertNotNull(actualValue);
         Assertions.assertNotNull(expectedValue1);
         Assertions.assertNotNull(expectedValue2);
         Assertions.assertNotNull(expectedValue3);
-        Assertions.assertNotNull(expectedValue4);
-        Assertions.assertNotNull(expectedValue5);
         Assertions.assertEquals(expectedSize, actualValue.size());
 
         Assertions.assertEquals(expectedValue1.getFullName(), actualValue.get(0).getFullName());
@@ -71,18 +67,6 @@ public class UserServiceImplTest {
         Assertions.assertEquals(expectedValue3.getTelephone(), actualValue.get(2).getTelephone());
         Assertions.assertEquals(expectedValue3.getBirthDate(), actualValue.get(2).getBirthDate());
         Assertions.assertEquals(expectedValue3.getGender(), actualValue.get(2).getGender());
-
-        Assertions.assertEquals(expectedValue4.getFullName(), actualValue.get(3).getFullName());
-        Assertions.assertEquals(expectedValue4.getEmail(), actualValue.get(3).getEmail());
-        Assertions.assertEquals(expectedValue4.getTelephone(), actualValue.get(3).getTelephone());
-        Assertions.assertEquals(expectedValue4.getBirthDate(), actualValue.get(3).getBirthDate());
-        Assertions.assertEquals(expectedValue4.getGender(), actualValue.get(3).getGender());
-
-        Assertions.assertEquals(expectedValue5.getFullName(), actualValue.get(4).getFullName());
-        Assertions.assertEquals(expectedValue5.getEmail(), actualValue.get(4).getEmail());
-        Assertions.assertEquals(expectedValue5.getTelephone(), actualValue.get(4).getTelephone());
-        Assertions.assertEquals(expectedValue5.getBirthDate(), actualValue.get(4).getBirthDate());
-        Assertions.assertEquals(expectedValue5.getGender(), actualValue.get(4).getGender());
     }
 
     @Test

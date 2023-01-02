@@ -39,10 +39,6 @@ public class RouteServiceImpl implements RouteService {
         Terminals arrivalTerminals = terminalsRepository.findTerminalExist(routeRequest.getArrivalTerminal(), arrivalAirports.getIataCode());
         Terminals departureTerminals = terminalsRepository.findTerminalExist(routeRequest.getDepartureTerminal(), departureAirports.getIataCode());
 
-        if(arrivalAirports == null)
-            return null;
-        if(departureAirports == null)
-            return null;
         if(arrivalCities == null)
             return null;
         if(departureCities == null)
@@ -152,6 +148,6 @@ public class RouteServiceImpl implements RouteService {
             routeRepository.deleteById(routes.getRouteId());
             return true;
         }
-        return null;
+        return false;
     }
 }

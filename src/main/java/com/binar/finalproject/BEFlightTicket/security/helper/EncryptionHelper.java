@@ -18,6 +18,8 @@ public class EncryptionHelper {
     private static final int KEY_SIZE = 32;
     private static final int IV_SIZE = 16;
 
+    private EncryptionHelper(){}
+
     @SneakyThrows
     public static SecretKey generateKey(){
         KeyGenerator generator = KeyGenerator.getInstance("AES");

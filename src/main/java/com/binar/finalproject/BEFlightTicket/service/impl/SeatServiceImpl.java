@@ -2,10 +2,8 @@ package com.binar.finalproject.BEFlightTicket.service.impl;
 
 import com.binar.finalproject.BEFlightTicket.dto.SeatRequest;
 import com.binar.finalproject.BEFlightTicket.dto.SeatResponse;
-import com.binar.finalproject.BEFlightTicket.dto.TerminalResponse;
 import com.binar.finalproject.BEFlightTicket.model.Airplanes;
 import com.binar.finalproject.BEFlightTicket.model.Seats;
-import com.binar.finalproject.BEFlightTicket.model.Terminals;
 import com.binar.finalproject.BEFlightTicket.repository.AirplanesRepository;
 import com.binar.finalproject.BEFlightTicket.repository.SeatRepository;
 import com.binar.finalproject.BEFlightTicket.service.SeatService;
@@ -13,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,14 +31,8 @@ public class SeatServiceImpl implements SeatService {
                Seats seatsExist = seatRepository.findSeatExist(seatRequest.getSeatNumber(), seatRequest.getAirplaneName());
                if(seatsExist == null) {
                    Seats seats = seatRequest.toSeats(airplanes.get());
-                   try {
-                       seatRepository.save(seats);
-                       return SeatResponse.build(seats);
-                   }
-                   catch (Exception exception)
-                   {
-                       return null;
-                   }
+                   seatRepository.save(seats);
+                   return SeatResponse.build(seats);
                }
                else
                    return null;
@@ -66,28 +59,22 @@ public class SeatServiceImpl implements SeatService {
                     if(seatsExist == null)
                     {
                         Seats seats = seatRequest.toSeats(airplanes.get());
-                        try {
-                            seatRepository.save(seats);
-                            allSeatResponse.add(SeatResponse.build(seats));
-                        }
-                        catch (Exception exception)
-                        {
-                            return null;
-                        }
+                        seatRepository.save(seats);
+                        allSeatResponse.add(SeatResponse.build(seats));
                     }
                     else
-                        return null;
+                        return Collections.emptyList();
                 }
                 else
-                    return null;
+                    return Collections.emptyList();
             }
             catch (Exception exception)
             {
-                return null;
+                return Collections.emptyList();
             }
         }
         if(allSeatResponse.isEmpty())
-            return null;
+            return Collections.emptyList();
         else
             return allSeatResponse;
     }

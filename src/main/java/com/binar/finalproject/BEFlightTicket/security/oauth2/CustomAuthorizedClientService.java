@@ -1,6 +1,5 @@
 package com.binar.finalproject.BEFlightTicket.security.oauth2;
 
-import com.binar.finalproject.BEFlightTicket.controller.OAuthController;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -29,6 +28,7 @@ public class CustomAuthorizedClientService implements OAuth2AuthorizedClientServ
 
     @Override
     public void removeAuthorizedClient(String clientRegistrationId, String principalName) {
+        // Not Used Method
     }
 
 }

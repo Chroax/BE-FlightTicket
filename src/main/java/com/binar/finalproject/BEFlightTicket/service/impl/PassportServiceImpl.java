@@ -33,15 +33,8 @@ public class PassportServiceImpl implements PassportService {
                 if(countries.isPresent())
                 {
                     Passport passport = passportRequest.toPassport(countries.get(), travelerList.get());
-
-                    try {
-                        passportRepository.save(passport);
-                        return PassportResponse.build(passport);
-                    }
-                    catch(Exception exception)
-                    {
-                        return null;
-                    }
+                    passportRepository.save(passport);
+                    return PassportResponse.build(passport);
                 }
                 else
                     return null;

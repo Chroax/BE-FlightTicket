@@ -11,9 +11,10 @@ import java.util.Optional;
 import static java.util.Objects.isNull;
 
 public class CookieHelper {
-    private static final String COOKIE_DOMAIN = "localhost";
     private static final Boolean HTTP_ONLY = Boolean.TRUE;
     private static final Boolean SECURE = Boolean.FALSE;
+
+    private CookieHelper(){}
 
     public static Optional<String> retrieve(Cookie[] cookies, @NonNull String name){
         if (isNull(cookies)){
@@ -28,9 +29,6 @@ public class CookieHelper {
     }
     public static String generateCookie(@NonNull String name, @NonNull String value, @NonNull Duration maxAge){
         Cookie cookie = new Cookie(name, value);
-        if (!"localhost".equals(COOKIE_DOMAIN)){
-            cookie.setDomain(COOKIE_DOMAIN);
-        }
         cookie.setHttpOnly(HTTP_ONLY);
         cookie.setSecure(SECURE);
         cookie.setMaxAge((int) maxAge.toSeconds());

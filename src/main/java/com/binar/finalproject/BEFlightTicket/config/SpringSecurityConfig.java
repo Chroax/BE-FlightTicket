@@ -18,7 +18,6 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter;
@@ -91,9 +90,7 @@ public class SpringSecurityConfig {
                 subconfig.authorizationRequestResolver(this.customAuthorizationRequestResolver);
                 subconfig.authorizationRequestRepository(this.customStatelessAuthorizationRequestRepository);
             });
-            config.redirectionEndpoint(subconfig -> {
-                subconfig.baseUri(OAuthController.CALLBACK_BASE_URL);
-            });
+            config.redirectionEndpoint(subconfig -> subconfig.baseUri(OAuthController.CALLBACK_BASE_URL));
             config.authorizedClientService(this.customAuthorizedClientService);
             config.successHandler(this.oAuthController::oauthSuccessHandler);
             config.failureHandler(this.oAuthController::oauthFailureHandler);

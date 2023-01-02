@@ -9,6 +9,7 @@ import com.binar.finalproject.BEFlightTicket.model.*;
 import com.binar.finalproject.BEFlightTicket.repository.*;
 import com.binar.finalproject.BEFlightTicket.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -43,49 +44,47 @@ public class OrderServiceImpl implements OrderService {
                 if(paymentMethods.isPresent())
                 {
                     Orders orders = orderRequest.toOrders(users.get(), paymentMethods.get());
-                    try {
-                        Float totalPrice = 0f;
-                        List<TravelerList> allTravelerList = new ArrayList<>();
-                        List<UUID> allSchedulesId = new ArrayList<>();
-                        List<Schedules> allSchedules = new ArrayList<>();
-                        List<String> departureCity = new ArrayList<>();
-                        List<String> arrivalCity = new ArrayList<>();
+                    Float totalPrice = 0f;
+                    List<TravelerList> allTravelerList = new ArrayList<>();
+                    List<UUID> allSchedulesId = new ArrayList<>();
+                    List<Schedules> allSchedules = new ArrayList<>();
+                    List<String> departureCity = new ArrayList<>();
+                    List<String> arrivalCity = new ArrayList<>();
 
-                        for (UUID schedulesId: orderRequest.getScheduleId()) {
-                            Optional<Schedules> schedules = scheduleRepository.findById(schedulesId);
-                            if(schedules.isPresent())
-                            {
-                                Optional<Routes> routes = routeRepository.findById(schedules.get().getRoutesSchedules().getRouteId());
+                    for (UUID schedulesId: orderRequest.getScheduleId()) {
+                        Optional<Schedules> schedules = scheduleRepository.findById(schedulesId);
+                        if(schedules.isPresent())
+                        {
+                            Optional<Routes> routes = routeRepository.findById(schedules.get().getRoutesSchedules().getRouteId());
+                            if(routes.isPresent()){
                                 departureCity.add(routes.get().getDepartureCity());
                                 arrivalCity.add(routes.get().getArrivalCity());
                                 allSchedulesId.add(schedules.get().getScheduleId());
                                 allSchedules.add(schedules.get());
                                 totalPrice += schedules.get().getPrice();
                             }
-                            else
-                                return null;
+                            return
+                                    null;
                         }
-
-                        for (UUID travelerListId: orderRequest.getTravelerListId()){
-                            Optional<TravelerList> travelerList = travelerListRepository.findById(travelerListId);
-                            if(travelerList.isPresent())
-                                allTravelerList.add(travelerList.get());
-                            else
-                                return null;
-                        }
-
-                        orders.setTotalTicket(allSchedulesId.size());
-                        orders.setTotalPrice(totalPrice);
-                        orders.setScheduleOrders(allSchedules);
-                        orders.setTravelerListsOrder(allTravelerList);
-                        orders.setStatus("WAITING");
-                        orderRepository.save(orders);
-                        return OrderResponse.build(orders, allSchedulesId, departureCity, arrivalCity);
+                        else
+                            return null;
                     }
-                    catch(Exception exception)
-                    {
-                        return null;
+
+                    for (UUID travelerListId: orderRequest.getTravelerListId()){
+                        Optional<TravelerList> travelerList = travelerListRepository.findById(travelerListId);
+                        if(travelerList.isPresent())
+                            allTravelerList.add(travelerList.get());
+                        else
+                            return null;
                     }
+
+                    orders.setTotalTicket(allSchedulesId.size());
+                    orders.setTotalPrice(totalPrice);
+                    orders.setScheduleOrders(allSchedules);
+                    orders.setTravelerListsOrder(allTravelerList);
+                    orders.setStatus("WAITING");
+                    orderRepository.save(orders);
+                    return OrderResponse.build(orders, allSchedulesId, departureCity, arrivalCity);
                 }
                 else
                     return null;
@@ -114,8 +113,13 @@ public class OrderServiceImpl implements OrderService {
                 NotificationRequest notificationRequest = new NotificationRequest("Order : " + orders.getOrderId().toString(),
                         "Pesanan kamu sudah dikonfirmasi");
                 Optional<Users> users = userRepository.findById(orders.getUsersOrder().getUserId());
-                Notification notification = notificationRequest.toNotification(users.get());
-                notificationRepository.save(notification);
+                if(users.isPresent())
+                {
+                    Notification notification = notificationRequest.toNotification(users.get());
+                    notificationRepository.save(notification);
+                }
+                else
+                    return null;
             }
             else
                 orders.setStatus(orderRequest.getStatus());
@@ -134,11 +138,15 @@ public class OrderServiceImpl implements OrderService {
                 if(schedules.isPresent())
                 {
                     Optional<Routes> routes = routeRepository.findById(schedules.get().getRoutesSchedules().getRouteId());
-                    departureCity.add(routes.get().getDepartureCity());
-                    arrivalCity.add(routes.get().getArrivalCity());
-                    allSchedulesId.add(schedules.get().getScheduleId());
-                    allSchedules.add(schedules.get());
-                    totalPrice += schedules.get().getPrice();
+                    if(routes.isPresent()){
+                        departureCity.add(routes.get().getDepartureCity());
+                        arrivalCity.add(routes.get().getArrivalCity());
+                        allSchedulesId.add(schedules.get().getScheduleId());
+                        allSchedules.add(schedules.get());
+                        totalPrice += schedules.get().getPrice();
+                    }
+                    else
+                        return null;
                 }
                 else
                     return null;
@@ -214,7 +222,7 @@ public class OrderServiceImpl implements OrderService {
             List<TravelerList> allTravelerList = orders.getTravelerListsOrder();
             List<String> travelerListName = new ArrayList<>();
             for (TravelerList travelerList: allTravelerList) {
-                String travelerName = travelerList.getTitle().replaceAll(" ", "") + ". " + travelerList.getFirstName() + " "
+                String travelerName = travelerList.getTitle().replace(" ", "") + ". " + travelerList.getFirstName() + " "
                         + travelerList.getLastName();
 
                 travelerListName.add(travelerName);
@@ -227,15 +235,19 @@ public class OrderServiceImpl implements OrderService {
                 Airplanes airplanes = schedules.getAirplanesSchedules();
                 Airports departureAirports = airportsRepository.findByAirportName(routes.getDepartureAirport());
                 Airports arrivalAirports = airportsRepository.findByAirportName(routes.getArrivalAirport());
-                OrderDetailResponse orderDetailResponse = OrderDetailResponse.build(orders,
-                        airplanes, departureAirports, arrivalAirports, routes, schedules, paymentMethods.get());
-                orderDetailResponse.setTravelerListName(travelerListName);
-                orderDetailResponses.add(orderDetailResponse);
+                if(paymentMethods.isPresent()){
+                    OrderDetailResponse orderDetailResponse = OrderDetailResponse.build(orders,
+                            airplanes, departureAirports, arrivalAirports, routes, schedules, paymentMethods.get());
+                    orderDetailResponse.setTravelerListName(travelerListName);
+                    orderDetailResponses.add(orderDetailResponse);
+                }
+                else
+                    return Collections.emptyList();
             }
             return orderDetailResponses;
         }
         else
-            return null;
+            return Collections.emptyList();
     }
 
     private List<OrderResponse> orderToOrderResponseList(List<Orders> allOrder)

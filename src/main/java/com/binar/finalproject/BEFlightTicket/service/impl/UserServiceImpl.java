@@ -1,10 +1,8 @@
 package com.binar.finalproject.BEFlightTicket.service.impl;
 
-import com.binar.finalproject.BEFlightTicket.config.EncoderConfiguration;
 import com.binar.finalproject.BEFlightTicket.dto.UserRequest;
 import com.binar.finalproject.BEFlightTicket.dto.UserResponse;
 import com.binar.finalproject.BEFlightTicket.dto.UserUpdateRequest;
-import com.binar.finalproject.BEFlightTicket.model.Countries;
 import com.binar.finalproject.BEFlightTicket.model.Roles;
 import com.binar.finalproject.BEFlightTicket.model.Users;
 import com.binar.finalproject.BEFlightTicket.repository.RoleRepository;
@@ -33,9 +31,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse registerUser(UserRequest userRequest) {
 
-        if(!isEmailExist(userRequest.getEmail()))
+        if(Boolean.FALSE.equals(isEmailExist(userRequest.getEmail())))
         {
-            if(!isPhoneNumberExist(userRequest.getTelephone()))
+            if(Boolean.FALSE.equals(isPhoneNumberExist(userRequest.getTelephone())))
             {
                 try {
                     Roles roles = roleRepository.findByName("ROLE_BUYER");
@@ -90,34 +88,38 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse updateUser(UserUpdateRequest userUpdateRequest, UUID userId) {
-        Users users = userRepository.findById(userId).get();
-        String message = null;
-        if (users != null) {
-            users.setFullName(userUpdateRequest.getFullName());
-
-            if(!isEmailExist(userUpdateRequest.getEmail()) || users.getEmail().equals(userUpdateRequest.getEmail()))
-                users.setEmail(userUpdateRequest.getEmail());
-            else
-                message = "Email already exist";
-
-            if(!isPhoneNumberExist(userUpdateRequest.getTelephone())  || users.getTelephone().equals(userUpdateRequest.getTelephone()))
-                users.setTelephone(userUpdateRequest.getTelephone());
-            else
-                message = "Phone number already exist";
-
-            users.setGender(userUpdateRequest.getGender());
-            users.setBirthDate(userUpdateRequest.getBirthDate());
-            users.setRolesUsers(users.getRolesUsers());
-
-            if(message == null)
-                return null;
-            else
-            {
-                userRepository.saveAndFlush(users);
-                return UserResponse.build(users);
-            }
-        } else
+        Optional<Users> userGet = userRepository.findById(userId);
+        Users users = null;
+        if(userGet.isPresent())
+            users = userGet.get();
+        else
             return null;
+
+        String message = null;
+
+        users.setFullName(userUpdateRequest.getFullName());
+
+        if(Boolean.TRUE.equals(!isEmailExist(userUpdateRequest.getEmail())) || users.getEmail().equals(userUpdateRequest.getEmail()))
+            users.setEmail(userUpdateRequest.getEmail());
+        else
+            message = "Email already exist";
+
+        if(Boolean.TRUE.equals(!isPhoneNumberExist(userUpdateRequest.getTelephone()))  || users.getTelephone().equals(userUpdateRequest.getTelephone()))
+            users.setTelephone(userUpdateRequest.getTelephone());
+        else
+            message = "Phone number already exist";
+
+        users.setGender(userUpdateRequest.getGender());
+        users.setBirthDate(userUpdateRequest.getBirthDate());
+        users.setRolesUsers(users.getRolesUsers());
+
+        if(message == null)
+            return null;
+        else
+        {
+            userRepository.saveAndFlush(users);
+            return UserResponse.build(users);
+        }
     }
 
     @Override

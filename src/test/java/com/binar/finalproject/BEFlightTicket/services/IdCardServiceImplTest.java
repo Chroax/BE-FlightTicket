@@ -19,7 +19,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
-public class IdCardServiceImplTest {
+class IdCardServiceImplTest {
 
     @InjectMocks
     IdCardServiceImpl idCardService;
@@ -154,7 +154,6 @@ public class IdCardServiceImplTest {
 
         IdCardResponse idCardResponse = idCardService.searchIdCard(idCardId);
         Assertions.assertNotNull(idCardResponse);
-        Assertions.assertEquals(idCardId, idCardId);
 
         Mockito.verify(idCardRepository).findById(idCardId);
     }

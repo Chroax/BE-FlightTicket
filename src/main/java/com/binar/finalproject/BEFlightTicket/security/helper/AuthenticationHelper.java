@@ -6,7 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 
 public class AuthenticationHelper {
-
+    private AuthenticationHelper(){}
     public static void attachAccountId(Authentication authentication, String accountId) {
         Object originalDetails = authentication.getDetails();
         if (originalDetails instanceof Details details) {

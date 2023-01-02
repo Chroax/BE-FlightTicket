@@ -6,14 +6,11 @@ import com.binar.finalproject.BEFlightTicket.service.InvoiceService;
 import com.binar.finalproject.BEFlightTicket.utility.QRGenerator;
 import com.google.zxing.WriterException;
 import net.sf.jasperreports.engine.*;
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 
 import javax.sql.DataSource;
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;

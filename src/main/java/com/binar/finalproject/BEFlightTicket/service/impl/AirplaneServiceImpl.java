@@ -5,7 +5,6 @@ import com.binar.finalproject.BEFlightTicket.dto.AirplanesResponse;
 import com.binar.finalproject.BEFlightTicket.exception.DataAlreadyExistException;
 import com.binar.finalproject.BEFlightTicket.exception.DataNotFoundException;
 import com.binar.finalproject.BEFlightTicket.model.Airplanes;
-import com.binar.finalproject.BEFlightTicket.model.PaymentMethods;
 import com.binar.finalproject.BEFlightTicket.repository.AirplanesRepository;
 import com.binar.finalproject.BEFlightTicket.service.AirplanesService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,14 +13,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
 public class AirplaneServiceImpl implements AirplanesService {
     @Autowired
     private AirplanesRepository airplanesRepository;
-
+    private String notFound = "Airplane not found";
     @Override
     public AirplanesResponse insertAirplane(AirplanesRequest airplanesRequest) {
         Airplanes isAirplaneExist = airplanesRepository.findByName(airplanesRequest.getAirplaneName());
@@ -43,7 +41,7 @@ public class AirplaneServiceImpl implements AirplanesService {
             return AirplanesResponse.build(isAirplanes);
         }
         else {
-            throw new DataNotFoundException("Airplane not found");
+            throw new DataNotFoundException(notFound);
         }
     }
 
@@ -78,7 +76,7 @@ public class AirplaneServiceImpl implements AirplanesService {
             return AirplanesResponse.build(isAirplanes);
         }
         else
-            throw new DataNotFoundException("Airplane not found");
+            throw new DataNotFoundException(notFound);
     }
 
     @Override
@@ -90,7 +88,7 @@ public class AirplaneServiceImpl implements AirplanesService {
             return true;
         }
         else {
-            throw new DataNotFoundException("Airplane not found");
+            throw new DataNotFoundException(notFound);
         }
     }
 }
