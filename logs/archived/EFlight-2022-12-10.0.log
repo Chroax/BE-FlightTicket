@@ -57,7 +57,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "airports" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -113,7 +113,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "cities" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -169,7 +169,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "gates" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -225,7 +225,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "id_card" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -281,7 +281,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "id_card" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -337,7 +337,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -393,7 +393,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -449,7 +449,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "passport" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -505,7 +505,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "passport" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -561,7 +561,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedules" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -617,7 +617,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedules" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -673,7 +673,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "seats" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -729,7 +729,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "terminals" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -785,7 +785,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "traveler_list" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -841,7 +841,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "traveler_list" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -897,7 +897,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "users" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -1017,7 +1017,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "airports" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -1073,7 +1073,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "cities" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -1129,7 +1129,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "gates" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -1185,7 +1185,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "id_card" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -1241,7 +1241,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "id_card" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -1297,7 +1297,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -1353,7 +1353,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -1409,7 +1409,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "passport" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -1465,7 +1465,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "passport" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -1521,7 +1521,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedules" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -1577,7 +1577,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedules" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -1633,7 +1633,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "seats" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -1689,7 +1689,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "terminals" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -1745,7 +1745,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "tickets" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -1801,7 +1801,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "tickets" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -1857,7 +1857,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "tickets" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -1913,7 +1913,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "traveler_list" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -1969,7 +1969,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "traveler_list" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -2025,7 +2025,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "users" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -2145,7 +2145,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "airports" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -2201,7 +2201,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "cities" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -2257,7 +2257,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "gates" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -2313,7 +2313,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "id_card" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -2369,7 +2369,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "id_card" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -2425,7 +2425,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -2481,7 +2481,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -2537,7 +2537,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "passport" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -2593,7 +2593,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "passport" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -2649,7 +2649,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedule_orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -2705,7 +2705,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedule_orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -2761,7 +2761,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedules" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -2817,7 +2817,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedules" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -2873,7 +2873,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "seats" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -2929,7 +2929,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "terminals" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -2985,7 +2985,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "tickets" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -3041,7 +3041,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "tickets" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -3097,7 +3097,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "tickets" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -3153,7 +3153,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "traveler_list" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -3209,7 +3209,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "traveler_list" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -3265,7 +3265,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "users" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -3362,7 +3362,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: foreign key constraint "fki8inlepnalij5p3m7wvrksyk6" cannot be implemented
   Detail: Key columns "schedule_id" and "schedule_id" are of incompatible types: integer and uuid.
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
@@ -3450,7 +3450,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "airports" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -3506,7 +3506,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "cities" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -3562,7 +3562,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "gates" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -3618,7 +3618,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "id_card" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -3674,7 +3674,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "id_card" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -3730,7 +3730,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -3786,7 +3786,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -3842,7 +3842,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "passport" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -3898,7 +3898,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "passport" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -3954,7 +3954,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedule_orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -4010,7 +4010,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedule_orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -4066,7 +4066,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedules" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -4122,7 +4122,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedules" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -4178,7 +4178,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "seats" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -4234,7 +4234,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "terminals" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -4290,7 +4290,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "tickets" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -4346,7 +4346,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "tickets" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -4402,7 +4402,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "tickets" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -4458,7 +4458,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "traveler_list" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -4514,7 +4514,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "traveler_list" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -4570,7 +4570,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "users" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -4724,7 +4724,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "airports" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -4780,7 +4780,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "cities" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -4836,7 +4836,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "gates" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -4892,7 +4892,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "id_card" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -4948,7 +4948,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "id_card" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -5004,7 +5004,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -5060,7 +5060,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -5116,7 +5116,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "passport" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -5172,7 +5172,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "passport" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -5228,7 +5228,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedule_orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -5284,7 +5284,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedule_orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -5340,7 +5340,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedules" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -5396,7 +5396,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedules" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -5452,7 +5452,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "seats" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -5508,7 +5508,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "terminals" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -5564,7 +5564,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "tickets" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -5620,7 +5620,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "tickets" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -5676,7 +5676,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "tickets" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -5732,7 +5732,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "traveler_list" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -5788,7 +5788,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "traveler_list" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -5844,7 +5844,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "users" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -5973,7 +5973,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "airports" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -6029,7 +6029,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "cities" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -6085,7 +6085,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "gates" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -6141,7 +6141,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "id_card" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -6197,7 +6197,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "id_card" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -6253,7 +6253,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -6309,7 +6309,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -6365,7 +6365,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "passport" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -6421,7 +6421,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "passport" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -6477,7 +6477,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedule_orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -6533,7 +6533,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedule_orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -6589,7 +6589,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedules" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -6645,7 +6645,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedules" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -6701,7 +6701,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "seats" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -6757,7 +6757,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "terminals" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -6813,7 +6813,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "tickets" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -6869,7 +6869,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "tickets" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -6925,7 +6925,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "tickets" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -6981,7 +6981,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "traveler_list" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -7037,7 +7037,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "traveler_list" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -7093,7 +7093,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "users" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -7156,9 +7156,9 @@ Caused by: org.postgresql.util.PSQLException: ERROR: relation "users" does not e
 2022-11-27 21:51:38,274 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
 2022-11-27 21:51:38,275 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 1 ms
 2022-11-27 21:51:39,730 INFO org.springdoc.api.AbstractOpenApiResource [http-nio-8080-exec-4] Init duration for springdoc-openapi is: 792 ms
-2022-11-27 21:53:03,029 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-9] Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Illegal unquoted character ((CTRL-CHAR, code 9)): has to be escaped using backslash to be included in string value; nested exception is com.fasterxml.jackson.databind.JsonMappingException: Illegal unquoted character ((CTRL-CHAR, code 9)): has to be escaped using backslash to be included in string value<EOL> at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 3, column: 17] (through reference chain: com.binar.finalproject.BEFlightTicket.dto.CitiesRequest["cityName"])]
-2022-11-27 22:00:15,656 ERROR org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-3] Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalStateException: Ambiguous handler methods mapped for '/schedule/get-all/b338b58d-bd80-4b15-a868-6ef04b971b2d': {public org.springframework.http.ResponseEntity com.binar.finalproject.BEFlightTicket.controller.ScheduleController.getRouteSchedule(java.util.UUID), public org.springframework.http.ResponseEntity com.binar.finalproject.BEFlightTicket.controller.ScheduleController.getAirplaneSchedule(java.lang.String)}] with root cause
-java.lang.IllegalStateException: Ambiguous handler methods mapped for '/schedule/get-all/b338b58d-bd80-4b15-a868-6ef04b971b2d': {public org.springframework.http.ResponseEntity com.binar.finalproject.BEFlightTicket.controller.ScheduleController.getRouteSchedule(java.util.UUID), public org.springframework.http.ResponseEntity com.binar.finalproject.BEFlightTicket.controller.ScheduleController.getAirplaneSchedule(java.lang.String)}
+2022-11-27 21:53:03,029 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-9] Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Illegal unquoted character ((CTRL-CHAR, code 9)): has to be escaped using backslash to be included in string value; nested exception is com.fasterxml.jackson.databind.JsonMappingException: Illegal unquoted character ((CTRL-CHAR, code 9)): has to be escaped using backslash to be included in string value<EOL> at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 3, column: 17] (through reference chain: com.binar.finalproject.flightticket.dto.CitiesRequest["cityName"])]
+2022-11-27 22:00:15,656 ERROR org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-3] Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalStateException: Ambiguous handler methods mapped for '/schedule/get-all/b338b58d-bd80-4b15-a868-6ef04b971b2d': {public org.springframework.http.ResponseEntity com.binar.finalproject.flightticket.controller.ScheduleController.getRouteSchedule(java.util.UUID), public org.springframework.http.ResponseEntity com.binar.finalproject.flightticket.controller.ScheduleController.getAirplaneSchedule(java.lang.String)}] with root cause
+java.lang.IllegalStateException: Ambiguous handler methods mapped for '/schedule/get-all/b338b58d-bd80-4b15-a868-6ef04b971b2d': {public org.springframework.http.ResponseEntity com.binar.finalproject.flightticket.controller.ScheduleController.getRouteSchedule(java.util.UUID), public org.springframework.http.ResponseEntity com.binar.finalproject.flightticket.controller.ScheduleController.getAirplaneSchedule(java.lang.String)}
 	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.lookupHandlerMethod(AbstractHandlerMethodMapping.java:432)
 	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.getHandlerInternal(AbstractHandlerMethodMapping.java:383)
 	at org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping.getHandlerInternal(RequestMappingInfoHandlerMapping.java:125)
@@ -7205,8 +7205,8 @@ java.lang.IllegalStateException: Ambiguous handler methods mapped for '/schedule
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-11-27 22:03:31,808 ERROR org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-9] Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalStateException: Ambiguous handler methods mapped for '/schedule/get-all/JT567': {public org.springframework.http.ResponseEntity com.binar.finalproject.BEFlightTicket.controller.ScheduleController.getRouteSchedule(java.util.UUID), public org.springframework.http.ResponseEntity com.binar.finalproject.BEFlightTicket.controller.ScheduleController.getAirplaneSchedule(java.lang.String)}] with root cause
-java.lang.IllegalStateException: Ambiguous handler methods mapped for '/schedule/get-all/JT567': {public org.springframework.http.ResponseEntity com.binar.finalproject.BEFlightTicket.controller.ScheduleController.getRouteSchedule(java.util.UUID), public org.springframework.http.ResponseEntity com.binar.finalproject.BEFlightTicket.controller.ScheduleController.getAirplaneSchedule(java.lang.String)}
+2022-11-27 22:03:31,808 ERROR org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-9] Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalStateException: Ambiguous handler methods mapped for '/schedule/get-all/JT567': {public org.springframework.http.ResponseEntity com.binar.finalproject.flightticket.controller.ScheduleController.getRouteSchedule(java.util.UUID), public org.springframework.http.ResponseEntity com.binar.finalproject.flightticket.controller.ScheduleController.getAirplaneSchedule(java.lang.String)}] with root cause
+java.lang.IllegalStateException: Ambiguous handler methods mapped for '/schedule/get-all/JT567': {public org.springframework.http.ResponseEntity com.binar.finalproject.flightticket.controller.ScheduleController.getRouteSchedule(java.util.UUID), public org.springframework.http.ResponseEntity com.binar.finalproject.flightticket.controller.ScheduleController.getAirplaneSchedule(java.lang.String)}
 	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.lookupHandlerMethod(AbstractHandlerMethodMapping.java:432)
 	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.getHandlerInternal(AbstractHandlerMethodMapping.java:383)
 	at org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping.getHandlerInternal(RequestMappingInfoHandlerMapping.java:125)
@@ -7316,7 +7316,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "airports" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -7372,7 +7372,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "cities" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -7428,7 +7428,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "gates" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -7484,7 +7484,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "id_card" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -7540,7 +7540,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "id_card" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -7596,7 +7596,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -7652,7 +7652,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -7708,7 +7708,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "passport" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -7764,7 +7764,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "passport" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -7820,7 +7820,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedule_orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -7876,7 +7876,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedule_orders" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -7932,7 +7932,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedules" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -7988,7 +7988,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "schedules" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -8044,7 +8044,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "seats" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -8100,7 +8100,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "terminals" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -8156,7 +8156,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "tickets" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -8212,7 +8212,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "tickets" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -8268,7 +8268,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "tickets" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -8324,7 +8324,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "traveler_list" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -8380,7 +8380,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "traveler_list" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -8436,7 +8436,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.binar.finalproject.BEFlightTicket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
+	at com.binar.finalproject.flightticket.BeFlightTicketApplication.main(BeFlightTicketApplication.java:10)
 Caused by: org.postgresql.util.PSQLException: ERROR: relation "users" does not exist
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
@@ -8499,8 +8499,8 @@ Caused by: org.postgresql.util.PSQLException: ERROR: relation "users" does not e
 2022-11-27 22:06:06,722 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
 2022-11-27 22:06:06,723 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 1 ms
 2022-11-27 22:06:07,486 INFO org.springdoc.api.AbstractOpenApiResource [http-nio-8080-exec-4] Init duration for springdoc-openapi is: 505 ms
-2022-11-27 22:25:12,655 ERROR org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-5] Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalStateException: Ambiguous handler methods mapped for '/schedule/get-all/JT567': {public org.springframework.http.ResponseEntity com.binar.finalproject.BEFlightTicket.controller.ScheduleController.getAirplaneSchedule(java.lang.String), public org.springframework.http.ResponseEntity com.binar.finalproject.BEFlightTicket.controller.ScheduleController.getRouteSchedule(java.util.UUID)}] with root cause
-java.lang.IllegalStateException: Ambiguous handler methods mapped for '/schedule/get-all/JT567': {public org.springframework.http.ResponseEntity com.binar.finalproject.BEFlightTicket.controller.ScheduleController.getAirplaneSchedule(java.lang.String), public org.springframework.http.ResponseEntity com.binar.finalproject.BEFlightTicket.controller.ScheduleController.getRouteSchedule(java.util.UUID)}
+2022-11-27 22:25:12,655 ERROR org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-5] Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalStateException: Ambiguous handler methods mapped for '/schedule/get-all/JT567': {public org.springframework.http.ResponseEntity com.binar.finalproject.flightticket.controller.ScheduleController.getAirplaneSchedule(java.lang.String), public org.springframework.http.ResponseEntity com.binar.finalproject.flightticket.controller.ScheduleController.getRouteSchedule(java.util.UUID)}] with root cause
+java.lang.IllegalStateException: Ambiguous handler methods mapped for '/schedule/get-all/JT567': {public org.springframework.http.ResponseEntity com.binar.finalproject.flightticket.controller.ScheduleController.getAirplaneSchedule(java.lang.String), public org.springframework.http.ResponseEntity com.binar.finalproject.flightticket.controller.ScheduleController.getRouteSchedule(java.util.UUID)}
 	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.lookupHandlerMethod(AbstractHandlerMethodMapping.java:432)
 	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.getHandlerInternal(AbstractHandlerMethodMapping.java:383)
 	at org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping.getHandlerInternal(RequestMappingInfoHandlerMapping.java:125)
@@ -8547,8 +8547,8 @@ java.lang.IllegalStateException: Ambiguous handler methods mapped for '/schedule
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-11-27 22:25:19,838 ERROR org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-7] Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalStateException: Ambiguous handler methods mapped for '/schedule/get-all/53f9bcbc-02f1-40c8-ba69-87c44bb1ffcb': {public org.springframework.http.ResponseEntity com.binar.finalproject.BEFlightTicket.controller.ScheduleController.getAirplaneSchedule(java.lang.String), public org.springframework.http.ResponseEntity com.binar.finalproject.BEFlightTicket.controller.ScheduleController.getRouteSchedule(java.util.UUID)}] with root cause
-java.lang.IllegalStateException: Ambiguous handler methods mapped for '/schedule/get-all/53f9bcbc-02f1-40c8-ba69-87c44bb1ffcb': {public org.springframework.http.ResponseEntity com.binar.finalproject.BEFlightTicket.controller.ScheduleController.getAirplaneSchedule(java.lang.String), public org.springframework.http.ResponseEntity com.binar.finalproject.BEFlightTicket.controller.ScheduleController.getRouteSchedule(java.util.UUID)}
+2022-11-27 22:25:19,838 ERROR org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-7] Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalStateException: Ambiguous handler methods mapped for '/schedule/get-all/53f9bcbc-02f1-40c8-ba69-87c44bb1ffcb': {public org.springframework.http.ResponseEntity com.binar.finalproject.flightticket.controller.ScheduleController.getAirplaneSchedule(java.lang.String), public org.springframework.http.ResponseEntity com.binar.finalproject.flightticket.controller.ScheduleController.getRouteSchedule(java.util.UUID)}] with root cause
+java.lang.IllegalStateException: Ambiguous handler methods mapped for '/schedule/get-all/53f9bcbc-02f1-40c8-ba69-87c44bb1ffcb': {public org.springframework.http.ResponseEntity com.binar.finalproject.flightticket.controller.ScheduleController.getAirplaneSchedule(java.lang.String), public org.springframework.http.ResponseEntity com.binar.finalproject.flightticket.controller.ScheduleController.getRouteSchedule(java.util.UUID)}
 	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.lookupHandlerMethod(AbstractHandlerMethodMapping.java:432)
 	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.getHandlerInternal(AbstractHandlerMethodMapping.java:383)
 	at org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping.getHandlerInternal(RequestMappingInfoHandlerMapping.java:125)
@@ -8617,7 +8617,7 @@ java.lang.IllegalStateException: Ambiguous handler methods mapped for '/schedule
 2022-12-10 13:26:57,802 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
 2022-12-10 13:26:58,306 DEBUG org.springframework.web.filter.GenericFilterBean [main] Filter 'authenticationJwtTokenFilter' configured for use
 2022-12-10 13:26:59,087 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-12-10 13:26:59,764 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1146e32e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@511ad0dd, org.springframework.security.web.context.SecurityContextPersistenceFilter@58c80957, org.springframework.security.web.header.HeaderWriterFilter@7a6e0f3c, org.springframework.web.filter.CorsFilter@634d56eb, org.springframework.security.web.authentication.logout.LogoutFilter@2e3b4394, com.binar.finalproject.BEFlightTicket.security.AuthTokenFilter@7d7c05fa, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@78c5ef58, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1fce6eb4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4cd7128, org.springframework.security.web.session.SessionManagementFilter@5b8b9b2d, org.springframework.security.web.access.ExceptionTranslationFilter@63ede2a0, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2284058a]
+2022-12-10 13:26:59,764 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1146e32e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@511ad0dd, org.springframework.security.web.context.SecurityContextPersistenceFilter@58c80957, org.springframework.security.web.header.HeaderWriterFilter@7a6e0f3c, org.springframework.web.filter.CorsFilter@634d56eb, org.springframework.security.web.authentication.logout.LogoutFilter@2e3b4394, com.binar.finalproject.flightticket.security.AuthTokenFilter@7d7c05fa, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@78c5ef58, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1fce6eb4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4cd7128, org.springframework.security.web.session.SessionManagementFilter@5b8b9b2d, org.springframework.security.web.access.ExceptionTranslationFilter@63ede2a0, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2284058a]
 2022-12-10 13:27:00,004 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
 2022-12-10 13:27:00,029 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
 2022-12-10 13:27:00,040 INFO org.springframework.boot.StartupInfoLogger [main] Started BeFlightTicketApplication in 6.047 seconds (JVM running for 7.209)
