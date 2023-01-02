@@ -62,8 +62,8 @@ public class OrderServiceImpl implements OrderService {
                                 allSchedules.add(schedules.get());
                                 totalPrice += schedules.get().getPrice();
                             }
-                            return
-                                    null;
+                            else
+                                return null;
                         }
                         else
                             return null;
