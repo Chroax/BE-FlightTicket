@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 public class CustomAuthorizedClientService implements OAuth2AuthorizedClientService {
 
     private final GoogleAccountService googleAccountService;
-    private final OAuthController oAuthController;
 
     @Override
     public <T extends OAuth2AuthorizedClient> T loadAuthorizedClient(String clientRegistrationId, String principalName) {
@@ -22,11 +21,10 @@ public class CustomAuthorizedClientService implements OAuth2AuthorizedClientServ
 
     @Override
     public void saveAuthorizedClient(OAuth2AuthorizedClient authorizedClient, Authentication authentication) {
-       this.googleAccountService.findOrRegisterAccount(
+       this.googleAccountService.oAuthLoginSuccess(
                authentication.getName(),
                authentication.getName().split("\\|")[0],
-               ((DefaultOidcUser) authentication.getPrincipal()).getClaims()
-       );
+               ((DefaultOidcUser) authentication.getPrincipal()).getClaims().toString());
     }
 
     @Override

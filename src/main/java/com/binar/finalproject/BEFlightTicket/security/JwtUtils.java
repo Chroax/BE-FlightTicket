@@ -1,6 +1,5 @@
 package com.binar.finalproject.BEFlightTicket.security;
 
-//import com.binar.finalproject.BEFlightTicket.security.oauth2.CustomOAuth2User;
 import com.binar.finalproject.BEFlightTicket.service.impl.security.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;

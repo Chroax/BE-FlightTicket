@@ -4,15 +4,12 @@ package com.binar.finalproject.BEFlightTicket.config;
 import com.binar.finalproject.BEFlightTicket.controller.OAuthController;
 import com.binar.finalproject.BEFlightTicket.security.AuthEntryPointJwt;
 import com.binar.finalproject.BEFlightTicket.security.AuthTokenFilter;
-//import com.binar.finalproject.BEFlightTicket.security.oauth2.CustomOAuth2UserService;
 import com.binar.finalproject.BEFlightTicket.security.oauth2.CustomAuthorizationRedirectFilter;
 import com.binar.finalproject.BEFlightTicket.security.oauth2.CustomAuthorizationRequestResolver;
 import com.binar.finalproject.BEFlightTicket.security.oauth2.CustomAuthorizedClientService;
 import com.binar.finalproject.BEFlightTicket.security.oauth2.CustomStatelessAuthorizationRequestRepository;
-//import com.binar.finalproject.BEFlightTicket.security.oauth2.OAuthLoginSuccessHandler;
 import com.binar.finalproject.BEFlightTicket.service.impl.security.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,8 +25,6 @@ import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequest
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -115,8 +110,4 @@ public class SpringSecurityConfig {
     private final CustomAuthorizationRequestResolver customAuthorizationRequestResolver;
     private final OAuthController oAuthController;
     private final CustomAuthorizationRedirectFilter customAuthorizationRedirectFilter;
-//    @Autowired
-//    CustomOAuth2UserService oAuth2UserService;
-//    @Autowired
-//    OAuthLoginSuccessHandler oAuthLoginSuccessHandler;
 }

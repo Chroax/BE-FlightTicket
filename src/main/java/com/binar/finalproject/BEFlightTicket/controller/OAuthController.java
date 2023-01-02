@@ -36,15 +36,6 @@ public class OAuthController {
     }
 
     @SneakyThrows
-    public void oauthSuccessCallback(OAuth2AuthorizedClient client, Authentication authentication){
-        UUID accountId = this.googleAccountService.findOrRegisterAccount(
-                authentication.getName(),
-                authentication.getName().split("\\|")[0],((DefaultOidcUser) authentication.getPrincipal()).getClaims()
-        );
-        AuthenticationHelper.attachAccountId(authentication, accountId.toString());
-    }
-
-    @SneakyThrows
     public void oauthSuccessHandler(HttpServletRequest request, HttpServletResponse response, Authentication authentication){
         String accountId = AuthenticationHelper.retrieveAccountId(authentication);
         response.addHeader(HttpHeaders.SET_COOKIE, CookieHelper.generateExpiredCookie(OAUTH_COOKIE_NAME));
