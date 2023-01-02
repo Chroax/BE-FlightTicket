@@ -1,5 +1,10 @@
 package com.binar.finalproject.BEFlightTicket.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +23,21 @@ public class AirplaneController {
     @Autowired
     private AirplanesService airplanesService;
 
+    @Operation(responses = {
+            @ApiResponse(responseCode = "201", content = @Content(examples = {
+                    @ExampleObject(name = "Add Airplane",
+                            description = "Menambahkan pesawat",
+                            value = """
+                                    {
+                                         "status": 201,
+                                         "message": "Add new airplane",
+                                         "data": {
+                                            "airplaneName": "JET 601",
+                                            "airplaneType": "Airbus"
+                                        }
+                                      }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @PostMapping("/add")
     @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
@@ -40,7 +60,21 @@ public class AirplaneController {
 
         }
     }
-
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Get all airplane",
+                            description = "Menampilkan pesawat berdasarkan nama pesawat",
+                            value = """
+                                    {
+                                       "status": 200,
+                                       "message": "Success get airplane",
+                                       "data": {
+                                         "airplaneName": "JET 700",
+                                         "airplaneType": "Airbus"
+                                       }
+                                     }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @GetMapping("/findby-name")
     public ResponseEntity<MessageModel> getAirplaneByName(@RequestParam String airplaneName){
         MessageModel messageModel = new MessageModel();
@@ -58,6 +92,31 @@ public class AirplaneController {
         }
     }
 
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Get all airplane",
+                            description = "Menampilkan semua pesawat",
+                            value = """
+                                    {
+                                       "status": 200,
+                                       "message": "Success get all airplane",
+                                       "data": [
+                                         {
+                                           "airplaneName": "JET 700",
+                                           "airplaneType": "Airbus"
+                                         },
+                                         {
+                                           "airplaneName": "JET 601",
+                                           "airplaneType": "Airbus"
+                                         },
+                                         {
+                                           "airplaneName": "JET 788",
+                                           "airplaneType": "BOEING 123"
+                                         }
+                                       ]
+                                     }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @GetMapping("/get-all")
     public ResponseEntity<MessageModel> getAllAirplane()
     {
@@ -76,6 +135,22 @@ public class AirplaneController {
         }
     }
 
+
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Update Airplane",
+                            description = "Update data pesawat",
+                            value = """
+                                    {
+                                         "status": 200,
+                                           "message": "Update airplane with name : JET 600",
+                                           "data": {
+                                             "airplaneName": "JET 600",
+                                             "airplaneType": "Airbus"
+                                           }
+                                      }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @PutMapping("/update")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> updateAirplane(@RequestParam String airplaneName, @RequestBody AirplanesRequest airplanesRequest)
@@ -98,6 +173,18 @@ public class AirplaneController {
         }
     }
 
+
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Delete Airplane",
+                            description = "Menghapus pesawat",
+                            value = """
+                                    {
+                                          "status": 200,
+                                          "message": "Success delete airplane by name: JET 600"
+                                      }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @DeleteMapping("/delete")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> deleteAirplane(@RequestParam String airplaneName)

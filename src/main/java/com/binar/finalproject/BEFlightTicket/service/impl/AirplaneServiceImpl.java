@@ -2,10 +2,13 @@ package com.binar.finalproject.BEFlightTicket.service.impl;
 
 import com.binar.finalproject.BEFlightTicket.dto.AirplanesRequest;
 import com.binar.finalproject.BEFlightTicket.dto.AirplanesResponse;
+import com.binar.finalproject.BEFlightTicket.exception.DataAlreadyExistException;
+import com.binar.finalproject.BEFlightTicket.exception.DataNotFoundException;
 import com.binar.finalproject.BEFlightTicket.model.Airplanes;
-import com.binar.finalproject.BEFlightTicket.model.Users;
+import com.binar.finalproject.BEFlightTicket.model.PaymentMethods;
 import com.binar.finalproject.BEFlightTicket.repository.AirplanesRepository;
 import com.binar.finalproject.BEFlightTicket.service.AirplanesService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class AirplaneServiceImpl implements AirplanesService {
     @Autowired
@@ -20,20 +24,27 @@ public class AirplaneServiceImpl implements AirplanesService {
 
     @Override
     public AirplanesResponse insertAirplane(AirplanesRequest airplanesRequest) {
-        Airplanes airplanes = airplanesRequest.toAirplanes();
-        try {
+        Airplanes isAirplaneExist = airplanesRepository.findByName(airplanesRequest.getAirplaneName());
+        if (isAirplaneExist == null) {
+            Airplanes airplanes = airplanesRequest.toAirplanes();
             airplanesRepository.save(airplanes);
+            log.info("Success add new airplane");
             return AirplanesResponse.build(airplanes);
         }
-        catch (Exception exception) {
-            return null;
+        else {
+            throw new DataAlreadyExistException ("Airplane with this name already exist");
         }
     }
 
     @Override
     public AirplanesResponse searchAirplaneByName(String airplaneName) {
-        Optional<Airplanes> isAirplanes = airplanesRepository.findById(airplaneName);
-        return isAirplanes.map(AirplanesResponse::build).orElse(null);
+        Airplanes isAirplanes = airplanesRepository.findByName(airplaneName);
+        if (isAirplanes != null) {
+            return AirplanesResponse.build(isAirplanes);
+        }
+        else {
+            throw new DataNotFoundException("Airplane not found");
+        }
     }
 
     @Override
@@ -43,36 +54,43 @@ public class AirplaneServiceImpl implements AirplanesService {
         for (Airplanes airplanes : allAirplane){
             AirplanesResponse airplanesResponse = AirplanesResponse.build(airplanes);
             allAirplaneResponse.add(airplanesResponse);
+            log.info("Success get all airplane");
         }
         return allAirplaneResponse;
     }
 
     @Override
     public AirplanesResponse updateAirplane(AirplanesRequest airplanesRequest, String airplaneName) {
-        Optional<Airplanes> isAirplanes = airplanesRepository.findById(airplaneName);
-        if (isAirplanes.isPresent()){
-            Airplanes airplanes = isAirplanes.get();
-            airplanes.setAirplaneType(airplanesRequest.getAirplaneType());
-            try {
-                airplanesRepository.save(airplanes);
-                return AirplanesResponse.build(airplanes);
+        Airplanes isAirplanes = airplanesRepository.findByName(airplaneName);
+        if (isAirplanes != null){
+            if (airplanesRequest.getAirplaneName() != null)
+            {
+                Airplanes airplanes = airplanesRepository.findByName(airplanesRequest.getAirplaneName());
+                if(airplanes == null || isAirplanes.getAirplaneName().equals(airplanesRequest.getAirplaneName()))
+                    isAirplanes.setAirplaneName(airplanesRequest.getAirplaneName());
+                else
+                    throw new DataAlreadyExistException("Airplane with this name already exist");
             }
-            catch (Exception exception){
-                return null;
-            }
+            if (airplanesRequest.getAirplaneType() != null)
+                isAirplanes.setAirplaneType(airplanesRequest.getAirplaneType());
+            airplanesRepository.save(isAirplanes);
+            log.info("Success update airplane");
+            return AirplanesResponse.build(isAirplanes);
         }
         else
-            throw new RuntimeException("Airplane with name: "+airplaneName+" not found");
+            throw new DataNotFoundException("Airplane not found");
     }
 
     @Override
     public Boolean deleteAirplane(String airplaneName) {
-        Optional<Airplanes> isAirplanes = airplanesRepository.findById(airplaneName);
-        if (isAirplanes.isPresent()){
-            Airplanes airplanes = isAirplanes.get();
-            airplanesRepository.deleteById(airplanes.getAirplaneName());
+        Airplanes isAirplanes = airplanesRepository.findByName(airplaneName);
+        if (isAirplanes != null){
+            airplanesRepository.deleteById(isAirplanes.getAirplaneName());
+            log.info("Success delete airplane");
             return true;
         }
-        return null;
+        else {
+            throw new DataNotFoundException("Airplane not found");
+        }
     }
 }
