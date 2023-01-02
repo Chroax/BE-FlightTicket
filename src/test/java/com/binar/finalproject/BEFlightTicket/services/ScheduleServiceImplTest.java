@@ -1,11 +1,9 @@
 package com.binar.finalproject.BEFlightTicket.services;
 
 import com.binar.finalproject.BEFlightTicket.dto.ScheduleRequest;
-import com.binar.finalproject.BEFlightTicket.dto.ScheduleResponse;
 import com.binar.finalproject.BEFlightTicket.model.*;
 import com.binar.finalproject.BEFlightTicket.repository.*;
 import com.binar.finalproject.BEFlightTicket.service.impl.ScheduleServiceImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +11,6 @@ import org.mockito.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -39,10 +36,10 @@ public class ScheduleServiceImplTest {
     @DisplayName("Test [Positive] Create New Schedule")
     void testPositiveAddSchedule() {
         ScheduleRequest scheduleRequest = new ScheduleRequest();
-        scheduleRequest.setDepartureDate(LocalDate.ofEpochDay(2023-02-27));
-        scheduleRequest.setArrivalDate(LocalDate.ofEpochDay(2023-02-27));
-        scheduleRequest.setDepartureTime(LocalTime.of(12, 30, 00));
-        scheduleRequest.setArrivalTime(LocalTime.of(14, 30, 00));
+        scheduleRequest.setDepartureDate(LocalDate.ofEpochDay(2023-2-27));
+        scheduleRequest.setArrivalDate(LocalDate.ofEpochDay(2023-2-27));
+        scheduleRequest.setDepartureTime(LocalTime.of(12, 30, 0));
+        scheduleRequest.setArrivalTime(LocalTime.of(14, 30, 0));
         scheduleRequest.setPrice(1500000F);
         scheduleRequest.setStatus("ON TIME");
         scheduleRequest.setAirplaneName("JET123");
@@ -50,10 +47,10 @@ public class ScheduleServiceImplTest {
 
         Schedules schedules = Schedules.builder()
                 .scheduleId(UUID.randomUUID())
-                .departureDate(LocalDate.ofEpochDay(2023-02-27))
-                .arrivalDate(LocalDate.ofEpochDay(2023-02-27))
-                .departureTime(LocalTime.of(12, 30, 00))
-                .arrivalTime(LocalTime.of(12, 30, 00))
+                .departureDate(LocalDate.ofEpochDay(2023- 2 -27))
+                .arrivalDate(LocalDate.ofEpochDay(2023- 2 -27))
+                .departureTime(LocalTime.of(12, 30, 0))
+                .arrivalTime(LocalTime.of(12, 30, 0))
                 .price(1500000F)
                 .status("ON TIME")
                 .build();
@@ -87,10 +84,10 @@ public class ScheduleServiceImplTest {
     @DisplayName("Test [Positive] Update Schedule")
     void testPositiveUpdateSchedule() {
         ScheduleRequest scheduleRequest = new ScheduleRequest();
-        scheduleRequest.setDepartureDate(LocalDate.ofEpochDay(2023-02-27));
-        scheduleRequest.setArrivalDate(LocalDate.ofEpochDay(2023-02-27));
-        scheduleRequest.setDepartureTime(LocalTime.of(12, 30, 00));
-        scheduleRequest.setArrivalTime(LocalTime.of(14, 30, 00));
+        scheduleRequest.setDepartureDate(LocalDate.ofEpochDay(2023- 2 -27));
+        scheduleRequest.setArrivalDate(LocalDate.ofEpochDay(2023- 2 -27));
+        scheduleRequest.setDepartureTime(LocalTime.of(12, 30, 0));
+        scheduleRequest.setArrivalTime(LocalTime.of(14, 30, 0));
         scheduleRequest.setPrice(1500000F);
         scheduleRequest.setStatus("ON TIME");
         scheduleRequest.setAirplaneName("JET123");
@@ -98,10 +95,10 @@ public class ScheduleServiceImplTest {
 
         Schedules schedules = Schedules.builder()
                 .scheduleId(UUID.randomUUID())
-                .departureDate(LocalDate.ofEpochDay(2023-02-27))
-                .arrivalDate(LocalDate.ofEpochDay(2023-02-27))
-                .departureTime(LocalTime.of(12, 30, 00))
-                .arrivalTime(LocalTime.of(12, 30, 00))
+                .departureDate(LocalDate.ofEpochDay(2023- 2 -27))
+                .arrivalDate(LocalDate.ofEpochDay(2023- 2 -27))
+                .departureTime(LocalTime.of(12, 30, 0))
+                .arrivalTime(LocalTime.of(12, 30, 0))
                 .price(1500000F)
                 .status("ON TIME")
                 .build();
@@ -133,7 +130,6 @@ public class ScheduleServiceImplTest {
         Mockito.verify(airplanesRepository).findById(scheduleRequest.getAirplaneName());
         Mockito.verify(airplanesRepository).findById(scheduleRequest.getAirplaneName());
         Mockito.verify(scheduleRepository).saveAndFlush(ArgumentMatchers.any(Schedules.class));
-
     }
     
 
