@@ -35,14 +35,6 @@ public class OAuthController {
         response.getWriter().write("{\"redirectUrl\": \"%s\" }".formatted(url));
     }
 
-    @SneakyThrows
-    public void oauthSuccessCallback(OAuth2AuthorizedClient client, Authentication authentication){
-        UUID accountId = this.googleAccountService.findOrRegisterAccount(
-                authentication.getName(),
-                authentication.getName().split("\\|")[0],((DefaultOidcUser) authentication.getPrincipal()).getClaims()
-        );
-        AuthenticationHelper.attachAccountId(authentication, accountId.toString());
-    }
 
     @SneakyThrows
     public void oauthSuccessHandler(HttpServletRequest request, HttpServletResponse response, Authentication authentication){
