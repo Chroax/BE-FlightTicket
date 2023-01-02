@@ -70,7 +70,7 @@ public class RouteController {
     @Operation(responses = {
             @ApiResponse(responseCode = "200", content = @Content(examples = {
                     @ExampleObject(name = "Find Route By City",
-                            description = "Menampilkan Route dengan kota",
+                            description = "Menampilkan Route dengan departure City dan arrival City",
                             value = """
                                     {
                                       "status": 200,
@@ -110,7 +110,7 @@ public class RouteController {
     @Operation(responses = {
             @ApiResponse(responseCode = "200", content = @Content(examples = {
                     @ExampleObject(name = "Find Route By Airport",
-                            description = "Menampilkan Route dengan Airport",
+                            description = "Menampilkan Route dengan departure Airport dan arrival Airport",
                             value = """
                                     {
                                       "status": 200,
@@ -188,22 +188,23 @@ public class RouteController {
 
     @Operation(responses = {
             @ApiResponse(responseCode = "200", content = @Content(examples = {
-                    @ExampleObject(name = "Update Route By Route Id",
-                            description = "Mengubah Route dengan Route Id",
+
+                    @ExampleObject(name = "Update Route",
+                            description = "Mengubah Route dengan routeId",
                             value = """
-                                    {
-                                      "status": 200,
-                                      "message": "Success update route with id : f4aa97ed-bd89-4595-9c16-8005fffb4ba1",
-                                      "data": [
-                                        {
-                                          "routeId": "f4aa97ed-bd89-4595-9c16-8005fffb4ba1",
-                                          "departureCity": "Jakarta",
-                                          "arrivalCity": "Surabaya",
-                                          "departureAirport": "Soekarno Hatta",
-                                          "arrivalAirport": "Djuanda",
-                                          "departureTerminal": "1A",
-                                          "arrivalTerminal": "1B"
-                                        }
+                                      {
+                                           "status": 200,
+                                           "message": "Success update route with id : f4aa97ed-bd89-4595-9c16-8005fffb4ba1",
+                                           "data": [
+                                             {
+                                               "routeId": "f4aa97ed-bd89-4595-9c16-8005fffb4ba1",
+                                               "departureCity": "Surabaya",
+                                               "arrivalCity": "Jakarta",
+                                               "departureAirport": "Djuanda",
+                                               "arrivalAirport": "Soekarno Hatta",
+                                               "departureTerminal": "1A",
+                                               "arrivalTerminal": "1B"
+                                             }
                                       ]
                                     }""")
             }, mediaType = MediaType.APPLICATION_JSON_VALUE))
