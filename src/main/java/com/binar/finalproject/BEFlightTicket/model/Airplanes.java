@@ -12,6 +12,8 @@ import java.util.Set;
 @Entity
 @Data
 @Builder
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "airplanes")
