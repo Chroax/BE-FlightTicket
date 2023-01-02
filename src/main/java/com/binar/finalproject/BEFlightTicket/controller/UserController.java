@@ -1,6 +1,7 @@
 package com.binar.finalproject.BEFlightTicket.controller;
 
 import com.binar.finalproject.BEFlightTicket.dto.*;
+import com.binar.finalproject.BEFlightTicket.model.Users;
 import com.binar.finalproject.BEFlightTicket.security.JwtUtils;
 import com.binar.finalproject.BEFlightTicket.service.UserService;
 import com.binar.finalproject.BEFlightTicket.service.impl.security.UserDetailsImpl;
@@ -11,7 +12,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -108,18 +108,18 @@ public class UserController {
 
     @DeleteMapping("/delete")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> deleteUser(@RequestParam String fullName){
+    public ResponseEntity<MessageModel> deleteUser(@RequestParam String email){
         MessageModel messageModel = new MessageModel();
-        Boolean deleteUser = userService.deleteUser(fullName);
+        Boolean deleteUser = userService.deleteUser(email);
         if(deleteUser)
         {
-            messageModel.setMessage("Success non-active user by name : " + fullName);
+            messageModel.setMessage("Success non-active user by email : " + email);
             messageModel.setStatus(HttpStatus.OK.value());
             return ResponseEntity.ok().body(messageModel);
         }
         else
         {
-            messageModel.setMessage("Failed non-active user by name : " + fullName + ", not found");
+            messageModel.setMessage("Failed non-active user by email : " + email + ", not found");
             messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
             return ResponseEntity.badRequest().body(messageModel);
         }

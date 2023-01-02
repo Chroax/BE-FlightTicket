@@ -13,7 +13,10 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "payment_methods")
+@Table(name = "payment_methods",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "payment_name", columnNames = "payment_name"),
+        }, schema = "public")
 public class PaymentMethods {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

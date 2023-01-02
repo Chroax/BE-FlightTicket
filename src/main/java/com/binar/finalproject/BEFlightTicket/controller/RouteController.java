@@ -107,7 +107,6 @@ public class RouteController {
         }
     }
 
-
     @Operation(responses = {
             @ApiResponse(responseCode = "200", content = @Content(examples = {
                     @ExampleObject(name = "Find Route By Airport",
@@ -170,7 +169,6 @@ public class RouteController {
             }, mediaType = MediaType.APPLICATION_JSON_VALUE))
     })
     @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> getAllRoute()
     {
         MessageModel messageModel = new MessageModel();

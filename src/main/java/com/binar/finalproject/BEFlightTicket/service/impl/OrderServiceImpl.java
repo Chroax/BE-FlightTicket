@@ -20,6 +20,8 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private ScheduleRepository scheduleRepository;
     @Autowired
+    private TravelerListRepository travelerListRepository;
+    @Autowired
     private UserRepository userRepository;
     @Autowired
     private PaymentMethodRepository paymentMethodRepository;
@@ -43,6 +45,7 @@ public class OrderServiceImpl implements OrderService {
                     Orders orders = orderRequest.toOrders(users.get(), paymentMethods.get());
                     try {
                         Float totalPrice = 0f;
+                        List<TravelerList> allTravelerList = new ArrayList<>();
                         List<UUID> allSchedulesId = new ArrayList<>();
                         List<Schedules> allSchedules = new ArrayList<>();
                         List<String> departureCity = new ArrayList<>();
@@ -62,9 +65,19 @@ public class OrderServiceImpl implements OrderService {
                             else
                                 return null;
                         }
+
+                        for (UUID travelerListId: orderRequest.getTravelerListId()){
+                            Optional<TravelerList> travelerList = travelerListRepository.findById(travelerListId);
+                            if(travelerList.isPresent())
+                                allTravelerList.add(travelerList.get());
+                            else
+                                return null;
+                        }
+
                         orders.setTotalTicket(allSchedulesId.size());
                         orders.setTotalPrice(totalPrice);
                         orders.setScheduleOrders(allSchedules);
+                        orders.setTravelerListsOrder(allTravelerList);
                         orders.setStatus("WAITING");
                         orderRepository.save(orders);
                         return OrderResponse.build(orders, allSchedulesId, departureCity, arrivalCity);
@@ -114,6 +127,7 @@ public class OrderServiceImpl implements OrderService {
             List<Schedules> allSchedules = new ArrayList<>();
             List<String> departureCity = new ArrayList<>();
             List<String> arrivalCity = new ArrayList<>();
+            List<TravelerList> allTravelerList = new ArrayList<>();
 
             for (UUID schedulesId: orderRequest.getScheduleId()) {
                 Optional<Schedules> schedules = scheduleRepository.findById(schedulesId);
@@ -130,9 +144,18 @@ public class OrderServiceImpl implements OrderService {
                     return null;
             }
 
+            for (UUID travelerListId: orderRequest.getTravelerListId()){
+                Optional<TravelerList> travelerList = travelerListRepository.findById(travelerListId);
+                if(travelerList.isPresent())
+                    allTravelerList.add(travelerList.get());
+                else
+                    return null;
+            }
+
             orders.setTotalTicket(allSchedulesId.size());
             orders.setTotalPrice(totalPrice);
             orders.setScheduleOrders(allSchedules);
+            orders.setTravelerListsOrder(allTravelerList);
 
             Optional<Users> users = userRepository.findById(orderRequest.getUserId());
             if (users.isPresent())
@@ -188,15 +211,24 @@ public class OrderServiceImpl implements OrderService {
         {
             Orders orders = isOrders.get();
             List<Schedules> allSchedules = orders.getScheduleOrders();
+            List<TravelerList> allTravelerList = orders.getTravelerListsOrder();
+            List<String> travelerListName = new ArrayList<>();
+            for (TravelerList travelerList: allTravelerList) {
+                String travelerName = travelerList.getTitle().replaceAll(" ", "") + ". " + travelerList.getFirstName() + " "
+                        + travelerList.getLastName();
+
+                travelerListName.add(travelerName);
+            }
+
             List<OrderDetailResponse> orderDetailResponses = new ArrayList<>();
+            Optional<PaymentMethods> paymentMethods = paymentMethodRepository.findById(orders.getPaymentMethodsOrder().getPaymentId());
             for (Schedules schedules : allSchedules) {
                 Routes routes = schedules.getRoutesSchedules();
                 Airplanes airplanes = schedules.getAirplanesSchedules();
                 Airports departureAirports = airportsRepository.findByAirportName(routes.getDepartureAirport());
                 Airports arrivalAirports = airportsRepository.findByAirportName(routes.getArrivalAirport());
-                Optional<PaymentMethods> paymentMethods = paymentMethodRepository.findById(orders.getPaymentMethodsOrder().getPaymentId());
                 orderDetailResponses.add(OrderDetailResponse.build(orders,
-                        airplanes, departureAirports, arrivalAirports, routes, schedules, paymentMethods.get()));
+                        airplanes, departureAirports, arrivalAirports, routes, schedules, paymentMethods.get(), travelerListName));
             }
             return orderDetailResponses;
         }

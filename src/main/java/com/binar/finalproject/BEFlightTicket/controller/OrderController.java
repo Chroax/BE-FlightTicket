@@ -97,7 +97,7 @@ public class OrderController {
         }
     }
 
-    @GetMapping("findby-payment")
+    @GetMapping("/findby-payment")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MessageModel> getPaymentOrders(@RequestParam Integer paymentId){
         MessageModel messageModel = new MessageModel();
