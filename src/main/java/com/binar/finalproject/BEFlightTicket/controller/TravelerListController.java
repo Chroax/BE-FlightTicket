@@ -153,6 +153,24 @@ public class TravelerListController {
         }
     }
 
+    @GetMapping("/auto-complete")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
+    public ResponseEntity<MessageModel> autoComplete(@RequestParam UUID userId){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<TravelerListDetailResponse> travelerListGet = travelerListService.autoComplete(userId);
+            messageModel.setMessage("Success get all traveler list by userId : " + userId);
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(travelerListGet);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get all traveler list by userId, " + userId + " not found");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+
     @Operation(responses = {
             @ApiResponse(responseCode = "200", content = @Content(examples = {
                     @ExampleObject(name = "Get All TravelerList",

@@ -75,6 +75,19 @@ public class TravelerListServiceImpl implements TravelerListService {
     }
 
     @Override
+    public List<TravelerListDetailResponse> autoComplete(UUID userId) {
+        List<TravelerList> allTravelerList = travelerListRepository.findAllTravelerListByUser(userId);
+        List<TravelerListDetailResponse> allTravelerListResponse = new ArrayList<>();
+        for (TravelerList travelerList: allTravelerList) {
+            Optional<IdCard> idCard = idCardRepository.findById(travelerList.getIdCard().getIdCardId());
+            Optional<Passport> passport = passportRepository.findById(travelerList.getPassport().getPassportId());
+            TravelerListDetailResponse travelerListResponse = TravelerListDetailResponse.build(travelerList, idCard.get(), passport.get());
+            allTravelerListResponse.add(travelerListResponse);
+        }
+        return allTravelerListResponse;
+    }
+
+    @Override
     public List<TravelerListResponse> searchAllUserTravelerList(UUID userId) {
         List<TravelerList> allTravelerList = travelerListRepository.findAllTravelerListByUser(userId);
         List<TravelerListResponse> allTravelerListResponse = new ArrayList<>();
