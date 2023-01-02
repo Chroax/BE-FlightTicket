@@ -2,8 +2,13 @@ package com.binar.finalproject.BEFlightTicket.controller;
 
 import com.binar.finalproject.BEFlightTicket.dto.*;
 import com.binar.finalproject.BEFlightTicket.service.IdCardService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +21,24 @@ public class IdCardController {
     @Autowired
     IdCardService idCardService;
 
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Register IdCard",
+                            description = "Mendaftar IdCard baru",
+                            value = """
+                                    {
+                                        "status": 200,
+                                        "message": "Register new id-card",
+                                        "data": {
+                                          "idCardId": "ad65c304-6f12-46a1-83b8-c52c3e92f4e8",
+                                          "idCardNumber": "123",
+                                          "idCardExpiry": "2022-12-30",
+                                          "countryCode": "IDN",
+                                          "travelerId": "26b32e79-cc0c-43ec-b470-cf1c6b2b7b56"
+                                        }
+                                      }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @PostMapping("/add")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.CREATED)
@@ -38,6 +61,24 @@ public class IdCardController {
         }
     }
 
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Find IdCard By travelerId",
+                            description = "Menampilkan IdCard dengan travelerId",
+                            value = """
+                                    {
+                                         "status": 200,
+                                         "message": "Success get id-card by traveler id : 26b32e79-cc0c-43ec-b470-cf1c6b2b7b56",
+                                         "data": {
+                                           "idCardId": "ad65c304-6f12-46a1-83b8-c52c3e92f4e8",
+                                           "idCardNumber": "123                                               ",
+                                           "idCardExpiry": "2022-12-30",
+                                           "countryCode": "IDN ",
+                                           "travelerId": "26b32e79-cc0c-43ec-b470-cf1c6b2b7b56"
+                                         }
+                                       }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @GetMapping("/findby-travelerId")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getTravelerIdCard(@RequestParam UUID travelerId){
@@ -56,7 +97,24 @@ public class IdCardController {
         }
     }
 
-
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Find IdCard By idCardId",
+                            description = "Menampilkan IdCard dengan idCardId",
+                            value = """
+                                    {
+                                      "status": 200,
+                                      "message": "Success get id-card",
+                                      "data": {
+                                        "idCardId": "ad65c304-6f12-46a1-83b8-c52c3e92f4e8",
+                                        "idCardNumber": "123                                               ",
+                                        "idCardExpiry": "2022-12-30",
+                                        "countryCode": "IDN ",
+                                        "travelerId": "26b32e79-cc0c-43ec-b470-cf1c6b2b7b56"
+                                      }
+                                    }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @GetMapping("/findby-id")
     public ResponseEntity<MessageModel> getIdCard(@RequestParam UUID idCardId){
@@ -74,7 +132,25 @@ public class IdCardController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
         }
     }
-    
+
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Update IdCard By idCardId",
+                            description = "Mengupdate IdCard dengan idCardId",
+                            value = """
+                                    {
+                                      "status": 200,
+                                      "message": "Success update id-card with id : ad65c304-6f12-46a1-83b8-c52c3e92f4e8",
+                                      "data": {
+                                        "idCardId": "ad65c304-6f12-46a1-83b8-c52c3e92f4e8",
+                                        "idCardNumber": "111",
+                                        "idCardExpiry": "2022-12-30",
+                                        "countryCode": "IDN",
+                                        "travelerId": "26b32e79-cc0c-43ec-b470-cf1c6b2b7b56"
+                                      }
+                                    }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @PutMapping("/update")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> updateIdCard(@RequestParam UUID idCardId, @RequestBody IdCardRequest idCardRequest) {
