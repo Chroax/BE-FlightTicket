@@ -1,10 +1,15 @@
 package com.binar.finalproject.BEFlightTicket.config;
 
 
+import com.binar.finalproject.BEFlightTicket.controller.OAuthController;
 import com.binar.finalproject.BEFlightTicket.security.AuthEntryPointJwt;
 import com.binar.finalproject.BEFlightTicket.security.AuthTokenFilter;
-import com.binar.finalproject.BEFlightTicket.security.oauth2.CustomOAuth2UserService;
-import com.binar.finalproject.BEFlightTicket.security.oauth2.OAuthLoginSuccessHandler;
+//import com.binar.finalproject.BEFlightTicket.security.oauth2.CustomOAuth2UserService;
+import com.binar.finalproject.BEFlightTicket.security.oauth2.CustomAuthorizationRedirectFilter;
+import com.binar.finalproject.BEFlightTicket.security.oauth2.CustomAuthorizationRequestResolver;
+import com.binar.finalproject.BEFlightTicket.security.oauth2.CustomAuthorizedClientService;
+import com.binar.finalproject.BEFlightTicket.security.oauth2.CustomStatelessAuthorizationRequestRepository;
+//import com.binar.finalproject.BEFlightTicket.security.oauth2.OAuthLoginSuccessHandler;
 import com.binar.finalproject.BEFlightTicket.service.impl.security.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +24,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -82,22 +88,35 @@ public class SpringSecurityConfig {
                 .antMatchers("/terminals/**").permitAll()
                 .antMatchers("/ticket/**").permitAll()
                 .antMatchers("/traveler-list/**").permitAll()
-                .antMatchers("/oauth/**").permitAll()
                 .antMatchers("/notification/**").permitAll()
                 .anyRequest().permitAll();
-        http.oauth2Login()
-                .userInfoEndpoint()
-                .userService(oAuth2UserService)
-                .and()
-                .successHandler(oAuthLoginSuccessHandler);
+        http.oauth2Login(config -> {
+            config.authorizationEndpoint(subconfig -> {
+                subconfig.baseUri("oauth2/authorization/google");
+                subconfig.authorizationRequestResolver(this.customAuthorizationRequestResolver);
+                subconfig.authorizationRequestRepository(this.customStatelessAuthorizationRequestRepository);
+            });
+            config.redirectionEndpoint(subconfig -> {
+                subconfig.baseUri(OAuthController.CALLBACK_BASE_URL);
+            });
+            config.authorizedClientService(this.customAuthorizedClientService);
+            config.successHandler(this.oAuthController::oauthSuccessHandler);
+            config.failureHandler(this.oAuthController::oauthFailureHandler);
+        });
 
         http.authenticationProvider(authenticationProvider());
+        http.addFilterBefore(this.customAuthorizationRedirectFilter, OAuth2AuthorizationRequestRedirectFilter.class);
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
-    @Autowired
-    CustomOAuth2UserService oAuth2UserService;
-    @Autowired
-    OAuthLoginSuccessHandler oAuthLoginSuccessHandler;
+    private final CustomStatelessAuthorizationRequestRepository customStatelessAuthorizationRequestRepository;
+    private final CustomAuthorizedClientService customAuthorizedClientService;
+    private final CustomAuthorizationRequestResolver customAuthorizationRequestResolver;
+    private final OAuthController oAuthController;
+    private final CustomAuthorizationRedirectFilter customAuthorizationRedirectFilter;
+//    @Autowired
+//    CustomOAuth2UserService oAuth2UserService;
+//    @Autowired
+//    OAuthLoginSuccessHandler oAuthLoginSuccessHandler;
 }

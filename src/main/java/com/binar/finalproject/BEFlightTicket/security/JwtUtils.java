@@ -1,6 +1,6 @@
 package com.binar.finalproject.BEFlightTicket.security;
 
-import com.binar.finalproject.BEFlightTicket.security.oauth2.CustomOAuth2User;
+//import com.binar.finalproject.BEFlightTicket.security.oauth2.CustomOAuth2User;
 import com.binar.finalproject.BEFlightTicket.service.impl.security.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
@@ -27,17 +27,6 @@ public class JwtUtils {
 
         return Jwts.builder()
                 .setSubject((userPrincipal.getEmail()))
-                .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
-                .compact();
-    }
-    public String generateJwtTokenGoogle(Authentication authentication) {
-
-        CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
-
-        return Jwts.builder()
-                .setSubject((oAuth2User.getEmail()))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)

@@ -86,7 +86,7 @@ public class RouteController {
                                           "arrivalTerminal": "1B"
                                         }
                                       ]
-                                    }""")
+                                      }""")
             }, mediaType = MediaType.APPLICATION_JSON_VALUE))
     })
     @GetMapping("/findby-city")
@@ -129,7 +129,7 @@ public class RouteController {
                                     }""")
             }, mediaType = MediaType.APPLICATION_JSON_VALUE))
     })
-    @GetMapping("/findby-airport")
+    @GetMapping("findby-airport")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getRouteByDepartureAndArrivalAirport(@RequestParam String departureAirport,@RequestParam String arrivalAirport){
         MessageModel messageModel = new MessageModel();
@@ -149,24 +149,23 @@ public class RouteController {
 
     @Operation(responses = {
             @ApiResponse(responseCode = "200", content = @Content(examples = {
-                    @ExampleObject(name = "Get All Route",
+                    @ExampleObject(name = "Find All Route",
                             description = "Menampilkan Semua Route",
                             value = """
-                                      {
-                                           "status": 200,
-                                           "message": "Success get all route",
-                                           "data": [
-                                             {
-                                               "routeId": "f4aa97ed-bd89-4595-9c16-8005fffb4ba1",
-                                               "departureCity": "Jakarta",
-                                               "arrivalCity": "Surabaya",
-                                               "departureAirport": "Soekarno Hatta",
-                                               "arrivalAirport": "Djuanda",
-                                               "departureTerminal": "1A",
-                                               "arrivalTerminal": "1B"
-                                             }
-                                      ]
-                                    }""")
+                                    {
+                                      "status": 200,
+                                      "message": "Success get all route",
+                                      "data": [
+                                        {
+                                          "routeId": "f4aa97ed-bd89-4595-9c16-8005fffb4ba1",
+                                          "departureCity": "Jakarta",
+                                          "arrivalCity": "Surabaya",
+                                          "departureAirport": "Soekarno Hatta",
+                                          "arrivalAirport": "Djuanda",
+                                          "departureTerminal": "1A",
+                                          "arrivalTerminal": "1B"
+                                        }
+                                        ]""")
             }, mediaType = MediaType.APPLICATION_JSON_VALUE))
     })
     @GetMapping(value = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -189,6 +188,7 @@ public class RouteController {
 
     @Operation(responses = {
             @ApiResponse(responseCode = "200", content = @Content(examples = {
+
                     @ExampleObject(name = "Update Route",
                             description = "Mengubah Route dengan routeId",
                             value = """
@@ -232,12 +232,12 @@ public class RouteController {
 
     @Operation(responses = {
             @ApiResponse(responseCode = "200", content = @Content(examples = {
-                    @ExampleObject(name = "Update Route",
-                            description = "Mengubah Route dengan routeId",
+                    @ExampleObject(name = "delete Route By Route Id",
+                            description = "menghapus Route dengan Route Id",
                             value = """
-                                      {
-                                           "status": 200,
-                                           "message": "Success delete route by id: f4aa97ed-bd89-4595-9c16-8005fffb4ba1"
+                                    {
+                                      "status": 200,
+                                      "message": "Success delete route by id : f4aa97ed-bd89-4595-9c16-8005fffb4ba1"
                                     }""")
             }, mediaType = MediaType.APPLICATION_JSON_VALUE))
     })
