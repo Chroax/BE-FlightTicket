@@ -8,6 +8,7 @@ import com.binar.finalproject.BEFlightTicket.model.Airplanes;
 import com.binar.finalproject.BEFlightTicket.model.PaymentMethods;
 import com.binar.finalproject.BEFlightTicket.repository.AirplanesRepository;
 import com.binar.finalproject.BEFlightTicket.service.AirplanesService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class AirplaneServiceImpl implements AirplanesService {
     @Autowired
@@ -26,6 +28,7 @@ public class AirplaneServiceImpl implements AirplanesService {
         if (isAirplaneExist == null) {
             Airplanes airplanes = airplanesRequest.toAirplanes();
             airplanesRepository.save(airplanes);
+            log.info("Success add new airplane");
             return AirplanesResponse.build(airplanes);
         }
         else {
@@ -51,6 +54,7 @@ public class AirplaneServiceImpl implements AirplanesService {
         for (Airplanes airplanes : allAirplane){
             AirplanesResponse airplanesResponse = AirplanesResponse.build(airplanes);
             allAirplaneResponse.add(airplanesResponse);
+            log.info("Success get all airplane");
         }
         return allAirplaneResponse;
     }
@@ -70,6 +74,7 @@ public class AirplaneServiceImpl implements AirplanesService {
             if (airplanesRequest.getAirplaneType() != null)
                 isAirplanes.setAirplaneType(airplanesRequest.getAirplaneType());
             airplanesRepository.save(isAirplanes);
+            log.info("Success update airplane");
             return AirplanesResponse.build(isAirplanes);
         }
         else
@@ -81,6 +86,7 @@ public class AirplaneServiceImpl implements AirplanesService {
         Airplanes isAirplanes = airplanesRepository.findByName(airplaneName);
         if (isAirplanes != null){
             airplanesRepository.deleteById(isAirplanes.getAirplaneName());
+            log.info("Success delete airplane");
             return true;
         }
         else {
