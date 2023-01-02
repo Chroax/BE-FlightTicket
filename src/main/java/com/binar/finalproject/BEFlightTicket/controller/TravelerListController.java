@@ -2,8 +2,13 @@ package com.binar.finalproject.BEFlightTicket.controller;
 
 import com.binar.finalproject.BEFlightTicket.dto.*;
 import com.binar.finalproject.BEFlightTicket.service.TravelerListService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +22,27 @@ public class TravelerListController {
     @Autowired
     private TravelerListService travelerListService;
 
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Register TravelerList",
+                            description = "Mendaftar TravelerList baru",
+                            value = """
+                                    {
+                                       "status": 200,
+                                       "message": "Register new traveler list",
+                                       "data": {
+                                            "travelerId": "26b32e79-cc0c-43ec-b470-cf1c6b2b7b56",
+                                            "type": "Mr",
+                                            "title": "ADT",
+                                            "firstName": "testing",
+                                            "lastName": "testing123",
+                                            "birthDate": "2022-12-30",
+                                            "userId": "40a59ad7-b809-479b-9ca4-fb04e65350a6",
+                                            "countryCode": "IDN"
+                                       }
+                                     }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @PostMapping("/add")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.CREATED)
@@ -39,6 +65,32 @@ public class TravelerListController {
         }
     }
 
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Register TravelerList From Order",
+                            description = "Mendaftar TravelerList baru dari Order",
+                            value = """
+                                    {
+                                       "status": 200,
+                                       "message": "Register new traveler list from order",
+                                       "data":   {
+                                            "type": "Mr",
+                                            "title": "ADL",
+                                            "firstName": "testing",
+                                            "lastName": "testing123",
+                                            "birthDate": "2022-12-30",
+                                            "nationality": "INDONESIA",
+                                            "userId": "40a59ad7-b809-479b-9ca4-fb04e65350a6",
+                                            "idCardNumber": "123",
+                                            "idCardExpiry": "2022-12-30",
+                                            "idCardCountry": "IDN",
+                                            "passportNumber": "1111",
+                                            "passportExpiry": "2022-12-30",
+                                            "passportCardCountry": "IDN"
+                                          }
+                                     }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @PostMapping("/add/from-order")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     @ResponseStatus(HttpStatus.CREATED)
@@ -61,6 +113,28 @@ public class TravelerListController {
         }
     }
 
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Get TravelerList By userId",
+                            description = "Menampilkan TravelerList dengan userId",
+                            value = """
+                                    {
+                                      "status": 200,
+                                      "message": "Success get all traveler list by userId : 40a59ad7-b809-479b-9ca4-fb04e65350a6",
+                                      "data": [
+                                        {
+                                          "travelerId": "26b32e79-cc0c-43ec-b470-cf1c6b2b7b56",
+                                          "type": "Mr",
+                                          "title": "ADT ",
+                                          "firstName": "testing",
+                                          "lastName": "testing123",
+                                          "birthDate": "2022-12-30",
+                                          "userId": "40a59ad7-b809-479b-9ca4-fb04e65350a6",
+                                          "countryCode": "IDN "
+                                        }
+                                    ] }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @GetMapping("/findby-userId")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAllUserTravelerList(@RequestParam UUID userId){
@@ -79,6 +153,28 @@ public class TravelerListController {
         }
     }
 
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Get All TravelerList",
+                            description = "Menampilkan Semua TravelerList",
+                            value = """
+                                    {
+                                       "status": 200,
+                                       "message": "Success get all traveler list",
+                                       "data": [
+                                         {
+                                           "travelerId": "26b32e79-cc0c-43ec-b470-cf1c6b2b7b56",
+                                           "type": "Mr",
+                                           "title": "ADT ",
+                                           "firstName": "testing",
+                                           "lastName": "testing123",
+                                           "birthDate": "2022-12-30",
+                                           "userId": "40a59ad7-b809-479b-9ca4-fb04e65350a6",
+                                           "countryCode": "IDN "
+                                         }
+                                     ]}""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @GetMapping("/get-all")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getAllTravelerList(){
@@ -97,6 +193,27 @@ public class TravelerListController {
         }
     }
 
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Update TravelerList",
+                            description = "Mengupdate TravelerList",
+                            value = """
+                                    {
+                                      "status": 200,
+                                      "message": "Update traveler-list with id : 26b32e79-cc0c-43ec-b470-cf1c6b2b7b56",
+                                      "data": {
+                                        "travelerId": "26b32e79-cc0c-43ec-b470-cf1c6b2b7b56",
+                                        "type": "MR",
+                                        "title": "SCS",
+                                        "firstName": "Budi",
+                                        "lastName": "Santoso",
+                                        "birthDate": "2022-12-30",
+                                        "userId": "40a59ad7-b809-479b-9ca4-fb04e65350a6",
+                                        "countryCode": "IDN"
+                                      }
+                                    }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @PutMapping("/update")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> updateUser(@RequestParam UUID travelerId, @RequestBody TravelerListUpdateRequest travelerListUpdateRequest) {

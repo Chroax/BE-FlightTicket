@@ -5,6 +5,10 @@ import com.binar.finalproject.BEFlightTicket.dto.NotificationDetailResponse;
 import com.binar.finalproject.BEFlightTicket.dto.NotificationRequest;
 import com.binar.finalproject.BEFlightTicket.dto.NotificationResponse;
 import com.binar.finalproject.BEFlightTicket.service.NotificationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,6 +25,23 @@ public class NotificationController {
     @Autowired
     NotificationService notificationService;
 
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Add Notification",
+                            description = "Menambahkan Notification Baru",
+                            value = """
+                                      {
+                                      "status": 200,
+                                      "message": "Success update read user notification",
+                                      "data": {
+                                        "notificationId": "b0c1fac1-cf9d-4d51-937a-6fb839eb0d3a",
+                                        "title": "Pembayaran",
+                                        "content": "Pembayaran Success",
+                                        "read": false
+                                      }
+                                    }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @ResponseBody
     @PostMapping("/add")
     @PreAuthorize("hasAnyRole('ADMIN')")
@@ -39,6 +60,28 @@ public class NotificationController {
         }
     }
 
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Get All Notification By userId",
+                            description = "Menampilkan Notification dengan userId",
+                            value = """
+                                    {
+                                      "status": 200,
+                                      "message": "Success get All Notification By userId",
+                                      "data": {
+                                        "unreadCount": 2,
+                                        "content": [
+                                          {
+                                            "notificationId": "b0c1fac1-cf9d-4d51-937a-6fb839eb0d3a",
+                                            "title": "Pembayaran",
+                                            "content": "Pembayaran Success",
+                                            "read": false
+                                          }
+                                        ]
+                                      }
+                                    }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @ResponseBody
     @GetMapping("/get")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BUYER')")
@@ -57,6 +100,23 @@ public class NotificationController {
         }
     }
 
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Update Read Status Notification",
+                            description = "Mengubah Status Notification Baru",
+                            value = """
+                                    {
+                                      "status": 200,
+                                      "message": "Success update read user notification",
+                                      "data": {
+                                        "notificationId": "b0c1fac1-cf9d-4d51-937a-6fb839eb0d3a",
+                                        "title": "Pembayaran",
+                                        "content": "Pembayaran Success",
+                                        "read": true
+                                      }
+                                    }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @ResponseBody
     @PutMapping("/update-status")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
@@ -74,7 +134,24 @@ public class NotificationController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
-    
+
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200", content = @Content(examples = {
+                    @ExampleObject(name = "Update Read Status Notification",
+                            description = "Mengubah Notification",
+                            value = """
+                                    {
+                                       "status": 200,
+                                       "message": "Update notification with title : Pembayaran",
+                                       "data": {
+                                         "notificationId": "b0c1fac1-cf9d-4d51-937a-6fb839eb0d3a",
+                                         "title": "Pembayaran",
+                                         "content": "Pembayaran  Belum Dibayarkan",
+                                         "read": false
+                                       }
+                                     }""")
+            }, mediaType = MediaType.APPLICATION_JSON_VALUE))
+    })
     @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MessageModel> updateNotification(@RequestBody NotificationRequest notificationRequest, @RequestParam UUID notificationId, @RequestParam UUID userId)
