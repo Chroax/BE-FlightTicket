@@ -227,8 +227,10 @@ public class OrderServiceImpl implements OrderService {
                 Airplanes airplanes = schedules.getAirplanesSchedules();
                 Airports departureAirports = airportsRepository.findByAirportName(routes.getDepartureAirport());
                 Airports arrivalAirports = airportsRepository.findByAirportName(routes.getArrivalAirport());
-                orderDetailResponses.add(OrderDetailResponse.build(orders,
-                        airplanes, departureAirports, arrivalAirports, routes, schedules, paymentMethods.get(), travelerListName));
+                OrderDetailResponse orderDetailResponse = OrderDetailResponse.build(orders,
+                        airplanes, departureAirports, arrivalAirports, routes, schedules, paymentMethods.get());
+                orderDetailResponse.setTravelerListName(travelerListName);
+                orderDetailResponses.add(orderDetailResponse);
             }
             return orderDetailResponses;
         }

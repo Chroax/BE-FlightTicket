@@ -1,7 +1,6 @@
 package com.binar.finalproject.BEFlightTicket.dto;
 
 import com.binar.finalproject.BEFlightTicket.model.Airplanes;
-import com.binar.finalproject.BEFlightTicket.model.Airports;
 import com.binar.finalproject.BEFlightTicket.model.Routes;
 import com.binar.finalproject.BEFlightTicket.model.Schedules;
 import lombok.Builder;

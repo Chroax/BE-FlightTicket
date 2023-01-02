@@ -79,11 +79,6 @@ public class Users {
     @OneToMany(mappedBy = "usersOrder", cascade = CascadeType.ALL)
     private Set<Orders> orders;
 
-    public void addRoles(Roles roles)
-    {
-        this.rolesUsers.add(roles);
-    }
-
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Notification> notifications;
 

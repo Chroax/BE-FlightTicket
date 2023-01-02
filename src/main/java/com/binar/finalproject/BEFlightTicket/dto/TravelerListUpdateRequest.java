@@ -2,7 +2,6 @@ package com.binar.finalproject.BEFlightTicket.dto;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
 @Data

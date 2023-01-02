@@ -50,11 +50,11 @@ public class NotificationController {
         NotificationResponse notificationResponse = notificationService.addNotification(notificationRequest, userId);
         if (notificationResponse == null) {
             messageModel.setStatus(HttpStatus.OK.value());
-            messageModel.setMessage("success new notification");
+            messageModel.setMessage("success create new notification");
             messageModel.setData(notificationRequest);
             return ResponseEntity.ok().body(messageModel);
         }else {
-            messageModel.setMessage("Failed notification user");
+            messageModel.setMessage("Failed create notification user");
             messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
             return ResponseEntity.badRequest().body(messageModel);
         }
@@ -89,7 +89,7 @@ public class NotificationController {
         MessageModel messageModel = new MessageModel();
         NotificationDetailResponse notificationDetailResponse = notificationService.getAllNotificationByUserId(userId);
         if (notificationDetailResponse == null) {
-            messageModel.setMessage("Failed notification user");
+            messageModel.setMessage("Failed get All notification user By userId");
             messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
             return ResponseEntity.badRequest().body(messageModel);
         } else {
@@ -124,7 +124,7 @@ public class NotificationController {
         MessageModel messageModel = new MessageModel();
         NotificationResponse notificationDetailResponse = notificationService.updateIsRead(userId, notificationId);
         if (notificationDetailResponse == null) {
-            messageModel.setMessage("Failed notification user");
+            messageModel.setMessage("Failed update read user notification");
             messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
             return ResponseEntity.badRequest().body(messageModel);
         } else {

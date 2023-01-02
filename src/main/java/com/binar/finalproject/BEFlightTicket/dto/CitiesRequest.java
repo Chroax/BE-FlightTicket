@@ -15,7 +15,7 @@ public class CitiesRequest {
     @NotEmpty(message = "Countries is required.")
     private String countryCode;
 
-    public Cities toAirports(Countries countries) {
+    public Cities toCities(Countries countries) {
         return Cities.builder()
                 .cityCode(this.cityCode)
                 .cityName(this.cityName)

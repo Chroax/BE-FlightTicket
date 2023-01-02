@@ -1,7 +1,6 @@
 package com.binar.finalproject.BEFlightTicket.dto;
 
 import com.binar.finalproject.BEFlightTicket.model.AuthenticationProvider;
-import com.binar.finalproject.BEFlightTicket.model.Roles;
 import com.binar.finalproject.BEFlightTicket.model.Users;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;

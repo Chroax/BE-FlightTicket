@@ -1,7 +1,6 @@
 package com.binar.finalproject.BEFlightTicket.controller;
 
 import com.binar.finalproject.BEFlightTicket.dto.*;
-import com.binar.finalproject.BEFlightTicket.model.Users;
 import com.binar.finalproject.BEFlightTicket.security.JwtUtils;
 import com.binar.finalproject.BEFlightTicket.service.UserService;
 import com.binar.finalproject.BEFlightTicket.service.impl.security.UserDetailsImpl;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/user")
@@ -111,7 +109,7 @@ public class UserController {
     public ResponseEntity<MessageModel> deleteUser(@RequestParam String email){
         MessageModel messageModel = new MessageModel();
         Boolean deleteUser = userService.deleteUser(email);
-        if(deleteUser)
+        if(Boolean.TRUE.equals(deleteUser))
         {
             messageModel.setMessage("Success non-active user by email : " + email);
             messageModel.setStatus(HttpStatus.OK.value());

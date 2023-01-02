@@ -1,9 +1,6 @@
 package com.binar.finalproject.BEFlightTicket.repository;
 
 import com.binar.finalproject.BEFlightTicket.model.Airplanes;
-import com.binar.finalproject.BEFlightTicket.model.PaymentMethods;
-import com.binar.finalproject.BEFlightTicket.model.Routes;
-import com.binar.finalproject.BEFlightTicket.model.Schedules;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -10,13 +10,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serial;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Data
 @Builder
@@ -36,9 +34,9 @@ public class UserDetailsImpl implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
     public static UserDetailsImpl build(Users users){
-        List<GrantedAuthority> authorities = users.getRolesUsers().stream()
+        List<SimpleGrantedAuthority> authorities = users.getRolesUsers().stream()
                 .map(roles -> new SimpleGrantedAuthority(roles.getRoleName()))
-                .collect(Collectors.toList());
+                .toList();
 
         return UserDetailsImpl.builder()
                 .userId(users.getUserId())
@@ -95,5 +93,10 @@ public class UserDetailsImpl implements UserDetails {
             return false;
         UserDetailsImpl user = (UserDetailsImpl) o;
         return Objects.equals(userId, user.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

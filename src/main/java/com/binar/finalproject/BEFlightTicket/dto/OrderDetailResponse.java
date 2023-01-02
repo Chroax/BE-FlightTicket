@@ -41,8 +41,7 @@ public class OrderDetailResponse {
     private List<String> travelerListName;
 
     public static OrderDetailResponse build(Orders orders, Airplanes airplanes, Airports departureAirport,
-                                            Airports arrivalAirport, Routes routes, Schedules schedules, PaymentMethods paymentMethods,
-                                            List<String> travelerListName)
+                                            Airports arrivalAirport, Routes routes, Schedules schedules, PaymentMethods paymentMethods)
     {
         return OrderDetailResponse.builder()
                 .orderId(orders.getOrderId())
@@ -60,7 +59,6 @@ public class OrderDetailResponse {
                 .departureTime(schedules.getDepartureTime())
                 .paymentName(paymentMethods.getPaymentName())
                 .paymentType(paymentMethods.getPaymentType())
-                .travelerListName(travelerListName)
                 .build();
     }
 }

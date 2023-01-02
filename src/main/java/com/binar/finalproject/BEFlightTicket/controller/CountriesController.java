@@ -82,7 +82,7 @@ public class CountriesController {
     {
         MessageModel messageModel = new MessageModel();
         Boolean deleteCountries = countriesService.deleteCountries(countryName);
-        if(deleteCountries)
+        if(Boolean.TRUE.equals(deleteCountries))
         {
             messageModel.setMessage("Success delete Countries by name : " + countryName);
             messageModel.setStatus(HttpStatus.OK.value());

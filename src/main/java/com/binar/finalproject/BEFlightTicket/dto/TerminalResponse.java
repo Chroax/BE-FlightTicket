@@ -1,6 +1,5 @@
 package com.binar.finalproject.BEFlightTicket.dto;
 
-import com.binar.finalproject.BEFlightTicket.model.Cities;
 import com.binar.finalproject.BEFlightTicket.model.Terminals;
 import lombok.Builder;
 import lombok.Data;

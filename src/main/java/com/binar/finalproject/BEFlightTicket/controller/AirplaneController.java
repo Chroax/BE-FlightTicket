@@ -191,7 +191,7 @@ public class AirplaneController {
     {
         MessageModel messageModel = new MessageModel();
         Boolean deleteAirplane = airplanesService.deleteAirplane(airplaneName);
-        if(deleteAirplane)
+        if(Boolean.TRUE.equals(deleteAirplane))
         {
             messageModel.setMessage("Success delete airplane by name: " + airplaneName);
             messageModel.setStatus(HttpStatus.OK.value());

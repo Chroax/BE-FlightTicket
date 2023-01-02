@@ -1,7 +1,6 @@
 package com.binar.finalproject.BEFlightTicket.repository;
 
 import com.binar.finalproject.BEFlightTicket.model.Seats;
-import com.binar.finalproject.BEFlightTicket.model.Terminals;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

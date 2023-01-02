@@ -1,12 +1,10 @@
 package com.binar.finalproject.BEFlightTicket.repository;
 
 import com.binar.finalproject.BEFlightTicket.model.Orders;
-import com.binar.finalproject.BEFlightTicket.model.Schedules;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 

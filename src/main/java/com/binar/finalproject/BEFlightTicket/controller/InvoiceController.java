@@ -2,15 +2,16 @@ package com.binar.finalproject.BEFlightTicket.controller;
 
 import com.binar.finalproject.BEFlightTicket.dto.MessageModel;
 import com.binar.finalproject.BEFlightTicket.service.InvoiceService;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.UUID;
 
 @RestController
@@ -24,7 +25,7 @@ public class InvoiceController {
     HttpServletResponse response;
 
     @GetMapping("/generate")
-    public void ResponseEntity(@RequestParam UUID orderId) throws Exception
+    public void generateInvoice(@RequestParam UUID orderId) throws IOException, JRException
     {
         MessageModel messageModel = new MessageModel();
         JasperPrint jasperPrint = invoiceService.generateInvoice(orderId);

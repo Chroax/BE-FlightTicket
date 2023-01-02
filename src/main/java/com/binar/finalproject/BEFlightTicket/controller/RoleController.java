@@ -88,7 +88,7 @@ public class RoleController {
     {
         MessageModel messageModel = new MessageModel();
         Boolean deleteRole = roleService.deleteRole(roleName);
-        if(deleteRole)
+        if(Boolean.TRUE.equals(deleteRole))
         {
             messageModel.setMessage("Success delete role by name : " + roleName);
             messageModel.setStatus(HttpStatus.OK.value());

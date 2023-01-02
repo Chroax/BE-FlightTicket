@@ -1,6 +1,5 @@
 package com.binar.finalproject.BEFlightTicket.dto;
 
-import com.binar.finalproject.BEFlightTicket.model.Roles;
 import com.binar.finalproject.BEFlightTicket.model.Users;
 import lombok.Data;
 

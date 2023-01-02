@@ -11,9 +11,9 @@ public class TicketRequest {
     @NotEmpty(message = "Traveler Id is required.")
     private UUID travelerId;
     @NotEmpty(message = "Order Id is required.")
-    private UUID OrderId;
+    private UUID orderId;
     @NotEmpty(message = "Seat Id is required.")
-    private Integer SeatId;
+    private Integer seatId;
     public Tickets toTickets(TravelerList travelerList, Orders orders, Seats seats)
     {
         return Tickets.builder()
