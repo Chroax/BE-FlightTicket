@@ -174,7 +174,7 @@ class PaymentMethodServiceImplTest {
         });
 
         DataAlreadyExistException exception2 = Assertions.assertThrows(DataAlreadyExistException.class, () -> {
-            Mockito.when(paymentMethodRepository.findByName(paymentName)).thenReturn(dataPaymentMethods.get(0));
+            Mockito.when(paymentMethodRepository.findByName(paymentName)).thenReturn(dataPaymentMethods.get(1));
             paymentMethodService.updatePayment(dataPaymentMethodRequest.get(0), paymentName);
         });
 

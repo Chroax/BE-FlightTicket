@@ -74,7 +74,7 @@ public class SeatServiceImpl implements SeatService {
             }
         }
         if(allSeatResponse.isEmpty())
-            return Collections.emptyList();
+            return null;
         else
             return allSeatResponse;
     }

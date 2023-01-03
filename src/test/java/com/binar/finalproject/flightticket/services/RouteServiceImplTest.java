@@ -299,8 +299,8 @@ class RouteServiceImplTest {
 
         Mockito.when(routeRepository.findById(routeId)).thenReturn(Optional.empty());
         var actualValue = routeService.deleteRoute(route.getRouteId());
-
-        Assertions.assertNull(actualValue, "actual Value null");
+        var expectedValue = false;
+        Assertions.assertEquals(expectedValue, actualValue);
 
     }
 }

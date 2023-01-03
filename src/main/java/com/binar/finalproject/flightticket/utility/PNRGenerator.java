@@ -9,18 +9,13 @@ public class PNRGenerator {
 
     public static String generatePNR()
     {
+        int leftLimit = 48;
+        int rightLimit = 90;
 
-        String alphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                + "0123456789";
-
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < 6; i++) {
-            int index = alphaNumericString.length() * random.nextInt();
-
-            sb.append(alphaNumericString.charAt(index));
-        }
-
-        return sb.toString();
+        return random.ints(leftLimit, rightLimit + 1)
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(6)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
     }
 }

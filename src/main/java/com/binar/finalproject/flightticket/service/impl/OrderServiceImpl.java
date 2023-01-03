@@ -62,8 +62,8 @@ public class OrderServiceImpl implements OrderService {
                                 allSchedules.add(schedules.get());
                                 totalPrice += schedules.get().getPrice();
                             }
-                            return
-                                    null;
+                            else
+                                return null;
                         }
                         else
                             return null;
@@ -179,8 +179,13 @@ public class OrderServiceImpl implements OrderService {
             if (message != null)
                 return null;
             else {
-                orderRepository.saveAndFlush(orders);
-                return OrderResponse.build(orders, orderRequest.getScheduleId(), departureCity, arrivalCity);
+                try {
+                    orderRepository.save(orders);
+                    return OrderResponse.build(orders, orderRequest.getScheduleId(), departureCity, arrivalCity);
+                }
+                catch (Exception exception){
+                    return null;
+                }
             }
         }
         else
