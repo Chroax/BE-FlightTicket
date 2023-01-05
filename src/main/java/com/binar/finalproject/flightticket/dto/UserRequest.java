@@ -1,6 +1,5 @@
 package com.binar.finalproject.flightticket.dto;
 
-import com.binar.finalproject.flightticket.model.AuthenticationProvider;
 import com.binar.finalproject.flightticket.model.Users;
 import lombok.Data;
 
