@@ -46,6 +46,7 @@ public class UserServiceImpl implements UserService {
 
                         if(userRequest.getAuthProvider().equals(AuthenticationProvider.GOOGLE.toString())){
                             users.setAuthProvider(AuthenticationProvider.GOOGLE);
+                            users.setGoogleId(userRequest.getGoogleId());
                         }
 
                         userRepository.saveAndFlush(users);

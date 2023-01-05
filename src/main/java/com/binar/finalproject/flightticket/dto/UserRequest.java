@@ -23,6 +23,7 @@ public class UserRequest {
     private Boolean gender;
 
     private String authProvider;
+    private String googleId;
 
     public Users toUsers() {
         Users users = new Users();
