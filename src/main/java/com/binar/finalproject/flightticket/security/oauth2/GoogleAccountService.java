@@ -18,7 +18,7 @@ public class GoogleAccountService {
 
     public UserResponse oAuthLoginSuccess(GoogleLoginRequest googleLoginRequest) {
         try{
-            Users userGoogle = userRepository.findByGoogleId(googleLoginRequest.getGooleId());
+            Users userGoogle = userRepository.findByGoogleId(googleLoginRequest.getGoogleId());
             if(userGoogle == null)
             {
                 Users users = googleLoginRequest.toUsersGoogle();
@@ -27,7 +27,7 @@ public class GoogleAccountService {
                 users.setFullName(googleLoginRequest.getFullName());
                 users.setStatusActive(true);
                 users.setAuthProvider(AuthenticationProvider.GOOGLE);
-                users.setGoogleId(googleLoginRequest.getGooleId());
+                users.setGoogleId(googleLoginRequest.getGoogleId());
                 roles.setRoleName("ROLE_BUYER");
                 oAuth2Password(users);
                 userRepository.save(users);
