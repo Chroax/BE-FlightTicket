@@ -1,5 +1,6 @@
 package com.binar.finalproject.flightticket.dto;
 
+import com.binar.finalproject.flightticket.model.AuthenticationProvider;
 import com.binar.finalproject.flightticket.model.Users;
 import lombok.Data;
 
@@ -20,6 +21,8 @@ public class UserRequest {
     private LocalDate birthDate;
     @NotEmpty(message = "gender is required.")
     private Boolean gender;
+
+    private String authProvider;
 
     public Users toUsers() {
         Users users = new Users();

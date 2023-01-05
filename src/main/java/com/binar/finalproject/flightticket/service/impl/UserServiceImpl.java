@@ -3,6 +3,7 @@ package com.binar.finalproject.flightticket.service.impl;
 import com.binar.finalproject.flightticket.dto.UserRequest;
 import com.binar.finalproject.flightticket.dto.UserResponse;
 import com.binar.finalproject.flightticket.dto.UserUpdateRequest;
+import com.binar.finalproject.flightticket.model.AuthenticationProvider;
 import com.binar.finalproject.flightticket.model.Roles;
 import com.binar.finalproject.flightticket.model.Users;
 import com.binar.finalproject.flightticket.repository.RoleRepository;
@@ -42,6 +43,11 @@ public class UserServiceImpl implements UserService {
                         Users users = userRequest.toUsers();
                         users.getRolesUsers().add(roles);
                         users.setPassword(encoder.encode(users.getPassword()));
+
+                        if(userRequest.getAuthProvider().equals(AuthenticationProvider.GOOGLE.toString())){
+                            users.setAuthProvider(AuthenticationProvider.GOOGLE);
+                        }
+
                         userRepository.saveAndFlush(users);
                         return UserResponse.build(users);
                     }
