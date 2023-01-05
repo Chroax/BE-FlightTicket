@@ -119,7 +119,7 @@ public class NotificationController {
     })
     @ResponseBody
     @PutMapping("/update-status")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BUYER')")
     public ResponseEntity<MessageModel> updateReadStatus(@RequestParam UUID userId, @RequestParam UUID notificationId) {
         MessageModel messageModel = new MessageModel();
         NotificationResponse notificationDetailResponse = notificationService.updateIsRead(userId, notificationId);
@@ -153,7 +153,7 @@ public class NotificationController {
             }, mediaType = MediaType.APPLICATION_JSON_VALUE))
     })
     @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BUYER')")
     public ResponseEntity<MessageModel> updateNotification(@RequestBody NotificationRequest notificationRequest, @RequestParam UUID notificationId, @RequestParam UUID userId)
     {
         MessageModel messageModel = new MessageModel();
