@@ -134,7 +134,7 @@ public class TravelerListServiceImpl implements TravelerListService {
     public List<TravelerListDetailResponse> registerTravelerListFromOrder(List<TravelerListDetailRequest> listTravelerListDetailRequest) {
         List<TravelerListDetailResponse> allTravelerListDetailResponse = new ArrayList<>();
         for (TravelerListDetailRequest travelerListDetailRequest: listTravelerListDetailRequest) {
-            TravelerList travelerListExist = travelerListRepository.findTravelerListExist(travelerListDetailRequest.getFirstName(), travelerListDetailRequest.getLastName(), travelerListDetailRequest.getUserId());
+            TravelerList travelerListExist = travelerListRepository.findTravelerListExist(travelerListDetailRequest.getLastName(), travelerListDetailRequest.getFirstName(), travelerListDetailRequest.getUserId());
 
             if(travelerListExist == null)
             {
