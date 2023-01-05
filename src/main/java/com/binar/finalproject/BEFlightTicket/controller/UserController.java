@@ -1,8 +1,8 @@
 package com.binar.finalproject.BEFlightTicket.controller;
 
 import com.binar.finalproject.BEFlightTicket.dto.*;
-import com.binar.finalproject.BEFlightTicket.model.Users;
 import com.binar.finalproject.BEFlightTicket.security.JwtUtils;
+import com.binar.finalproject.BEFlightTicket.security.oauth2.GoogleAccountService;
 import com.binar.finalproject.BEFlightTicket.service.UserService;
 import com.binar.finalproject.BEFlightTicket.service.impl.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +17,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private GoogleAccountService googleAccountService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -48,6 +49,26 @@ public class UserController {
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setMessage("Register new user");
             messageModel.setData(userResponse);
+            return ResponseEntity.ok().body(messageModel);
+        }
+    }
+    @PostMapping("/login-google")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<MessageModel> registerUser(@RequestBody GoogleLoginRequest googleLoginRequest) {
+        MessageModel messageModel = new MessageModel();
+
+        UserResponse users = googleAccountService.oAuthLoginSuccess(googleLoginRequest);
+        if(users == null)
+        {
+            messageModel.setMessage("Failed register new user");
+            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
+            return ResponseEntity.badRequest().body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Register new user");
+            messageModel.setData(users);
             return ResponseEntity.ok().body(messageModel);
         }
     }

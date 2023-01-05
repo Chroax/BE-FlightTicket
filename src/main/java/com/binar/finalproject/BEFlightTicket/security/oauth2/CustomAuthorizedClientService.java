@@ -1,6 +1,7 @@
 package com.binar.finalproject.BEFlightTicket.security.oauth2;
 
 import com.binar.finalproject.BEFlightTicket.controller.OAuthController;
+import com.binar.finalproject.BEFlightTicket.dto.GoogleLoginRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -21,11 +22,8 @@ public class CustomAuthorizedClientService implements OAuth2AuthorizedClientServ
 
     @Override
     public void saveAuthorizedClient(OAuth2AuthorizedClient authorizedClient, Authentication authentication) {
-       this.googleAccountService.oAuthLoginSuccess(
-               authentication.getName(),
-               authentication.getName().split("\\|")[0],
-               ((DefaultOidcUser) authentication.getPrincipal()).getClaims().toString()
-       );
+        GoogleLoginRequest googleLoginRequest = new GoogleLoginRequest();
+        this.googleAccountService.oAuthLoginSuccess(googleLoginRequest);
     }
 
     @Override
