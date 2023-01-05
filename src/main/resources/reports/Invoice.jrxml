@@ -74,7 +74,8 @@
 	<parameter name="ORDER_ID" class="java.lang.String"/>
 	<parameter name="QR" class="java.io.InputStream"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT o.order_id,
+		<![CDATA[SELECT 
+	o.order_id,
 	o.created_at,
 	o.status,
 	o.total_price,
@@ -84,7 +85,9 @@
 	u.email,
 	u.telephone,
 	s.price,
-	CONCAT (r.departure_airport, ' - ', r.arrival_airport, ' | ',  s.departure_date) AS description,
+	s.departure_date,
+	CONCAT (t.title, t.first_name, ' ', t.last_name) AS traveler_name,
+	CONCAT (REPLACE(r.departure_airport, 'International Airport', ''), ' - ', REPLACE(r.arrival_airport , 'International Airport', '')) AS description,
 	COUNT (*) AS "total_ticket"
 FROM orders o
 	INNER JOIN schedule_orders so ON 
@@ -97,12 +100,17 @@ FROM orders o
 	 s.route_id = r.route_id 
 	INNER JOIN users u ON 
 	 o.user_id = u.user_id 
+	 INNER JOIN traveler_orders tor ON
+	 tor.order_id =  o.order_id
+	 INNER JOIN traveler_list t ON
+	 t.traveler_id = tor.traveler_id
 WHERE o.order_id::text =  $P{ORDER_ID} 
 GROUP BY o.order_id,
 	s.schedule_id,
 	r.route_id,
 	pm.payment_id,
-	u.user_id]]>
+	u.user_id,
+	t.traveler_id ]]>
 	</queryString>
 	<field name="order_id" class="java.util.UUID">
 		<property name="com.jaspersoft.studio.field.name" value="order_id"/>
@@ -154,6 +162,15 @@ GROUP BY o.order_id,
 		<property name="com.jaspersoft.studio.field.label" value="price"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="schedules"/>
 	</field>
+	<field name="departure_date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="departure_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="departure_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="schedules"/>
+	</field>
+	<field name="traveler_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="traveler_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="traveler_name"/>
+	</field>
 	<field name="description" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="description"/>
 		<property name="com.jaspersoft.studio.field.label" value="description"/>
@@ -163,7 +180,7 @@ GROUP BY o.order_id,
 		<property name="com.jaspersoft.studio.field.label" value="total_ticket"/>
 	</field>
 	<pageHeader>
-		<band height="300">
+		<band height="299">
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="107" width="555" height="25" backcolor="rgba(222, 222, 222, 0.7882353)" uuid="57aed2b1-4f4e-40a3-a6ad-54dae8dd4c5a">
 					<property name="local_mesure_unitheight" value="pixel"/>
@@ -369,10 +386,18 @@ GROUP BY o.order_id,
 				</textElement>
 				<text><![CDATA[|]]></text>
 			</staticText>
+			<rectangle>
+				<reportElement x="350" y="0" width="224" height="40" forecolor="#3E5CB8" backcolor="#3E5CB8" uuid="2986709c-040f-4743-b197-b8089df47af7"/>
+			</rectangle>
+			<image>
+				<reportElement x="360" y="4" width="195" height="32" uuid="b5a0602c-3f1e-4ea4-9b09-bede9cb57e91"/>
+				<imageExpression><![CDATA["images/Travelwind-white.png"]]></imageExpression>
+			</image>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="269" width="555" height="25" backcolor="rgba(222, 222, 222, 0.7882353)" uuid="a580a0e2-8df3-42cc-864f-d4ecc46cfcd7">
+				<reportElement mode="Opaque" x="0" y="268" width="555" height="25" backcolor="rgba(222, 222, 222, 0.7882353)" uuid="e196e14a-d2cb-4ffb-8512-e434d43c5597">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box leftPadding="6">
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -385,17 +410,52 @@ GROUP BY o.order_id,
 				</textElement>
 				<text><![CDATA[PURCHASE DETAILS]]></text>
 			</staticText>
-			<rectangle>
-				<reportElement x="350" y="0" width="224" height="40" forecolor="#3E5CB8" backcolor="#3E5CB8" uuid="2986709c-040f-4743-b197-b8089df47af7"/>
-			</rectangle>
-			<image>
-				<reportElement x="360" y="4" width="195" height="32" uuid="b5a0602c-3f1e-4ea4-9b09-bede9cb57e91"/>
-				<imageExpression>"images/Travelwind-white.png"</imageExpression>
-			</image>
 		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="30">
+			<staticText>
+				<reportElement x="30" y="0" width="80" height="30" uuid="5b94eddc-f8f4-4ab4-be7b-46c759c04559"/>
+				<box leftPadding="5">
+					<pen lineWidth="2.0" lineColor="#DEDEDE"/>
+					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
+					<leftPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
+					<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
+					<rightPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Departure Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="0" width="220" height="30" uuid="a2ae3f5e-fef2-413d-8d62-75ba7ee1c214"/>
+				<box leftPadding="5">
+					<pen lineWidth="2.0" lineColor="#DEDEDE"/>
+					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
+					<leftPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
+					<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
+					<rightPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="0" width="104" height="30" uuid="2a5c424a-1a10-4444-9dd4-f88520098d17"/>
+				<box leftPadding="5">
+					<pen lineWidth="2.0" lineColor="#DEDEDE"/>
+					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
+					<leftPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
+					<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
+					<rightPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unit price Rp]]></text>
+			</staticText>
 			<staticText>
 				<reportElement x="0" y="0" width="30" height="30" uuid="37ab451e-130a-402d-8045-b7d307a0f693"/>
 				<box>
@@ -411,7 +471,7 @@ GROUP BY o.order_id,
 				<text><![CDATA[No.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="30" y="0" width="80" height="30" uuid="5b94eddc-f8f4-4ab4-be7b-46c759c04559"/>
+				<reportElement x="330" y="0" width="120" height="30" uuid="0587f9f7-c909-4c69-85a4-5204a6a090f1"/>
 				<box leftPadding="5">
 					<pen lineWidth="2.0" lineColor="#DEDEDE"/>
 					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
@@ -422,49 +482,7 @@ GROUP BY o.order_id,
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="SansSerif" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Items]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="110" y="0" width="314" height="30" uuid="a2ae3f5e-fef2-413d-8d62-75ba7ee1c214"/>
-				<box leftPadding="5">
-					<pen lineWidth="2.0" lineColor="#DEDEDE"/>
-					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
-					<leftPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
-					<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
-					<rightPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
-				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="SansSerif" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Description]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="424" y="0" width="26" height="30" uuid="a8a0c8c2-980e-4867-b405-7689dbc366eb"/>
-				<box>
-					<pen lineWidth="2.0" lineColor="#DEDEDE"/>
-					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
-					<leftPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
-					<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
-					<rightPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Jml.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="450" y="0" width="104" height="30" uuid="2a5c424a-1a10-4444-9dd4-f88520098d17"/>
-				<box leftPadding="5">
-					<pen lineWidth="2.0" lineColor="#DEDEDE"/>
-					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
-					<leftPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
-					<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
-					<rightPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
-				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="SansSerif" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Unit price Rp]]></text>
+				<text><![CDATA[Passenger]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -488,22 +506,6 @@ GROUP BY o.order_id,
 				</textElement>
 				<textFieldExpression><![CDATA[$V{PAGE_COUNT}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="30" y="0" width="80" height="16" uuid="00e129bb-a971-45b5-a0d4-e1afd840ed13">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<box leftPadding="5">
-					<pen lineWidth="2.0" lineColor="#DEDEDE"/>
-					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
-					<leftPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
-					<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
-					<rightPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
-				</box>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Tiket Pesawat]]></text>
-			</staticText>
 			<textField>
 				<reportElement key="" x="450" y="0" width="104" height="16" uuid="e12b18dc-e236-4ef9-b751-fff18548ae01">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f61a3433-7454-4248-82c0-a366965caa82"/>
@@ -522,7 +524,7 @@ GROUP BY o.order_id,
 				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="110" y="0" width="314" height="16" uuid="1a19ae70-50f3-4e0a-b585-5d8d9f20d667">
+				<reportElement x="110" y="0" width="220" height="16" uuid="1a19ae70-50f3-4e0a-b585-5d8d9f20d667">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="35a9c080-ed22-4370-bbcd-86f0d65aea39"/>
 				</reportElement>
 				<box leftPadding="5">
@@ -538,27 +540,43 @@ GROUP BY o.order_id,
 				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="424" y="0" width="26" height="16" uuid="90e1606d-ea19-4477-b117-98ee3b8e57ae">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4ec45f7f-9a7e-4e3f-8cf6-21cd187f8ce5"/>
+				<reportElement x="330" y="0" width="120" height="16" uuid="11197674-13bb-4eeb-be9c-4234e20a9166">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="35a9c080-ed22-4370-bbcd-86f0d65aea39"/>
 				</reportElement>
-				<box leftPadding="0">
+				<box leftPadding="5">
 					<pen lineWidth="2.0" lineColor="#DEDEDE"/>
 					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
 					<leftPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
 					<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
 					<rightPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{total_ticket}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{traveler_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="0" width="80" height="16" uuid="ab0a95a6-b451-4656-9b16-9bf9c4172321">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="35a9c080-ed22-4370-bbcd-86f0d65aea39"/>
+				</reportElement>
+				<box leftPadding="5">
+					<pen lineWidth="2.0" lineColor="#DEDEDE"/>
+					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
+					<leftPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
+					<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
+					<rightPen lineWidth="2.0" lineStyle="Solid" lineColor="#DEDEDE"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{departure_date}.toString()]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="16">
+		<band height="195">
 			<staticText>
-				<reportElement x="340" y="0" width="110" height="16" uuid="bbe09833-0202-4d12-a17c-c07867558040">
+				<reportElement x="330" y="0" width="120" height="16" uuid="bbe09833-0202-4d12-a17c-c07867558040">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box leftPadding="5">
@@ -601,7 +619,11 @@ GROUP BY o.order_id,
 				<text><![CDATA[Syarat dan Ketentuan berlaku. Silakan lihat http://www.travelwind.com/termsandconditions]]></text>
 			</staticText>
 			<image>
-				<reportElement x="0" y="0" width="140" height="140" uuid="ffa28d0c-8f29-48cd-ab04-63a246bcc238"/>
+				<reportElement x="0" y="0" width="140" height="140" uuid="ffa28d0c-8f29-48cd-ab04-63a246bcc238">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
 				<imageExpression><![CDATA[$P{QR}]]></imageExpression>
 			</image>
 		</band>
