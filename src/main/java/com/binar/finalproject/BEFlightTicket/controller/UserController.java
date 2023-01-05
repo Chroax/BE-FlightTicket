@@ -52,7 +52,7 @@ public class UserController {
             return ResponseEntity.ok().body(messageModel);
         }
     }
-    @PostMapping("/login-google")
+    @PostMapping("/login-google-account")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageModel> registerUser(@RequestBody GoogleLoginRequest googleLoginRequest) {
         MessageModel messageModel = new MessageModel();
