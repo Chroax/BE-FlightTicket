@@ -2,6 +2,7 @@ package com.binar.finalproject.flightticket.controller;
 
 import com.binar.finalproject.flightticket.dto.*;
 import com.binar.finalproject.flightticket.security.JwtUtils;
+import com.binar.finalproject.flightticket.security.oauth2.GoogleAccountService;
 import com.binar.finalproject.flightticket.service.UserService;
 import com.binar.finalproject.flightticket.service.impl.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ import java.util.UUID;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private GoogleAccountService googleAccountService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -122,6 +125,27 @@ public class UserController {
             return ResponseEntity.badRequest().body(messageModel);
         }
     }
+    @PostMapping("/login-google")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<MessageModel> registerUser(@RequestBody GoogleLoginRequest googleLoginRequest) {
+        MessageModel messageModel = new MessageModel();
+
+        UserResponse users = googleAccountService.oAuthLoginSuccess(googleLoginRequest);
+        if(users == null)
+        {
+            messageModel.setMessage("Failed register new user");
+            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
+            return ResponseEntity.badRequest().body(messageModel);
+        }
+        else
+        {
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setMessage("Register new user");
+            messageModel.setData(users);
+            return ResponseEntity.ok().body(messageModel);
+        }
+    }
+
 
     @PutMapping("/update")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
