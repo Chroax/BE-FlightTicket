@@ -1,6 +1,5 @@
-package com.binar.finalproject.flightticket.security;
-
-import com.binar.finalproject.flightticket.service.impl.security.UserDetailsImpl;
+package com.binar.finalproject.BEFlightTicket.security;
+import com.binar.finalproject.BEFlightTicket.service.impl.security.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
