@@ -1,5 +1,7 @@
 package com.binar.finalproject.flightticket.security.oauth2;
 
+import com.binar.finalproject.flightticket.dto.GoogleLoginRequest;
+import com.binar.finalproject.flightticket.dto.UserResponse;
 import com.binar.finalproject.flightticket.model.AuthenticationProvider;
 import com.binar.finalproject.flightticket.model.Roles;
 import com.binar.finalproject.flightticket.model.Users;
@@ -14,24 +16,29 @@ public class GoogleAccountService {
     @Autowired
     private UserRepository userRepository;
 
-    public Users oAuthLoginSuccess(String email, String fullName, String googleId) {
-        Users userGoogle = userRepository.findByGoogleId(googleId);
-        if (userGoogle == null) {
-            Users userWithGmail = userRepository.findByGmail(email);
-            if (userWithGmail == null) {
-                Users users = new Users();
+    public UserResponse oAuthLoginSuccess(GoogleLoginRequest googleLoginRequest) {
+        try{
+            Users userGoogle = userRepository.findByGoogleId(googleLoginRequest.getGoogleId());
+            if(userGoogle == null)
+            {
+                Users users = googleLoginRequest.toUsersGoogle();
                 Roles roles = new Roles();
-                users.setEmail(email);
-                users.setFullName(fullName);
+                users.setEmail(googleLoginRequest.getEmail());
+                users.setFullName(googleLoginRequest.getFullName());
                 users.setStatusActive(true);
                 users.setAuthProvider(AuthenticationProvider.GOOGLE);
-                users.setGoogleId(googleId);
+                users.setGoogleId(googleLoginRequest.getGoogleId());
                 roles.setRoleName("ROLE_BUYER");
                 oAuth2Password(users);
-                return userRepository.save(users);
+                userRepository.save(users);
+                return UserResponse.build(users);
             }
+            else
+                return null;
         }
-        return userGoogle;
+        catch (Exception ignore){
+            return null;
+        }
     }
     public void oAuth2Password(Users users){
         String googleId = users.getGoogleId();
