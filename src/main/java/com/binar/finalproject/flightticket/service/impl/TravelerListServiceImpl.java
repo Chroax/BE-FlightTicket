@@ -186,7 +186,16 @@ public class TravelerListServiceImpl implements TravelerListService {
 
                 allTravelerListDetailResponse.add(TravelerListDetailResponse.build(travelerList, idCard, passport));
             }
-
+            else
+            {
+                Optional<IdCard> idCardGet = idCardRepository.findById(travelerListExist.getIdCard().getIdCardId());
+                Optional<Passport> passportGet = passportRepository.findById(travelerListExist.getPassport().getPassportId());
+                if(idCardGet.isPresent() && passportGet.isPresent()){
+                    allTravelerListDetailResponse.add(TravelerListDetailResponse.build(travelerListExist, idCardGet.get(), passportGet.get()));
+                }
+                else
+                    return null;
+            }
         }
         return allTravelerListDetailResponse;
     }
