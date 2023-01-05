@@ -31,6 +31,7 @@ public class OAuthController {
         response.getWriter().write("{\"redirectUrl\": \"%s\" }".formatted(url));
     }
 
+    @SneakyThrows
     public void oauthSuccessHandler(HttpServletRequest request, HttpServletResponse response, Authentication authentication){
         String accountId = AuthenticationHelper.retrieveAccountId(authentication);
         response.addHeader(HttpHeaders.SET_COOKIE, CookieHelper.generateExpiredCookie(OAUTH_COOKIE_NAME));

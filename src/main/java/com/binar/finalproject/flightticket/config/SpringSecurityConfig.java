@@ -1,5 +1,6 @@
 package com.binar.finalproject.flightticket.config;
 
+
 import com.binar.finalproject.flightticket.controller.OAuthController;
 import com.binar.finalproject.flightticket.security.AuthEntryPointJwt;
 import com.binar.finalproject.flightticket.security.AuthTokenFilter;

@@ -1,10 +1,9 @@
-package com.binar.finalproject.BEFlightTicket.controller;
+package com.binar.finalproject.flightticket.controller;
 
-import com.binar.finalproject.BEFlightTicket.dto.*;
-import com.binar.finalproject.BEFlightTicket.security.JwtUtils;
-import com.binar.finalproject.BEFlightTicket.security.oauth2.GoogleAccountService;
-import com.binar.finalproject.BEFlightTicket.service.UserService;
-import com.binar.finalproject.BEFlightTicket.service.impl.security.UserDetailsImpl;
+import com.binar.finalproject.flightticket.dto.*;
+import com.binar.finalproject.flightticket.security.JwtUtils;
+import com.binar.finalproject.flightticket.service.UserService;
+import com.binar.finalproject.flightticket.service.impl.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +22,6 @@ import java.util.UUID;
 public class UserController {
     @Autowired
     private UserService userService;
-    @Autowired
-    private GoogleAccountService googleAccountService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -49,26 +46,6 @@ public class UserController {
             messageModel.setStatus(HttpStatus.OK.value());
             messageModel.setMessage("Register new user");
             messageModel.setData(userResponse);
-            return ResponseEntity.ok().body(messageModel);
-        }
-    }
-    @PostMapping("/login-google")
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<MessageModel> registerUser(@RequestBody GoogleLoginRequest googleLoginRequest) {
-        MessageModel messageModel = new MessageModel();
-
-        UserResponse users = googleAccountService.oAuthLoginSuccess(googleLoginRequest);
-        if(users == null)
-        {
-            messageModel.setMessage("Failed register new user");
-            messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
-            return ResponseEntity.badRequest().body(messageModel);
-        }
-        else
-        {
-            messageModel.setStatus(HttpStatus.OK.value());
-            messageModel.setMessage("Register new user");
-            messageModel.setData(users);
             return ResponseEntity.ok().body(messageModel);
         }
     }
@@ -129,18 +106,18 @@ public class UserController {
 
     @DeleteMapping("/delete")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
-    public ResponseEntity<MessageModel> deleteUser(@RequestParam String fullName){
+    public ResponseEntity<MessageModel> deleteUser(@RequestParam String email){
         MessageModel messageModel = new MessageModel();
-        Boolean deleteUser = userService.deleteUser(fullName);
-        if(deleteUser)
+        Boolean deleteUser = userService.deleteUser(email);
+        if(Boolean.TRUE.equals(deleteUser))
         {
-            messageModel.setMessage("Success non-active user by name : " + fullName);
+            messageModel.setMessage("Success non-active user by email : " + email);
             messageModel.setStatus(HttpStatus.OK.value());
             return ResponseEntity.ok().body(messageModel);
         }
         else
         {
-            messageModel.setMessage("Failed non-active user by name : " + fullName + ", not found");
+            messageModel.setMessage("Failed non-active user by email : " + email + ", not found");
             messageModel.setStatus(HttpStatus.BAD_REQUEST.value());
             return ResponseEntity.badRequest().body(messageModel);
         }
