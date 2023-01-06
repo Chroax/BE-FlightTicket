@@ -104,7 +104,7 @@ public class OrderServiceImpl implements OrderService {
         {
             Orders orders = isOrders.get();
 
-            if(orderRequest.getStatus().equals("ACCEPT")
+            if(orderRequest.getStatus().equals("ACCEPTED")
                     && orders.getPnrCode() == null)
             {
                 orders.setStatus(orderRequest.getStatus());
