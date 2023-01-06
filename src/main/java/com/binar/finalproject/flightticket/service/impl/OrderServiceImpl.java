@@ -199,6 +199,56 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<OrderDetailResponse> getAllOrderAdmin() {
+        List<Orders> allOrder = orderRepository.findAll();
+        List<OrderDetailResponse> orderDetailResponses = new ArrayList<>();
+        for (Orders orders: allOrder) {
+            List<Schedules> allSchedules = orders.getScheduleOrders();
+            List<TravelerList> allTravelerList = orders.getTravelerListsOrder();
+            List<String> travelerListName = new ArrayList<>();
+            List<UUID> allTravelerListId = new ArrayList<>();
+            List<UUID> allScheduleListId = new ArrayList<>();
+            for (TravelerList travelerList: allTravelerList) {
+                String travelerName = travelerList.getTitle().replace(" ", "") + ". " + travelerList.getFirstName() + " "
+                        + travelerList.getLastName();
+                travelerListName.add(travelerName);
+                allTravelerListId.add(travelerList.getTravelerId());
+            }
+            Optional<Users> users = userRepository.findById(orders.getUsersOrder().getUserId());
+            Optional<PaymentMethods> paymentMethods = paymentMethodRepository.findById(orders.getPaymentMethodsOrder().getPaymentId());
+
+            Airplanes airplanes = null;
+            Airports departureAirports = null;
+            Airports arrivalAirports = null;
+            Routes routes = null;
+            Schedules schedule = null;
+
+            for (Schedules schedules : allSchedules){
+                allScheduleListId.add(schedules.getScheduleId());
+                schedule = schedules;
+                routes = schedules.getRoutesSchedules();
+                airplanes = schedules.getAirplanesSchedules();
+                departureAirports = airportsRepository.findByAirportName(routes.getDepartureAirport());
+                arrivalAirports = airportsRepository.findByAirportName(routes.getArrivalAirport());
+            }
+
+            if(paymentMethods.isPresent() && users.isPresent()){
+                OrderDetailResponse orderDetailResponse = OrderDetailResponse.build(orders,
+                        airplanes, departureAirports, arrivalAirports, routes, schedule, paymentMethods.get());
+                orderDetailResponse.setUserId(users.get().getUserId());
+                orderDetailResponse.setScheduleId(allScheduleListId);
+                orderDetailResponse.setPaymentId(paymentMethods.get().getPaymentId());
+                orderDetailResponse.setTravelerListName(travelerListName);
+                orderDetailResponse.setTravelerListId(allTravelerListId);
+                orderDetailResponses.add(orderDetailResponse);
+            }
+            else
+                return Collections.emptyList();
+        }
+        return orderDetailResponses;
+    }
+
+    @Override
     public List<OrderResponse> getAllOrderByUserId(UUID userId) {
         List<Orders> allOrder = orderRepository.findAllOrderByUserId(userId);
         return orderToOrderResponseList(allOrder);

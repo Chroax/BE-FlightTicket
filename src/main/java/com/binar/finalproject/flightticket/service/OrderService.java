@@ -15,4 +15,5 @@ public interface OrderService {
     List<OrderResponse> getAllOrderByUserIdAndStatus(UUID userId, String status);
     List<OrderResponse> getAllOrderByPaymentId(Integer paymentId);
     List<OrderDetailResponse> getOrderDetails(UUID orderId);
+    public List<OrderDetailResponse> getAllOrderAdmin();
 }

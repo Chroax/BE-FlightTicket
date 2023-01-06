@@ -79,6 +79,24 @@ public class OrderController {
         }
     }
 
+    @GetMapping("/get-all-dashboard")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<MessageModel> getAllTravelerListAdmin(){
+        MessageModel messageModel = new MessageModel();
+        try {
+            List<OrderDetailResponse> orderGet = orderService.getAllOrderAdmin();
+            messageModel.setMessage("Success get all traveler list to dashboard");
+            messageModel.setStatus(HttpStatus.OK.value());
+            messageModel.setData(orderGet);
+            return ResponseEntity.ok().body(messageModel);
+        }catch (Exception exception)
+        {
+            messageModel.setMessage("Failed get all traveler list to dashboard");
+            messageModel.setStatus(HttpStatus.BAD_GATEWAY.value());
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY.value()).body(messageModel);
+        }
+    }
+
     @GetMapping("/findby-user")
     @PreAuthorize("hasRole('ADMIN') or hasRole('BUYER')")
     public ResponseEntity<MessageModel> getUserOrders(@RequestParam UUID userId){

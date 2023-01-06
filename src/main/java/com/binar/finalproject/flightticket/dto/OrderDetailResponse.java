@@ -1,6 +1,7 @@
 package com.binar.finalproject.flightticket.dto;
 
 import com.binar.finalproject.flightticket.model.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
@@ -13,10 +14,14 @@ import java.util.UUID;
 
 @Data
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderDetailResponse {
 
     private UUID orderId;
     private String status;
+
+    private String fullName;
+    private UUID userId;
 
     private Float totalPrice;
     private String pnrCode;
@@ -24,6 +29,7 @@ public class OrderDetailResponse {
     @JsonProperty("orderDate")
     private LocalDateTime createdAt;
 
+    private List<UUID> scheduleId;
     private String airplaneName;
 
     private String departureCity;
@@ -35,9 +41,11 @@ public class OrderDetailResponse {
     private LocalDate departureDate;
     private LocalTime departureTime;
 
+    private Integer paymentId;
     private String paymentName;
     private String paymentType;
 
+    private List<UUID> travelerListId;
     private List<String> travelerListName;
 
     public static OrderDetailResponse build(Orders orders, Airplanes airplanes, Airports departureAirport,
