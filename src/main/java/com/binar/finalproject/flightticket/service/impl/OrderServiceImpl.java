@@ -236,6 +236,8 @@ public class OrderServiceImpl implements OrderService {
                 OrderDetailResponse orderDetailResponse = OrderDetailResponse.build(orders,
                         airplanes, departureAirports, arrivalAirports, routes, schedule, paymentMethods.get());
                 orderDetailResponse.setUserId(users.get().getUserId());
+                orderDetailResponse.setFullName(users.get().getFullName());
+                orderDetailResponse.setEmail(users.get().getEmail());
                 orderDetailResponse.setScheduleId(allScheduleListId);
                 orderDetailResponse.setPaymentId(paymentMethods.get().getPaymentId());
                 orderDetailResponse.setTravelerListName(travelerListName);

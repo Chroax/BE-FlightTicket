@@ -21,6 +21,7 @@ public class OrderDetailResponse {
     private String status;
 
     private String fullName;
+    private String email;
     private UUID userId;
 
     private Float totalPrice;
