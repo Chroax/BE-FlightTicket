@@ -1,6 +1,7 @@
 package com.binar.finalproject.flightticket.service.impl.security;
 
 
+import com.binar.finalproject.flightticket.model.Roles;
 import com.binar.finalproject.flightticket.model.Users;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -11,10 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @Data
 @Builder
@@ -30,6 +28,7 @@ public class UserDetailsImpl implements UserDetails {
     private String password;
     private LocalDate birthDate;
     private Boolean gender;
+    private String roleName;
 
     private Collection<? extends GrantedAuthority> authorities;
 
@@ -37,7 +36,7 @@ public class UserDetailsImpl implements UserDetails {
         List<SimpleGrantedAuthority> authorities = users.getRolesUsers().stream()
                 .map(roles -> new SimpleGrantedAuthority(roles.getRoleName()))
                 .toList();
-
+        List<Roles> userRoles = users.getRolesUsers().stream().toList();
         return UserDetailsImpl.builder()
                 .userId(users.getUserId())
                 .email(users.getEmail())
@@ -47,6 +46,7 @@ public class UserDetailsImpl implements UserDetails {
                 .birthDate(users.getBirthDate())
                 .gender(users.getGender())
                 .authorities(authorities)
+                .roleName(userRoles.get(0).getRoleName())
                 .build();
     }
 
