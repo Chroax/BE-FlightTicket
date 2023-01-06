@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
                         users.getRolesUsers().add(roles);
                         users.setPassword(encoder.encode(users.getPassword()));
 
-                        if(userRequest.getAuthProvider().equals(AuthenticationProvider.GOOGLE.toString())){
+                        if(userRequest.getAuthProvider() != null && userRequest.getAuthProvider().equals(AuthenticationProvider.GOOGLE.toString())){
                             users.setAuthProvider(AuthenticationProvider.GOOGLE);
                             users.setGoogleId(userRequest.getGoogleId());
                         }
